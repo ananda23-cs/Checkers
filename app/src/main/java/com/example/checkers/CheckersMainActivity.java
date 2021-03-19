@@ -1,15 +1,11 @@
 package com.example.checkers;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.gameConfiguration.GameConfig;
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 
-public class MainActivity extends GameMainActivity {
+public class CheckersMainActivity extends GameMainActivity {
 
     // we need to override the abstract methods from GameMainActivity
     // I can see what that looks like in the TTT main activity
@@ -30,7 +26,6 @@ public class MainActivity extends GameMainActivity {
      *
      * @return
      */
-    @Override
     public LocalGame createLocalGame(GameState gameState) {
         return null;
     }
