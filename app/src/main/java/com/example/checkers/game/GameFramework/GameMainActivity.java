@@ -26,15 +26,15 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
-import edu.up.cs301.game.GameFramework.gameConfiguration.GameConfig;
-import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
-import edu.up.cs301.game.GameFramework.infoMessage.GameState;
-import edu.up.cs301.game.GameFramework.players.GamePlayer;
-import edu.up.cs301.game.GameFramework.utilities.IPCoder;
-import edu.up.cs301.game.GameFramework.utilities.Logger;
-import edu.up.cs301.game.GameFramework.utilities.MessageBox;
-import edu.up.cs301.game.GameFramework.utilities.Saving;
-import edu.up.cs301.game.R;
+import com.example.checkers.game.GameFramework.gameConfiguration.GameConfig;
+import com.example.checkers.game.GameFramework.gameConfiguration.GamePlayerType;
+import com.example.checkers.game.GameFramework.infoMessage.GameState;
+import com.example.checkers.game.GameFramework.players.GamePlayer;
+import com.example.checkers.game.GameFramework.utilities.IPCoder;
+import com.example.checkers.game.GameFramework.utilities.Logger;
+import com.example.checkers.game.GameFramework.utilities.MessageBox;
+import com.example.checkers.game.GameFramework.utilities.Saving;
+import com.example.checkers.R;
 
 /**
  * class GameMainActivity
