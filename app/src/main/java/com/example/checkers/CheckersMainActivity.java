@@ -67,10 +67,11 @@ public class CheckersMainActivity extends GameMainActivity {
      * @return
      */
     public LocalGame createLocalGame(GameState gameState) {
-        return null;
+        if(gameState == null) return new CheckersLocalGame();
+        return new CheckersLocalGame((CheckersGameState) gameState);
     }
 
-    protected void onCreate(Bundle savedInstanceState) {
+    /*protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_main);
@@ -189,7 +190,7 @@ public class CheckersMainActivity extends GameMainActivity {
                 board[x][y].setOnClickListener(boardListener[x][y]);
             }
         }
-    }
+    }*/
 
     /**
      * saveGame, adds this games prepend to the filename
