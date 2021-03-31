@@ -1,14 +1,23 @@
 package com.example.checkers;
 
+import android.widget.ImageButton;
+import android.widget.TextView;
+
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 
 public class CheckersGameState extends GameState {
 
-    private CheckersPiece[] p1Pieces;//if the grid is pieces this might not be needed
-    private CheckersPiece[] p2Pieces;//if the grid is pieces this might not be needed
-    private int p1NumPieces;
-    private int p2NumPieces;
-    private int playerTurn;
+    // instance variables
+    public CheckersPiece[] p1Pieces;//if the grid is pieces this might not be needed
+    public CheckersPiece[] p2Pieces;//if the grid is pieces this might not be needed
+    public int p1NumPieces;
+    public int p2NumPieces;
+    public boolean pieceSelectedBoolean;//this determines if a piece has been selected yet. It was not here before
+    public CheckersPiece pieceSelectedPiece;//this is the piece that is going to get moved.this was not here before
+    public int playerTurn;
+    //add grid here
+    public ImageButton[][] board; //displays the 8x8 checkerboard
+    TextView gameInfo;
 
     public CheckersGameState(){
         playerTurn = 0;
@@ -68,4 +77,50 @@ public class CheckersGameState extends GameState {
     public void setPlayerTurn(int playerTurn) {
         this.playerTurn = playerTurn;
     }
+
+    //this sets the board and displays all the locations of the coordinates
+    //this method was not here before we turned it in.
+    public void setBoard(ImageButton[][] board){
+        //this nested forloop makes a black checker board. The if statements help with the checker pattern
+        for(int height=1;height<=8;height++) {
+            for(int length=1; length<=8;length++) {
+                /*if(height%2 == 1) {
+                    if(length%2 == 1) {
+                        board[length][height].setImageResource(R.drawable.red_tile);
+                    }
+                    else{
+                        board[length][height].setImageResource(R.drawable.white_tile);
+                    }
+                }
+                else{
+                    if(height%2 == 1){
+                        board[length][height].setImageResource(R.drawable.white_tile);
+                    }
+                    else{
+                        board[length][height].setImageResource(R.drawable.red_tile);
+                    }
+                }*/
+                if((height + length) % 2 == 0){
+                    board[length][height].setImageResource(R.drawable.red_tile);
+                }
+                else{
+                    board[length][height].setImageResource(R.drawable.white_tile);
+                }
+            }
+        }
+
+        //this sets all of player ones pieces on the map.
+        for(CheckersPiece piece :  p1Pieces){
+            if(piece.getAlive()) {
+                board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.black_piece);
+            }
+        }
+
+        for(CheckersPiece piece :  p2Pieces){
+            if(piece.getAlive()) {
+                board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.red_piece);
+            }
+        }
+    }
+
 }
