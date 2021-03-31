@@ -27,6 +27,7 @@ public class CheckersMainActivity extends GameMainActivity {
 
     /**
      * sets up a default of one human and one computer player
+     *
      * @return
      */
     @Override
@@ -38,19 +39,22 @@ public class CheckersMainActivity extends GameMainActivity {
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
                 return new CheckersHumanPlayer(name);
-            }});
+            }
+        });
         // checkpoint 5
         playerTypes.add(new GamePlayerType("Smart Computer Player") {
             public GamePlayer createPlayer(String name) {
                 return new CheckersComputerPlayer1(name);
-            }});
+            }
+        });
         playerTypes.add(new GamePlayerType("Computer Player") {
             public GamePlayer createPlayer(String name) {
                 return new CheckersComputerPlayer2(name);
-            }});
+            }
+        });
 
         // Create a game configuration class for Pig:
-        GameConfig defaultConfig = new GameConfig(playerTypes, 1, 2, "Pig", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "Checkers", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
@@ -59,15 +63,13 @@ public class CheckersMainActivity extends GameMainActivity {
     }//createDefaultConfig
 
     /**
-     *
-     * @param gameState
-     * The desired gameState to start at or null for new game
-     *
+     * @param gameState The desired gameState to start at or null for new game
      * @return
      */
     public LocalGame createLocalGame(GameState gameState) {
         return null;
     }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -79,12 +81,12 @@ public class CheckersMainActivity extends GameMainActivity {
         ImageButton[][] board = new ImageButton[9][9];
 
         //this is will be listening to the tiles. I made it 9 by 9 for the same reason I made the board 9 by 9
-        CheckersTileListener [][] boardListener = new CheckersTileListener[9][9];
+        CheckersTileListener[][] boardListener = new CheckersTileListener[9][9];
 
         CheckersGameState gameState = new CheckersGameState();
 
         //this button is used to let a player unchoose a piece
-        Button cancelButton = (Button)findViewById(R.id.cancelButton);
+        Button cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +95,7 @@ public class CheckersMainActivity extends GameMainActivity {
         });
 
         //used to display the turn/how many pieces captured etc.
-        TextView gameInfo = (TextView)findViewById(R.id.gameInfo);
+        TextView gameInfo = (TextView) findViewById(R.id.gameInfo);
         gameInfo.setText("Player one, please choose a piece. You can choose a piece by taping it.");
 
         //This is where I initialize all the image buttons. Their locations in the array
@@ -181,36 +183,37 @@ public class CheckersMainActivity extends GameMainActivity {
 
         gameState.setBoard(board);
 
-        for(int y = 1; y<9 ; y++){
-            for(int x = 1; x<9 ; x++){
-                boardListener[x][y] = new CheckersTileListener(x,y,gameState,gameInfo,board);
+        for (int y = 1; y < 9; y++) {
+            for (int x = 1; x < 9; x++) {
+                boardListener[x][y] = new CheckersTileListener(x, y, gameState, gameInfo, board);
                 board[x][y].setOnClickListener(boardListener[x][y]);
             }
         }
+    }
 
     /**
      * saveGame, adds this games prepend to the filename
      *
-     * @param gameName
+     * @param Checkers
      * 				Desired save name
      * @return String representation of the save
      */
     @Override
-    public GameState saveGame(String gameName) {
-        return super.saveGame(getGameString(gameName));
+    public GameState saveGame (String Checkers){
+        return super.saveGame(getGameString(Checkers));
     }
 
     /**
      * loadGame, adds this games prepend to the desire file to open and creates the game specific state
-     * @param gameName
+     * @param Checkers
      * 				The file to open
      * @return The loaded GameState
      */
     @Override
-        public GameState loadGame(String gameName){
-            String appName = getGameString(gameName);
-            super.loadGame(appName);
-            return (GameState) new CheckersGameState((CheckersGameState) Saving.readFromFile(appName,
-                    this.getApplicationContext()));
-        }
+    public GameState loadGame (String Checkers){
+        String appName = getGameString(Checkers);
+        super.loadGame(appName);
+        return (GameState) new CheckersGameState((CheckersGameState) Saving.readFromFile(appName,
+                this.getApplicationContext()));
+    }
 }
