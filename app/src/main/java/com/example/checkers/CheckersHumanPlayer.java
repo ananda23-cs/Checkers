@@ -30,7 +30,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     @Override
     public View getTopView() {
-        return null;
+        return myActivity.findViewById(R.id.top_gui_layout);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         }
         else if(!(info instanceof CheckersGameState)) return;
         else{
-
+            ((CheckersGameState) info).setBoard(board);
         }
     }
 
@@ -51,86 +51,86 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
         //This is where we initialize all the image buttons. Their locations in the array
         //matches the location on the board
-        board[1][1] = activity.findViewById(R.id.tile11);
-        board[2][1] = activity.findViewById(R.id.tile21);
-        board[3][1] = activity.findViewById(R.id.tile31);
-        board[4][1] = activity.findViewById(R.id.tile41);
-        board[5][1] = activity.findViewById(R.id.tile51);
-        board[6][1] = activity.findViewById(R.id.tile61);
-        board[7][1] = activity.findViewById(R.id.tile71);
-        board[8][1] = activity.findViewById(R.id.tile81);
+        board[1][1] = (ImageButton) activity.findViewById(R.id.tile11);
+        board[2][1] = (ImageButton) activity.findViewById(R.id.tile21);
+        board[3][1] = (ImageButton) activity.findViewById(R.id.tile31);
+        board[4][1] = (ImageButton) activity.findViewById(R.id.tile41);
+        board[5][1] = (ImageButton) activity.findViewById(R.id.tile51);
+        board[6][1] = (ImageButton) activity.findViewById(R.id.tile61);
+        board[7][1] = (ImageButton) activity.findViewById(R.id.tile71);
+        board[8][1] = (ImageButton) activity.findViewById(R.id.tile81);
 
-        board[1][2] = activity.findViewById(R.id.tile12);
-        board[2][2] = activity.findViewById(R.id.tile22);
-        board[3][2] = activity.findViewById(R.id.tile32);
-        board[4][2] = activity.findViewById(R.id.tile42);
-        board[5][2] = activity.findViewById(R.id.tile52);
-        board[6][2] = activity.findViewById(R.id.tile62);
-        board[7][2] = activity.findViewById(R.id.tile72);
-        board[8][2] = activity.findViewById(R.id.tile82);
+        board[1][2] = (ImageButton) activity.findViewById(R.id.tile12);
+        board[2][2] = (ImageButton) activity.findViewById(R.id.tile22);
+        board[3][2] = (ImageButton) activity.findViewById(R.id.tile32);
+        board[4][2] = (ImageButton) activity.findViewById(R.id.tile42);
+        board[5][2] = (ImageButton) activity.findViewById(R.id.tile52);
+        board[6][2] = (ImageButton) activity.findViewById(R.id.tile62);
+        board[7][2] = (ImageButton) activity.findViewById(R.id.tile72);
+        board[8][2] = (ImageButton) activity.findViewById(R.id.tile82);
 
-        board[1][3] = activity.findViewById(R.id.tile13);
-        board[2][3] = activity.findViewById(R.id.tile23);
-        board[3][3] = activity.findViewById(R.id.tile33);
-        board[4][3] = activity.findViewById(R.id.tile43);
-        board[5][3] = activity.findViewById(R.id.tile53);
-        board[6][3] = activity.findViewById(R.id.tile63);
-        board[7][3] = activity.findViewById(R.id.tile73);
-        board[8][3] = activity.findViewById(R.id.tile83);
+        board[1][3] = (ImageButton) activity.findViewById(R.id.tile13);
+        board[2][3] = (ImageButton) activity.findViewById(R.id.tile23);
+        board[3][3] = (ImageButton) activity.findViewById(R.id.tile33);
+        board[4][3] = (ImageButton) activity.findViewById(R.id.tile43);
+        board[5][3] = (ImageButton) activity.findViewById(R.id.tile53);
+        board[6][3] = (ImageButton) activity.findViewById(R.id.tile63);
+        board[7][3] = (ImageButton) activity.findViewById(R.id.tile73);
+        board[8][3] = (ImageButton) activity.findViewById(R.id.tile83);
 
-        board[1][4] = activity.findViewById(R.id.tile14);
-        board[2][4] = activity.findViewById(R.id.tile24);
-        board[3][4] = activity.findViewById(R.id.tile34);
-        board[4][4] = activity.findViewById(R.id.tile44);
-        board[5][4] = activity.findViewById(R.id.tile54);
-        board[6][4] = activity.findViewById(R.id.tile64);
-        board[7][4] = activity.findViewById(R.id.tile74);
-        board[8][4] = activity.findViewById(R.id.tile84);
+        board[1][4] = (ImageButton) activity.findViewById(R.id.tile14);
+        board[2][4] = (ImageButton) activity.findViewById(R.id.tile24);
+        board[3][4] = (ImageButton) activity.findViewById(R.id.tile34);
+        board[4][4] = (ImageButton) activity.findViewById(R.id.tile44);
+        board[5][4] = (ImageButton) activity.findViewById(R.id.tile54);
+        board[6][4] = (ImageButton) activity.findViewById(R.id.tile64);
+        board[7][4] = (ImageButton) activity.findViewById(R.id.tile74);
+        board[8][4] = (ImageButton) activity.findViewById(R.id.tile84);
 
-        board[1][5] = activity.findViewById(R.id.tile15);
-        board[2][5] = activity.findViewById(R.id.tile25);
-        board[3][5] = activity.findViewById(R.id.tile35);
-        board[4][5] = activity.findViewById(R.id.tile45);
-        board[5][5] = activity.findViewById(R.id.tile55);
-        board[6][5] = activity.findViewById(R.id.tile65);
-        board[7][5] = activity.findViewById(R.id.tile75);
-        board[8][5] = activity.findViewById(R.id.tile85);
+        board[1][5] = (ImageButton) activity.findViewById(R.id.tile15);
+        board[2][5] = (ImageButton) activity.findViewById(R.id.tile25);
+        board[3][5] = (ImageButton) activity.findViewById(R.id.tile35);
+        board[4][5] = (ImageButton) activity.findViewById(R.id.tile45);
+        board[5][5] = (ImageButton) activity.findViewById(R.id.tile55);
+        board[6][5] = (ImageButton) activity.findViewById(R.id.tile65);
+        board[7][5] = (ImageButton) activity.findViewById(R.id.tile75);
+        board[8][5] = (ImageButton) activity.findViewById(R.id.tile85);
 
-        board[1][6] = activity.findViewById(R.id.tile16);
-        board[2][6] = activity.findViewById(R.id.tile26);
-        board[3][6] = activity.findViewById(R.id.tile36);
-        board[4][6] = activity.findViewById(R.id.tile46);
-        board[5][6] = activity.findViewById(R.id.tile56);
-        board[6][6] = activity.findViewById(R.id.tile66);
-        board[7][6] = activity.findViewById(R.id.tile76);
-        board[8][6] = activity.findViewById(R.id.tile86);
+        board[1][6] = (ImageButton) activity.findViewById(R.id.tile16);
+        board[2][6] = (ImageButton) activity.findViewById(R.id.tile26);
+        board[3][6] = (ImageButton) activity.findViewById(R.id.tile36);
+        board[4][6] = (ImageButton) activity.findViewById(R.id.tile46);
+        board[5][6] = (ImageButton) activity.findViewById(R.id.tile56);
+        board[6][6] = (ImageButton) activity.findViewById(R.id.tile66);
+        board[7][6] = (ImageButton) activity.findViewById(R.id.tile76);
+        board[8][6] = (ImageButton) activity.findViewById(R.id.tile86);
 
-        board[1][6] = activity.findViewById(R.id.tile16);
-        board[2][6] = activity.findViewById(R.id.tile26);
-        board[3][6] = activity.findViewById(R.id.tile36);
-        board[4][6] = activity.findViewById(R.id.tile46);
-        board[5][6] = activity.findViewById(R.id.tile56);
-        board[6][6] = activity.findViewById(R.id.tile66);
-        board[7][6] = activity.findViewById(R.id.tile76);
-        board[8][6] = activity.findViewById(R.id.tile86);
+        board[1][6] = (ImageButton) activity.findViewById(R.id.tile16);
+        board[2][6] = (ImageButton) activity.findViewById(R.id.tile26);
+        board[3][6] = (ImageButton) activity.findViewById(R.id.tile36);
+        board[4][6] = (ImageButton) activity.findViewById(R.id.tile46);
+        board[5][6] = (ImageButton) activity.findViewById(R.id.tile56);
+        board[6][6] = (ImageButton) activity.findViewById(R.id.tile66);
+        board[7][6] = (ImageButton) activity.findViewById(R.id.tile76);
+        board[8][6] = (ImageButton) activity.findViewById(R.id.tile86);
 
-        board[1][7] = activity.findViewById(R.id.tile17);
-        board[2][7] = activity.findViewById(R.id.tile27);
-        board[3][7] = activity.findViewById(R.id.tile37);
-        board[4][7] = activity.findViewById(R.id.tile47);
-        board[5][7] = activity.findViewById(R.id.tile57);
-        board[6][7] = activity.findViewById(R.id.tile67);
-        board[7][7] = activity.findViewById(R.id.tile77);
-        board[8][7] = activity.findViewById(R.id.tile87);
+        board[1][7] = (ImageButton) activity.findViewById(R.id.tile17);
+        board[2][7] = (ImageButton) activity.findViewById(R.id.tile27);
+        board[3][7] = (ImageButton) activity.findViewById(R.id.tile37);
+        board[4][7] = (ImageButton) activity.findViewById(R.id.tile47);
+        board[5][7] = (ImageButton) activity.findViewById(R.id.tile57);
+        board[6][7] = (ImageButton) activity.findViewById(R.id.tile67);
+        board[7][7] = (ImageButton) activity.findViewById(R.id.tile77);
+        board[8][7] = (ImageButton) activity.findViewById(R.id.tile87);
 
-        board[1][8] = activity.findViewById(R.id.tile18);
-        board[2][8] = activity.findViewById(R.id.tile28);
-        board[3][8] = activity.findViewById(R.id.tile38);
-        board[4][8] = activity.findViewById(R.id.tile48);
-        board[5][8] = activity.findViewById(R.id.tile58);
-        board[6][8] = activity.findViewById(R.id.tile68);
-        board[7][8] = activity.findViewById(R.id.tile78);
-        board[8][8] = activity.findViewById(R.id.tile88);
+        board[1][8] = (ImageButton) activity.findViewById(R.id.tile18);
+        board[2][8] = (ImageButton) activity.findViewById(R.id.tile28);
+        board[3][8] = (ImageButton) activity.findViewById(R.id.tile38);
+        board[4][8] = (ImageButton) activity.findViewById(R.id.tile48);
+        board[5][8] = (ImageButton) activity.findViewById(R.id.tile58);
+        board[6][8] = (ImageButton) activity.findViewById(R.id.tile68);
+        board[7][8] = (ImageButton) activity.findViewById(R.id.tile78);
+        board[8][8] = (ImageButton) activity.findViewById(R.id.tile88);
         
         //this is will be listening to the tiles. I made it 9 by 9 for the same reason I made the board 9 by 9
         CheckersTileListener[][] boardListener = new CheckersTileListener[9][9];
