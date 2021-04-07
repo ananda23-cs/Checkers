@@ -121,8 +121,8 @@ public class CheckersGameState extends GameState {
     //this method was not here before we turned it in.
     public void setBoard(ImageButton[][] board){
         //this nested forloop makes a black checker board. The if statements help with the checker pattern
-        for(int height=1;height<=8;height++) {
-            for(int length=1; length<=8;length++) {
+        for(int height=0;height<8;height++) {
+            for(int length=0; length<8;length++) {
                 /*if(height%2 == 1) {
                     if(length%2 == 1) {
                         board[length][height].setImageResource(R.drawable.red_tile);
