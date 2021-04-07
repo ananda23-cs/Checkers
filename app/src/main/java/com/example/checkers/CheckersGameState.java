@@ -69,6 +69,26 @@ public class CheckersGameState extends GameState {
         super.currentSetupTurn = original.currentSetupTurn;
         super.numSetupTurns = original.numSetupTurns;
     }
+
+
+    public int getP1NumPieces()
+    {
+        return p1NumPieces;
+    }
+    public int getP2NumPieces()
+    {
+        return p1NumPieces;
+    }
+    public void setP1Pieces(int p1)
+    {
+        p1NumPieces = p1;
+    }
+    public void setP2NumPieces(int p2)
+    {
+        p2NumPieces = p2;
+
+    }
+    /*
     public CheckersPiece[] getP1Pieces()
     {
         return p1Pieces;
@@ -88,7 +108,7 @@ public class CheckersGameState extends GameState {
     {
         p1Pieces = p2;
     }
-
+*/
     public int getPlayerTurn() {
         return playerTurn;
     }
