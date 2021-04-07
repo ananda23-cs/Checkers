@@ -29,7 +29,7 @@ public class CheckersGameState extends GameState {
         p1Pieces = new CheckersPiece[12];
 
 
-        p1Pieces[0] = new CheckersPiece(1,1,2);
+        p1Pieces[0] = new CheckersPiece(1,1,1);
         p1Pieces[1] = new CheckersPiece(3,1,1);
         p1Pieces[2] = new CheckersPiece(5,1,1);
         p1Pieces[3] = new CheckersPiece(7,1,1);
