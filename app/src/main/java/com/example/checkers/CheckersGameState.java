@@ -10,11 +10,11 @@ public class CheckersGameState extends GameState {
     // instance variables
     public CheckersPiece[] p1Pieces;//if the grid is pieces this might not be needed
     public CheckersPiece[] p2Pieces;//if the grid is pieces this might not be needed
-    public int p1NumPieces;
-    public int p2NumPieces;
-    public boolean pieceSelectedBoolean;//this determines if a piece has been selected yet. It was not here before
+    private int p1NumPieces;
+    private int p2NumPieces;
+    private boolean pieceSelectedBoolean;//this determines if a piece has been selected yet. It was not here before
     public CheckersPiece pieceSelectedPiece;//this is the piece that is going to get moved.this was not here before
-    public int playerTurn;
+    private int playerTurn;
     //add grid here
     public ImageButton[][] board; //displays the 8x8 checkerboard
     TextView gameInfo;
@@ -79,7 +79,7 @@ public class CheckersGameState extends GameState {
     {
         return p1NumPieces;
     }
-    public void setP1Pieces(int p1)
+    public void setP1NumPieces(int p1)
     {
         p1NumPieces = p1;
     }
