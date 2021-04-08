@@ -131,7 +131,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                boardListener[i][j] = new CheckersTileListener();
+                boardListener[i][j] = new CheckersTileListener(x, y, gameState, gameInfo, board);
                 board[i][j].setOnClickListener(boardListener[i][j]);
             }
         }

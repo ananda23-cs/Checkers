@@ -15,8 +15,8 @@ public class CheckersMoveAction extends GameAction {
      */
     public CheckersMoveAction(GamePlayer player, int row, int col) {
         super(player);
-        this.row = Math.max(1,Math.min(8,row));
-        this.col = Math.max(1,Math.min(8,col));
+        this.row = Math.max(0,Math.min(7,row));
+        this.col = Math.max(0,Math.min(7,col));
     }
 
     public int getRow() {
