@@ -1,3 +1,11 @@
+/**
+ * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
+ * Move Action class - stores move actions
+ *
+ * CS301A
+ * @version 04/11/2021
+ */
+
 package com.example.checkers;
 
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;

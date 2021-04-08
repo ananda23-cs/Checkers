@@ -50,7 +50,7 @@ import com.example.checkers.R;
 public abstract class GameMainActivity extends Activity implements
         View.OnClickListener {
     //Tag for Logging
-    private static final String TAG = "GameMainActivity";
+    private static final String CHECKERS = "GameMainActivity";
     /*
      * ====================================================================
      * Instance Variables
@@ -155,7 +155,7 @@ public abstract class GameMainActivity extends Activity implements
      * "main" for the game framework
      */
     @Override
-    public final void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //Set Context for Toast Logging
@@ -523,24 +523,24 @@ public abstract class GameMainActivity extends Activity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_help:
-                Logger.log(TAG, "This is the help button!");
+                Logger.log(CHECKERS, "This is the help button!");
                 return true;
             case R.id.save_game:
-                Logger.log(TAG, "This is the save button!");
+                Logger.log(CHECKERS, "This is the save button!");
                 if( this.game != null){
-                    Logger.log(TAG, "The Game Exists!");
+                    Logger.log(CHECKERS, "The Game Exists!");
                     MessageBox.popUpSaveGame("Name your game:", this);
                 } else {
-                    Logger.log(TAG, "No Game Exists!");
+                    Logger.log(CHECKERS, "No Game Exists!");
                     MessageBox.popUpMessage("You cannot save a game without first starting a game (Click Anywhere to dismiss).", this);
                 }
                 return true;
             case R.id.load_game:
-                Logger.log(TAG, "This is the loading button!");
+                Logger.log(CHECKERS, "This is the loading button!");
                 MessageBox.popUpLoadGame("Select Your Game: ", this);
                 return true;
             case R.id.delete_game:
-                Logger.log(TAG, "This is the delete button!");
+                Logger.log(CHECKERS, "This is the delete button!");
                 MessageBox.popUpDeleteGame("Select the Game to Delete: ", this);
                 return true;
             default:
@@ -556,7 +556,7 @@ public abstract class GameMainActivity extends Activity implements
      */
     public void onClick(View button) {
 
-        Logger.log(TAG, "Clicked "+button);
+        Logger.log(CHECKERS, "Clicked "+button);
 
         // if the GUI many not have been fully initialized, ignore
         if (justStarted) {
@@ -935,7 +935,7 @@ public abstract class GameMainActivity extends Activity implements
      * @return String representation of the gameState
      */
     public GameState saveGame(String gameName) {
-        Logger.log(TAG, "Saving: " + gameName);
+        Logger.log(CHECKERS, "Saving: " + gameName);
         config.saveConfig(gameName + ".c" , this);
         GameState gameState = getGameState();
         Saving.writeToFile(gameState, gameName, this.getApplicationContext());

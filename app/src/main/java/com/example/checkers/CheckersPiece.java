@@ -3,7 +3,7 @@
  * Piece class - initializes checker pieces coordinates, if its alive, and if its a king
  *
  * CS301A
- * @version 03/30/2021
+ * @version 04/11/2021
  */
 
 package com.example.checkers;
@@ -13,14 +13,13 @@ public class CheckersPiece {
     private int yCord;
     private boolean isKing;
     private boolean isAlive;
-    //variable for player num or owner;
-    private int owner;// this was not here before
+    private int owner; // player num or owner
 
-    public CheckersPiece(int xCord, int yCord, int owner){
+    public CheckersPiece(int xCord, int yCord, int owner) {
         this.xCord = xCord;
         this.yCord = yCord;
-        this.isAlive = true;
-        this.isKing = false;
+        this.isAlive = true; // set all pieces to be alive, when starting game
+        this.isKing = false; // set none of the pieces to be a king, when starting game
         this.owner = owner;
     }
 
@@ -32,7 +31,7 @@ public class CheckersPiece {
         this.owner = p.owner;
     }
 
-    public String toString(){
+    public String toString() {
         String returnValue = "";
         returnValue = returnValue+"Xcord = " + this.xCord;
         returnValue = returnValue + "\nYcord = " + this.yCord;
@@ -41,14 +40,7 @@ public class CheckersPiece {
         return returnValue;
     }
 
-    public boolean getAlive(){
-        return this.isAlive;
-    }
-    public void setCoordinates(int xCord,int yCord){
-        this.xCord = xCord;
-        this.yCord = yCord;
-    }
-
+    // getter methods for coordinates, king, and is alive
     public int getXcoordinate(){
         return this.xCord;
     }
@@ -57,11 +49,21 @@ public class CheckersPiece {
         return this.yCord;
     }
 
-    public void setAlive(boolean isAlive) {
-        this.isAlive = isAlive;
+    public boolean getAlive(){
+        return this.isAlive;
     }
 
     public boolean getKing() { return isKing; }
+
+    // setter methods for coordinates, king, and is alive
+    public void setCoordinates(int xCord,int yCord) {
+        this.xCord = xCord;
+        this.yCord = yCord;
+    }
+
+    public void setAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
 
     public void setKing(boolean king) {
         this.isKing = king;

@@ -56,4 +56,5 @@ public abstract class GameState extends GameInfo {
         return numSetupTurns + SEPARATOR + currentSetupTurn;
     }
 
+    public abstract boolean hasEnemyPieces(int xCord, int yCord);
 }

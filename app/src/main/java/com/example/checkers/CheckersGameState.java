@@ -1,3 +1,11 @@
+/**
+ * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
+ * Game State class - defines different states of the game
+ *
+ * CS301A
+ * @version 04/11/2021
+ */
+
 package com.example.checkers;
 
 import android.widget.ImageButton;
@@ -12,8 +20,8 @@ public class CheckersGameState extends GameState {
     public CheckersPiece[] p2Pieces;//if the grid is pieces this might not be needed
     private int p1NumPieces;
     private int p2NumPieces;
-    private boolean pieceSelectedBoolean;//this determines if a piece has been selected yet. It was not here before
-    public CheckersPiece pieceSelectedPiece;//this is the piece that is going to get moved.this was not here before
+    private boolean pieceSelectedBoolean; //this determines if a piece has been selected yet. It was not here before
+    public CheckersPiece pieceSelectedPiece; //this is the piece that is going to get moved.this was not here before
     private int playerTurn;
     //add grid here
     public ImageButton[][] board; //displays the 8x8 checkerboard
@@ -162,4 +170,8 @@ public class CheckersGameState extends GameState {
         }
     }
 
+    @Override
+    public boolean hasEnemyPieces(int xCord, int yCord) {
+        return false;
+    }
 }

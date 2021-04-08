@@ -1,3 +1,12 @@
+/**
+ * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
+ * Local game class - creates a new game state, implement the move,
+ * capture, and turn to king actions, and update it to the new game state
+ *
+ * CS301A
+ * @version 04/11/2021
+ */
+
 package com.example.checkers;
 
 import com.example.checkers.game.GameFramework.LocalGame;

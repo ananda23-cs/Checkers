@@ -1,3 +1,11 @@
+/**
+ * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
+ * Human Player class - User player that decides where to move using onclick and displays board
+ *
+ * CS301A
+ * @version 04/11/2021
+ */
+
 package com.example.checkers;
 
 import android.graphics.Color;
