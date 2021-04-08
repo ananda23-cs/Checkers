@@ -20,8 +20,6 @@ import com.example.checkers.game.GameFramework.infoMessage.IllegalMoveInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 
-import org.w3c.dom.Text;
-
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     private ImageButton[][] board;
@@ -31,8 +29,9 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
      * constructor
      *
      * @param name the name of the player
+     * @param activity_main
      */
-    public CheckersHumanPlayer(String name) {
+    public CheckersHumanPlayer(String name, int activity_main) {
         super(name);
     }
 
