@@ -2,7 +2,7 @@ package com.example.checkers.game.GameFramework.actionMessage;
 
 import java.io.Serializable;
 
-import edu.up.cs301.game.GameFramework.players.GamePlayer;
+import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 //Let's the Game know the player is done with the turn
 public class EndTurnAction extends GameAction implements Serializable {

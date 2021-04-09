@@ -1,6 +1,6 @@
 package com.example.checkers.game.GameFramework.actionMessage;
 
-import edu.up.cs301.game.GameFramework.players.GamePlayer;
+import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 /**
  * An action by which the player tells the game its name
