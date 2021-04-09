@@ -140,7 +140,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                boardListener[i][j] = new CheckersTileListener(x, y, gameState, gameInfo, board);
+                boardListener[i][j] = new CheckersTileListener(i, j, , gameInfo, board);
                 board[i][j].setOnClickListener(boardListener[i][j]);
             }
         }
@@ -163,6 +163,9 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     public void onClick(View button) {
         if(button instanceof Button){
             game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this));
+        }
+        else if (button instanceof ImageButton){
+            game.sendAction(new CheckersMoveAction(CheckersHumanPlayer.this));
         }
     }
 }
