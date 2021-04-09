@@ -25,14 +25,16 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     private ImageButton[][] board;
     private Button cancelButton;
     private TextView gameInfo;
+    private int layoutID;
     /**
      * constructor
      *
      * @param name the name of the player
-     * @param activity_main
+     * @param activity_main the layout ID of the game
      */
     public CheckersHumanPlayer(String name, int activity_main) {
         super(name);
+        this.layoutID = activity_main;
     }
 
     @Override
@@ -53,7 +55,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     @Override
     public void setAsGui(GameMainActivity activity) {
-        activity.setContentView(R.layout.activity_main);
+        activity.setContentView(layoutID);
         board = new ImageButton[8][8];
 
         //This is where we initialize all the image buttons. Their locations in the array

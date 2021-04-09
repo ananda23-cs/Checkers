@@ -41,7 +41,7 @@ public class CheckersMainActivity extends GameMainActivity {
         // Human's pieces are black pieces
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
-                return new CheckersHumanPlayer(name, R.layout.activity_main);
+                return new CheckersHumanPlayer(name, R.layout.checkers_main);
             }
         });
 
