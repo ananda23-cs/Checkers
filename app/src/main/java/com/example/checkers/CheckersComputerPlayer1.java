@@ -1,6 +1,6 @@
 /**
  * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
- * Computer Player 1 - Smart AI
+ * Computer Player 1 - Dumb AI
  *
  * CS301A
  * @version 04/11/2021

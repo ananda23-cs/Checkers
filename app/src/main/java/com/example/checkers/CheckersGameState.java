@@ -91,11 +91,7 @@ public class CheckersGameState extends GameState {
     {
         p1NumPieces = p1;
     }
-    public void setP2NumPieces(int p2)
-    {
-        p2NumPieces = p2;
-
-    }
+    public void setP2NumPieces(int p2) { p2NumPieces = p2; }
     /*
     public CheckersPiece[] getP1Pieces()
     {
@@ -159,13 +155,13 @@ public class CheckersGameState extends GameState {
         //this sets all of player ones pieces on the map.
         for(CheckersPiece piece :  p1Pieces){
             if(piece.getAlive()) {
-                board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.black_piece);
+                board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.black_piece);
             }
         }
 
         for(CheckersPiece piece :  p2Pieces){
             if(piece.getAlive()) {
-                board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.red_piece);
+                board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.red_piece);
             }
         }
     }
