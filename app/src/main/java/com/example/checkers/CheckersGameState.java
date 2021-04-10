@@ -146,9 +146,11 @@ public class CheckersGameState extends GameState {
                 }*/
                 if((height + length) % 2 == 0){
                     board[length][height].setImageResource(R.drawable.red_tile);
+                    board[length][height].setTag(R.drawable.red_tile);
                 }
                 else{
                     board[length][height].setImageResource(R.drawable.white_tile);
+                    board[length][height].setTag(R.drawable.white_tile);
                 }
             }
         }
@@ -158,9 +160,11 @@ public class CheckersGameState extends GameState {
             if(piece.getAlive()) {
                 if(piece.getKing()){
                     board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.black_king);
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setTag(R.drawable.black_king);
                 }
                 else {
                     board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.black_piece);
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setTag(R.drawable.black_piece);
                 }
             }
         }
@@ -169,9 +173,11 @@ public class CheckersGameState extends GameState {
             if(piece.getAlive()) {
                 if(piece.getKing()){
                     board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.red_king);
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setTag(R.drawable.red_king);
                 }
                 else {
                     board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.red_piece);
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setTag(R.drawable.red_piece);
                 }
             }
         }
