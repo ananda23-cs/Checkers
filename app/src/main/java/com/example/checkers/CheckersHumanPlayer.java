@@ -201,12 +201,13 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         if(button instanceof Button){
             for(int i = 0; i < 8; i++) {
                 for(int j = 0; j < 8; j++) {
-                    if(board[i][j].isPressed() &&
-                            (board[i][j].getTag().equals(R.drawable.black_piece) ||
+                    if((board[i][j].getTag().equals(R.drawable.black_piece) ||
                                     board[i][j].getTag().equals(R.drawable.black_king) ||
                                     board[i][j].getTag().equals(R.drawable.red_piece)  ||
                                     board[i][j].getTag().equals(R.drawable.red_king))){
+                        gameInfo.setText("The piece in " + i + ", " + j + " has been unselected. Please select another piece.");
                         game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this,i,j));
+                        return;
                     }
                 }
             }
@@ -216,13 +217,11 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         }*/
     }
 
-    /*private ImageButton findTile(View button, int xCord, int yCord){
+    /*private ImageButton findTile(View button){
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 if(board[i][j].equals(button)){
-                    xCord = i;
-                    yCord = j;
-                    return board[xCord][yCord];
+                    return board[i][j];
                 }
             }
         }

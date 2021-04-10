@@ -25,9 +25,10 @@ public class CheckersGameState extends GameState {
     public boolean pieceSelectedBoolean; //this determines if a piece has been selected yet. It was not here before
     public CheckersPiece pieceSelectedPiece; //this is the piece that is going to get moved.this was not here before
     private int playerTurn;
+    //private String message;
     //add grid here
-    private ImageButton[][] board; //displays the 8x8 checkerboard
-    TextView gameInfo;
+    //private ImageButton[][] board; //displays the 8x8 checkerboard
+    //TextView gameInfo;
 
     public CheckersGameState(){
         playerTurn = 0;
@@ -66,6 +67,8 @@ public class CheckersGameState extends GameState {
         p2Pieces[9] = new CheckersPiece(4,8,2);
         p2Pieces[10] = new CheckersPiece(6,8,2);
         p2Pieces[11] = new CheckersPiece(8,8,2);
+
+        //message = "";
     }
 
     public CheckersGameState(CheckersGameState original){
@@ -80,6 +83,7 @@ public class CheckersGameState extends GameState {
         this.playerTurn = original.playerTurn;
         super.currentSetupTurn = original.currentSetupTurn;
         super.numSetupTurns = original.numSetupTurns;
+        //this.message = original.message;
     }
 
 
@@ -499,13 +503,14 @@ public class CheckersGameState extends GameState {
             if(p1Pieces[i].getAlive()){
                 if(p1Pieces[i].getYcoordinate() == yCord && p1Pieces[i].getXcoordinate() == xCord){
                     this.pieceSelectedPiece = p1Pieces[i];
-
+                    break;
                 }
             }
 
             if(piece.getAlive()){
                 if(piece.getYcoordinate() == yCord && piece.getXcoordinate() == xCord){
                     this.pieceSelectedPiece = piece;
+                    break;
                 }
             }
             i++;
@@ -513,5 +518,4 @@ public class CheckersGameState extends GameState {
         }
         this.pieceSelectedBoolean = true;
     }
-
 }
