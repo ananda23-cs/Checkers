@@ -210,6 +210,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                                 board[i][j].getTag().equals(R.drawable.red_king))) {
                             game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this,
                                     boardListener[i][j].xCord, boardListener[i][j].yCord));
+                            boardListener[i][j].setClicked(false);
                         }
                         return;
                     }

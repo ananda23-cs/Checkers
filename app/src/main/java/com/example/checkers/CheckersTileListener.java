@@ -142,4 +142,8 @@ public class CheckersTileListener implements View.OnClickListener {
     public boolean isClicked() {
         return isClicked;
     }
+
+    public void setClicked(boolean clicked) {
+        isClicked = clicked;
+    }
 }
