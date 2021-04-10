@@ -214,9 +214,6 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                         }
                         return;
                     }
-                    else{
-                        continue;
-                    }
                 }
             }
         }
