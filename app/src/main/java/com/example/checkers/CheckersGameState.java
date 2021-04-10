@@ -157,7 +157,7 @@ public class CheckersGameState extends GameState {
         for(CheckersPiece piece :  p1Pieces){
             if(piece.getAlive()) {
                 if(piece.getKing()){
-                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.black_king);
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.black_piece);//change to king later
                 }
                 else {
                     board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.black_piece);
