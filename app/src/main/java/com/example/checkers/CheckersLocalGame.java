@@ -36,7 +36,20 @@ public class CheckersLocalGame extends LocalGame {
 
     @Override
     protected String checkIfGameOver() {
-        return null;
+        CheckersGameState state = (CheckersGameState) super.state;
+        if(state.getP1NumPieces() == 0)
+        {
+            return "Player 2 wins.";
+        }
+        else if(state.getP2NumPieces() == 0)
+        {
+            return "Player 1 wins.";
+        }
+        else
+        {
+            return null;
+        }
+
     }
 
     @Override
