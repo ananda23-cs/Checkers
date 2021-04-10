@@ -64,7 +64,7 @@ public class CheckersMainActivity extends GameMainActivity {
 
         // Add the default players
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
-        defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
+        defaultConfig.addPlayer("Computer", 2); // player 2: a computer player
 
         // Set the initial information for the remote players
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
