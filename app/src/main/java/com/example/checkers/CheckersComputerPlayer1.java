@@ -37,6 +37,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         boolean invalid = true;
 
         while(invalid) {
+
             //chooses the index of a computer player's piece;
             int pieceIdx = (int) Math.random() * 11;
             int [] directions = new int[2];
