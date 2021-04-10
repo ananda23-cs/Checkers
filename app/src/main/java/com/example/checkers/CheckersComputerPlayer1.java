@@ -13,23 +13,23 @@ import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
 
 public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
-    int id;
-    public CheckersComputerPlayer1(String name,int id,CheckersGameState checkersGameState){
+
+    public CheckersComputerPlayer1(String name){
         super(name);
-        this.id = id;
+
     }
 
     @Override
     protected void receiveInfo(GameInfo info) {
         //ignore if not the computer's turn
 
-        //if(info instanceof NotYourTurnInfo) return;
+        if(info instanceof NotYourTurnInfo) return;
 
         CheckersGameState current = new CheckersGameState((CheckersGameState) info);
 
-        if(current.getPlayerTurn() == this.id){
-            return;
-        }
+        //if(current.getPlayerTurn() == this.id){
+         //   return;
+       // }
 
         //delay for a second so human can see the computer's movements
         sleep(1);
