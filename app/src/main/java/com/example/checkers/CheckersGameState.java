@@ -25,7 +25,7 @@ public class CheckersGameState extends GameState {
     public boolean pieceSelectedBoolean; //this determines if a piece has been selected yet. It was not here before
     public CheckersPiece pieceSelectedPiece; //this is the piece that is going to get moved.this was not here before
     private int playerTurn;
-    //private String message;
+    private String message;
     //add grid here
     //private ImageButton[][] board; //displays the 8x8 checkerboard
     //TextView gameInfo;
@@ -68,7 +68,7 @@ public class CheckersGameState extends GameState {
         p2Pieces[10] = new CheckersPiece(6,8,2);
         p2Pieces[11] = new CheckersPiece(8,8,2);
 
-        //message = "";
+        message = "";
     }
 
     public CheckersGameState(CheckersGameState original){
@@ -83,7 +83,7 @@ public class CheckersGameState extends GameState {
         this.playerTurn = original.playerTurn;
         super.currentSetupTurn = original.currentSetupTurn;
         super.numSetupTurns = original.numSetupTurns;
-        //this.message = original.message;
+        this.message = original.message;
     }
 
 
@@ -516,6 +516,19 @@ public class CheckersGameState extends GameState {
             i++;
 
         }
-        this.pieceSelectedBoolean = true;
+        if(this.pieceSelectedBoolean == false) {
+            this.pieceSelectedBoolean = true;
+        }
+        else{
+            this.pieceSelectedBoolean = false;
+        }
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

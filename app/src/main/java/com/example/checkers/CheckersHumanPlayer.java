@@ -23,6 +23,7 @@ import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     private ImageButton[][] board;
+    private CheckersTileListener[][] boardListener;
     private Button cancelButton;
     private TextView gameInfo;
     private int layoutID;
@@ -50,6 +51,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         else if(!(info instanceof CheckersGameState)) return;
         else{
             ((CheckersGameState) info).setBoard(board);
+            gameInfo.setText(((CheckersGameState) info).getMessage());
         }
     }
 
@@ -186,7 +188,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     protected void initAfterReady() {
         myActivity.setTitle("Checkers: " + allPlayerNames[0] + " vs. " + allPlayerNames[1]);
         //this is will be listening to the tiles.
-        CheckersTileListener[][] boardListener = new CheckersTileListener[8][8];
+        boardListener = new CheckersTileListener[8][8];
         for(int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(),
@@ -201,13 +203,18 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         if(button instanceof Button){
             for(int i = 0; i < 8; i++) {
                 for(int j = 0; j < 8; j++) {
-                    if((board[i][j].getTag().equals(R.drawable.black_piece) ||
-                                    board[i][j].getTag().equals(R.drawable.black_king) ||
-                                    board[i][j].getTag().equals(R.drawable.red_piece)  ||
-                                    board[i][j].getTag().equals(R.drawable.red_king))){
-                        gameInfo.setText("The piece in " + i + ", " + j + " has been unselected. Please select another piece.");
-                        game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this,i,j));
+                    if(boardListener[i][j].isClicked()) {
+                        if ((board[i][j].getTag().equals(R.drawable.black_piece) ||
+                                board[i][j].getTag().equals(R.drawable.black_king) ||
+                                board[i][j].getTag().equals(R.drawable.red_piece) ||
+                                board[i][j].getTag().equals(R.drawable.red_king))) {
+                            game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this,
+                                    boardListener[i][j].xCord, boardListener[i][j].yCord));
+                        }
                         return;
+                    }
+                    else{
+                        continue;
                     }
                 }
             }
