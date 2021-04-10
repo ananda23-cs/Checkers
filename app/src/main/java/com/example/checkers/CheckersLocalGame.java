@@ -14,9 +14,14 @@ import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersLocalGame extends LocalGame {
+
+    CheckersGameState checkersGameState;//I added this
+
     public CheckersLocalGame(){
-        super();
-        super.state = new CheckersGameState();
+        //I am commenting this out
+        //super();
+        //super.state = new CheckersGameState();
+        checkersGameState = new CheckersGameState();
     }
 
     public CheckersLocalGame(CheckersGameState checkersGameState){
@@ -64,12 +69,31 @@ public class CheckersLocalGame extends LocalGame {
                                 " has been unselected. Please select another piece.");
             return true;
         }
-        else if (action instanceof CheckersMoveAction){
-            return true;
+
+        else if (action instanceof CheckersMoveAction2){
+            if(checkersGameState.movePiece(((CheckersMoveAction2) action).getPiece(),
+            ((CheckersMoveAction2)action).getXDire(),((CheckersMoveAction2) action).YDire,
+            checkersGameState.getPlayerTurn())){
+                return true;
+            }
+            else{
+                return false;
+            }
+
         }
+
         else if (action instanceof CheckersCaptureAction){
-            return true;
+            CheckersPiece piece = ((CheckersCaptureAction) action).checkersPiece;
+            if(checkersGameState.capturepiece(piece,checkersGameState.getPlayerTurn(),
+            checkersGameState.p1Pieces,((CheckersCaptureAction) action).getXDire(),((CheckersCaptureAction) action).getYDire())){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
-        else { return false; }
+        else {
+            return false;
+        }
     }
 }

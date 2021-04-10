@@ -5,10 +5,12 @@ import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersCaptureAction extends GameAction {
     int XDire,YDire;
-    public CheckersCaptureAction(GamePlayer player, int XDir, int YDir) {
+    CheckersPiece checkersPiece;
+    public CheckersCaptureAction(GamePlayer player, int XDir, int YDir,CheckersPiece checkersPiece) {
         super(player);
         this.XDire = XDir;
         this.YDire = YDir;
+        this.checkersPiece = checkersPiece;
     }
 
     public int getXDire() {
