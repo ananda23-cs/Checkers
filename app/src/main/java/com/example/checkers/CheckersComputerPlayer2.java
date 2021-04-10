@@ -16,6 +16,7 @@ import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
 public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
     public CheckersComputerPlayer2(String name){
+        int id;
         super(name);
     }
 

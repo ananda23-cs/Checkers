@@ -14,23 +14,80 @@ import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
 
 public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
-    public CheckersComputerPlayer1(String name){
+    int id;
+    CheckersGameState checkersGameState;
+    public CheckersComputerPlayer1(String name,int id,CheckersGameState checkersGameState){
         super(name);
+        this.id = id;
+        this.checkersGameState = checkersGameState;
     }
 
     @Override
     protected void receiveInfo(GameInfo info) {
         //ignore if not the computer's turn
-        if(info instanceof NotYourTurnInfo) return;
 
-        //chooses a row and column randomly
-        int row = (int) (1+Math.random()*8);
-        int col = (int) (1+Math.random()*8);
+        //if(info instanceof NotYourTurnInfo) return;
+
+        CheckersGameState current = new CheckersGameState((CheckersGameState) info);
+
+        if(checkersGameState.getPlayerTurn() == this.id){
+            return;
+        }
 
         //delay for a second so human can see the computer's movements
         sleep(1);
 
-        game.sendAction(new CheckersMoveAction(CheckersComputerPlayer1.this, row, col));
+        //chooses a row and column randomly
+        //int row = (int) (1+Math.random()*8);
+        //int col = (int) (1+Math.random()*8);
+
+
+        boolean invalid = true;
+
+        while(invalid) {
+            //chooses the index of a computer player's piece;
+            int pieceIdx = (int) Math.random() * 11;
+            int [] directions = new int[2];
+            directions[0]= -1;
+            directions[1] = 1;
+            int xdirection = directions[(int)(Math.random()*2)];
+            int ydirection = directions[(int)(Math.random()*2)];
+
+
+            //CheckersPiece piece, int xDir,int yDir,int id
+            if(id == 1) {
+                if (checkersGameState.movePiece(checkersGameState.p1Pieces[pieceIdx],xdirection,ydirection,id)) {
+                    invalid = false;
+                    game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection));
+                }
+                else if(checkersGameState.capturepiece(checkersGameState.p1Pieces[pieceIdx],
+                id,checkersGameState.p2Pieces,xdirection,ydirection)){
+                    game.sendAction(new CheckersCaptureAciton(this,xdirection,ydirection));
+                    invalid = false;
+                }
+
+            }
+            else{
+                if (checkersGameState.movePiece(checkersGameState.p2Pieces[pieceIdx],xdirection,ydirection,id)) {
+                    invalid = false;
+                    game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection));
+                }
+
+                else if(checkersGameState.capturepiece(checkersGameState.p2Pieces[pieceIdx],
+                        id,checkersGameState.p1Pieces,xdirection,ydirection)){
+                    game.sendAction(new CheckersCaptureAciton(this,xdirection,ydirection));
+                    invalid = false;
+
+                }
+
+            }
+
+
+        }
+
+
+
+        //game.sendAction(new CheckersMoveAction(CheckersComputerPlayer1.this, row, col));
     }
 
 }
