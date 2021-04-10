@@ -140,7 +140,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(), gameInfo, board);
+                boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(),
+                                        gameInfo, board, CheckersHumanPlayer.this,game);
                 board[i][j].setOnClickListener(boardListener[i][j]);
             }
         }
@@ -171,8 +172,36 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                 }
             }
         }
-        else if (button instanceof ImageButton){
+        /*else if (button instanceof ImageButton){
+            int newXCord = findXButton(button);
+            int newYCord = -1;
+            findTile(button, newXCord, newYCord);
             game.sendAction(new CheckersMoveAction(CheckersHumanPlayer.this));
-        }
+        }*/
     }
+
+    /*private ImageButton findTile(View button, int xCord, int yCord){
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(board[i][j].equals(button)){
+                    xCord = i;
+                    yCord = j;
+                    return board[xCord][yCord];
+                }
+            }
+        }
+        return null;
+    }
+    private int findXButton(View button){
+        int xCord;
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(board[i][j].equals(button)){
+                    xCord = i;
+                    return xCord;
+                }
+            }
+        }
+        return -1;
+    }*/
 }

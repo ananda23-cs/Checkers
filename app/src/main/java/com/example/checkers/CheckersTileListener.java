@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.checkers.game.GameFramework.Game;
+
 public class CheckersTileListener implements View.OnClickListener {
 
     int xCord;//the xcord of the button its litenting to
@@ -19,14 +21,18 @@ public class CheckersTileListener implements View.OnClickListener {
     CheckersGameState gameState;//the current game state
     TextView gameInfo;//the text view that displays who's turn it is
     ImageButton[][] board;
+    Game game;
+    CheckersHumanPlayer player;
 
     //initial constructor
-    public CheckersTileListener(int xCord, int yCord, CheckersGameState gameState,TextView gameInfo,ImageButton[][] board){
+    public CheckersTileListener(int xCord, int yCord, CheckersGameState gameState,TextView gameInfo,ImageButton[][] board, CheckersHumanPlayer player, Game game){
         this.xCord = xCord;
         this.yCord = yCord;
         this.gameState = gameState;
         this.gameInfo = gameInfo;
         this.board = board;
+        this.player = player;
+        this.game = game;
     }
 
     //this programs what actually happens when a button is clicked
@@ -67,6 +73,7 @@ public class CheckersTileListener implements View.OnClickListener {
 
                 //if the location is valid it moves
                 if(gameState.movePiece(gameState.pieceSelectedPiece,newXCord,newYCord,gameState.getPlayerTurn())){
+                    game.sendAction(new CheckersMoveAction2(player,newXCord,newYCord,gameState.pieceSelectedPiece));
                     gameState.pieceSelectedBoolean = false;//sets the piece selected back to false
                     gameState.setBoard(board);
                     if(gameState.getPlayerTurn() == 1) {
