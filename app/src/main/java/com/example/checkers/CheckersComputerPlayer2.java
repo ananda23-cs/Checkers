@@ -15,8 +15,10 @@ import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
 
 public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
+    int id;
     public CheckersComputerPlayer2(String name){
         super(name);
+        int id;
     }
 
     @Override
