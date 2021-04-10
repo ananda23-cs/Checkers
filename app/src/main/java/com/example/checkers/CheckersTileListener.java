@@ -81,11 +81,11 @@ public class CheckersTileListener implements View.OnClickListener {
                     fake.pieceSelectedBoolean = false;//sets the piece selected back to false
                     fake.setBoard(board);
                     if(fake.getPlayerTurn() == 1) {
-                        game.sendAction(new CheckersMoveAction2(player, newXCord,newYCord));
+                        game.sendAction(new CheckersMoveAction2(player, newXCord,newYCord, fake.pieceSelectedPiece));
                         gameInfo.setText("That move was valid. Player two please choose a piece");
                     }
                     else{
-                        game.sendAction(new CheckersMoveAction2(player,newXCord,newYCord));
+                        game.sendAction(new CheckersMoveAction2(player,newXCord,newYCord, fake.pieceSelectedPiece));
                         gameInfo.setText("That move was valid. Player one please choose a piece");
                     }
 
