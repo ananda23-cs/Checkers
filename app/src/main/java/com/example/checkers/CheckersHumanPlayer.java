@@ -165,17 +165,17 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         if(button instanceof Button){
             for(int i = 0; i < 8; i++) {
                 for(int j = 0; j < 8; j++) {
-                    if(board[i][j].isPressed()) {
+                    if(board[i][j].isPressed() &&
+                            (board[i][j].getDrawable().equals(R.drawable.black_piece) ||
+                                    board[i][j].getDrawable().equals(R.drawable.black_king) ||
+                                    board[i][j].getDrawable().equals(R.drawable.red_piece)  ||
+                                    board[i][j].getDrawable().equals(R.drawable.red_king))){
                         game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this,i,j));
-                        return;
                     }
                 }
             }
         }
         /*else if (button instanceof ImageButton){
-            int newXCord = findXButton(button);
-            int newYCord = -1;
-            findTile(button, newXCord, newYCord);
             game.sendAction(new CheckersMoveAction(CheckersHumanPlayer.this));
         }*/
     }
