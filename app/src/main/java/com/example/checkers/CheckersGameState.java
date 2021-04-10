@@ -237,17 +237,17 @@ public class CheckersGameState extends GameState {
                         && piece.getYcoordinate()-1 +yDir == piece1.getYcoordinate()-1) {
 
                     //makes sure the space ahead of the the capture pieces is empty
-                    if (isEmpty(piece1.getXcoordinate()-1 + xDir, piece1.getYcoordinate() + yDir) &&
-                            inBounds(piece1.getXcoordinate()-1 + xDir, piece1.getYcoordinate() + yDir)) {
+                    if (isEmpty(piece1.getXcoordinate()-1 + xDir, piece1.getYcoordinate()-1 + yDir) &&
+                            inBounds(piece1.getXcoordinate()-1 + xDir, piece1.getYcoordinate()-1 + yDir)) {
                         //kills the pieces and sets the return value to true
                         piece1.setAlive(false);
                         returnValue = true;
 
-                        if(piece.getYcoordinate() == 7 && playerTurn == 0){
+                        if(piece.getYcoordinate()-1 == 7 && playerTurn == 0){
                             piece.setKing(true);
                         }
 
-                        if(piece.getYcoordinate() == 0 && playerTurn == 1){
+                        if(piece.getYcoordinate()-1 == 0 && playerTurn == 1){
                             piece.setKing(true);
                         }
 

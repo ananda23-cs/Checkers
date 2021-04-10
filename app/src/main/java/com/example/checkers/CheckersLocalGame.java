@@ -41,6 +41,13 @@ public class CheckersLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
+        if(action instanceof CheckersCancelMoveAction){
+            CheckersCancelMoveAction cancelMoveAction = (CheckersCancelMoveAction) action;
+            CheckersGameState state = (CheckersGameState) super.state;
+            int cancelRow = cancelMoveAction.getSelectedRow();
+            int cancelCol = cancelMoveAction.getSelectedCol();
+            state.setPieceSelectedPieceAndPieceSelectedBoolean(cancelRow,cancelCol);
+        }
         return false;
     }
 }
