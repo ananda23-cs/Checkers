@@ -59,7 +59,7 @@ public class CheckersTileListener implements View.OnClickListener {
         else{
             //these are the distances of where the piece will move to. If they are
             //invalid it will not do anything
-            int newXCord = xCord-gameState.pieceSelectedPiece.getXcoordinate();
+            int newXCord = xCord - gameState.pieceSelectedPiece.getXcoordinate();
             int newYCord = yCord - gameState.pieceSelectedPiece.getYcoordinate();
 
             //if the player is trying to move and not capture

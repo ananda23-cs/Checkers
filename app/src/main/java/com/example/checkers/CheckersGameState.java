@@ -56,7 +56,7 @@ public class CheckersGameState extends GameState {
         p2Pieces[0] = new CheckersPiece(2,6,2);
         p2Pieces[1] = new CheckersPiece(4,6,2);
         p2Pieces[2] = new CheckersPiece(6,6,2);
-        p2Pieces[3]= new CheckersPiece(8,6,2);
+        p2Pieces[3] = new CheckersPiece(8,6,2);
         p2Pieces[4] = new CheckersPiece(1,7,2);
         p2Pieces[5] = new CheckersPiece(3,7,2);
         p2Pieces[6] = new CheckersPiece(5,7,2);
@@ -68,7 +68,7 @@ public class CheckersGameState extends GameState {
     }
 
     public CheckersGameState(CheckersGameState original){
-        for(int i = 0;i<12;i++){
+        for(int i = 0; i < 12; i++){
             this.p1Pieces[i] = new CheckersPiece(original.p1Pieces[i]);
             this.p2Pieces[i] = new CheckersPiece(original.p2Pieces[i]);
         }
@@ -92,11 +92,7 @@ public class CheckersGameState extends GameState {
     {
         p1NumPieces = p1;
     }
-    public void setP2NumPieces(int p2)
-    {
-        p2NumPieces = p2;
-
-    }
+    public void setP2NumPieces(int p2) { p2NumPieces = p2; }
     /*
     public CheckersPiece[] getP1Pieces()
     {
@@ -129,7 +125,7 @@ public class CheckersGameState extends GameState {
     //this sets the board and displays all the locations of the coordinates
     //this method was not here before we turned it in.
     public void setBoard(ImageButton[][] board){
-        //this nested forloop makes a black checker board. The if statements help with the checker pattern
+        //this nested for loop makes a checker board. The if statement helps with the checker pattern
         for(int height=0;height<8;height++) {
             for(int length=0; length<8;length++) {
                 /*if(height%2 == 1) {
@@ -160,30 +156,37 @@ public class CheckersGameState extends GameState {
         //this sets all of player ones pieces on the map.
         for(CheckersPiece piece :  p1Pieces){
             if(piece.getAlive()) {
-                board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.black_piece);
+                if(piece.getKing()){
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.black_king);
+                }
+                else {
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.black_piece);
+                }
             }
         }
 
         for(CheckersPiece piece :  p2Pieces){
             if(piece.getAlive()) {
-                board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.red_piece);
+                if(piece.getKing()){
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.red_king);
+                }
+                else {
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.red_piece);
+                }
             }
         }
     }
 
-
-
-
     public boolean isEmpty(int newXCord,int newYCord){
         boolean returnValue  = true;
         for(CheckersPiece piece : p1Pieces ){
-            if(piece.getXcoordinate() == newXCord && piece.getYcoordinate() == newYCord
+            if(piece.getXcoordinate()-1 == newXCord && piece.getYcoordinate()-1 == newYCord
                     && piece.getAlive()){
                 return false;
             }
         }
         for(CheckersPiece piece : p2Pieces ){
-            if(piece.getXcoordinate() == newXCord && piece.getYcoordinate() == newYCord
+            if(piece.getXcoordinate()-1 == newXCord && piece.getYcoordinate()-1 == newYCord
                     && piece.getAlive()){
                 return false;
             }
@@ -194,7 +197,7 @@ public class CheckersGameState extends GameState {
     public boolean inBounds(int newXCord,int newYCord){
         boolean valid = true;
 
-        if(newXCord>8 || newYCord>8 || newXCord<1 || newYCord<1){
+        if(newXCord>7 || newYCord>7 || newXCord<0 || newYCord<0){
             valid = false;
         }
 
@@ -218,7 +221,6 @@ public class CheckersGameState extends GameState {
 
         //checks if player two is trying to capture a piece behind it. If so, it makes sure it's a king
         if(id == 2 && yDir>1 && !piece.getKing()){
-
             return false;
         }
 
@@ -231,26 +233,27 @@ public class CheckersGameState extends GameState {
             if(piece.getAlive()) {
                 Log.e("capturepiece: ", ""+piece1);
                 //makes checks if any enemy pieces is in a position to be captured by piece
-                if (piece.getXcoordinate() + xDir == piece1.getXcoordinate()
-                        && piece.getYcoordinate() +yDir == piece1.getYcoordinate()) {
+                if (piece.getXcoordinate()-1 + xDir == piece1.getXcoordinate()-1
+                        && piece.getYcoordinate()-1 +yDir == piece1.getYcoordinate()-1) {
 
                     //makes sure the space ahead of the the capture pieces is empty
-                    if (isEmpty(piece1.getXcoordinate() + xDir, piece1.getYcoordinate() + yDir) &&
-                            inBounds(piece1.getXcoordinate() + xDir, piece1.getYcoordinate() + yDir)) {
+                    if (isEmpty(piece1.getXcoordinate()-1 + xDir, piece1.getYcoordinate() + yDir) &&
+                            inBounds(piece1.getXcoordinate()-1 + xDir, piece1.getYcoordinate() + yDir)) {
                         //kills the pieces and sets the return value to true
                         piece1.setAlive(false);
                         returnValue = true;
 
-                        if(piece.getYcoordinate() == 8 && playerTurn == 0){
+                        if(piece.getYcoordinate() == 7 && playerTurn == 0){
                             piece.setKing(true);
                         }
 
-                        if(piece.getYcoordinate() == 1 && playerTurn == 1){
+                        if(piece.getYcoordinate() == 0 && playerTurn == 1){
                             piece.setKing(true);
                         }
 
                         //changes the turn number
-                        piece.setCoordinates(piece1.getXcoordinate() + xDir, piece1.getYcoordinate() + yDir);
+                        piece.setCoordinates(piece1.getXcoordinate()-1 + xDir,
+                                piece1.getYcoordinate()-1 + yDir);
                         if(playerTurn == 0){
                             playerTurn = 1;
                         }
@@ -270,7 +273,7 @@ public class CheckersGameState extends GameState {
         boolean returnValue = false;
         if(playerTurn == 0) {
             for (CheckersPiece piece : p2Pieces) {
-                if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
+                if (piece.getXcoordinate()-1 == xLocation && piece.getYcoordinate()-1 == yLocation
                         && piece.getAlive()) {
                     returnValue = true;
                 }
@@ -278,7 +281,7 @@ public class CheckersGameState extends GameState {
         }
         else{
             for (CheckersPiece piece : p1Pieces) {
-                if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
+                if (piece.getXcoordinate()-1 == xLocation && piece.getYcoordinate()-1 == yLocation
                         && piece.getAlive()) {
                     returnValue = true;
                 }
@@ -290,10 +293,10 @@ public class CheckersGameState extends GameState {
 
     public CheckersPiece findPiece(int xCord,int yCord){
         for(int i = 0;i<12;i++){
-            if(p1Pieces[i].getYcoordinate() == yCord && p1Pieces[i].getXcoordinate() == xCord){
+            if(p1Pieces[i].getYcoordinate()-1 == yCord && p1Pieces[i].getXcoordinate()-1 == xCord){
                 return p1Pieces[i];
             }
-            else if (p2Pieces[i].getYcoordinate() == yCord && p2Pieces[i].getXcoordinate() == xCord){
+            else if (p2Pieces[i].getYcoordinate()-1 == yCord && p2Pieces[i].getXcoordinate()-1 == xCord){
                 return p2Pieces[i];
             }
         }
@@ -306,8 +309,8 @@ public class CheckersGameState extends GameState {
         if(inRange(xDir,yDir)){
 
             //this checks that user is not trying to move off the checker board as well as if the space is held by another piece
-            if(inBounds(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir) &&
-                    isEmpty(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir)){
+            if(inBounds(piece.getXcoordinate()-1+xDir,piece.getYcoordinate()-1+yDir) &&
+                    isEmpty(piece.getXcoordinate()-1+xDir,piece.getYcoordinate()-1+yDir)){
 
                 //this checks if player one is not trying to move a non king piece backwards
                 if(id == 1 && yDir<1 && !piece.getKing()){
@@ -323,19 +326,19 @@ public class CheckersGameState extends GameState {
 
                 //if all the conditions are right the piece will move.
                 else {
-                    piece.setCoordinates(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir);
+                    piece.setCoordinates(piece.getXcoordinate()-1+xDir,piece.getYcoordinate()-1+yDir);
 
                     //will turn to player 1's pieces king if the piece reaches the other side of the board
                     if(playerTurn == 0){
                         playerTurn = 1;
-                        if(piece.getYcoordinate() == 8){
+                        if(piece.getYcoordinate() == 7){
                             piece.setKing(true);
                         }
                     }
 
                     //will turn to player 2's pieces king if the piece reaches the other side of the board
                     else{
-                        if(piece.getYcoordinate() == 1){
+                        if(piece.getYcoordinate() == 0){
                             piece.setKing(true);
                         }
                         playerTurn = 0;
@@ -359,12 +362,12 @@ public class CheckersGameState extends GameState {
     }
 
     /* prints board in logcat and will be used to print it on the canvas
-        by converting string to bitmap*/
+        by converting string to bitmap
     public static void printBoard(String[][] board2,CheckersPiece [] P1, CheckersPiece [] P2) {
         //we set the board to be empty, then it will be converted to a bitmap
         for(int height=1;height<=8;height++) {
-            /*when it's converted to a bitmap, we will set every single element in the
-              Bitmap array to a square*/
+            //when it's converted to a bitmap, we will set every single element in the
+              Bitmap array to a square
             for(int length=1; length<=8;length++) {
                 board2[height][length]="___";
             }
@@ -373,7 +376,7 @@ public class CheckersGameState extends GameState {
         /*right now, these if statements set P1[n] to
           board2[P1[n].getXcoordinate()][P1[n].getYcoordinate()]
           A string is used to represent these pieces and when converted to a bitmap,
-          we will set it to be equal to a circle, which will be used to represent a piece*/
+          we will set it to be equal to a circle, which will be used to represent a piece
         if (P1[0].getAlive()==true) {
             board2[P1[0].getXcoordinate()][P1[0].getYcoordinate()]="O1_";
         }
@@ -469,7 +472,7 @@ public class CheckersGameState extends GameState {
         Log.e( "printBoard: ","\n|   |   |   |   |   |   |   |   |");
         Log.e( "printBoard: ","\n|"+board2[1][1]+"|"+board2[2][1]+"|"+board2[3][1]+"|"+board2[4][1]+"|"+board2[5][1]+"|"+board2[6][1]+"|"+board2[7][1]+"|"+board2[8][1]+"|"+1);
         Log.e( "printBoard: ","\n  1   2   3   4   5   6   7   8");
-    }
+    }*/
 
     public boolean inRange(int xDir,int yDir){
         if((xDir == 1 || xDir == -1) && (yDir == 1 || yDir == -1)){

@@ -132,7 +132,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         board[6][7] = (ImageButton) activity.findViewById(R.id.tile78);
         board[7][7] = (ImageButton) activity.findViewById(R.id.tile88);
         
-        //this is will be listening to the tiles. I made it 9 by 9 for the same reason I made the board 9 by 9
+        //this is will be listening to the tiles.
         CheckersTileListener[][] boardListener = new CheckersTileListener[8][8];
 
         //sets up the textview displaying information regarding the events of the game
@@ -140,7 +140,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                boardListener[i][j] = new CheckersTileListener(x, y, gameState, gameInfo, board);
+                boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(), gameInfo, board);
                 board[i][j].setOnClickListener(boardListener[i][j]);
             }
         }
@@ -163,6 +163,9 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     public void onClick(View button) {
         if(button instanceof Button){
             game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this));
+        }
+        else if (button instanceof ImageButton){
+            game.sendAction(new CheckersMoveAction(CheckersHumanPlayer.this));
         }
     }
 }
