@@ -48,6 +48,9 @@ public class CheckersLocalGame extends LocalGame {
             int cancelCol = cancelMoveAction.getSelectedCol();
             state.setPieceSelectedPieceAndPieceSelectedBoolean(cancelRow,cancelCol);
         }
+        else if (action instanceof CheckersMoveAction){
+
+        }
         return false;
     }
 }
