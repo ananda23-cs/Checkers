@@ -59,7 +59,7 @@ public class CheckersTileListener implements View.OnClickListener {
 
                 //if all the conditions are right the piece is chosen
                 else{
-                    gameInfo.setText("This piece can be moved. Click on the spot where you want to move it.");
+                    gameInfo.setText("This piece can be moved. Click on the spot where you want to move it." + gameState.getPlayerTurn());
                     fake.setPieceSelectedPieceAndPieceSelectedBoolean(xCord,yCord);
 
                 }
