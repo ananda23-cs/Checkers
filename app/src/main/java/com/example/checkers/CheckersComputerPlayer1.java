@@ -1,25 +1,22 @@
 /**
  * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
- * Computer Player 1 - Smart AI
+ * Computer Player 1 - Dumb AI
  *
  * CS301A
  * @version 04/11/2021
  */
 
 package com.example.checkers;
-
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
 
 public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
-     int id;
-    CheckersGameState checkersGameState;
+    int id;
     public CheckersComputerPlayer1(String name,int id,CheckersGameState checkersGameState){
         super(name);
         this.id = id;
-        this.checkersGameState = checkersGameState;
     }
 
     @Override
@@ -30,7 +27,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
         CheckersGameState current = new CheckersGameState((CheckersGameState) info);
 
-        if(checkersGameState.getPlayerTurn() == this.id){
+        if(current.getPlayerTurn() == this.id){
             return;
         }
 
@@ -56,25 +53,25 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
             //CheckersPiece piece, int xDir,int yDir,int id
             if(id == 1) {
-                if (checkersGameState.movePiece(checkersGameState.p1Pieces[pieceIdx],xdirection,ydirection,id)) {
+                if (current.movePiece(current.p1Pieces[pieceIdx],xdirection,ydirection,id)) {
                     invalid = false;
                     game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection));
                 }
-                else if(checkersGameState.capturepiece(checkersGameState.p1Pieces[pieceIdx],
-                id,checkersGameState.p2Pieces,xdirection,ydirection)){
+                else if(current.capturepiece(current.p1Pieces[pieceIdx],
+                id,current.p2Pieces,xdirection,ydirection)){
                     game.sendAction(new CheckersCaptureAciton(this,xdirection,ydirection));
                     invalid = false;
                 }
 
             }
             else{
-                if (checkersGameState.movePiece(checkersGameState.p2Pieces[pieceIdx],xdirection,ydirection,id)) {
+                if (current.movePiece(current.p2Pieces[pieceIdx],xdirection,ydirection,id)) {
                     invalid = false;
                     game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection));
                 }
 
-                else if(checkersGameState.capturepiece(checkersGameState.p2Pieces[pieceIdx],
-                        id,checkersGameState.p1Pieces,xdirection,ydirection)){
+                else if(current.capturepiece(current.p2Pieces[pieceIdx],
+                        id,current.p1Pieces,xdirection,ydirection)){
                     game.sendAction(new CheckersCaptureAciton(this,xdirection,ydirection));
                     invalid = false;
 
