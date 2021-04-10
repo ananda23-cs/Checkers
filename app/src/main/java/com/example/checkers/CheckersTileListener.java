@@ -22,20 +22,20 @@ public class CheckersTileListener implements View.OnClickListener {
     TextView gameInfo;//the text view that displays who's turn it is
     ImageButton[][] board;
 
-    CheckersHumanPlayer player1;
-    CheckersHumanPlayer player2;
+    CheckersHumanPlayer player;
+    //CheckersHumanPlayer player2;
     Game game;
 
     //initial constructor
     public CheckersTileListener(int xCord, int yCord, CheckersGameState gameState,TextView gameInfo,ImageButton[][] board,
-    CheckersHumanPlayer p1, CheckersHumanPlayer p2,Game game){
+    CheckersHumanPlayer player, Game game){
         this.xCord = xCord;
         this.yCord = yCord;
         this.gameState = gameState;
         this.gameInfo = gameInfo;
         this.board = board;
-        this.player1 = p1;
-        this.player2 = p2;
+        this.player = player;
+        //this.player2 = p2;
         this.game = game;
     }
 
@@ -81,11 +81,11 @@ public class CheckersTileListener implements View.OnClickListener {
                     fake.pieceSelectedBoolean = false;//sets the piece selected back to false
                     fake.setBoard(board);
                     if(fake.getPlayerTurn() == 1) {
-                        game.sendAction(new CheckersMoveAction2(player1,newXCord,newYCord));
+                        game.sendAction(new CheckersMoveAction2(player, newXCord,newYCord));
                         gameInfo.setText("That move was valid. Player two please choose a piece");
                     }
                     else{
-                        game.sendAction(new CheckersMoveAction2(player2,newXCord,newYCord));
+                        game.sendAction(new CheckersMoveAction2(player,newXCord,newYCord));
                         gameInfo.setText("That move was valid. Player one please choose a piece");
                     }
 
@@ -106,7 +106,7 @@ public class CheckersTileListener implements View.OnClickListener {
                             fake.p2Pieces, newXCord, newYCord)) {
 
                         gameInfo.setText("You have captured a piece. Player 2, it's your turn");
-                        game.sendAction(new CheckersCaptureAciton(player2,newXCord,newYCord));
+                        game.sendAction(new CheckersCaptureAction(player,newXCord,newYCord));
                         fake.setBoard(board);
                         fake.pieceSelectedBoolean = false;
                     }
@@ -121,7 +121,7 @@ public class CheckersTileListener implements View.OnClickListener {
                     if (fake.capturepiece(fake.pieceSelectedPiece, fake.getPlayerTurn(),
                             fake.p1Pieces, newXCord, newYCord)) {
                         gameInfo.setText("You have captured a piece. Player 1, it's your turn.");
-                        game.sendAction(new CheckersCaptureAciton(player1,newXCord,newYCord));
+                        game.sendAction(new CheckersCaptureAction(player,newXCord,newYCord));
                         fake.setBoard(board);
                         fake.pieceSelectedBoolean = false;
                     }
