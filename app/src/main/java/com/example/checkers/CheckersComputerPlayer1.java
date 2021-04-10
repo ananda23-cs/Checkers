@@ -30,7 +30,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         //delay for a second so human can see the computer's movements
         sleep(1);
 
-        game.sendAction(new CheckersMoveAction(CheckersComputerPlayer1.this, row, col));
+        game.sendAction(new CheckersMoveAction(CheckersComputerPlayer1.this));
     }
 
 }
