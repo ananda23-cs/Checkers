@@ -60,10 +60,16 @@ public class CheckersLocalGame extends LocalGame {
             int cancelRow = cancelMoveAction.getSelectedRow();
             int cancelCol = cancelMoveAction.getSelectedCol();
             state.setPieceSelectedPieceAndPieceSelectedBoolean(cancelRow,cancelCol);
+            state.setMessage("The piece at " + cancelRow + ", " + cancelCol +
+                                " has been unselected. Please select another piece.");
+            return true;
         }
         else if (action instanceof CheckersMoveAction){
-
+            return true;
         }
-        return false;
+        else if (action instanceof CheckersCaptureAction){
+            return true;
+        }
+        else { return false; }
     }
 }

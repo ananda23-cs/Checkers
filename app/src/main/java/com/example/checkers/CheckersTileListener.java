@@ -21,7 +21,7 @@ public class CheckersTileListener implements View.OnClickListener {
     CheckersGameState gameState;//the current game state
     TextView gameInfo;//the text view that displays who's turn it is
     ImageButton[][] board;
-
+    private boolean isClicked;
     CheckersHumanPlayer player;
     //CheckersHumanPlayer player2;
     Game game;
@@ -37,12 +37,14 @@ public class CheckersTileListener implements View.OnClickListener {
         this.player = player;
         //this.player2 = p2;
         this.game = game;
+        isClicked = false;
     }
 
     //this programs what actually happens when a button is clicked
     @Override
     public void onClick(View v) {
         //this if statement is to choose a piece to move
+        isClicked = true;
         CheckersGameState fake = (CheckersGameState) gameState;
         if(fake.pieceSelectedBoolean == false){
             //this checks if they chose an empty spot
@@ -135,5 +137,13 @@ public class CheckersTileListener implements View.OnClickListener {
 
             }
         }
+    }
+
+    public boolean isClicked() {
+        return isClicked;
+    }
+
+    public void setClicked(boolean clicked) {
+        isClicked = clicked;
     }
 }

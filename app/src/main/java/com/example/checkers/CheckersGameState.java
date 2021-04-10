@@ -8,6 +8,7 @@
 
 package com.example.checkers;
 
+import android.media.Image;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -24,9 +25,10 @@ public class CheckersGameState extends GameState {
     public boolean pieceSelectedBoolean; //this determines if a piece has been selected yet. It was not here before
     public CheckersPiece pieceSelectedPiece; //this is the piece that is going to get moved.this was not here before
     private int playerTurn;
+    private String message;
     //add grid here
-    public ImageButton[][] board; //displays the 8x8 checkerboard
-    TextView gameInfo;
+    //private ImageButton[][] board; //displays the 8x8 checkerboard
+    //TextView gameInfo;
 
     public CheckersGameState(){
         playerTurn = 0;
@@ -65,9 +67,13 @@ public class CheckersGameState extends GameState {
         p2Pieces[9] = new CheckersPiece(4,8,2);
         p2Pieces[10] = new CheckersPiece(6,8,2);
         p2Pieces[11] = new CheckersPiece(8,8,2);
+
+        message = "";
     }
 
     public CheckersGameState(CheckersGameState original){
+        this.p1Pieces = new CheckersPiece[12];
+        this.p2Pieces = new CheckersPiece[12];
         for(int i = 0; i < 12; i++){
             this.p1Pieces[i] = new CheckersPiece(original.p1Pieces[i]);
             this.p2Pieces[i] = new CheckersPiece(original.p2Pieces[i]);
@@ -77,6 +83,7 @@ public class CheckersGameState extends GameState {
         this.playerTurn = original.playerTurn;
         super.currentSetupTurn = original.currentSetupTurn;
         super.numSetupTurns = original.numSetupTurns;
+        this.message = original.message;
     }
 
 
@@ -126,7 +133,7 @@ public class CheckersGameState extends GameState {
     //this method was not here before we turned it in.
     public void setBoard(ImageButton[][] board){
         //this nested for loop makes a checker board. The if statement helps with the checker pattern
-        for(int height=0;height<8;height++) {
+        /*for(int height=0;height<8;height++) {
             for(int length=0; length<8;length++) {
                 /*if(height%2 == 1) {
                     if(length%2 == 1) {
@@ -143,24 +150,28 @@ public class CheckersGameState extends GameState {
                     else{
                         board[length][height].setImageResource(R.drawable.red_tile);
                     }
-                }*/
+                }
                 if((height + length) % 2 == 0){
                     board[length][height].setImageResource(R.drawable.red_tile);
+                    board[length][height].setTag(R.drawable.red_tile);
                 }
                 else{
                     board[length][height].setImageResource(R.drawable.white_tile);
+                    board[length][height].setTag(R.drawable.white_tile);
                 }
             }
-        }
+        }*/
 
         //this sets all of player ones pieces on the map.
         for(CheckersPiece piece :  p1Pieces){
             if(piece.getAlive()) {
                 if(piece.getKing()){
                     board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.black_king);
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setTag(R.drawable.black_king);
                 }
                 else {
                     board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.black_piece);
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setTag(R.drawable.black_piece);
                 }
             }
         }
@@ -169,9 +180,11 @@ public class CheckersGameState extends GameState {
             if(piece.getAlive()) {
                 if(piece.getKing()){
                     board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.red_king);
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setTag(R.drawable.red_king);
                 }
                 else {
                     board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setImageResource(R.drawable.red_piece);
+                    board[piece.getXcoordinate()-1][piece.getYcoordinate()-1].setTag(R.drawable.red_piece);
                 }
             }
         }
@@ -490,19 +503,32 @@ public class CheckersGameState extends GameState {
             if(p1Pieces[i].getAlive()){
                 if(p1Pieces[i].getYcoordinate() == yCord && p1Pieces[i].getXcoordinate() == xCord){
                     this.pieceSelectedPiece = p1Pieces[i];
-
+                    break;
                 }
             }
 
             if(piece.getAlive()){
                 if(piece.getYcoordinate() == yCord && piece.getXcoordinate() == xCord){
                     this.pieceSelectedPiece = piece;
+                    break;
                 }
             }
             i++;
 
         }
-        this.pieceSelectedBoolean = true;
+        if(this.pieceSelectedBoolean == false) {
+            this.pieceSelectedBoolean = true;
+        }
+        else{
+            this.pieceSelectedBoolean = false;
+        }
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
