@@ -12,12 +12,24 @@ import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersCancelMoveAction extends GameAction {
+    private int selectedRow;
+    private int selectedCol;
     /**
      * constructor for GameAction
      *
      * @param player the player who created the action
      */
-    public CheckersCancelMoveAction(GamePlayer player) {
+    public CheckersCancelMoveAction(GamePlayer player, int selectedRow, int selectedCol) {
         super(player);
+        this.selectedRow = selectedRow;
+        this.selectedCol = selectedCol;
+    }
+
+    public int getSelectedRow() {
+        return selectedRow;
+    }
+
+    public int getSelectedCol() {
+        return selectedCol;
     }
 }
