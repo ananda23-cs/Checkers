@@ -4,8 +4,8 @@ import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersCaptureAction extends GameAction {
-    int XDire,YDire;
-    CheckersPiece checkersPiece;
+    private int XDire,YDire;
+    private CheckersPiece checkersPiece;
     public CheckersCaptureAction(GamePlayer player, int XDir, int YDir,CheckersPiece checkersPiece) {
         super(player);
         this.XDire = XDir;
@@ -19,5 +19,9 @@ public class CheckersCaptureAction extends GameAction {
 
     public int getYDire() {
         return YDire;
+    }
+
+    public CheckersPiece getCheckersPiece() {
+        return checkersPiece;
     }
 }

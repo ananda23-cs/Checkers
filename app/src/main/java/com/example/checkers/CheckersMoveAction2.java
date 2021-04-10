@@ -7,8 +7,8 @@ import com.example.checkers.game.GameFramework.players.GamePlayer;
  *this is a new move action class. I did not want to delete code so I made a new move action class
  */
 public class CheckersMoveAction2 extends GameAction {
-    int XDire,YDire;
-    CheckersPiece piece;
+    private int XDire,YDire;
+    private CheckersPiece piece;
     public CheckersMoveAction2(GamePlayer player,int XDir,int YDir, CheckersPiece piece) {
         super(player);
         this.XDire = XDir;

@@ -15,13 +15,13 @@ import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersLocalGame extends LocalGame {
 
-    CheckersGameState checkersGameState;//I added this
+    //CheckersGameState checkersGameState;//I added this
 
     public CheckersLocalGame(){
         //I am commenting this out
-        //super();
-        //super.state = new CheckersGameState();
-        checkersGameState = new CheckersGameState();
+        super();
+        super.state = new CheckersGameState();
+        //checkersGameState = new CheckersGameState();
     }
 
     public CheckersLocalGame(CheckersGameState checkersGameState){
@@ -69,31 +69,37 @@ public class CheckersLocalGame extends LocalGame {
                                 " has been unselected. Please select another piece.");
             return true;
         }
-
         else if (action instanceof CheckersMoveAction2){
-            if(checkersGameState.movePiece(((CheckersMoveAction2) action).getPiece(),
-            ((CheckersMoveAction2)action).getXDire(),((CheckersMoveAction2) action).YDire,
-            checkersGameState.getPlayerTurn())){
+            CheckersMoveAction2 moveAction = (CheckersMoveAction2) action;
+            CheckersGameState state = (CheckersGameState) super.state;
+            int playerId = state.getPlayerTurn();
+            int xDir = moveAction.getXDire();
+            int yDir = moveAction.getYDire();
+            CheckersPiece piece = moveAction.getPiece();
+            if (canMove(playerId)){
+                state.movePiece(piece,playerId,xDir,yDir);
                 return true;
             }
-            else{
-                return false;
-            }
-
+            else{ return false; }
         }
-
         else if (action instanceof CheckersCaptureAction){
-            CheckersPiece piece = ((CheckersCaptureAction) action).checkersPiece;
-            if(checkersGameState.capturepiece(piece,checkersGameState.getPlayerTurn(),
-            checkersGameState.p1Pieces,((CheckersCaptureAction) action).getXDire(),((CheckersCaptureAction) action).getYDire())){
+            CheckersCaptureAction captureAction = (CheckersCaptureAction) action;
+            CheckersGameState state = (CheckersGameState) super.state;
+            int playerId = state.getPlayerTurn();
+            int xDir = captureAction.getXDire();
+            int yDir = captureAction.getYDire();
+            CheckersPiece piece = captureAction.getCheckersPiece();
+            if (canMove(playerId)){
+                if(playerId == 0){
+                    state.capturepiece(piece,playerId,state.p2Pieces,xDir,yDir);
+                }
+                else{
+                    state.capturepiece(piece,playerId,state.p1Pieces,xDir,yDir);
+                }
                 return true;
             }
-            else{
-                return false;
-            }
+            else{ return false; }
         }
-        else {
-            return false;
-        }
+        else { return false; }
     }
 }
