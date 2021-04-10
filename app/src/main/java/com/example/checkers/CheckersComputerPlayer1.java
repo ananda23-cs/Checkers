@@ -50,7 +50,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             if(playerNum == 1) {
                 if (current.movePiece(current.p1Pieces[pieceIdx],xdirection,ydirection,playerNum)) {
                     invalid = false;
-                    game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection));
+                    game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection,current.p1Pieces[pieceIdx]));
                 }
                 else if(current.capturepiece(current.p1Pieces[pieceIdx],
                 playerNum,current.p2Pieces,xdirection,ydirection)){
@@ -62,7 +62,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             else{
                 if (current.movePiece(current.p2Pieces[pieceIdx],xdirection,ydirection,playerNum)) {
                     invalid = false;
-                    game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection));
+                    game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection,current.p1Pieces[pieceIdx]));
                 }
 
                 else if(current.capturepiece(current.p2Pieces[pieceIdx],
