@@ -8,6 +8,7 @@
 
 package com.example.checkers;
 
+import android.media.Image;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ public class CheckersGameState extends GameState {
     public CheckersPiece pieceSelectedPiece; //this is the piece that is going to get moved.this was not here before
     private int playerTurn;
     //add grid here
-    public ImageButton[][] board; //displays the 8x8 checkerboard
+    private ImageButton[][] board; //displays the 8x8 checkerboard
     TextView gameInfo;
 
     public CheckersGameState(){
@@ -68,6 +69,8 @@ public class CheckersGameState extends GameState {
     }
 
     public CheckersGameState(CheckersGameState original){
+        this.p1Pieces = new CheckersPiece[12];
+        this.p2Pieces = new CheckersPiece[12];
         for(int i = 0; i < 12; i++){
             this.p1Pieces[i] = new CheckersPiece(original.p1Pieces[i]);
             this.p2Pieces[i] = new CheckersPiece(original.p2Pieces[i]);
@@ -126,7 +129,7 @@ public class CheckersGameState extends GameState {
     //this method was not here before we turned it in.
     public void setBoard(ImageButton[][] board){
         //this nested for loop makes a checker board. The if statement helps with the checker pattern
-        for(int height=0;height<8;height++) {
+        /*for(int height=0;height<8;height++) {
             for(int length=0; length<8;length++) {
                 /*if(height%2 == 1) {
                     if(length%2 == 1) {
@@ -143,7 +146,7 @@ public class CheckersGameState extends GameState {
                     else{
                         board[length][height].setImageResource(R.drawable.red_tile);
                     }
-                }*/
+                }
                 if((height + length) % 2 == 0){
                     board[length][height].setImageResource(R.drawable.red_tile);
                     board[length][height].setTag(R.drawable.red_tile);
@@ -153,7 +156,7 @@ public class CheckersGameState extends GameState {
                     board[length][height].setTag(R.drawable.white_tile);
                 }
             }
-        }
+        }*/
 
         //this sets all of player ones pieces on the map.
         for(CheckersPiece piece :  p1Pieces){

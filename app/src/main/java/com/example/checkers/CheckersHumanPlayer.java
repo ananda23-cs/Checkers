@@ -131,20 +131,48 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         board[5][7] = (ImageButton) activity.findViewById(R.id.tile68);
         board[6][7] = (ImageButton) activity.findViewById(R.id.tile78);
         board[7][7] = (ImageButton) activity.findViewById(R.id.tile88);
-        
+
+        for(int height=0;height<8;height++) {
+            for(int length=0; length<8;length++) {
+                /*if(height%2 == 1) {
+                    if(length%2 == 1) {
+                        board[length][height].setImageResource(R.drawable.red_tile);
+                    }
+                    else{
+                        board[length][height].setImageResource(R.drawable.white_tile);
+                    }
+                }
+                else{
+                    if(height%2 == 1){
+                        board[length][height].setImageResource(R.drawable.white_tile);
+                    }
+                    else{
+                        board[length][height].setImageResource(R.drawable.red_tile);
+                    }
+                }*/
+                if((height + length) % 2 == 0){
+                    board[length][height].setImageResource(R.drawable.red_tile);
+                    board[length][height].setTag(R.drawable.red_tile);
+                }
+                else{
+                    board[length][height].setImageResource(R.drawable.white_tile);
+                    board[length][height].setTag(R.drawable.white_tile);
+                }
+            }
+        }
         //this is will be listening to the tiles.
-        CheckersTileListener[][] boardListener = new CheckersTileListener[8][8];
+        //CheckersTileListener[][] boardListener = new CheckersTileListener[8][8];
 
         //sets up the textview displaying information regarding the events of the game
         gameInfo = activity.findViewById(R.id.gameInfo);
 
-        for(int i = 0; i < 8; i++){
+        /*for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(),
                                         gameInfo, board, CheckersHumanPlayer.this,game);
                 board[i][j].setOnClickListener(boardListener[i][j]);
             }
-        }
+        }*/
 
         cancelButton = activity.findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
@@ -157,7 +185,15 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     protected void initAfterReady() {
         myActivity.setTitle("Checkers: " + allPlayerNames[0] + " vs. " + allPlayerNames[1]);
-        super.initAfterReady();
+        //this is will be listening to the tiles.
+        CheckersTileListener[][] boardListener = new CheckersTileListener[8][8];
+        for(int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(),
+                        gameInfo, board, CheckersHumanPlayer.this, game);
+                board[i][j].setOnClickListener(boardListener[i][j]);
+            }
+        }
     }
 
     @Override
