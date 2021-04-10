@@ -43,7 +43,7 @@ public class CheckersTileListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         //this if statement is to choose a piece to move
-        CheckersGameState fake = (CheckersGameState) game;
+        CheckersGameState fake = (CheckersGameState) gameState;
         if(fake.pieceSelectedBoolean == false){
             //this checks if they chose an empty spot
             if(fake.isEmpty(xCord,yCord)){
