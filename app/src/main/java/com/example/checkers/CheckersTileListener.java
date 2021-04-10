@@ -132,9 +132,6 @@ public class CheckersTileListener implements View.OnClickListener {
                         gameInfo.setText("You can not capture this piece. Try again.");
                     }
                 }
-
-
-
             }
         }
     }
