@@ -140,7 +140,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(), gameInfo, board);
+                boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(),
+                                        gameInfo, board, CheckersHumanPlayer.this,game);
                 board[i][j].setOnClickListener(boardListener[i][j]);
             }
         }
@@ -162,10 +163,45 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     public void onClick(View button) {
         if(button instanceof Button){
-            game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this));
+            for(int i = 0; i < 8; i++) {
+                for(int j = 0; j < 8; j++) {
+                    if(board[i][j].isPressed() &&
+                            (board[i][j].getDrawable().equals(R.drawable.black_piece) ||
+                                    board[i][j].getDrawable().equals(R.drawable.black_king) ||
+                                    board[i][j].getDrawable().equals(R.drawable.red_piece)  ||
+                                    board[i][j].getDrawable().equals(R.drawable.red_king))){
+                        game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this,i,j));
+                    }
+                }
+            }
         }
-        else if (button instanceof ImageButton){
+        /*else if (button instanceof ImageButton){
             game.sendAction(new CheckersMoveAction(CheckersHumanPlayer.this));
-        }
+        }*/
     }
+
+    /*private ImageButton findTile(View button, int xCord, int yCord){
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(board[i][j].equals(button)){
+                    xCord = i;
+                    yCord = j;
+                    return board[xCord][yCord];
+                }
+            }
+        }
+        return null;
+    }
+    private int findXButton(View button){
+        int xCord;
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(board[i][j].equals(button)){
+                    xCord = i;
+                    return xCord;
+                }
+            }
+        }
+        return -1;
+    }*/
 }

@@ -13,10 +13,8 @@ import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
 
 public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
-
     public CheckersComputerPlayer1(String name){
         super(name);
-
     }
 
     @Override
@@ -24,12 +22,9 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         //ignore if not the computer's turn
 
         if(info instanceof NotYourTurnInfo) return;
+        else if (!(info instanceof CheckersGameState)) return;
 
         CheckersGameState current = new CheckersGameState((CheckersGameState) info);
-
-        //if(current.getPlayerTurn() == this.id){
-         //   return;
-       // }
 
         //delay for a second so human can see the computer's movements
         sleep(1);
@@ -52,27 +47,27 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
 
             //CheckersPiece piece, int xDir,int yDir,int id
-            if(id == 1) {
-                if (current.movePiece(current.p1Pieces[pieceIdx],xdirection,ydirection,id)) {
+            if(playerNum == 1) {
+                if (current.movePiece(current.p1Pieces[pieceIdx],xdirection,ydirection,playerNum)) {
                     invalid = false;
-                    game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection));
+                    game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection,current.p1Pieces[pieceIdx]));
                 }
                 else if(current.capturepiece(current.p1Pieces[pieceIdx],
-                id,current.p2Pieces,xdirection,ydirection)){
-                    game.sendAction(new CheckersCaptureAciton(this,xdirection,ydirection));
+                playerNum,current.p2Pieces,xdirection,ydirection)){
+                    game.sendAction(new CheckersCaptureAction(this,xdirection,ydirection));
                     invalid = false;
                 }
 
             }
             else{
-                if (current.movePiece(current.p2Pieces[pieceIdx],xdirection,ydirection,id)) {
+                if (current.movePiece(current.p2Pieces[pieceIdx],xdirection,ydirection,playerNum)) {
                     invalid = false;
-                    game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection));
+                    game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection,current.p1Pieces[pieceIdx]));
                 }
 
                 else if(current.capturepiece(current.p2Pieces[pieceIdx],
-                        id,current.p1Pieces,xdirection,ydirection)){
-                    game.sendAction(new CheckersCaptureAciton(this,xdirection,ydirection));
+                        playerNum,current.p1Pieces,xdirection,ydirection)){
+                    game.sendAction(new CheckersCaptureAction(this,xdirection,ydirection));
                     invalid = false;
 
                 }

@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.checkers.game.GameFramework.Game;
+
 public class CheckersTileListener implements View.OnClickListener {
 
     int xCord;//the xcord of the button its litenting to
@@ -20,34 +22,43 @@ public class CheckersTileListener implements View.OnClickListener {
     TextView gameInfo;//the text view that displays who's turn it is
     ImageButton[][] board;
 
+    CheckersHumanPlayer player;
+    //CheckersHumanPlayer player2;
+    Game game;
+
     //initial constructor
-    public CheckersTileListener(int xCord, int yCord, CheckersGameState gameState,TextView gameInfo,ImageButton[][] board){
+    public CheckersTileListener(int xCord, int yCord, CheckersGameState gameState,TextView gameInfo,ImageButton[][] board,
+                                CheckersHumanPlayer player, Game game){
         this.xCord = xCord;
         this.yCord = yCord;
         this.gameState = gameState;
         this.gameInfo = gameInfo;
         this.board = board;
+        this.player = player;
+        //this.player2 = p2;
+        this.game = game;
     }
 
     //this programs what actually happens when a button is clicked
     @Override
     public void onClick(View v) {
         //this if statement is to choose a piece to move
-        if(gameState.pieceSelectedBoolean == false){
+        CheckersGameState fake = (CheckersGameState) gameState;
+        if(fake.pieceSelectedBoolean == false){
             //this checks if they chose an empty spot
-            if(gameState.isEmpty(xCord,yCord)){
+            if(fake.isEmpty(xCord,yCord)){
                 gameInfo.setText("This tile is empty. Pick another square");
             }
             else {
                 //this checks if the piece belongs to the player
-                if (gameState.hasEnemyPieces(xCord,yCord)) {
+                if (fake.hasEnemyPieces(xCord,yCord)) {
                     gameInfo.setText("This piece is not yours. Please try again.");
                 }
 
                 //if all the conditions are right the piece is chosen
                 else{
                     gameInfo.setText("This piece can be moved. Click on the spot where you want to move it.");
-                    gameState.setPieceSelectedPieceAndPieceSelectedBoolean(xCord,yCord);
+                    fake.setPieceSelectedPieceAndPieceSelectedBoolean(xCord,yCord);
 
                 }
 
@@ -59,20 +70,22 @@ public class CheckersTileListener implements View.OnClickListener {
         else{
             //these are the distances of where the piece will move to. If they are
             //invalid it will not do anything
-            int newXCord = xCord - gameState.pieceSelectedPiece.getXcoordinate();
-            int newYCord = yCord - gameState.pieceSelectedPiece.getYcoordinate();
+            int newXCord = xCord - fake.pieceSelectedPiece.getXcoordinate();
+            int newYCord = yCord - fake.pieceSelectedPiece.getYcoordinate();
 
             //if the player is trying to move and not capture
-            if(!gameState.hasEnemyPieces(xCord,yCord)){
+            if(!fake.hasEnemyPieces(xCord,yCord)){
 
                 //if the location is valid it moves
-                if(gameState.movePiece(gameState.pieceSelectedPiece,newXCord,newYCord,gameState.getPlayerTurn())){
-                    gameState.pieceSelectedBoolean = false;//sets the piece selected back to false
-                    gameState.setBoard(board);
-                    if(gameState.getPlayerTurn() == 1) {
+                if(fake.movePiece(fake.pieceSelectedPiece,newXCord,newYCord,fake.getPlayerTurn())){
+                    fake.pieceSelectedBoolean = false;//sets the piece selected back to false
+                    fake.setBoard(board);
+                    if(fake.getPlayerTurn() == 1) {
+                        game.sendAction(new CheckersMoveAction2(player, newXCord,newYCord, fake.pieceSelectedPiece));
                         gameInfo.setText("That move was valid. Player two please choose a piece");
                     }
                     else{
+                        game.sendAction(new CheckersMoveAction2(player,newXCord,newYCord, fake.pieceSelectedPiece));
                         gameInfo.setText("That move was valid. Player one please choose a piece");
                     }
 
@@ -88,12 +101,14 @@ public class CheckersTileListener implements View.OnClickListener {
             else{
 
                 //player 1 capturing a piece
-                if(gameState.getPlayerTurn() == 0) {
-                    if (gameState.capturepiece(gameState.pieceSelectedPiece, gameState.getPlayerTurn(),
-                            gameState.p2Pieces, newXCord, newYCord)) {
+                if(fake.getPlayerTurn() == 1) {
+                    if (fake.capturepiece(fake.pieceSelectedPiece, fake.getPlayerTurn(),
+                            fake.p2Pieces, newXCord, newYCord)) {
+
                         gameInfo.setText("You have captured a piece. Player 2, it's your turn");
-                        gameState.setBoard(board);
-                        gameState.pieceSelectedBoolean = false;
+                        game.sendAction(new CheckersCaptureAction(player,newXCord,newYCord));
+                        fake.setBoard(board);
+                        fake.pieceSelectedBoolean = false;
                     }
                     //prints an error message if they are trying to capture a piece that is not valid.
                     else{
@@ -102,12 +117,13 @@ public class CheckersTileListener implements View.OnClickListener {
                 }
 
                 //player 2 capturing a piece
-                else if(gameState.getPlayerTurn() == 1){
-                    if (gameState.capturepiece(gameState.pieceSelectedPiece, gameState.getPlayerTurn(),
-                            gameState.p1Pieces, newXCord, newYCord)) {
+                else if(fake.getPlayerTurn() == 2){
+                    if (fake.capturepiece(fake.pieceSelectedPiece, fake.getPlayerTurn(),
+                            fake.p1Pieces, newXCord, newYCord)) {
                         gameInfo.setText("You have captured a piece. Player 1, it's your turn.");
-                        gameState.setBoard(board);
-                        gameState.pieceSelectedBoolean = false;
+                        game.sendAction(new CheckersCaptureAction(player,newXCord,newYCord));
+                        fake.setBoard(board);
+                        fake.pieceSelectedBoolean = false;
                     }
                     //prints an error message if they are trying to capture a piece that is not valid.
                     else{
