@@ -337,7 +337,7 @@ public class CheckersGameState extends GameState {
 
     public boolean canMove(CheckersPiece piece, int xDir,int yDir,int id){
         if(inRange(xDir,yDir)) {
-
+            Log.e("canMove", "Xcord"+piece.getXcoordinate());
             //this checks that user is not trying to move off the checker board as well as if the space is held by another piece
             if (inBounds(piece.getXcoordinate() + xDir, piece.getYcoordinate() + yDir) &&
                     isEmpty(piece.getXcoordinate() + xDir, piece.getYcoordinate() + yDir)) {
