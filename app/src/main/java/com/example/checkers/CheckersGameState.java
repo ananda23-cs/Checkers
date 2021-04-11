@@ -231,7 +231,7 @@ public class CheckersGameState extends GameState {
         }
 
         //checks if player two is trying to capture a piece behind it. If so, it makes sure it's a king
-        if(id == 1 && yDir>1 && !piece.getKing()){
+        if(id == 1 && yDir>0 && !piece.getKing()){
             return false;
         }
 
