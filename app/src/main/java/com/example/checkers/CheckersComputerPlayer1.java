@@ -22,10 +22,10 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         //ignore if not the computer's turn
-
+        if(info instanceof NotYourTurnInfo) return;
         if (!(info instanceof CheckersGameState)) return;
         CheckersGameState current = new CheckersGameState((CheckersGameState) info);
-        if(current.getPlayerTurn() != playerNum) return;
+
         //delay for a second so human can see the computer's movements
         sleep(1);
 
@@ -39,7 +39,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         int xdirection = directions[(int)(Math.random()*2)];
         int ydirection = directions[(int)(Math.random()*2)];
 
-        int action = r.nextInt(100);
+        int action = 1 + r.nextInt(101);
         //CheckersPiece piece, int xDir,int yDir,int id
         if(playerNum == 0) {
             if (action < 51) {
