@@ -48,7 +48,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
 
             //CheckersPiece piece, int xDir,int yDir,int id
-            if(playerNum == 1) {
+            if(playerNum == 0) {
                 if (current.movePiece(current.p1Pieces[pieceIdx],xdirection,ydirection,playerNum)) {
                     invalid = false;
                     game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection,current.p1Pieces[pieceIdx]));
