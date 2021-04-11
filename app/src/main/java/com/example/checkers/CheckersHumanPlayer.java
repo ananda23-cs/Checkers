@@ -22,12 +22,14 @@ import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
-    private ImageButton[][] board;
+    ImageButton[][] board;
     private CheckersTileListener[][] boardListener;
     private Button cancelButton;
     private TextView gameInfo;
     private int layoutID;
-    /**
+
+
+     /**
      * constructor
      *
      * @param name the name of the player
@@ -36,6 +38,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     public CheckersHumanPlayer(String name, int activity_main) {
         super(name);
         this.layoutID = activity_main;
+        board = new ImageButton[8][8];
     }
 
     @Override
@@ -58,8 +61,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     public void setAsGui(GameMainActivity activity) {
         activity.setContentView(layoutID);
-        board = new ImageButton[8][8];
-
+        //board = new ImageButton[8][8];
         //This is where we initialize all the image buttons. Their locations in the array
         //matches the location on the board
         board[0][0] = (ImageButton) activity.findViewById(R.id.tile11);
@@ -133,6 +135,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         board[5][7] = (ImageButton) activity.findViewById(R.id.tile68);
         board[6][7] = (ImageButton) activity.findViewById(R.id.tile78);
         board[7][7] = (ImageButton) activity.findViewById(R.id.tile88);
+
+
 
         for(int height=0;height<8;height++) {
             for(int length=0; length<8;length++) {
