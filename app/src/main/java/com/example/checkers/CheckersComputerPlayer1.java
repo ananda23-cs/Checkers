@@ -37,7 +37,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         //= new CheckersGameState((CheckersGameState) info);
 
         //delay for a second so human can see the computer's movements
-        sleep(1);
+        sleep(1.5);
         CheckersGameState current;
         if(info instanceof CheckersGameState) {
             current = new CheckersGameState((CheckersGameState) info);
@@ -52,7 +52,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                 int xdirection = directions[(int) (Math.random() * 2)];
                 int ydirection = directions[(int) (Math.random() * 2)];
 
-                int action = 1 + r.nextInt(101);
+                int action = 1 + r.nextInt(100);
                 //CheckersPiece piece, int xDir,int yDir,int id
                 if (playerNum == 0) {
                     if (action < 51) {

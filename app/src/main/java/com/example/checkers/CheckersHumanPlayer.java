@@ -197,6 +197,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     /**
      * perform any initialization that needs to be done after player
      * knows what the game-position and opponents' names are
+     *
+     * also sets up the tile listeners for the board
      */
     @Override
     protected void initAfterReady() {
