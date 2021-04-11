@@ -73,7 +73,6 @@ public class CheckersLocalGame extends LocalGame {
             return true;
         }
         else if (action instanceof CheckersMoveAction2){
-
             CheckersMoveAction2 moveAction = (CheckersMoveAction2) action;
             CheckersGameState state = (CheckersGameState) super.state;
             int playerId = state.getPlayerTurn();
@@ -86,9 +85,9 @@ public class CheckersLocalGame extends LocalGame {
                         piece.getYcoordinate());
                 state.movePiece(piece, xDir, yDir, playerId);
                 if (state.getPlayerTurn() == 0) {
-                    state.setMessage("That move was valid. Player two please choose a piece");
+                    state.setMessage("Player 1's move was valid.");
                 } else {
-                    state.setMessage("That move was valid. Player one please choose a piece");
+                    state.setMessage("Player 2's move was valid.");
                 }
                 state.setPlayerTurn(1 - playerId);
                 return true;
