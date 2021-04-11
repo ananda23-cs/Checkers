@@ -25,7 +25,7 @@ public class CheckersGameState extends GameState {
     private int playerTurn;
     private String message;
     //add grid here
-    //private ImageButton[][] board; //displays the 8x8 checkerboard
+    private ImageButton[][] board; //displays the 8x8 checkerboard
     //TextView gameInfo;
 
     //stop here top here sto here
@@ -73,6 +73,7 @@ public class CheckersGameState extends GameState {
         p2Pieces[10] = new CheckersPiece(5,7,2);
         p2Pieces[11] = new CheckersPiece(7,7,2);
 
+        board = new ImageButton[8][8];
         message = "";
     }
 
@@ -136,7 +137,7 @@ public class CheckersGameState extends GameState {
 
     //this sets the board and displays all the locations of the coordinates
     //this method was not here before we turned it in.
-    public void setBoard(ImageButton[][] board){
+    public void setBoard(){
         //this nested for loop makes a checker board. The if statement helps with the checker pattern
         /*for(int height=0;height<8;height++) {
             for(int length=0; length<8;length++) {
@@ -349,7 +350,7 @@ public class CheckersGameState extends GameState {
                 }
 
                 //this checks if player two is not trying to move a non king piece backwards
-                else if (id == 1 && yDir > 1 && !piece.getKing()) {
+                else if (id == 1 && yDir == 1 && !piece.getKing()) {
                     Log.e("movePiece: ", "Can't move backwards because not king");
                     return false;
                 }

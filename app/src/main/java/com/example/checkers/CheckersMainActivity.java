@@ -69,7 +69,7 @@ public class CheckersMainActivity extends GameMainActivity {
 
 
         // Set the initial information for the remote players
-        //defaultConfig.setRemoteData("Remote Human Player", "", 0);
+        defaultConfig.setRemoteData("Remote Human Player", "", 0);
 
         //done!
         return defaultConfig;
