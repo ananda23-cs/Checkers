@@ -7,9 +7,11 @@
  */
 
 package com.example.checkers;
+import com.example.checkers.Actions.CheckersCaptureAction;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
+import com.example.checkers.Actions.CheckersMoveAction2;
 
 import java.util.Random;
 

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.checkers.Actions.CheckersCancelMoveAction;
 import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
 import com.example.checkers.game.GameFramework.infoMessage.IllegalMoveInfo;

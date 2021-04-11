@@ -11,9 +11,12 @@ package com.example.checkers;
 
 import android.util.Log;
 
+import com.example.checkers.Actions.CheckersCancelMoveAction;
+import com.example.checkers.Actions.CheckersCaptureAction;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
+import com.example.checkers.Actions.CheckersMoveAction2;
 
 public class CheckersLocalGame extends LocalGame {
 
@@ -69,7 +72,7 @@ public class CheckersLocalGame extends LocalGame {
             int cancelCol = cancelMoveAction.getSelectedCol();
             state.setPieceSelectedPieceAndPieceSelectedBoolean(cancelRow,cancelCol);
             state.setMessage("The piece at " + cancelRow + ", " + cancelCol +
-                                " has been unselected. Please select another piece.");
+                                " has been unselected.\nPlease select another piece.");
             return true;
         }
         else if (action instanceof CheckersMoveAction2){
@@ -84,9 +87,9 @@ public class CheckersLocalGame extends LocalGame {
                         piece.getYcoordinate());
                 state.movePiece(piece, xDir, yDir, playerId);
                 if (state.getPlayerTurn() == 0) {
-                    state.setMessage("Player 1's move was valid.");
+                    state.setMessage("Player 1's move was valid.\nPlayer 2's turn.");
                 } else {
-                    state.setMessage("Player 2's move was valid.");
+                    state.setMessage("Player 2's move was valid.\nPlayer 1's turn");
                 }
                 state.setPlayerTurn(1 - playerId);
                 return true;
