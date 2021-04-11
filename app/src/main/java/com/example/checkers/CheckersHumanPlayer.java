@@ -8,6 +8,7 @@
 
 package com.example.checkers;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +59,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     public void setAsGui(GameMainActivity activity) {
         activity.setContentView(layoutID);
+        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         board = new ImageButton[8][8];
 
         //This is where we initialize all the image buttons. Their locations in the array
