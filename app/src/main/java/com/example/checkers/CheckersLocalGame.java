@@ -80,11 +80,8 @@ public class CheckersLocalGame extends LocalGame {
             int xDir = moveAction.getXDire();
             int yDir = moveAction.getYDire();
             CheckersPiece piece = moveAction.getPiece();
-            if (canMove(playerId)){
-                state.movePiece(piece,playerId,xDir,yDir);
-                return true;
-            }
-            else{ return false; }
+            state.movePiece(piece,xDir,yDir,playerId);
+            return true;
         }
         else if (action instanceof CheckersCaptureAction){
             CheckersCaptureAction captureAction = (CheckersCaptureAction) action;

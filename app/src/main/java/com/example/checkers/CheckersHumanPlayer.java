@@ -45,7 +45,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     @Override
     public void receiveInfo(GameInfo info) {
-        /*if(info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo){
+        if(info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo){
             flash(Color.RED, 100);
         }
         else if(!(info instanceof CheckersGameState)) return;
@@ -53,16 +53,16 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             ((CheckersGameState) info).setBoard(board);
             gameInfo.setText(((CheckersGameState) info).getMessage());
         }
-        */
 
-        if ( (info instanceof CheckersGameState)!=true){
+
+        /*if ( (info instanceof CheckersGameState)!=true){
             flash(Color.RED,3);
             return;
         }
         else{
             ((CheckersGameState) info).setBoard(board);
             gameInfo.setText(((CheckersGameState) info).getMessage());
-        }
+        }*/
 
     }
 
@@ -230,8 +230,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     public void onClick(View button) {
         if(button instanceof Button){
-            for(int i = 0; i < 8; i++) {
-                for(int j = 0; j < 8; j++) {
+            for(int i = 1; i < 9; i++) {
+                for(int j = 1; j < 9; j++) {
                     if(boardListener[i][j].isClicked()) {
                         if ((board[i][j].getTag().equals(R.drawable.black_piece) ||
                                 board[i][j].getTag().equals(R.drawable.black_king) ||
