@@ -9,6 +9,8 @@
 
 package com.example.checkers;
 
+import android.util.Log;
+
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
@@ -59,6 +61,7 @@ public class CheckersLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
+        Log.e("Make Move", "this happened");
         if(action instanceof CheckersCancelMoveAction){
             CheckersCancelMoveAction cancelMoveAction = (CheckersCancelMoveAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
@@ -70,6 +73,7 @@ public class CheckersLocalGame extends LocalGame {
             return true;
         }
         else if (action instanceof CheckersMoveAction2){
+
             CheckersMoveAction2 moveAction = (CheckersMoveAction2) action;
             CheckersGameState state = (CheckersGameState) super.state;
             int playerId = state.getPlayerTurn();
