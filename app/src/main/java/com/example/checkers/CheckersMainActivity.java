@@ -30,7 +30,7 @@ public class CheckersMainActivity extends GameMainActivity {
     /**
      * sets up a default of one human and one computer player
      *
-     * @return
+     * @return the game configuration
      */
     @Override
     public GameConfig createDefaultConfig() {
@@ -78,7 +78,7 @@ public class CheckersMainActivity extends GameMainActivity {
 
     /**
      * @param CheckersGame The desired gameState to start at or null for new game
-     * @return
+     * @return the local Checkers game
      */
     public LocalGame createLocalGame(GameState CheckersGame) {
         if(CheckersGame == null) return new CheckersLocalGame();
