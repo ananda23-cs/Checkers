@@ -30,7 +30,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         sleep(1);
 
 
-        boolean invalid = true;
+         boolean invalid = true;
         while(invalid) {
             Random r = new Random();
 
