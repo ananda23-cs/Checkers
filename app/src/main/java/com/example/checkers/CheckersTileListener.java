@@ -12,7 +12,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.checkers.Actions.CheckersCaptureAction;
 import com.example.checkers.game.GameFramework.Game;
+import com.example.checkers.Actions.CheckersMoveAction2;
 
 public class CheckersTileListener implements View.OnClickListener {
 
@@ -59,9 +61,9 @@ public class CheckersTileListener implements View.OnClickListener {
 
                 //if all the conditions are right the piece is chosen
                 else{
-                    gameInfo.setText("This piece can be moved. Click on the spot where you want to move it." + gameState.getPlayerTurn());
+                    gameInfo.setText("Player " + (gameState.getPlayerTurn() + 1) + " turn\n" +
+                            "This piece can be moved. Click on the spot where you want to move it.");
                     fake.setPieceSelectedPieceAndPieceSelectedBoolean(xCord,yCord);
-
                 }
 
             }
@@ -134,9 +136,6 @@ public class CheckersTileListener implements View.OnClickListener {
                         gameInfo.setText("You can not capture this piece. Try again.");
                     }
                 }*/
-
-
-
             }
         }
     }
