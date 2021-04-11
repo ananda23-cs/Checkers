@@ -374,8 +374,9 @@ public class CheckersGameState extends GameState {
 
                 //if all the conditions are right the piece will move.
                 else {
+                    CheckersPiece oldPiece = piece;
                     piece.setCoordinates(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir);
-
+                    oldPiece = null;
                     //will turn to player 1's pieces king if the piece reaches the other side of the board
                     if(playerTurn == 0){
                         //playerTurn = 1;

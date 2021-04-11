@@ -77,9 +77,9 @@ public class CheckersLocalGame extends LocalGame {
             int yDir = moveAction.getYDire();
             CheckersPiece piece = moveAction.getPiece();
             if(state.canMove(state.getPieceSelectedPiece(),xDir,yDir,state.getPlayerTurn())) {
+                state.movePiece(piece, xDir, yDir, playerId);
                 state.setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(),
                         piece.getYcoordinate());
-                state.movePiece(piece, playerId, xDir, yDir);
                 if (state.getPlayerTurn() == 0) {
                     state.setMessage("That move was valid. Player two please choose a piece");
                 } else {
