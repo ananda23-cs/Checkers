@@ -8,6 +8,7 @@
 
 package com.example.checkers;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -44,8 +45,9 @@ public class CheckersTileListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         //this if statement is to choose a piece to move
+        Log.e("onClick: ", ""+gameState.getPlayerTurn());
         isClicked = true;
-        CheckersGameState fake = (CheckersGameState) gameState;
+        CheckersGameState fake = new CheckersGameState((CheckersGameState)gameState);
         if(!fake.isPieceSelectedBoolean()){
             //this checks if they chose an empty spot
             if(fake.isEmpty(xCord,yCord)){
@@ -60,7 +62,7 @@ public class CheckersTileListener implements View.OnClickListener {
                 //if all the conditions are right the piece is chosen
                 else{
                     gameInfo.setText("This piece can be moved. Click on the spot where you want to move it." + gameState.getPlayerTurn());
-                    fake.setPieceSelectedPieceAndPieceSelectedBoolean(xCord,yCord);
+                    gameState.setPieceSelectedPieceAndPieceSelectedBoolean(xCord,yCord);
 
                 }
 
@@ -78,9 +80,13 @@ public class CheckersTileListener implements View.OnClickListener {
             //if the player is trying to move and not capture
             if(!fake.hasEnemyPieces(xCord,yCord)){
 
+                if(fake.movePiece(fake.getPieceSelectedPiece(),newXCord,newYCord,fake.getPlayerTurn())) {
+                    game.sendAction(new CheckersMoveAction2(player, newXCord, newYCord, gameState.getPieceSelectedPiece()));
+                }
                 //if the location is valid it moves
                 //if(fake.canMove(fake.getPieceSelectedPiece(),newXCord,newYCord,fake.getPlayerTurn())){
-                    game.sendAction(new CheckersMoveAction2(player, newXCord,newYCord, fake.getPieceSelectedPiece()));
+                    //Log.e("tile listener",""+fake.getPieceSelectedPiece());
+
                     /*fake.setPieceSelectedPieceAndPieceSelectedBoolean(fake.getPieceSelectedPiece().getXcoordinate(),
                             fake.getPieceSelectedPiece().getYcoordinate());//sets the piece selected back to false
                     //fake.setBoard(board);
@@ -101,7 +107,13 @@ public class CheckersTileListener implements View.OnClickListener {
             }
             //if they are trying to capture a piece
             else{
-                game.sendAction(new CheckersCaptureAction(player,newXCord,newYCord,fake.getPieceSelectedPiece()));
+                if(fake.capturepiece(fake.getPieceSelectedPiece(),fake.getPlayerTurn(),fake.p2Pieces,newXCord,newYCord) && fake.getPlayerTurn() == 0 ) {
+                    game.sendAction(new CheckersCaptureAction(player, newXCord, newYCord, gameState.getPieceSelectedPiece()));
+                }
+
+                if(fake.capturepiece(fake.getPieceSelectedPiece(),fake.getPlayerTurn(),fake.p1Pieces,newXCord,newYCord) && fake.getPlayerTurn() == 1 ) {
+                    game.sendAction(new CheckersCaptureAction(player, newXCord, newYCord, gameState.getPieceSelectedPiece()));
+                }
                 //player 1 capturing a piece
                 /*if(fake.getPlayerTurn() == 0) {
                     if (fake.capturepiece(fake.getPieceSelectedPiece(), fake.getPlayerTurn(),

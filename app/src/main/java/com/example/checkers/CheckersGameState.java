@@ -25,7 +25,7 @@ public class CheckersGameState extends GameState {
     private int playerTurn;
     private String message;
     //add grid here
-    private ImageButton[][] board; //displays the 8x8 checkerboard
+    //private ImageButton[][] board; //displays the 8x8 checkerboard
     //TextView gameInfo;
 
     //stop here top here sto here
@@ -73,7 +73,7 @@ public class CheckersGameState extends GameState {
         p2Pieces[10] = new CheckersPiece(5,7,2);
         p2Pieces[11] = new CheckersPiece(7,7,2);
 
-        board = new ImageButton[8][8];
+        pieceSelectedBoolean = false;
         message = "";
     }
 
@@ -90,6 +90,9 @@ public class CheckersGameState extends GameState {
         super.currentSetupTurn = original.currentSetupTurn;
         super.numSetupTurns = original.numSetupTurns;
         this.message = original.message;
+        this.pieceSelectedBoolean = original.pieceSelectedBoolean;
+        this.pieceSelectedPiece = new CheckersPiece(original.pieceSelectedPiece);
+
     }
 
 
@@ -132,12 +135,18 @@ public class CheckersGameState extends GameState {
     }
 
     public void setPlayerTurn(int playerTurn) {
-        this.playerTurn = playerTurn;
+        if(this.playerTurn == 0) {
+            this.playerTurn = 1;
+        }
+        else{
+            this.playerTurn = 0;
+        }
+        //this.playerTurn = playerTurn
     }
 
     //this sets the board and displays all the locations of the coordinates
     //this method was not here before we turned it in.
-    public void setBoard(){
+    public void setBoard(ImageButton[][] board){
         //this nested for loop makes a checker board. The if statement helps with the checker pattern
         /*for(int height=0;height<8;height++) {
             for(int length=0; length<8;length++) {
@@ -196,6 +205,7 @@ public class CheckersGameState extends GameState {
         }
 
         for(CheckersPiece piece :  p2Pieces){
+            Log.e("setBoard: ",""+piece );
             if(piece.getAlive()) {
                 if(piece.getKing()){
                     board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.red_king);
@@ -207,6 +217,7 @@ public class CheckersGameState extends GameState {
                 }
             }
         }
+        Log.e( "setBoard: ",""+p1Pieces[10] );
     }
 
     public boolean isEmpty(int newXCord,int newYCord){
@@ -243,6 +254,7 @@ public class CheckersGameState extends GameState {
 
         //checks that the player isn't trying to capture a piece that is out of range
         if(!inRange(xDir,yDir)){
+
             return false;
         }
 
@@ -371,30 +383,30 @@ public class CheckersGameState extends GameState {
         }
     }
 
-    public void movePiece(CheckersPiece piece, int xDir, int yDir, int id){
+    public boolean movePiece(CheckersPiece piece, int xDir, int yDir, int id){
         //this if statement checks that the user has not tried to move more than one space
-//        if(inRange(xDir,yDir)){
-//
-//            //this checks that user is not trying to move off the checker board as well as if the space is held by another piece
-//            if(inBounds(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir) &&
-//                    isEmpty(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir)){
-//
-//                //this checks if player one is not trying to move a non king piece backwards
-//                if(id == 0 && yDir<1 && !piece.getKing()){
-//                    Log.e( "movePiece: ","Can't move backwards because not king" );
-//                    return false;
-//                }
-//
-//                //this checks if player two is not trying to move a non king piece backwards
-//                else if(id == 1 && yDir>1 && !piece.getKing()){
-//                    Log.e( "movePiece: ","Can't move backwards because not king" );
-//                    return false;
-//                }
-//
-//                //if all the conditions are right the piece will move.
-//                else {
-                    piece.setCoordinates(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir);
+        if(inRange(xDir,yDir)){
 
+            //this checks that user is not trying to move off the checker board as well as if the space is held by another piece
+            if(inBounds(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir) &&
+                    isEmpty(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir)){
+
+                //this checks if player one is not trying to move a non king piece backwards
+                if(id == 0 && yDir<1 && !piece.getKing()){
+                    Log.e( "movePiece: ","Can't move backwards because not king" );
+                    return false;
+                }
+
+                //this checks if player two is not trying to move a non king piece backwards
+                else if(id == 1 && yDir>1 && !piece.getKing()){
+                    Log.e( "movePiece: ","Can't move backwards because not king" );
+                    return false;
+                }
+
+//                //if all the conditions are right the piece will move.
+                else {
+                    piece.setCoordinates(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir);
+                    setPlayerTurn(5);
                     //will turn to player 1's pieces king if the piece reaches the other side of the board
                     if(id == 0){
                         //playerTurn = 1;
@@ -410,21 +422,21 @@ public class CheckersGameState extends GameState {
                         }
                         //playerTurn = 0;
                     }
-//                    return true;
-//                }
-//            }
-//
-//            //returns false if the move is out of bounds or tries to move into a spot with another piece
-//            else {
-//                Log.e( "movePiece: ","not in bounds" );
-//                return false;
-//            }
-//        }
-//        //will return false if the player tries to move
-//        else {
-//            Log.e( "movePiece: ","not in range" );
-//            return false;
-//        }
+                    return true;
+                }
+            }
+
+            //returns false if the move is out of bounds or tries to move into a spot with another piece
+            else {
+                Log.e( "movePiece: ","not in bounds" );
+                return false;
+            }
+        }
+        //will return false if the player tries to move
+        else {
+            Log.e( "movePiece: ","not in range" );
+            return false;
+        }
 
     }
 
@@ -481,5 +493,10 @@ public class CheckersGameState extends GameState {
 
     public CheckersPiece getPieceSelectedPiece() {
         return pieceSelectedPiece;
+    }
+
+    public void setPieceSelectedPieceAndPieceSelectedBoolean(){
+        pieceSelectedPiece = null;
+        pieceSelectedBoolean = false;
     }
 }

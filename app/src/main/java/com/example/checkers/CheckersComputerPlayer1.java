@@ -24,12 +24,13 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         //ignore if not the computer's turn
-
         if (!(info instanceof CheckersGameState)) return;
+
         CheckersGameState current = new CheckersGameState((CheckersGameState) info);
         if(current.getPlayerTurn() != playerNum) return;
+
         //delay for a second so human can see the computer's movements
-        sleep(1);
+        sleep(0.5);
 
         boolean invalid = true;
         while(invalid) {
@@ -50,7 +51,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             if (playerNum == 0) {
                 if (action < 51) {
 
-                    if( current.canMove(current.p1Pieces[pieceIdx],xdirection,ydirection,current.getPlayerTurn())) {
+                    if( current.movePiece(current.p1Pieces[pieceIdx],xdirection,ydirection,current.getPlayerTurn())) {
                         game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection, ((CheckersGameState)info).p1Pieces[pieceIdx]));
                         invalid = false;
                     }
@@ -63,10 +64,10 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
             } else if (playerNum == 1) {
                 if (action < 51) {
-                    if( current.canMove(current.p2Pieces[pieceIdx],xdirection,ydirection,current.getPlayerTurn())) {
+                    if( current.movePiece(current.p2Pieces[pieceIdx],xdirection,ydirection,current.getPlayerTurn())) {
                         Log.e("receiveInfo: ", "\nbefore"+((CheckersGameState)info).p2Pieces[pieceIdx]);
                         invalid = false;
-                        game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection, ((CheckersGameState)info).p2Pieces[pieceIdx]));
+                        game.sendAction(new CheckersMoveAction2(this, xdirection, ydirection, ((CheckersGameState)info).p2Pieces[pieceIdx]));
                         Log.e("receiveInfo: ", "\nafter"+((CheckersGameState)info).p2Pieces[pieceIdx]);
                     }
                 } else {
