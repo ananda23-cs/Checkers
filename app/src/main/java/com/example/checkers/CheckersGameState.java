@@ -167,6 +167,19 @@ public class CheckersGameState extends GameState {
             }
         }*/
 
+        for(int height=0;height<8;height++) {
+            for(int length=0; length<8;length++) {
+                if((height + length) % 2 == 0){
+                    board[length][height].setImageResource(R.drawable.red_tile);
+                    board[length][height].setTag(R.drawable.red_tile);
+                }
+                else{
+                    board[length][height].setImageResource(R.drawable.white_tile);
+                    board[length][height].setTag(R.drawable.white_tile);
+                }
+            }
+        }
+
         //this sets all of player ones pieces on the map.
         for(CheckersPiece piece :  p1Pieces){
             if(piece.getAlive()) {
