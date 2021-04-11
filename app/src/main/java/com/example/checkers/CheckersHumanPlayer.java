@@ -44,6 +44,13 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         return myActivity.findViewById(R.id.top_gui_layout);
     }
 
+    /**
+     * Called when the player receives a game-state (or other info) from the
+     * game.
+     *
+     * @param info
+     * 		the message from the game
+     */
     @Override
     public void receiveInfo(GameInfo info) {
         if(info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo){
@@ -56,6 +63,11 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         }
     }
 
+    /**
+     * sets up the game activity's GUI
+     *
+     * @param activity what's running on the tablet right now
+     */
     @Override
     public void setAsGui(GameMainActivity activity) {
         activity.setContentView(layoutID);

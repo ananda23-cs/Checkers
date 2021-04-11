@@ -18,7 +18,9 @@ import com.example.checkers.game.GameFramework.players.GamePlayer;
 public class CheckersLocalGame extends LocalGame {
 
     //CheckersGameState checkersGameState;//I added this
-
+    /**
+     * Constructor for the CheckersLocalGame.
+     */
     public CheckersLocalGame(){
         //I am commenting this out
         super();
@@ -26,21 +28,52 @@ public class CheckersLocalGame extends LocalGame {
         //checkersGameState = new CheckersGameState();
     }
 
+    /**
+     * Constructor for the CheckersLocalGame with loaded checkersGameState.
+     * @param checkersGameState
+     */
     public CheckersLocalGame(CheckersGameState checkersGameState){
         super();
         super.state = new CheckersGameState(checkersGameState);
     }
 
+    /**
+     * Notify the given player that its state has changed. This should involve sending
+     * a GameInfo object to the player. If the game is not a perfect-information game
+     * this method should remove any information from the game that the player is not
+     * allowed to know.
+     *
+     * @param p
+     * 			the player to notify
+     */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
+        //make a copy of the state and send it to the player
         p.sendInfo(new CheckersGameState((CheckersGameState) state));
     }
 
+    /**
+     * Tell whether the given player is allowed to make a move at the
+     * present point in the game.
+     *
+     * @param playerIdx
+     * 		the player's player-number (ID)
+     * @return
+     * 		true iff the player is allowed to move
+     */
     @Override
     protected boolean canMove(int playerIdx) {
         return playerIdx == ((CheckersGameState) state).getPlayerTurn();
     }
 
+    /**
+     * checks if the game is over. If it's over, return a message
+     * showing who won the game. If not, return null
+     *
+     * @return
+     *          a String message showing the winner of the game
+     *          or null
+     */
     @Override
     protected String checkIfGameOver() {
         CheckersGameState state = (CheckersGameState) super.state;
@@ -59,9 +92,17 @@ public class CheckersLocalGame extends LocalGame {
 
     }
 
+    /**
+     * Makes a move on behalf of a player.
+     *
+     * @param action
+     * 			The move that the player has sent to the game
+     * @return
+     * 			Tells whether the move was a legal one.
+     */
     @Override
     protected boolean makeMove(GameAction action) {
-        Log.e("Make Move", "this happened");
+        Log.e("Cancel Move", "this happened");
         if(action instanceof CheckersCancelMoveAction){
             CheckersCancelMoveAction cancelMoveAction = (CheckersCancelMoveAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
@@ -73,6 +114,7 @@ public class CheckersLocalGame extends LocalGame {
             return true;
         }
         else if (action instanceof CheckersMoveAction2){
+            Log.e("Make Move", "this happened");
             CheckersMoveAction2 moveAction = (CheckersMoveAction2) action;
             CheckersGameState state = (CheckersGameState) super.state;
             int playerId = state.getPlayerTurn();
@@ -80,9 +122,9 @@ public class CheckersLocalGame extends LocalGame {
             int yDir = moveAction.getYDire();
             CheckersPiece piece = moveAction.getPiece();
             if(state.canMove(state.getPieceSelectedPiece(),xDir,yDir,state.getPlayerTurn())) {
+                state.movePiece(piece, xDir, yDir, playerId);
                 state.setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(),
                         piece.getYcoordinate());
-                state.movePiece(piece, xDir, yDir, playerId);
                 if (state.getPlayerTurn() == 0) {
                     state.setMessage("Player 1's move was valid.");
                 } else {

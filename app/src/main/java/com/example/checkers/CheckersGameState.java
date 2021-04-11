@@ -16,24 +16,14 @@ import com.example.checkers.game.GameFramework.infoMessage.GameState;
 public class CheckersGameState extends GameState {
 
     // instance variables
-    public CheckersPiece[] p1Pieces;//if the grid is pieces this might not be needed
-    public CheckersPiece[] p2Pieces;//if the grid is pieces this might not be needed
+    public CheckersPiece[] p1Pieces;
+    public CheckersPiece[] p2Pieces;
     private int p1NumPieces;
     private int p2NumPieces;
     private boolean pieceSelectedBoolean; //this determines if a piece has been selected yet. It was not here before
     private CheckersPiece pieceSelectedPiece; //this is the piece that is going to get moved.this was not here before
     private int playerTurn;
     private String message;
-    //add grid here
-    //private ImageButton[][] board; //displays the 8x8 checkerboard
-    //TextView gameInfo;
-
-    //stop here top here sto here
-    // jno o42en oew
-    // hnfoew huowhnuo
-    // uihfiuhiufwh
-    // iojfoijfoi3j
-    // iojhoheohoifj
 
     public CheckersGameState(){
         playerTurn = 0;

@@ -15,51 +15,63 @@ import java.util.Random;
 
 public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
+    /**
+     * ctor of CheckersComputerPlayer1
+     */
     public CheckersComputerPlayer1(String name){
         super(name);
     }
 
+    /**
+     * Called when the player receives a game-state (or other info) from the
+     * game.
+     *
+     * @param info
+     * 		the message from the game
+     */
     @Override
     protected void receiveInfo(GameInfo info) {
         //ignore if not the computer's turn
-        if(info instanceof NotYourTurnInfo) return;
-        if (!(info instanceof CheckersGameState)) return;
-        CheckersGameState current = new CheckersGameState((CheckersGameState) info);
+        //if(info instanceof NotYourTurnInfo) return;
+        //if (!(info instanceof CheckersGameState)) return;
+        //= new CheckersGameState((CheckersGameState) info);
 
         //delay for a second so human can see the computer's movements
         sleep(1);
+        CheckersGameState current;
+        if(info instanceof CheckersGameState) {
+            current = new CheckersGameState((CheckersGameState) info);
+            if(current.getPlayerTurn() == playerNum) {
+                Random r = new Random();
 
-        Random r = new Random();
+                //chooses the index of a computer player's piece;
+                int pieceIdx = (int) (Math.random() * 12);
+                int[] directions = new int[2];
+                directions[0] = -1;
+                directions[1] = 1;
+                int xdirection = directions[(int) (Math.random() * 2)];
+                int ydirection = directions[(int) (Math.random() * 2)];
 
-        //chooses the index of a computer player's piece;
-        int pieceIdx = (int) (Math.random() * 12);
-        int [] directions = new int[2];
-        directions[0]= -1;
-        directions[1] = 1;
-        int xdirection = directions[(int)(Math.random()*2)];
-        int ydirection = directions[(int)(Math.random()*2)];
+                int action = 1 + r.nextInt(101);
+                //CheckersPiece piece, int xDir,int yDir,int id
+                if (playerNum == 0) {
+                    if (action < 51) {
+                        //invalid = false;
+                        game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection, current.p1Pieces[pieceIdx]));
+                    } else {
+                        game.sendAction(new CheckersCaptureAction(CheckersComputerPlayer1.this, xdirection, ydirection, current.p1Pieces[pieceIdx]));
+                        //invalid = false;
+                    }
 
-        int action = 1 + r.nextInt(101);
-        //CheckersPiece piece, int xDir,int yDir,int id
-        if(playerNum == 0) {
-            if (action < 51) {
-                //invalid = false;
-                game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection,current.p1Pieces[pieceIdx]));
-            }
-            else{
-                game.sendAction(new CheckersCaptureAction(CheckersComputerPlayer1.this,xdirection,ydirection,current.p1Pieces[pieceIdx]));
-                //invalid = false;
-            }
-
-        }
-        else if(playerNum == 1){
-            if (action < 51) {
-                //invalid = false;
-                game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection,current.p2Pieces[pieceIdx]));
-            }
-            else{
-                game.sendAction(new CheckersCaptureAction(CheckersComputerPlayer1.this,xdirection,ydirection,current.p2Pieces[pieceIdx]));
-                //invalid = false;
+                } else if (playerNum == 1) {
+                    if (action < 51) {
+                        //invalid = false;
+                        game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection, current.p2Pieces[pieceIdx]));
+                    } else {
+                        game.sendAction(new CheckersCaptureAction(CheckersComputerPlayer1.this, xdirection, ydirection, current.p2Pieces[pieceIdx]));
+                        //invalid = false;
+                    }
+                }
             }
         }
     }
