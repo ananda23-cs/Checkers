@@ -8,10 +8,8 @@
 
 package com.example.checkers;
 
-import android.media.Image;
 import android.util.Log;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 
@@ -352,33 +350,32 @@ public class CheckersGameState extends GameState {
         }
     }
 
-    public boolean movePiece(CheckersPiece piece, int xDir,int yDir,int id){
+    public void movePiece(CheckersPiece piece, int xDir, int yDir, int id){
         //this if statement checks that the user has not tried to move more than one space
-        if(inRange(xDir,yDir)){
-
-            //this checks that user is not trying to move off the checker board as well as if the space is held by another piece
-            if(inBounds(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir) &&
-                    isEmpty(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir)){
-
-                //this checks if player one is not trying to move a non king piece backwards
-                if(id == 0 && yDir<1 && !piece.getKing()){
-                    Log.e( "movePiece: ","Can't move backwards because not king" );
-                    return false;
-                }
-
-                //this checks if player two is not trying to move a non king piece backwards
-                else if(id == 1 && yDir>1 && !piece.getKing()){
-                    Log.e( "movePiece: ","Can't move backwards because not king" );
-                    return false;
-                }
-
-                //if all the conditions are right the piece will move.
-                else {
-                    CheckersPiece oldPiece = piece;
+//        if(inRange(xDir,yDir)){
+//
+//            //this checks that user is not trying to move off the checker board as well as if the space is held by another piece
+//            if(inBounds(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir) &&
+//                    isEmpty(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir)){
+//
+//                //this checks if player one is not trying to move a non king piece backwards
+//                if(id == 0 && yDir<1 && !piece.getKing()){
+//                    Log.e( "movePiece: ","Can't move backwards because not king" );
+//                    return false;
+//                }
+//
+//                //this checks if player two is not trying to move a non king piece backwards
+//                else if(id == 1 && yDir>1 && !piece.getKing()){
+//                    Log.e( "movePiece: ","Can't move backwards because not king" );
+//                    return false;
+//                }
+//
+//                //if all the conditions are right the piece will move.
+//                else {
                     piece.setCoordinates(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir);
-                    oldPiece = null;
+
                     //will turn to player 1's pieces king if the piece reaches the other side of the board
-                    if(playerTurn == 0){
+                    if(id == 0){
                         //playerTurn = 1;
                         if(piece.getYcoordinate() == 7){
                             piece.setKing(true);
@@ -392,21 +389,21 @@ public class CheckersGameState extends GameState {
                         }
                         //playerTurn = 0;
                     }
-                    return true;
-                }
-            }
-
-            //returns false if the move is out of bounds or tries to move into a spot with another piece
-            else {
-                Log.e( "movePiece: ","not in bounds" );
-                return false;
-            }
-        }
-        //will return false if the player tries to move
-        else {
-            Log.e( "movePiece: ","not in range" );
-            return false;
-        }
+//                    return true;
+//                }
+//            }
+//
+//            //returns false if the move is out of bounds or tries to move into a spot with another piece
+//            else {
+//                Log.e( "movePiece: ","not in bounds" );
+//                return false;
+//            }
+//        }
+//        //will return false if the player tries to move
+//        else {
+//            Log.e( "movePiece: ","not in range" );
+//            return false;
+//        }
 
     }
 

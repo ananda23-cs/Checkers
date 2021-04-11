@@ -101,9 +101,9 @@ public class CheckersTileListener implements View.OnClickListener {
             }
             //if they are trying to capture a piece
             else{
-
+                game.sendAction(new CheckersCaptureAction(player,newXCord,newYCord,fake.getPieceSelectedPiece()));
                 //player 1 capturing a piece
-                if(fake.getPlayerTurn() == 0) {
+                /*if(fake.getPlayerTurn() == 0) {
                     if (fake.capturepiece(fake.getPieceSelectedPiece(), fake.getPlayerTurn(),
                             fake.p2Pieces, newXCord, newYCord)) {
 
@@ -133,7 +133,7 @@ public class CheckersTileListener implements View.OnClickListener {
                     else{
                         gameInfo.setText("You can not capture this piece. Try again.");
                     }
-                }
+                }*/
 
 
 
