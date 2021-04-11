@@ -76,11 +76,23 @@ public class CheckersLocalGame extends LocalGame {
             int xDir = moveAction.getXDire();
             int yDir = moveAction.getYDire();
             CheckersPiece piece = moveAction.getPiece();
-            if (canMove(playerId)){
-                state.movePiece(piece,playerId,xDir,yDir);
+            if(state.canMove(state.getPieceSelectedPiece(),xDir,yDir,state.getPlayerTurn())) {
+                state.setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(),
+                        piece.getYcoordinate());
+                state.movePiece(piece, xDir, yDir, playerId);
+                if (state.getPlayerTurn() == 0) {
+                    state.setMessage("That move was valid. Player two please choose a piece");
+                } else {
+                    state.setMessage("That move was valid. Player one please choose a piece");
+                }
+                state.setPlayerTurn(1 - playerId);
                 return true;
             }
-            else{ return false; }
+            else{
+                state.setMessage("Invalid Move. Try again.");
+                return false;
+            }
+
         }
         else if (action instanceof CheckersCaptureAction){
             CheckersCaptureAction captureAction = (CheckersCaptureAction) action;
@@ -92,14 +104,16 @@ public class CheckersLocalGame extends LocalGame {
             if (canMove(playerId)){
                 if(playerId == 0){
                     state.capturepiece(piece,playerId,state.p2Pieces,xDir,yDir);
+                    state.setP2NumPieces(state.getP2NumPieces()-1);
                 }
                 else{
                     state.capturepiece(piece,playerId,state.p1Pieces,xDir,yDir);
+                    state.setP1NumPieces(state.getP1NumPieces()-1);
                 }
                 return true;
             }
             else{ return false; }
         }
-        else { return false; }
+        return false;
     }
 }
