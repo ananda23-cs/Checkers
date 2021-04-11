@@ -61,7 +61,7 @@ public class CheckersLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
-        Log.v("Make Move", "this happened");
+        Log.e("Make Move", "this happened");
         if(action instanceof CheckersCancelMoveAction){
             CheckersCancelMoveAction cancelMoveAction = (CheckersCancelMoveAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
