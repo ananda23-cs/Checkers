@@ -1,5 +1,7 @@
 package com.example.checkers;
 
+import com.example.checkers.infoMessage.CheckersGameState;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

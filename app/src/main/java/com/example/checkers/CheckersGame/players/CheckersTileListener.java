@@ -6,15 +6,16 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGame.players;
 
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.checkers.Actions.CheckersCaptureAction;
+import com.example.checkers.CheckersGame.Actions.CheckersCaptureAction;
+import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.game.GameFramework.Game;
-import com.example.checkers.Actions.CheckersMoveAction2;
+import com.example.checkers.CheckersGame.Actions.CheckersMoveAction2;
 
 public class CheckersTileListener implements View.OnClickListener {
 

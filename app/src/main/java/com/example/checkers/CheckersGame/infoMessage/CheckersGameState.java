@@ -6,11 +6,12 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGame.infoMessage;
 
 import android.util.Log;
 import android.widget.ImageButton;
 
+import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 
 public class CheckersGameState extends GameState {

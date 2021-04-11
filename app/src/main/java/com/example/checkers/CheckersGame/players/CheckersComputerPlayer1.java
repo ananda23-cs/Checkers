@@ -6,12 +6,12 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
-import com.example.checkers.Actions.CheckersCaptureAction;
+package com.example.checkers.CheckersGame.players;
+import com.example.checkers.CheckersGame.Actions.CheckersCaptureAction;
+import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
-import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
-import com.example.checkers.Actions.CheckersMoveAction2;
+import com.example.checkers.CheckersGame.Actions.CheckersMoveAction2;
 
 import java.util.Random;
 

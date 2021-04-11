@@ -7,8 +7,9 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGame;
 
+import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.gameConfiguration.GameConfig;
@@ -17,6 +18,10 @@ import com.example.checkers.game.GameFramework.infoMessage.GameState;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 import com.example.checkers.game.GameFramework.utilities.Logger;
 import com.example.checkers.game.GameFramework.utilities.Saving;
+import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
+import com.example.checkers.CheckersGame.players.CheckersComputerPlayer1;
+import com.example.checkers.CheckersGame.players.CheckersComputerPlayer2;
+import com.example.checkers.CheckersGame.players.CheckersHumanPlayer;
 
 import java.util.ArrayList;
 

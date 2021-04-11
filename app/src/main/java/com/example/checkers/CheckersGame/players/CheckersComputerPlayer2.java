@@ -6,7 +6,7 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGame.players;
 
 import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;

@@ -7,16 +7,18 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGame;
 
 import android.util.Log;
 
-import com.example.checkers.Actions.CheckersCancelMoveAction;
-import com.example.checkers.Actions.CheckersCaptureAction;
+import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
+import com.example.checkers.CheckersGame.Actions.CheckersCaptureAction;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
-import com.example.checkers.Actions.CheckersMoveAction2;
+import com.example.checkers.CheckersGame.Actions.CheckersMoveAction2;
+import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
+import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
 
 public class CheckersLocalGame extends LocalGame {
 

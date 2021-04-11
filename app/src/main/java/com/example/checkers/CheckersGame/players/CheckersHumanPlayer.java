@@ -6,7 +6,7 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGame.players;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.checkers.Actions.CheckersCancelMoveAction;
+import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
+import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
+import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
 import com.example.checkers.game.GameFramework.infoMessage.IllegalMoveInfo;
