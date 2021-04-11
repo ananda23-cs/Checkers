@@ -110,6 +110,7 @@ public class CheckersLocalGame extends LocalGame {
                     state.capturepiece(piece,playerId,state.p1Pieces,xDir,yDir);
                     state.setP1NumPieces(state.getP1NumPieces()-1);
                 }
+                state.setPlayerTurn(1-playerId);
                 return true;
             }
             else{ return false; }
