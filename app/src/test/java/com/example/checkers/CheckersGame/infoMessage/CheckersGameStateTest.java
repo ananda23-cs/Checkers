@@ -28,14 +28,14 @@ public class CheckersGameStateTest {
     public void setP1NumPieces() {
         CheckersGameState state = new CheckersGameState();
         state.setP1NumPieces(11);
-        assertEquals(11, state.getP1NumPieces());
+        assertEquals("Unequal number of P1 pieces", 11, state.getP1NumPieces());
     }
 
     @Test
     public void setP2NumPieces() {
         CheckersGameState state = new CheckersGameState();
         state.setP2NumPieces(11);
-        assertEquals(11, state.getP2NumPieces());
+        assertEquals("Unequal number of P2 pieces",11, state.getP2NumPieces());
     }
 
     @Test
