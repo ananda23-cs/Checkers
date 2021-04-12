@@ -109,13 +109,19 @@ public class CheckersLocalGame extends LocalGame {
 //                    return false;
 //              }
 
-                if(state.getPlayerTurn() == 0){
+                //if(state.getPlayerTurn() == 0){
                     if(state.hasEnemyPieces(x,y)){
                         if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
                             return true;
                         }
                     }
-                }
+               // }
+
+                // ston ui ui nin i ni  r3o f f3 ioj ij oj i jo j oi
+                //  ofofj o3i
+                // ifojfjioj
+                // fofjijjfioqj
+
 
                 if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
 

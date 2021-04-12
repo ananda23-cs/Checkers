@@ -104,6 +104,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                     }
                 }
             }
+            Log.e(" health", "num"+((CheckersGameState) info).getP2NumPieces());
         }
     }
 

@@ -554,6 +554,34 @@ public class CheckersGameState extends GameState {
 
             }
         }
+
+        if(playerTurn == 1) {
+
+            for (CheckersPiece piece : p1Pieces) {
+
+                if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
+                    && piece.getAlive()) {
+
+                    int xDist = xLocation - nVX;
+                    int yDist = yLocation - nVY;
+                    if(inRange(xDist,yDist)){
+                        int xFinal = nVX + xDist*2;
+                        int yFinal = nVY + yDist*2;
+                        if(isEmpty(xFinal,yFinal)){
+                            piece.setAlive(false);
+                            pieceSelectedPiece.setCoordinates(xFinal,yFinal);
+                            setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
+                            setPlayerTurn(54);
+                            p1NumPieces = p1NumPieces-1;
+                            return true;
+                        }
+                    }
+
+                }
+
+            }
+        }
+
         return false;
 
 

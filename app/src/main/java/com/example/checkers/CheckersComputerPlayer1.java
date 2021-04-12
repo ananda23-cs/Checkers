@@ -96,9 +96,15 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
                 }
             if (((CheckersGameState) info).canMove(piece,-1,-1,((CheckersGameState) info).getPlayerTurn())) {
+
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate(),piece.getYcoordinate()));
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate()-1, piece.getYcoordinate() -1 ));
 
+            }
+            if(((CheckersGameState) info).CaptureEnemyPiece(-1,-1,piece.getXcoordinate(),piece.getYcoordinate())){
+                Log.e("xlr19","hello");
+                game.sendAction(new ChooseAction(this, piece.getXcoordinate(),piece.getYcoordinate()));
+                game.sendAction(new ChooseAction(this, piece.getXcoordinate()-1, piece.getYcoordinate() -1 ));
             }
        }
         //game.sendAction(new ChooseAction(this, 3 ,5));
