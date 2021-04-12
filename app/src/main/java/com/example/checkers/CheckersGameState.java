@@ -537,15 +537,24 @@ public class CheckersGameState extends GameState {
 
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
-                    if(inRange(xDist,yDist)){
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
-                            setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
-                            setPlayerTurn(54);
+
                             p2NumPieces = p2NumPieces-1;
+
+                            if(playerTurn == 0){
+                                //playerTurn = 1;
+                                if(pieceSelectedPiece.getYcoordinate() == 7){
+                                    pieceSelectedPiece.setKing(true);
+                                }
+                            }
+                            setPlayerTurn(54);
+                            setPieceSelectedPieceAndPieceSelectedBoolean();
+
                             return true;
                         }
                     }
@@ -555,30 +564,50 @@ public class CheckersGameState extends GameState {
             }
         }
 
-        if(playerTurn == 1) {
+        return false;
 
+
+    }
+
+    public boolean CaptureEnemyPieceCP(int xLocation,int yLocation,int nVX,int nVY){
+        boolean returnValue = false;
+
+        Log.e("cp","nVX = "+ nVX + "nYy = "+nVY );
+        //Lo
+        if(playerTurn == 1 ){
             for (CheckersPiece piece : p1Pieces) {
-
+                if(piece.equals(p2Pieces[0])) {
+                    Log.e("cp34r33", "nVX = " + nVX + "nYy = " + nVY + "\n" + piece + "\n" + "xLoc = " + xLocation + "yLoc = " + yLocation);
+                }
                 if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
-                    && piece.getAlive()) {
-
+                && piece.getAlive()) {
+                    Log.e("cp343","nVX = "+ nVX + "nYy = "+nVY );
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
-                    if(inRange(xDist,yDist)){
+                    if(inRange(xDist,yDist) ){//&& inBounds(nVX + xDist*2,yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
-                            setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
-                            setPlayerTurn(54);
+
+
                             p1NumPieces = p1NumPieces-1;
+                            if(playerTurn == 1){
+                                //playerTurn = 1;
+                                if(pieceSelectedPiece.getYcoordinate() == 0){
+                                    pieceSelectedPiece.setKing(true);
+                                }
+                            }
+                            setPlayerTurn(54);
+                            setPieceSelectedPieceAndPieceSelectedBoolean();
+
+
                             return true;
                         }
                     }
 
                 }
-
             }
         }
 

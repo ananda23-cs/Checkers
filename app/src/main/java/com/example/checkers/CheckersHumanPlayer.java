@@ -215,6 +215,9 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     @Override
     public void onClick(View button) {
+        if(button instanceof Button){
+            game.sendAction(new CheckersCancelMoveAction(this,4,4));
+        }
         if (button instanceof ImageButton) {
             for (int x = 0; x < 8; x++) {
                 for (int y = 0; y < 8; y++) {

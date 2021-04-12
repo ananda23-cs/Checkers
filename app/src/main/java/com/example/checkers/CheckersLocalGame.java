@@ -99,14 +99,9 @@ public class CheckersLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
         if(action instanceof CheckersCancelMoveAction){
-            CheckersCancelMoveAction cancelMoveAction = (CheckersCancelMoveAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
-            int cancelRow = cancelMoveAction.getSelectedRow();
-            int cancelCol = cancelMoveAction.getSelectedCol();
-            //deselects the piece to undo an action
             state.setPieceSelectedPieceAndPieceSelectedBoolean();
-            state.setMessage("The piece at " + cancelRow + ", " + cancelCol +
-                    " has been unselected.\nPlease select another piece.");
+            state.setMessage("Choose another piece" );
             return true;
         }
         else if(action instanceof ChooseAction){
@@ -155,19 +150,24 @@ public class CheckersLocalGame extends LocalGame {
 //                else {
 //                    return false;
 //              }
-
                 //if(state.getPlayerTurn() == 0){
-                    if(state.hasEnemyPieces(x,y)){
-                        if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
-                            return true;
-                        }
+                if(state.hasEnemyPieces(x,y)){
+                    if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+                        return true;
                     }
+                }
+                if(state.hasEnemyPieces(x,y)){
+                    if(state.CaptureEnemyPieceCP(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+                        return true;
+                    }
+                }
                 if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
-
                     state.move(xDire,yDire);
                     state.setMessage("This is a valid move." );
                     return true;
                 }
+
+
             }
         }
         return false;
