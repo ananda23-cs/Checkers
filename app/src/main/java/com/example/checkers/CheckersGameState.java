@@ -35,11 +35,14 @@ public class CheckersGameState extends GameState {
     public CheckersGameState(){
         // initializes 12 pieces to each player
         playerTurn = 0;
+
         p1NumPieces = 12;
         p2NumPieces = 12;
 
         // initializes pieces to player 1 and puts them in their starting coordinates
         p1Pieces = new CheckersPiece[12];
+
+
         p1Pieces[0] = new CheckersPiece(0,0,1);
         p1Pieces[1] = new CheckersPiece(2,0,1);
         p1Pieces[2] = new CheckersPiece(4,0,1);
@@ -121,6 +124,31 @@ public class CheckersGameState extends GameState {
         p1NumPieces = p1;
     }
     public void setP2NumPieces(int p2) { p2NumPieces = p2; }
+
+    /*
+    public CheckersPiece[] getP1Pieces()
+    {
+        return p1Pieces;
+    }
+
+    public CheckersPiece[] getP2Pieces()
+    {
+        return p2Pieces;
+        }
+
+    public void setP1Pieces(CheckersPiece[] p1)
+    {
+        p1Pieces = p1;
+    }
+
+    public void setP2Pieces(CheckersPiece[] p2)
+    {
+        p1Pieces = p2;
+    }
+*/
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
 
     public void setPlayerTurn(int playerTurn) {
         if(this.playerTurn == 0) {
