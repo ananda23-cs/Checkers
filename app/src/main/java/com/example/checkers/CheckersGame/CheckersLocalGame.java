@@ -87,11 +87,11 @@ public class CheckersLocalGame extends LocalGame {
         CheckersGameState state = (CheckersGameState) super.state;
         if(state.getP1NumPieces() == 0)
         {
-            return "Player 2 wins.";
+            return "Player 2 won!";
         }
         else if(state.getP2NumPieces() == 0)
         {
-            return "Player 1 wins.";
+            return "Player 1 won!";
         }
         else
         {

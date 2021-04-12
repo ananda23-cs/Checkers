@@ -9,6 +9,7 @@
 package com.example.checkers.CheckersGame.infoMessage;
 
 public class CheckersPiece {
+    // variables for coordinates, king, and is alive
     private int xCord;
     private int yCord;
     private boolean isKing;

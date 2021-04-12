@@ -264,8 +264,9 @@ public class CheckersGameState extends GameState {
                         && piece.getYcoordinate() +yDir == piece1.getYcoordinate()) {
 
                     // checks if spot is empty
-                    if (isEmpty(piece1.getXcoordinate() + xDir, piece1.getYcoordinate() + yDir) &&
-                            inBounds(piece1.getXcoordinate() + xDir, piece1.getYcoordinate() + yDir)) {
+                    if (isEmpty(piece1.getXcoordinate() + xDir, piece1.getYcoordinate()
+                            + yDir) && inBounds(piece1.getXcoordinate() + xDir,
+                            piece1.getYcoordinate() + yDir)) {
                         // removes piece and sets return value to true
                         piece1.setAlive(false);
                         returnValue = true;
@@ -372,17 +373,17 @@ public class CheckersGameState extends GameState {
     public boolean canMove(CheckersPiece piece, int xDir,int yDir,int id){
         if(inRange(xDir,yDir)) {
 
-            //this checks that user is not trying to move off the checker board as well as if the space is held by another piece
+            // checks if move is in bounds
             if (inBounds(piece.getXcoordinate() + xDir, piece.getYcoordinate() + yDir) &&
                     isEmpty(piece.getXcoordinate() + xDir, piece.getYcoordinate() + yDir)) {
 
-                //this checks if player one is not trying to move a non king piece backwards
+                // checks if player 1's piece is a king if it wants to move backwards
                 if (id == 0 && yDir < 1 && !piece.getKing()) {
                     Log.e("movePiece: ", "Can't move backwards because not king");
                     return false;
                 }
 
-                //this checks if player two is not trying to move a non king piece backwards
+                // checks if player 2's piece is a king if it wants to move backwards
                 else if (id == 1 && yDir > 0 && !piece.getKing()) {
                     Log.e("movePiece: ", "Can't move backwards because not king");
                     return false;
@@ -391,13 +392,13 @@ public class CheckersGameState extends GameState {
                     return true;
                 }
             }
-            //returns false if the move is out of bounds or tries to move into a spot with another piece
+            // return false if move is out of bounds or not empty
             else {
                 Log.e("movePiece: ", "not in bounds");
                 return false;
             }
         }
-        //will return false if the player tries to move
+        // return false if not in range
         else {
             Log.e( "movePiece: ","not in range" );
             return false;

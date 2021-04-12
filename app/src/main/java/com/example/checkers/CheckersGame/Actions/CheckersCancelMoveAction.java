@@ -15,6 +15,7 @@ public class CheckersCancelMoveAction extends GameAction {
     // variables for row and column
     private int selectedRow;
     private int selectedCol;
+
     /**
      * constructor for CheckersCancelMoveAction
      *
