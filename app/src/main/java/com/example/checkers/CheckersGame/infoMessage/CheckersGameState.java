@@ -11,7 +11,6 @@ package com.example.checkers.CheckersGame.infoMessage;
 import android.util.Log;
 import android.widget.ImageButton;
 
-import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
 import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 
@@ -36,45 +35,46 @@ public class CheckersGameState extends GameState {
      */
     public CheckersGameState(){
         // initializes 12 pieces to each player
-        playerTurn = 0;
+        this.playerTurn = 0;
 
-        p1NumPieces = 12;
-        p2NumPieces = 12;
+        this.p1NumPieces = 12;
+        this.p2NumPieces = 12;
 
         // initializes pieces to player 1 and puts them in their starting coordinates
-        p1Pieces = new CheckersPiece[12];
+        this.p1Pieces = new CheckersPiece[12];
 
 
-        p1Pieces[0] = new CheckersPiece(0,0,1);
-        p1Pieces[1] = new CheckersPiece(2,0,1);
-        p1Pieces[2] = new CheckersPiece(4,0,1);
-        p1Pieces[3] = new CheckersPiece(6,0,1);
-        p1Pieces[4] = new CheckersPiece(1,1,1);
-        p1Pieces[5] = new CheckersPiece(3,1,1);
-        p1Pieces[6] = new CheckersPiece(5,1,1);
-        p1Pieces[7] = new CheckersPiece(7,1,1);
-        p1Pieces[8] = new CheckersPiece(6,2,1);
-        p1Pieces[9] = new CheckersPiece(4,2,1);
-        p1Pieces[10] = new CheckersPiece(2,2,1);
-        p1Pieces[11] = new CheckersPiece(0,2,1);
+        this.p1Pieces[0] = new CheckersPiece(0,0,1);
+        this.p1Pieces[1] = new CheckersPiece(2,0,1);
+        this.p1Pieces[2] = new CheckersPiece(4,0,1);
+        this.p1Pieces[3] = new CheckersPiece(6,0,1);
+        this.p1Pieces[4] = new CheckersPiece(1,1,1);
+        this.p1Pieces[5] = new CheckersPiece(3,1,1);
+        this.p1Pieces[6] = new CheckersPiece(5,1,1);
+        this.p1Pieces[7] = new CheckersPiece(7,1,1);
+        this.p1Pieces[8] = new CheckersPiece(6,2,1);
+        this.p1Pieces[9] = new CheckersPiece(4,2,1);
+        this.p1Pieces[10] = new CheckersPiece(2,2,1);
+        this.p1Pieces[11] = new CheckersPiece(0,2,1);
 
         // initializes pieces to player 2 and puts them in their starting coordinates
-        p2Pieces = new CheckersPiece[12];
-        p2Pieces[0] = new CheckersPiece(1,5,2);
-        p2Pieces[1] = new CheckersPiece(3,5,2);
-        p2Pieces[2] = new CheckersPiece(5,5,2);
-        p2Pieces[3] = new CheckersPiece(7,5,2);
-        p2Pieces[4] = new CheckersPiece(0,6,2);
-        p2Pieces[5] = new CheckersPiece(2,6,2);
-        p2Pieces[6] = new CheckersPiece(4,6,2);
-        p2Pieces[7] = new CheckersPiece(6,6,2);
-        p2Pieces[8] = new CheckersPiece(1,7,2);
-        p2Pieces[9] = new CheckersPiece(3,7,2);
-        p2Pieces[10] = new CheckersPiece(5,7,2);
-        p2Pieces[11] = new CheckersPiece(7,7,2);
+        this.p2Pieces = new CheckersPiece[12];
+        this.p2Pieces[0] = new CheckersPiece(1,5,2);
+        this.p2Pieces[1] = new CheckersPiece(3,5,2);
+        this.p2Pieces[2] = new CheckersPiece(5,5,2);
+        this.p2Pieces[3] = new CheckersPiece(7,5,2);
+        this.p2Pieces[4] = new CheckersPiece(0,6,2);
+        this.p2Pieces[5] = new CheckersPiece(2,6,2);
+        this.p2Pieces[6] = new CheckersPiece(4,6,2);
+        this.p2Pieces[7] = new CheckersPiece(6,6,2);
+        this.p2Pieces[8] = new CheckersPiece(1,7,2);
+        this.p2Pieces[9] = new CheckersPiece(3,7,2);
+        this.p2Pieces[10] = new CheckersPiece(5,7,2);
+        this.p2Pieces[11] = new CheckersPiece(7,7,2);
 
-        pieceSelectedBoolean = false;
-        message = "";
+        this.pieceSelectedBoolean = false;
+        this.pieceSelectedPiece = null;
+        this.message = "";
     } //CheckersGameState
 
     /**
@@ -123,9 +123,9 @@ public class CheckersGameState extends GameState {
      */
     public void setP1NumPieces(int p1)
     {
-        p1NumPieces = p1;
+        this.p1NumPieces = p1;
     }
-    public void setP2NumPieces(int p2) { p2NumPieces = p2; }
+    public void setP2NumPieces(int p2) { this.p2NumPieces = p2; }
 
     /*
     public CheckersPiece[] getP1Pieces()
@@ -661,7 +661,7 @@ public class CheckersGameState extends GameState {
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
 
-                            p2NumPieces = p2NumPieces-1;
+                            setP2NumPieces(p2NumPieces-1);
 
                             if(playerTurn == 0){
                                 //playerTurn = 1;
@@ -721,7 +721,7 @@ public class CheckersGameState extends GameState {
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
 
 
-                            p1NumPieces = p1NumPieces-1;
+                            setP1NumPieces(p1NumPieces-1);
                             if(playerTurn == 1){
                                 //playerTurn = 1;
                                 if(pieceSelectedPiece.getYcoordinate() == 0){
