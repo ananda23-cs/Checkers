@@ -45,25 +45,32 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             return;
 
         }
-        sleep(1);
         // loop until a valid move can be made
         for(CheckersPiece piece: ((CheckersGameState) info).p2Pieces) {
             Log.e("xlr15","hello"+((CheckersGameState) info).p1Pieces[10]);
             if (((CheckersGameState) info).canMove(piece,1,-1,((CheckersGameState) info).getPlayerTurn())) {
+                sleep(1);
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate(),piece.getYcoordinate()));
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate()+1, piece.getYcoordinate() -1 ));
 
                 }
             if (((CheckersGameState) info).canMove(piece,-1,-1,((CheckersGameState) info).getPlayerTurn())) {
-
+                sleep(1);
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate(),piece.getYcoordinate()));
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate()-1, piece.getYcoordinate() -1 ));
 
             }
-            if(((CheckersGameState) info).CaptureEnemyPiece(-1,-1,piece.getXcoordinate(),piece.getYcoordinate())){
+            if(((CheckersGameState) info).CaptureEnemyPiece(piece.getXcoordinate(),piece.getYcoordinate(),-1,-1)){
                 Log.e("xlr19","hello");
+                sleep(1);
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate(),piece.getYcoordinate()));
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate()-1, piece.getYcoordinate() -1 ));
+            }
+            if(((CheckersGameState) info).CaptureEnemyPiece(piece.getXcoordinate(),piece.getYcoordinate(),1,-1)){
+                Log.e("xlr19","hello");
+                sleep(1);
+                game.sendAction(new ChooseAction(this, piece.getXcoordinate(),piece.getYcoordinate()));
+                game.sendAction(new ChooseAction(this, piece.getXcoordinate()+1, piece.getYcoordinate() -1 ));
             }
        }
     } //receiveInfo
