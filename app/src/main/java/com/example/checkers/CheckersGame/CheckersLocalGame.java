@@ -24,15 +24,15 @@ import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
 public class CheckersLocalGame extends LocalGame {
 
     //CheckersGameState checkersGameState;//I added this
+
     /**
      * Constructor for the CheckersLocalGame.
      */
     public CheckersLocalGame(){
-        //I am commenting this out
         super();
         super.state = new CheckersGameState();
         //checkersGameState = new CheckersGameState();
-    }
+    } //CheckersLocalGame
 
     /**
      * Constructor for the CheckersLocalGame with loaded checkersGameState.
@@ -41,13 +41,13 @@ public class CheckersLocalGame extends LocalGame {
     public CheckersLocalGame(CheckersGameState checkersGameState){
         super();
         super.state = new CheckersGameState(checkersGameState);
-    }
+    } //CheckersLocalGame
 
-    /**
-     * Notify the given player that its state has changed. This should involve sending
-     * a GameInfo object to the player. If the game is not a perfect-information game
-     * this method should remove any information from the game that the player is not
-     * allowed to know.
+   /**
+     * method sendUpdatedStateTo
+     * notifies the players that the state of the game has changed
+     * should involve sending a GameInfo object to the player
+     *
      *
      * @param p
      * 			the player to notify
@@ -56,9 +56,10 @@ public class CheckersLocalGame extends LocalGame {
     protected void sendUpdatedStateTo(GamePlayer p) {
         //make a copy of the state and send it to the player
         p.sendInfo(new CheckersGameState((CheckersGameState) state));
-    }
+    } //sendUpdatedStateTo
 
     /**
+     * method canMove
      * Tell whether the given player is allowed to make a move at the
      * present point in the game.
      *
@@ -70,9 +71,10 @@ public class CheckersLocalGame extends LocalGame {
     @Override
     protected boolean canMove(int playerIdx) {
         return playerIdx == ((CheckersGameState) state).getPlayerTurn();
-    }
+    } //canMove
 
     /**
+     * method checkIfGameOver
      * checks if the game is over. If it's over, return a message
      * showing who won the game. If not, return null
      *
@@ -95,8 +97,7 @@ public class CheckersLocalGame extends LocalGame {
         {
             return null;
         }
-
-    }
+    } //checkIfGameOver
 
     /**
      * Makes a move on behalf of a player.
@@ -170,5 +171,5 @@ public class CheckersLocalGame extends LocalGame {
             else{ return false; }
         }
         else{return false;}
-    }
+    } //makeMove
 }

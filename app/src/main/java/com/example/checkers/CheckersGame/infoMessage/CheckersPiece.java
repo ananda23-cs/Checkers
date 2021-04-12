@@ -18,9 +18,12 @@ public class CheckersPiece {
     /**
      * creates a new instance of a checker piece
      *
-     * @param xCord x-coordinate of a piece
-     * @param yCord y-coordinate of a piece
-     * @param owner the player that owns the piece
+     * @param xCord
+     *      x-coordinate of a piece
+     * @param yCord
+     *      y-coordinate of a piece
+     * @param owner
+     *      the player that owns the piece
      */
     public CheckersPiece(int xCord, int yCord, int owner) {
         this.xCord = xCord;
@@ -28,11 +31,12 @@ public class CheckersPiece {
         this.isAlive = true; // set all pieces to be alive, when starting game
         this.isKing = false; // set none of the pieces to be a king, when starting game
         this.owner = owner;
-    }
+    } //CheckersPiece
 
     /**
      * deep copy constructor of the piece class
-     * @param p the saved Checker piece
+     * @param p
+     *      the saved Checker piece
      */
     public CheckersPiece(CheckersPiece p){
         this.xCord = p.xCord;
@@ -40,7 +44,7 @@ public class CheckersPiece {
         this.isAlive = p.isAlive;
         this.isKing = p.isKing;
         this.owner = p.owner;
-    }
+    } //CheckersPiece
 
     public String toString() {
         String returnValue = "";
@@ -49,31 +53,34 @@ public class CheckersPiece {
         returnValue = returnValue + "\nIs Alive = " + this.isAlive;
         returnValue = returnValue + "\nIs King = " + this.isKing;
         return returnValue;
-    }
+    } //toString
 
-    /**
-     * getter and setter methods for coordinates, king, and is alive
-     */
+    // getter methods for coordinates, king, and is alive
     public int getXcoordinate(){
         return this.xCord;
     }
-
     public int getYcoordinate(){
         return this.yCord;
     }
-
     public boolean getAlive(){
         return this.isAlive;
     }
-
     public boolean getKing() { return isKing; }
 
-    // setter methods for coordinates, king, and is alive
+
+    /**
+     * method setCoordinates
+     * @param xCord
+     *      pieces x coordinates
+     *  @param yCord
+     *      pieces y coordinates
+     */
     public void setCoordinates(int xCord,int yCord) {
         this.xCord = xCord;
         this.yCord = yCord;
-    }
+    } //setCoordinates
 
+    // getter methods for coordinates, king, and is alive
     public void setAlive(boolean isAlive) {
         this.isAlive = isAlive;
     }
