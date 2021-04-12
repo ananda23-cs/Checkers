@@ -9,6 +9,7 @@
 package com.example.checkers;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -56,8 +57,10 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         }
         else if(!(info instanceof CheckersGameState)) return;
         else{
-            ((CheckersGameState) info).setBoard(board);
-            gameInfo.setText(((CheckersGameState) info).getMessage());
+            Log.e("human","p2piece"+((CheckersGameState) info).p2Pieces[1]);
+            checkersGameState = (CheckersGameState) info;
+            checkersGameState.setBoard(board);
+            gameInfo.setText((checkersGameState).getMessage());
         }
     }
 
