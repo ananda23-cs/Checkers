@@ -105,7 +105,4 @@ public class CheckersMainActivity extends GameMainActivity {
         return (GameState) new CheckersGameState((CheckersGameState) Saving.readFromFile(appName,
                 this.getApplicationContext()));
     } //loadGame
-
-    //public void moveFinal(int xdir, int ydir){
-    //}
 }
