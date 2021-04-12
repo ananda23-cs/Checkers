@@ -28,13 +28,6 @@ public class CheckersGameState extends GameState {
     ImageButton[][] board; //displays the 8x8 checkerboard
     //TextView gameInfo;
 
-    //stop here top here sto here
-    // jno o42en oew
-    // hnfoew huowhnuo
-    // uihfiuhiufwh
-    // iojfoijfoi3j
-    // iojhoheohoifj
-
     public CheckersGameState(){
         playerTurn = 0;
 
@@ -147,35 +140,6 @@ public class CheckersGameState extends GameState {
     //this sets the board and displays all the locations of the coordinates
     //this method was not here before we turned it in.
     public void setBoard(ImageButton[][] board){
-        //this nested for loop makes a checker board. The if statement helps with the checker pattern
-        /*for(int height=0;height<8;height++) {
-            for(int length=0; length<8;length++) {
-                /*if(height%2 == 1) {
-                    if(length%2 == 1) {
-                        board[length][height].setImageResource(R.drawable.red_tile);
-                    }
-                    else{
-                        board[length][height].setImageResource(R.drawable.white_tile);
-                    }
-                }
-                else{
-                    if(height%2 == 1){
-                        board[length][height].setImageResource(R.drawable.white_tile);
-                    }
-                    else{
-                        board[length][height].setImageResource(R.drawable.red_tile);
-                    }
-                }
-                if((height + length) % 2 == 0){
-                    board[length][height].setImageResource(R.drawable.red_tile);
-                    board[length][height].setTag(R.drawable.red_tile);
-                }
-                else{
-                    board[length][height].setImageResource(R.drawable.white_tile);
-                    board[length][height].setTag(R.drawable.white_tile);
-                }
-            }
-        }*/
 
         for(int height=0;height<8;height++) {
             for(int length=0; length<8;length++) {

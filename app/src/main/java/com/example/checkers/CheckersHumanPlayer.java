@@ -227,9 +227,6 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                     }
                 }
             }
-        /*else if (button instanceof ImageButton){
-            game.sendAction(new CheckersMoveAction(CheckersHumanPlayer.this));
-        }*/
         } //onClick
     }
 }
