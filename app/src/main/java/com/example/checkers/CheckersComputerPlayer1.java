@@ -17,79 +17,37 @@ import java.util.Random;
 
 public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
+    /**
+     * constructor of CheckersComputerPlayer1
+     */
     public CheckersComputerPlayer1(String name){
         super(name);
     }
 
+    /**
+     * Called when the player receives a game-state (or other info) from the
+     * game.
+     *
+     * @param info
+     * 		the message from the game
+     */
     @Override
     protected void receiveInfo(GameInfo info) {
         int xDire = 0;
         int yDire = 0;
         int pieceIdx = 1;
+        // return if not computer plays turn or not an instance of game state
         if (info instanceof NotYourTurnInfo) {
             return;
         }
-
-
         else if(!(info instanceof CheckersGameState)) {
             return;
 
         }
 
-        else {
-//            Log.e("xlr8 ", "" + ((CheckersGameState) info).p1Pieces[10] + "turn" + ((CheckersGameState) info).getPlayerTurn());
-//            CheckersGameState current = ((CheckersGameState) info);
-//
-//            //((CheckersGameState) info).setPlayerTurn(4);
-//            //sleep(0.5);
-//            boolean invalid = true;
-//
-//
-//
-//            Log.e("xlr11", "" + current.p1Pieces[10] + "turn" + current.getPlayerTurn());
-//
-//
-//            if (current.getPlayerTurn() == 1)
-//                while (invalid) {
-//                    pieceIdx = (int) (Math.random() * 12);
-//                    int xIndex = (int) (Math.random() * 100);
-//                    int yIndex = (int) (Math.random() * 100);
-//
-//                    if (yIndex > 50) {
-//                        yDire = 1;
-//                    } else {
-//                        yDire = -1;
-//                    }
-//
-//                    if (xIndex > 50) {
-//                        xDire = 1;
-//                    } else {
-//                        xDire = -1;
-//                    }
-//
-//
-//                    Log.e("xlr9 ", "xDire: " + xDire + "yDire: " + yDire + "piece" + ((CheckersGameState) info).p2Pieces[pieceIdx]
-//                            + "\nturn" + ((CheckersGameState) info).getPlayerTurn());
-//                    if (((CheckersGameState) info).canMove(((CheckersGameState) info).p2Pieces[pieceIdx], xDire, yDire, ((CheckersGameState) info).getPlayerTurn())) {
-//                        invalid = false;
-//
-//                    }
-//
-//
-//                }
-//                for(CheckersPiece piece: ((CheckersGameState) info).p2Pieces) {
-//                    Log.e("xlr15","hello");
-//                    if (((CheckersGameState) info).canMove(piece,1,1,((CheckersGameState) info).getPlayerTurn())) {
-//                        game.sendAction(new ChooseAction(this, piece.getXcoordinate(),piece.getYcoordinate()));
-//                        game.sendAction(new ChooseAction(this, piece.getXcoordinate()+1, piece.getYcoordinate() +1 ));
-//
-//                    }
-//                }
-            }
-            //game.sendAction(new ChooseAction(this, ((CheckersGameState) info).p2Pieces[pieceIdx].getXcoordinate() ,((CheckersGameState) info).p2Pieces[pieceIdx].getYcoordinate()));
-            //game.sendAction(new ChooseAction(this, ((CheckersGameState) info).p2Pieces[pieceIdx].getXcoordinate() +xDire ,((CheckersGameState) info).p2Pieces[pieceIdx].getYcoordinate()+yDire) );
+        // loop until a valid move can be made
         for(CheckersPiece piece: ((CheckersGameState) info).p2Pieces) {
-                    Log.e("xlr15","hello"+((CheckersGameState) info).p1Pieces[10]);
+            Log.e("xlr15","hello"+((CheckersGameState) info).p1Pieces[10]);
             if (((CheckersGameState) info).canMove(piece,1,-1,((CheckersGameState) info).getPlayerTurn())) {
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate(),piece.getYcoordinate()));
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate()+1, piece.getYcoordinate() -1 ));
@@ -107,9 +65,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                 game.sendAction(new ChooseAction(this, piece.getXcoordinate()-1, piece.getYcoordinate() -1 ));
             }
        }
-        //game.sendAction(new ChooseAction(this, 3 ,5));
-        // game.sendAction(new ChooseAction(this, 4, 4));
-    }
+    } //receiveInfo
 }
 
         //ignore if not the computer's turn

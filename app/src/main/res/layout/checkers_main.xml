@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E6E5E5"
     tools:context=".CheckersMainActivity">
 
     <LinearLayout
@@ -20,8 +21,24 @@
             android:text="@string/app_name"
             android:textAlignment="center"
             android:textColor="#F13A01"
-            android:textSize="60sp"
-            android:textStyle="bold" />
+            android:textSize="110sp"
+            android:textStyle="bold"
+            android:translationY="30sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="0" />
+
+        <TextView
+            android:id="@+id/computerPlayerId"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0"
+            android:text="@string/Computer_Dumb_Name"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:translationX="150sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +48,7 @@
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="0.9" />
 
             <LinearLayout
                 android:id="@+id/board"
@@ -53,6 +70,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -61,6 +79,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -69,6 +88,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -77,6 +97,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -85,6 +106,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -93,6 +115,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -101,6 +124,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -109,6 +133,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
                 </LinearLayout>
@@ -124,6 +149,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -132,6 +158,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -140,6 +167,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -148,6 +176,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -156,6 +185,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -164,6 +194,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -172,6 +203,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -180,6 +212,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
                 </LinearLayout>
@@ -195,6 +228,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -203,6 +237,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -211,6 +246,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -219,6 +255,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -227,6 +264,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -235,6 +273,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -243,6 +282,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -251,6 +291,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
                 </LinearLayout>
@@ -266,6 +307,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -274,6 +316,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -282,6 +325,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -290,6 +334,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -298,6 +343,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -306,6 +352,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -314,6 +361,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -322,6 +370,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
                 </LinearLayout>
@@ -338,6 +387,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -346,6 +396,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -354,6 +405,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -362,6 +414,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -370,6 +423,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -378,6 +432,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -386,6 +441,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -394,6 +450,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
                 </LinearLayout>
@@ -409,6 +466,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -417,6 +475,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -425,6 +484,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -433,6 +493,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -441,6 +502,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -449,6 +511,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -457,6 +520,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -465,6 +529,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
                 </LinearLayout>
@@ -480,6 +545,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -488,6 +554,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -496,6 +563,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -504,6 +572,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -512,6 +581,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -520,6 +590,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -528,6 +599,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -536,6 +608,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
                 </LinearLayout>
@@ -551,6 +624,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -559,6 +633,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -567,6 +642,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -575,6 +651,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -583,6 +660,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -591,6 +669,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
 
@@ -599,6 +678,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#8c4646"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/red_tile" />
 
@@ -607,6 +687,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
+                        android:background="#f5e5be"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/white_tile" />
                 </LinearLayout>
@@ -624,16 +705,27 @@
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="0.6" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/humanPlayerId2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0"
+            android:text="@string/Human_Player_Name"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:translationX="150sp" />
 
         <TextView
             android:id="@+id/gameInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="14sp" />
+            android:textSize="25sp"
+            android:translationX="20sp" />
 
 
     </LinearLayout>

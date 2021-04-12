@@ -19,41 +19,83 @@ public class CheckersLocalGame extends LocalGame {
 
     //CheckersGameState checkersGameState;//I added this
 
+    /**
+     * Constructor for the CheckersLocalGame.
+     */
     public CheckersLocalGame() {
         //I am commenting this out
         super();
         super.state = new CheckersGameState();
         //checkersGameState = new CheckersGameState();
-    }
+    } //CheckersLocalGame
 
+    /**
+     * Constructor for the CheckersLocalGame with loaded checkersGameState.
+     * @param checkersGameState
+     */
     public CheckersLocalGame(CheckersGameState checkersGameState) {
         super();
         super.state = new CheckersGameState(checkersGameState);
-    }
+    } //CheckersLocalGame
 
+    /**
+     * method sendUpdatedStateTo
+     * notifies the players that the state of the game has changed
+     * should involve sending a GameInfo object to the player
+     *
+     *
+     * @param p
+     * 			the player to notify
+     */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         p.sendInfo(new CheckersGameState((CheckersGameState) state));
-    }
+    } //sendUpdatedStateTo
 
+    /**
+     * method canMove
+     * Tell whether the given player is allowed to make a move at the
+     * present point in the game.
+     *
+     * @param playerIdx
+     * 		the player's player-number (ID)
+     * @return
+     * 		true iff the player is allowed to move
+     */
     @Override
     protected boolean canMove(int playerIdx) {
         return playerIdx == ((CheckersGameState) state).getPlayerTurn();
-    }
+    } //canMove
 
+    /**
+     * method checkIfGameOver
+     * checks if the game is over. If it's over, return a message
+     * showing who won the game. If not, return null
+     *
+     * @return
+     *          a String message showing the winner of the game
+     *          or null
+     */
     @Override
     protected String checkIfGameOver() {
         CheckersGameState state = (CheckersGameState) super.state;
         if (state.getP1NumPieces() == 0) {
-            return "Player 2 wins.";
+            return "Player 2 won!";
         } else if (state.getP2NumPieces() == 0) {
-            return "Player 1 wins.";
+            return "Player 1 won!";
         } else {
             return null;
         }
+    } //checkIfGameOver
 
-    }
-
+    /**
+     * Makes a move on behalf of a player.
+     *
+     * @param action
+     * 			The move that the player has sent to the game
+     * @return
+     * 			Tells whether the move was a legal one.
+     */
     @Override
     protected boolean makeMove(GameAction action) {
         if(action instanceof ChooseAction){
@@ -64,33 +106,27 @@ public class CheckersLocalGame extends LocalGame {
             int x = ca.x;
             int y = ca.y;
 
-            // get the 0/1 id of our player
+            // get player id
             int playerId = state.getPlayerTurn();
 
-
             if(!state.isPieceSelectedBoolean()){
-                //this checks if they chose an empty spot
-
+                // checks if spot is empty
                 if(state.isEmpty(x,y)){
                     state.setMessage("This tile is empty. Pick another square");
                     return false;
                 }
                 else {
-                    //this checks if the piece belongs to the player
+                    // checks if piece belongs to player
                     if (state.hasEnemyPieces(x,y)) {
                         state.setMessage("This piece is not yours. Please try again.");
                     }
-
-                    //if all the conditions are right the piece is chosen
+                    // if conditions are true, piece is chosen
                     else{
                         state.setMessage("This piece can be moved. Click on the spot where you want to move it." );
                         state.setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
                         return true;
-
                     }
-
                 }
-
             }
             else{
                 int xDire=x-state.getPieceSelectedPiece().getXcoordinate();
@@ -115,14 +151,6 @@ public class CheckersLocalGame extends LocalGame {
                             return true;
                         }
                     }
-               // }
-
-                // ston ui ui nin i ni  r3o f f3 ioj ij oj i jo j oi
-                //  ofofj o3i
-                // ifojfjioj
-                // fofjijjfioqj
-
-
                 if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
 
                     state.move(xDire,yDire);
@@ -131,9 +159,8 @@ public class CheckersLocalGame extends LocalGame {
                 }
             }
         }
-
         return false;
-    }
+    } //makeMove
 
 }
 

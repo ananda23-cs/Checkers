@@ -24,9 +24,6 @@ public class CheckersMainActivity extends GameMainActivity {
     private static final String CHECKERS = "CheckersMainActivity";
     private static final int PORT_NUMBER = 5213;
 
-    // we need to override the abstract methods from GameMainActivity
-    // I can see what that looks like in the TTT main activity
-
     /**
      * sets up a default of one human and one computer player
      *
@@ -65,13 +62,10 @@ public class CheckersMainActivity extends GameMainActivity {
         // Add the default players
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
-        // sngo ij h i hiuo hiu  iuh ih u hiu hiu i uh hi
-
 
         // Set the initial information for the remote players
-        defaultConfig.setRemoteData("Remote Human Player", "", 0);
+        //defaultConfig.setRemoteData("Remote Human Player", "", 0);
 
-        //done!
         return defaultConfig;
 
     }//createDefaultConfig
@@ -83,7 +77,7 @@ public class CheckersMainActivity extends GameMainActivity {
     public LocalGame createLocalGame(GameState CheckersGame) {
         if(CheckersGame == null) return new CheckersLocalGame();
         return new CheckersLocalGame((CheckersGameState) CheckersGame);
-    }
+    } //createLocalGame
 
     /**
      * saveGame, adds this games prepend to the filename
@@ -95,7 +89,7 @@ public class CheckersMainActivity extends GameMainActivity {
     @Override
     public GameState saveGame (String CheckersGame){
         return super.saveGame(getGameString(CheckersGame));
-    }
+    } //saveGame
 
     /**
      * loadGame, adds this games prepend to the desire file to open and creates the game specific state
@@ -110,9 +104,8 @@ public class CheckersMainActivity extends GameMainActivity {
         Logger.log(CHECKERS, "Loading: " + CheckersGame);
         return (GameState) new CheckersGameState((CheckersGameState) Saving.readFromFile(appName,
                 this.getApplicationContext()));
-    }
+    } //loadGame
 
-    public void moveFinal(int xdir, int ydir){
-
-    }
+    //public void moveFinal(int xdir, int ydir){
+    //}
 }
