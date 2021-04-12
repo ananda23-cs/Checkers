@@ -148,13 +148,7 @@ public class CheckersGameState extends GameState {
 */
 
     public void setPlayerTurn(int playerTurn) {
-        if(this.playerTurn == 0) {
-            this.playerTurn = 1;
-        }
-        else{
-            this.playerTurn = 0;
-        }
-        //this.playerTurn = playerTurn
+        this.playerTurn = playerTurn;
     } //setPlayerTurn
 
     /**
@@ -484,7 +478,7 @@ public class CheckersGameState extends GameState {
                 else {
                     Log.e("tag","true");
                     piece.setCoordinates(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir);
-                    setPlayerTurn(5);
+                    setPlayerTurn(1-playerTurn);
                     //will turn to player 1's pieces king if the piece reaches the other side of the board
                     if(id == 0){
                         //playerTurn = 1;
@@ -625,7 +619,7 @@ public class CheckersGameState extends GameState {
         }
 
         setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
-        setPlayerTurn(54);
+        setPlayerTurn(1-playerTurn);
 
     } //move
 
@@ -673,7 +667,7 @@ public class CheckersGameState extends GameState {
                                     pieceSelectedPiece.setKing(true);
                                 }
                             }
-                            setPlayerTurn(54);
+                            setPlayerTurn(1);
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
                             return true;
@@ -732,7 +726,7 @@ public class CheckersGameState extends GameState {
                                     pieceSelectedPiece.setKing(true);
                                 }
                             }
-                            setPlayerTurn(54);
+                            setPlayerTurn(0);
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
                             return true;

@@ -46,12 +46,14 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         }
         else if(((CheckersGameState) info).getPlayerTurn()==1) {
             // loop until a valid move can be made
+            sleep(1);
             for (CheckersPiece piece : ((CheckersGameState) info).p2Pieces) {
                 Log.e("xlr15", "hello" + ((CheckersGameState) info).p1Pieces[10]);
                 if (piece.getAlive()) {
                     // computer move method
                     // move backwards diagonally left
                     if (((CheckersGameState) info).canMove(piece, 1, -1, ((CheckersGameState) info).getPlayerTurn())) {
+
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() - 1));
 
@@ -68,7 +70,6 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                     }
                     // move forwards diagonally left
                     if (((CheckersGameState) info).canMove(piece, 1, +1, ((CheckersGameState) info).getPlayerTurn())) {
-
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() + 1));
 
@@ -80,10 +81,11 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1));
                     }
 
-                    if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() - 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
+                    /*if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() - 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
+                        sleep(1);
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1));
-                    }
+                    }*/
 
                     if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() + 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
