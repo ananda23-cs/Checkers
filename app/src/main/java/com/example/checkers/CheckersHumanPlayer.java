@@ -34,16 +34,14 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     /**
      * constructor CheckersHumanPlayer
      *
-     * @param name
-     *      the name of the player
-     * @param activity_main
-     *      the layout ID of the game
+     * @param name          the name of the player
+     * @param activity_main the layout ID of the game
      */
     public CheckersHumanPlayer(String name, int activity_main) {
         super(name);
         this.layoutID = activity_main;
         board = new ImageButton[8][8];
-     } //CheckersHumanPlayer
+    } //CheckersHumanPlayer
 
     @Override
     public View getTopView() {
@@ -54,33 +52,30 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
      * Called when the player receives a game-state (or other info) from the
      * game.
      *
-     * @param info
-     * 		the message from the game
+     * @param info the message from the game
      */
     @Override
     public void receiveInfo(GameInfo info) {
         // flash red if move is invalid
-        if(info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo){
+        if (info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo) {
             flash(Color.RED, 100);
             //gameInfo.setText(((CheckersGameState)info).getMessage());
-        }
-        else if(!(info instanceof CheckersGameState)) return;
-        else{
+        } else if (!(info instanceof CheckersGameState)) return;
+        else {
             ((CheckersGameState) info).setImageBoard(board);
-            Log.e("human","p2piece"+((CheckersGameState) info).p2Pieces[1]);
+            Log.e("human", "p2piece" + ((CheckersGameState) info).p2Pieces[1]);
 
             //checkersGameState = (CheckersGameState) info;
             //checkersGameState.setBoard(board);
             gameInfo.setText(((CheckersGameState) info).getMessage());
 
             // alternates between red and white tiles in a checkerboard pattern
-            for(int height=0;height<8;height++) {
-                for(int length=0; length<8;length++) {
-                    if((height + length) % 2 == 0){
+            for (int height = 0; height < 8; height++) {
+                for (int length = 0; length < 8; length++) {
+                    if ((height + length) % 2 == 0) {
                         board[length][height].setImageResource(R.drawable.red_tile);
                         board[length][height].setTag(R.drawable.red_tile);
-                    }
-                    else{
+                    } else {
                         board[length][height].setImageResource(R.drawable.white_tile);
                         board[length][height].setTag(R.drawable.white_tile);
                     }
@@ -88,33 +83,31 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             }
 
             // sets player 1's pieces on the board to black
-            for(CheckersPiece piece :  ((CheckersGameState) info).p1Pieces){
-                if(piece.getAlive()) {
-                    if(piece.getKing()){
+            for (CheckersPiece piece : ((CheckersGameState) info).p1Pieces) {
+                if (piece.getAlive()) {
+                    if (piece.getKing()) {
                         board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.black_king);
                         board[piece.getXcoordinate()][piece.getYcoordinate()].setTag(R.drawable.black_king);
-                    }
-                    else {
+                    } else {
                         board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.black_piece);
                         board[piece.getXcoordinate()][piece.getYcoordinate()].setTag(R.drawable.black_piece);
                     }
                 }
             }
             // sets player 2's pieces on the board to red
-            for(CheckersPiece piece :  ((CheckersGameState) info).p2Pieces){
-                Log.e("setBoard: ",""+piece );
-                if(piece.getAlive()) {
-                    if(piece.getKing()){
+            for (CheckersPiece piece : ((CheckersGameState) info).p2Pieces) {
+                Log.e("setBoard: ", "" + piece);
+                if (piece.getAlive()) {
+                    if (piece.getKing()) {
                         board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.red_king);
                         board[piece.getXcoordinate()][piece.getYcoordinate()].setTag(R.drawable.red_king);
-                    }
-                    else {
+                    } else {
                         board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.red_piece);
                         board[piece.getXcoordinate()][piece.getYcoordinate()].setTag(R.drawable.red_piece);
                     }
                 }
             }
-            Log.e(" health", "num"+((CheckersGameState) info).getP2NumPieces());
+            Log.e(" health", "num" + ((CheckersGameState) info).getP2NumPieces());
         }
     } //receiveInfo
 
@@ -211,7 +204,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         myActivity.setTitle("Checkers: " + allPlayerNames[0] + " vs. " + allPlayerNames[1]);
 
         // sets board to listen to tiles
-        for(int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 //boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(),
                 //gameInfo, board, CheckersHumanPlayer.this, game);
@@ -222,20 +215,18 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     @Override
     public void onClick(View button) {
-        if(button instanceof ImageButton){
-            for(int x = 0; x < 8; x++) {
-                for(int y = 0; y < 8; y++) {
-                    {
-                        if(board[x][y].equals(button)) {
-                            Log.e("onClick: ", "x = " + x + "y = " + y);
-                            game.sendAction(new ChooseAction(this,x,y));
-                        }
+        if (button instanceof ImageButton) {
+            for (int x = 0; x < 8; x++) {
+                for (int y = 0; y < 8; y++) {
+                    if (board[x][y].equals(button)) {
+                        Log.e("onClick: ", "x = " + x + "y = " + y);
+                        game.sendAction(new ChooseAction(this, x, y));
                     }
                 }
             }
-        }
         /*else if (button instanceof ImageButton){
             game.sendAction(new CheckersMoveAction(CheckersHumanPlayer.this));
         }*/
-    } //onClick
+        } //onClick
+    }
 }

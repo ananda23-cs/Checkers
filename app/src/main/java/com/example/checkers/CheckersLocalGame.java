@@ -98,7 +98,18 @@ public class CheckersLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
-        if(action instanceof ChooseAction){
+        if(action instanceof CheckersCancelMoveAction){
+            CheckersCancelMoveAction cancelMoveAction = (CheckersCancelMoveAction) action;
+            CheckersGameState state = (CheckersGameState) super.state;
+            int cancelRow = cancelMoveAction.getSelectedRow();
+            int cancelCol = cancelMoveAction.getSelectedCol();
+            //deselects the piece to undo an action
+            state.setPieceSelectedPieceAndPieceSelectedBoolean();
+            state.setMessage("The piece at " + cancelRow + ", " + cancelCol +
+                    " has been unselected.\nPlease select another piece.");
+            return true;
+        }
+        else if(action instanceof ChooseAction){
 
             ChooseAction ca = (ChooseAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
