@@ -25,7 +25,7 @@ public class CheckersGameState extends GameState {
     private int playerTurn;
     private String message;
     //add grid here
-    //private ImageButton[][] board; //displays the 8x8 checkerboard
+    ImageButton[][] board; //displays the 8x8 checkerboard
     //TextView gameInfo;
 
     //stop here top here sto here
@@ -296,7 +296,7 @@ public class CheckersGameState extends GameState {
                         }
 
                         //changes the turn number
-                        piece.setCoordinates(piece1.getXcoordinate() + xDir,
+                        piece.setCoordinates(piece1.getXcoordinate() + xDir+1,
                                 piece1.getYcoordinate() + yDir);
                         if(playerTurn == 0){
                             playerTurn = 1;
@@ -521,6 +521,40 @@ public class CheckersGameState extends GameState {
 
         setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
         setPlayerTurn(54);
+
+    }
+
+    public void setImageBoard(ImageButton[][] board){
+        this.board = board;
+    }
+
+    public boolean CaptureEnemyPiece(int xLocation,int yLocation,int nVX,int nVY){
+        boolean returnValue = false;
+        if(playerTurn == 0) {
+            for (CheckersPiece piece : p2Pieces) {
+                if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
+                        && piece.getAlive()) {
+
+                    int xDist = xLocation - nVX;
+                    int yDist = yLocation - nVY;
+                    if(inRange(xDist,yDist)){
+                        int xFinal = nVX + xDist*2;
+                        int yFinal = nVY + yDist*2;
+                        if(isEmpty(xFinal,yFinal)){
+                            piece.setAlive(false);
+                            pieceSelectedPiece.setCoordinates(xFinal,yFinal);
+                            setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
+                            setPlayerTurn(54);
+                            return true;
+                        }
+                    }
+
+                }
+
+            }
+        }
+        return false;
+
 
     }
 
