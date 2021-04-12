@@ -1,6 +1,6 @@
 package com.example.checkers;
 
-import com.example.checkers.infoMessage.CheckersGameState;
+import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 
 import org.junit.Test;
 
