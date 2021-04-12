@@ -35,12 +35,12 @@ public class CheckersMoveAction2 extends GameAction {
     } //CheckersMoveAction2
 
     /// getter methods for variables
-    public int getXDire() {
+    /*public int getXDire() {
         return XDire;
     }
     public int getYDire() {
         return YDire;
-    }
+    }*/
     public CheckersPiece getPiece() {
         return piece;
     }

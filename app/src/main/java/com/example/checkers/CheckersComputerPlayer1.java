@@ -33,9 +33,9 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
      */
     @Override
     protected void receiveInfo(GameInfo info) {
-        int xDire = 0;
-        int yDire = 0;
-        int pieceIdx = 1;
+        //int xDire = 0;
+        //int yDire = 0;
+        //int pieceIdx = 1;
         // return if not computer plays turn or not an instance of game state
         if (info instanceof NotYourTurnInfo) {
             return;
@@ -49,26 +49,24 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             for (CheckersPiece piece : ((CheckersGameState) info).p2Pieces) {
                 Log.e("xlr15", "hello" + ((CheckersGameState) info).p1Pieces[10]);
                 if (piece.getAlive()) {
+                    // computer move method
+                    // move backwards diagonally left
                     if (((CheckersGameState) info).canMove(piece, 1, -1, ((CheckersGameState) info).getPlayerTurn())) {
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() - 1));
 
                     }
+                    // move move backwards diagonally right
                     if (((CheckersGameState) info).canMove(piece, -1, -1, ((CheckersGameState) info).getPlayerTurn())) {
-
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1));
-
                     }
-
+                    // move forwards diagonally right
                     if (((CheckersGameState) info).canMove(piece, -1, +1, ((CheckersGameState) info).getPlayerTurn())) {
-
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() + 1));
-
                     }
-
-
+                    // move forwards diagonally left
                     if (((CheckersGameState) info).canMove(piece, 1, +1, ((CheckersGameState) info).getPlayerTurn())) {
 
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
@@ -76,7 +74,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
                     }
 
-
+                    // computer capture method
                     if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() - 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new ChooseAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1));

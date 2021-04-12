@@ -23,7 +23,6 @@ public class CheckersLocalGame extends LocalGame {
      * Constructor for the CheckersLocalGame.
      */
     public CheckersLocalGame() {
-        //I am commenting this out
         super();
         super.state = new CheckersGameState();
         //checkersGameState = new CheckersGameState();
@@ -45,7 +44,7 @@ public class CheckersLocalGame extends LocalGame {
      *
      *
      * @param p
-     * 			the player to notify
+     * 		the player to notify
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
@@ -73,8 +72,8 @@ public class CheckersLocalGame extends LocalGame {
      * showing who won the game. If not, return null
      *
      * @return
-     *          a String message showing the winner of the game
-     *          or null
+     *       a String message showing the winner of the game
+     *       or null
      */
     @Override
     protected String checkIfGameOver() {
@@ -92,9 +91,9 @@ public class CheckersLocalGame extends LocalGame {
      * Makes a move on behalf of a player.
      *
      * @param action
-     * 			The move that the player has sent to the game
+     * 	    The move that the player has sent to the game
      * @return
-     * 			Tells whether the move was a legal one.
+     * 		Tells whether the move was a legal one.
      */
     @Override
     protected boolean makeMove(GameAction action) {
@@ -113,7 +112,7 @@ public class CheckersLocalGame extends LocalGame {
             int y = ca.y;
 
             // get player id
-            int playerId = state.getPlayerTurn();
+            //int playerId = state.getPlayerTurn();
 
             if(!state.isPieceSelectedBoolean()){
                 // checks if spot is empty

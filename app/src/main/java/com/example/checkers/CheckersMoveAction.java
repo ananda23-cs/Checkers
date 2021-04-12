@@ -46,7 +46,7 @@ public class CheckersMoveAction extends GameAction {
     } //CheckersMoveAction
 
     // getter methods for variables
-    public int getSelectedRow() {
+    /*public int getSelectedRow() {
         return selectedRow;
     }
     public int getSelectedCol() {
@@ -60,5 +60,5 @@ public class CheckersMoveAction extends GameAction {
     }
     public CheckersPiece getCheckersPiece() {
         return checkersPiece;
-    }
+    } */
 }

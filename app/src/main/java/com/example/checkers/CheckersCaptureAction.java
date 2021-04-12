@@ -35,7 +35,7 @@ public class CheckersCaptureAction extends GameAction {
     } //CheckersCaptureAction
 
     // getter methods for coordinates
-    public int getXDire() {
+    /*public int getXDire() {
         return XDire;
     }
     public int getYDire() {
@@ -43,5 +43,5 @@ public class CheckersCaptureAction extends GameAction {
     }
     public CheckersPiece getCheckersPiece() {
         return checkersPiece;
-    }
+    } */
 }

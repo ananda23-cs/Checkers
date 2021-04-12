@@ -29,10 +29,10 @@ public class CheckersCancelMoveAction extends GameAction {
     } //CheckersCancelMoveAction
 
     // getter method for variables
-    public int getSelectedRow() {
+    /*public int getSelectedRow() {
         return selectedRow;
     }
     public int getSelectedCol() {
         return selectedCol;
-    }
+    }*/
 }

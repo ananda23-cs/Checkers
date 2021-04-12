@@ -34,8 +34,10 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     /**
      * constructor CheckersHumanPlayer
      *
-     * @param name          the name of the player
-     * @param activity_main the layout ID of the game
+     * @param name
+     *      the name of the player
+     * @param activity_main
+     *      the layout ID of the game
      */
     public CheckersHumanPlayer(String name, int activity_main) {
         super(name);
@@ -52,7 +54,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
      * Called when the player receives a game-state (or other info) from the
      * game.
      *
-     * @param info the message from the game
+     * @param info
+     *      the message from the game
      */
     @Override
     public void receiveInfo(GameInfo info) {

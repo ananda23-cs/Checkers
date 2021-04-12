@@ -33,12 +33,12 @@ public class CheckersGameState extends GameState {
      *
      */
     public CheckersGameState(){
+        // initializes 12 pieces to each player
         playerTurn = 0;
-
         p1NumPieces = 12;
         p2NumPieces = 12;
 
-        // initializes 12 pieces to player 1 and puts them in their starting coordinates
+        // initializes pieces to player 1 and puts them in their starting coordinates
         p1Pieces = new CheckersPiece[12];
         p1Pieces[0] = new CheckersPiece(0,0,1);
         p1Pieces[1] = new CheckersPiece(2,0,1);
@@ -53,7 +53,7 @@ public class CheckersGameState extends GameState {
         p1Pieces[10] = new CheckersPiece(2,2,1);
         p1Pieces[11] = new CheckersPiece(0,2,1);
 
-        // initializes 12 pieces to player 2 and puts them in their starting coordinates
+        // initializes pieces to player 2 and puts them in their starting coordinates
         p2Pieces = new CheckersPiece[12];
         p2Pieces[0] = new CheckersPiece(1,5,2);
         p2Pieces[1] = new CheckersPiece(3,5,2);
