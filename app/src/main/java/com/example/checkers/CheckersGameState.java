@@ -146,9 +146,6 @@ public class CheckersGameState extends GameState {
         p1Pieces = p2;
     }
 */
-    public int getPlayerTurn() {
-        return playerTurn;
-    }
 
     public void setPlayerTurn(int playerTurn) {
         if(this.playerTurn == 0) {
