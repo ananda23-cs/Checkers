@@ -44,7 +44,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         if(info instanceof CheckersGameState) {
             current = new CheckersGameState((CheckersGameState) info);
             if(current.getPlayerTurn() == playerNum) {
-                Random r = new Random();
+                //Random r = new Random();
 
                 //chooses the index of a computer player's piece;
                 int pieceIdx = (int) (Math.random() * 12);
@@ -54,10 +54,10 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                 int xdirection = directions[(int) (Math.random() * 2)];
                 int ydirection = directions[(int) (Math.random() * 2)];
 
-                int action = 1 + r.nextInt(100);
+                //int action = 1 + r.nextInt(100);
                 //CheckersPiece piece, int xDir,int yDir,int id
                 if (playerNum == 0) {
-                    if (action < 51) {
+                    if (current.canMove(current.p1Pieces[pieceIdx],xdirection,ydirection,playerNum)) {
                         //invalid = false;
                         game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection, current.p1Pieces[pieceIdx]));
                     } else {
@@ -66,7 +66,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                     }
 
                 } else if (playerNum == 1) {
-                    if (action < 51) {
+                    if (current.canMove(current.p2Pieces[pieceIdx],xdirection,ydirection,playerNum)) {
                         //invalid = false;
                         game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection, current.p2Pieces[pieceIdx]));
                     } else {

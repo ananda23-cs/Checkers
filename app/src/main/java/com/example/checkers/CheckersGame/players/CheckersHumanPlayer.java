@@ -31,6 +31,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     private Button cancelButton;
     private TextView gameInfo;
     private int layoutID;
+    private int checkersGameState;
+
     /**
      * constructor
      *
@@ -60,7 +62,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             flash(Color.RED, 100);
         }
         else if(!(info instanceof CheckersGameState)) return;
-        else{
+        else{;
             ((CheckersGameState) info).setBoard(board);
             gameInfo.setText(((CheckersGameState) info).getMessage());
         }
