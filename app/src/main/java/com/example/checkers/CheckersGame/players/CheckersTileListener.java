@@ -103,11 +103,11 @@ public class CheckersTileListener implements View.OnClickListener {
         }
     } //onClick
 
-    public boolean isClicked() {
+    /*public boolean isClicked() {
         return isClicked;
     }
 
     public void setClicked(boolean clicked) {
         isClicked = clicked;
-    }
+    }*/
 }

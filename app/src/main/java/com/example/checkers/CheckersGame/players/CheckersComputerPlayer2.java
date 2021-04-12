@@ -15,16 +15,14 @@ import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
 
 public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
-    int id;
+    //int id;
     public CheckersComputerPlayer2(String name){
         super(name);
-        int id;
-    }
+        //int id;
+    } //CheckersComputerPlayer2
 
     @Override
     protected void receiveInfo(GameInfo info) {
         if (info instanceof NotYourTurnInfo) return;
-
-    }
-
+    } //receiveInfo
 }

@@ -39,8 +39,10 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     /**
      * constructor CheckersHumanPlayer
      *
-     * @param name          the name of the player
-     * @param activity_main the layout ID of the game
+     * @param name
+     *      the name of the player
+     * @param activity_main
+     *      the layout ID of the game
      */
     public CheckersHumanPlayer(String name, int activity_main) {
         super(name);
@@ -57,7 +59,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
      * Called when the player receives a game-state (or other info) from the
      * game.
      *
-     * @param info the message from the game
+     * @param info
+     *      the message from the game
      */
     @Override
     public void receiveInfo(GameInfo info) {
@@ -220,6 +223,9 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     @Override
     public void onClick(View button) {
+        if(button instanceof Button){
+            game.sendAction(new CheckersCancelMoveAction(this,4,4));
+        }
         if (button instanceof ImageButton) {
             for (int x = 0; x < 8; x++) {
                 for (int y = 0; y < 8; y++) {

@@ -6,19 +6,18 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers.CheckersGame.infoMessage;
+package com.example.checkers;
 
 import android.util.Log;
 import android.widget.ImageButton;
 
-import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 
 public class CheckersGameState extends GameState {
 
     // instance variables
-    public CheckersPiece[] p1Pieces;
-    public CheckersPiece[] p2Pieces;
+    public CheckersPiece[] p1Pieces; // holds player 1's pieces
+    public CheckersPiece[] p2Pieces; // holds player 2's pieces
     private int p1NumPieces;
     private int p2NumPieces;
     private boolean pieceSelectedBoolean; // determines if pieces has been selected
@@ -34,13 +33,16 @@ public class CheckersGameState extends GameState {
      *
      */
     public CheckersGameState(){
+        // initializes 12 pieces to each player
         playerTurn = 0;
 
         p1NumPieces = 12;
         p2NumPieces = 12;
 
-        // initializes 12 pieces to player 1 and puts them in their starting coordinates
+        // initializes pieces to player 1 and puts them in their starting coordinates
         p1Pieces = new CheckersPiece[12];
+
+
         p1Pieces[0] = new CheckersPiece(0,0,1);
         p1Pieces[1] = new CheckersPiece(2,0,1);
         p1Pieces[2] = new CheckersPiece(4,0,1);
@@ -54,7 +56,7 @@ public class CheckersGameState extends GameState {
         p1Pieces[10] = new CheckersPiece(2,2,1);
         p1Pieces[11] = new CheckersPiece(0,2,1);
 
-        // initializes 12 pieces to player 2 and puts them in their starting coordinates
+        // initializes pieces to player 2 and puts them in their starting coordinates
         p2Pieces = new CheckersPiece[12];
         p2Pieces[0] = new CheckersPiece(1,5,2);
         p2Pieces[1] = new CheckersPiece(3,5,2);
@@ -94,10 +96,13 @@ public class CheckersGameState extends GameState {
         this.message = original.message;
         this.pieceSelectedBoolean = original.pieceSelectedBoolean;
         this.pieceSelectedPiece = new CheckersPiece(original.pieceSelectedPiece);
+
     } //CheckersGameState
 
-
-    // getter methods for players pieces
+    /**
+     * getter methods for players pieces
+     *
+     */
     public int getP1NumPieces()
     {
         return p1NumPieces;
@@ -110,12 +115,37 @@ public class CheckersGameState extends GameState {
         return playerTurn;
     }
 
-    // setter methods players pieces
+    /**
+     * setter methods for players pieces
+     *
+     */
     public void setP1NumPieces(int p1)
     {
         p1NumPieces = p1;
     }
     public void setP2NumPieces(int p2) { p2NumPieces = p2; }
+
+    /*
+    public CheckersPiece[] getP1Pieces()
+    {
+        return p1Pieces;
+    }
+
+    public CheckersPiece[] getP2Pieces()
+    {
+        return p2Pieces;
+        }
+
+    public void setP1Pieces(CheckersPiece[] p1)
+    {
+        p1Pieces = p1;
+    }
+
+    public void setP2Pieces(CheckersPiece[] p2)
+    {
+        p1Pieces = p2;
+    }
+*/
 
     public void setPlayerTurn(int playerTurn) {
         this.playerTurn = playerTurn;
@@ -220,6 +250,7 @@ public class CheckersGameState extends GameState {
         }
 
         return valid;
+
     } //inBounds
 
     /**
@@ -258,6 +289,7 @@ public class CheckersGameState extends GameState {
         if(id == 1 && yDir>0 && !piece.getKing()){
             return false;
         }
+
 
         //runs through all the enemy pieces
         for(CheckersPiece piece1 : enemyPieces ){
@@ -331,6 +363,7 @@ public class CheckersGameState extends GameState {
             }
         }
         return returnValue;
+
     } //hasEnemyPieces
 
     /**
@@ -355,7 +388,6 @@ public class CheckersGameState extends GameState {
         }
         return null;
     } //findPiece
-
 
     /**
      * method canMove
@@ -446,7 +478,7 @@ public class CheckersGameState extends GameState {
                 else {
                     Log.e("tag","true");
                     piece.setCoordinates(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir);
-                    setPlayerTurn(5);
+                    setPlayerTurn(1-playerTurn);
                     //will turn to player 1's pieces king if the piece reaches the other side of the board
                     if(id == 0){
                         //playerTurn = 1;
@@ -480,7 +512,6 @@ public class CheckersGameState extends GameState {
 
     } //movePiece
 
-
     /**
      * method inRange
      * checks if player is in range
@@ -499,6 +530,7 @@ public class CheckersGameState extends GameState {
         else{
             return false;
         }
+
     } //inRange
 
     /**
@@ -558,7 +590,7 @@ public class CheckersGameState extends GameState {
     public void setPieceSelectedPieceAndPieceSelectedBoolean(){
         pieceSelectedPiece = null;
         pieceSelectedBoolean = false;
-    } //setPieceSelectedPieceAndPieceSelectedBoolean
+    } //getMessage
 
     /**
      * method move
@@ -590,14 +622,14 @@ public class CheckersGameState extends GameState {
         setPlayerTurn(1-playerTurn);
 
     } //move
+
     /**
      * method setImageBoard
      * sets the image board
      */
-
     public void setImageBoard(ImageButton[][] board){
         this.board = board;
-    } //setImageBoard
+    }
 
     /**
      * method CaptureEnemyPiece
@@ -612,60 +644,32 @@ public class CheckersGameState extends GameState {
      *      not valid y location
      */
     public boolean CaptureEnemyPiece(int xLocation,int yLocation,int nVX,int nVY){
-        //boolean returnValue = false;
+        boolean returnValue = false;
         if(playerTurn == 0) {
-            if(nVY<1 && !(pieceSelectedPiece.getKing())){
-                return false;
-            }
             for (CheckersPiece piece : p2Pieces) {
                 if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
                         && piece.getAlive()) {
 
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
-                    if(inRange(xDist,yDist)){
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
-                            if(yFinal == 7){
-                                pieceSelectedPiece.setKing(true);
-                            }
-                            setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
-                            setPlayerTurn(1);
+
                             p2NumPieces = p2NumPieces-1;
-                            return true;
-                        }
-                    }
 
-                }
-
-            }
-        }
-
-        if(playerTurn == 1) {
-            if(nVY>0 && !(pieceSelectedPiece.getKing())){
-                return false;
-            }
-            for (CheckersPiece piece : p1Pieces) {
-                if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
-                    && piece.getAlive()) {
-
-                    int xDist = xLocation - nVX;
-                    int yDist = yLocation - nVY;
-                    if(inRange(xDist,yDist)){
-                        int xFinal = nVX + xDist*2;
-                        int yFinal = nVY + yDist*2;
-                        if(isEmpty(xFinal,yFinal)){
-                            piece.setAlive(false);
-                            pieceSelectedPiece.setCoordinates(xFinal,yFinal);
-                            if(yFinal == 0){
-                                pieceSelectedPiece.setKing(true);
+                            if(playerTurn == 0){
+                                //playerTurn = 1;
+                                if(pieceSelectedPiece.getYcoordinate() == 7){
+                                    pieceSelectedPiece.setKing(true);
+                                }
                             }
-                            setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
-                            setPlayerTurn(0);
-                            p1NumPieces = p1NumPieces-1;
+                            setPlayerTurn(1);
+                            setPieceSelectedPieceAndPieceSelectedBoolean();
+
                             return true;
                         }
                     }
@@ -676,6 +680,63 @@ public class CheckersGameState extends GameState {
         }
 
         return false;
+
+
     } //CaptureEnemyPiece
+
+    /**
+     * method CaptureEnemyPieceCP
+     * checks if computer can capture the enemies piece
+     * @param xLocation
+     *      x location of piece
+     * @param yLocation
+     *      y location of piece
+     * @param nVX
+     *      not valid x location
+     * @param nVY
+     *      not valid y location
+     */
+    public boolean CaptureEnemyPieceCP(int xLocation,int yLocation,int nVX,int nVY){
+        boolean returnValue = false;
+
+        Log.e("cp","nVX = "+ nVX + "nYy = "+nVY );
+        //Lo
+        if(playerTurn == 1 ){
+            for (CheckersPiece piece : p1Pieces) {
+                if(piece.equals(p2Pieces[0])) {
+                    Log.e("cp34r33", "nVX = " + nVX + "nYy = " + nVY + "\n" + piece + "\n" + "xLoc = " + xLocation + "yLoc = " + yLocation);
+                }
+                if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
+                && piece.getAlive()) {
+                    Log.e("cp343","nVX = "+ nVX + "nYy = "+nVY );
+                    int xDist = xLocation - nVX;
+                    int yDist = yLocation - nVY;
+                    if(inRange(xDist,yDist) ){//&& inBounds(nVX + xDist*2,yDist*2)){
+                        int xFinal = nVX + xDist*2;
+                        int yFinal = nVY + yDist*2;
+                        if(isEmpty(xFinal,yFinal)){
+                            piece.setAlive(false);
+                            pieceSelectedPiece.setCoordinates(xFinal,yFinal);
+
+
+                            p1NumPieces = p1NumPieces-1;
+                            if(playerTurn == 1){
+                                //playerTurn = 1;
+                                if(pieceSelectedPiece.getYcoordinate() == 0){
+                                    pieceSelectedPiece.setKing(true);
+                                }
+                            }
+                            setPlayerTurn(0);
+                            setPieceSelectedPieceAndPieceSelectedBoolean();
+
+                            return true;
+                        }
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
 
 }

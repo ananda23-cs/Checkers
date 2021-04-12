@@ -1,23 +1,22 @@
 /**
  * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
- * Move Action class - stores move actions
+ * Capture action class - capture opponents pieces
  *
  * CS301A
  * @version 04/11/2021
  */
-package com.example.checkers.CheckersGame.Actions;
+package com.example.checkers;
 
-import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
-public class CheckersMoveAction2 extends GameAction {
-    // variables for row and columns and pieces
+public class CheckersCaptureAction extends GameAction {
+    // variables for coordinates and pieces
     private int XDire,YDire;
-    private CheckersPiece piece;
+    private CheckersPiece checkersPiece;
 
     /**
-     * constructor for CheckersMoveAction2
+     * constructor for CheckersCancelMoveAction
      *
      * @param player
      *      the player who created the action
@@ -25,24 +24,24 @@ public class CheckersMoveAction2 extends GameAction {
      *      x direction of piece
      * @param YDir
      *      y direction of piece
-     * @param piece
-     *      players selected piece
+     * @param checkersPiece
+     *      checkers piece
      */
-    public CheckersMoveAction2(GamePlayer player,int XDir,int YDir, CheckersPiece piece) {
+    public CheckersCaptureAction(GamePlayer player, int XDir, int YDir,CheckersPiece checkersPiece) {
         super(player);
         this.XDire = XDir;
         this.YDire = YDir;
-        this.piece = piece;
-    } //CheckersMoveAction2
+        this.checkersPiece = checkersPiece;
+    } //CheckersCaptureAction
 
-    /// getter methods for variables
+    // getter methods for coordinates
     /*public int getXDire() {
         return XDire;
     }
     public int getYDire() {
         return YDire;
-    }*/
-    public CheckersPiece getPiece() {
-        return piece;
     }
+    public CheckersPiece getCheckersPiece() {
+        return checkersPiece;
+    } */
 }

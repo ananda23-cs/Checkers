@@ -6,10 +6,9 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers.CheckersGame.infoMessage;
+package com.example.checkers;
 
 public class CheckersPiece {
-    // variables for coordinates, king, and is alive
     private int xCord;
     private int yCord;
     private boolean isKing;
@@ -57,9 +56,12 @@ public class CheckersPiece {
         returnValue = returnValue + "\nIs Alive = " + this.isAlive;
         returnValue = returnValue + "\nIs King = " + this.isKing;
         return returnValue;
-    } //toString
+    }
 
-    // getter methods for coordinates, king, and is alive
+    /**
+     * getter and setter methods for coordinates, king, and is alive
+     *
+     */
     public int getXcoordinate(){
         return this.xCord;
     }
@@ -70,25 +72,14 @@ public class CheckersPiece {
         return this.isAlive;
     }
     public boolean getKing() { return isKing; }
-
-
-    /**
-     * method setCoordinates
-     * @param xCord
-     *      pieces x coordinates
-     *  @param yCord
-     *      pieces y coordinates
-     */
     public void setCoordinates(int xCord,int yCord) {
         this.xCord = xCord;
         this.yCord = yCord;
-    } //setCoordinates
+    }
 
-    // getter methods for coordinates, king, and is alive
     public void setAlive(boolean isAlive) {
         this.isAlive = isAlive;
     }
-
     public void setKing(boolean king) {
         this.isKing = king;
     }

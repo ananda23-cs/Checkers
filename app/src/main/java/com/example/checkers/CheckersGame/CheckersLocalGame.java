@@ -7,11 +7,10 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers.CheckersGame;
+package com.example.checkers;
 
-import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
-import com.example.checkers.CheckersGame.Actions.ChooseAction;
-import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
+import android.util.Log;
+
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
@@ -45,7 +44,7 @@ public class CheckersLocalGame extends LocalGame {
      *
      *
      * @param p
-     * 			the player to notify
+     * 		the player to notify
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
@@ -73,8 +72,8 @@ public class CheckersLocalGame extends LocalGame {
      * showing who won the game. If not, return null
      *
      * @return
-     *          a String message showing the winner of the game
-     *          or null
+     *       a String message showing the winner of the game
+     *       or null
      */
     @Override
     protected String checkIfGameOver() {
@@ -92,21 +91,16 @@ public class CheckersLocalGame extends LocalGame {
      * Makes a move on behalf of a player.
      *
      * @param action
-     * 			The move that the player has sent to the game
+     * 	    The move that the player has sent to the game
      * @return
-     * 			Tells whether the move was a legal one.
+     * 		Tells whether the move was a legal one.
      */
     @Override
     protected boolean makeMove(GameAction action) {
         if(action instanceof CheckersCancelMoveAction){
-            CheckersCancelMoveAction cancelMoveAction = (CheckersCancelMoveAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
-            int cancelRow = cancelMoveAction.getSelectedRow();
-            int cancelCol = cancelMoveAction.getSelectedCol();
-            //deselects the piece to undo an action
             state.setPieceSelectedPieceAndPieceSelectedBoolean();
-            state.setMessage("The piece at " + cancelRow + ", " + cancelCol +
-                    " has been unselected.\nPlease select another piece.");
+            state.setMessage("Choose another piece" );
             return true;
         }
         else if(action instanceof ChooseAction){
@@ -114,11 +108,11 @@ public class CheckersLocalGame extends LocalGame {
             ChooseAction ca = (ChooseAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
 
-            int x = ca.getX();
-            int y = ca.getY();
+            int x = ca.x;
+            int y = ca.y;
 
             // get player id
-            int playerId = state.getPlayerTurn();
+            //int playerId = state.getPlayerTurn();
 
             if(!state.isPieceSelectedBoolean()){
                 // checks if spot is empty
@@ -142,13 +136,17 @@ public class CheckersLocalGame extends LocalGame {
             else{
                 int xDire=x-state.getPieceSelectedPiece().getXcoordinate();
                 int yDire=y-state.getPieceSelectedPiece().getYcoordinate();
-                    if(state.hasEnemyPieces(x,y)){
-                        if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
-                            return true;
-                        }
+                if(state.hasEnemyPieces(x,y)){
+                    if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+                        return true;
                     }
+                }
+                if(state.hasEnemyPieces(x,y)){
+                    if(state.CaptureEnemyPieceCP(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+                        return true;
+                    }
+                }
                 if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
-
                     state.move(xDire,yDire);
                     state.setMessage("This is a valid move." );
                     return true;
@@ -159,4 +157,3 @@ public class CheckersLocalGame extends LocalGame {
     } //makeMove
 
 }
-
