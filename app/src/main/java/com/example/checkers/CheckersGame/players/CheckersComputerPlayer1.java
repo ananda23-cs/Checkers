@@ -64,7 +64,6 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                         game.sendAction(new CheckersCaptureAction(CheckersComputerPlayer1.this, xdirection, ydirection, current.p1Pieces[pieceIdx]));
                         //invalid = false;
                     }
-                    return;
 
                 } else if (playerNum == 1) {
                     if (action < 51) {
@@ -74,7 +73,6 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                         game.sendAction(new CheckersCaptureAction(CheckersComputerPlayer1.this, xdirection, ydirection, current.p2Pieces[pieceIdx]));
                         //invalid = false;
                     }
-                    return;
                 }
             }
         }
