@@ -545,6 +545,7 @@ public class CheckersGameState extends GameState {
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
                             setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
                             setPlayerTurn(54);
+                            p2NumPieces = p2NumPieces-1;
                             return true;
                         }
                     }

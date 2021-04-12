@@ -111,7 +111,7 @@ public class CheckersLocalGame extends LocalGame {
 
                 if(state.getPlayerTurn() == 0){
                     if(state.hasEnemyPieces(x,y)){
-                        if(state.capturepiece(state.getPieceSelectedPiece(),0,state.p2Pieces,xDire,yDire)){
+                        if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
                             return true;
                         }
                     }

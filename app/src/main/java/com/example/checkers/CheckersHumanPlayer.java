@@ -58,7 +58,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         }
         else if(!(info instanceof CheckersGameState)) return;
         else{
-
+            ((CheckersGameState) info).setImageBoard(board);
             Log.e("human","p2piece"+((CheckersGameState) info).p2Pieces[1]);
 
             //checkersGameState = (CheckersGameState) info;
