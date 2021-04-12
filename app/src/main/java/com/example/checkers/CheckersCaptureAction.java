@@ -20,13 +20,19 @@ public class CheckersCaptureAction extends GameAction {
      *
      * @param player
      *      the player who created the action
+     * @param XDir
+     *      x direction of piece
+     * @param YDir
+     *      y direction of piece
+     * @param checkersPiece
+     *      checkers piece
      */
     public CheckersCaptureAction(GamePlayer player, int XDir, int YDir,CheckersPiece checkersPiece) {
         super(player);
         this.XDire = XDir;
         this.YDire = YDir;
         this.checkersPiece = checkersPiece;
-    }
+    } //CheckersCaptureAction
 
     // getter methods for coordinates
     public int getXDire() {

@@ -152,12 +152,9 @@ public class CheckersLocalGame extends LocalGame {
                     state.setMessage("This is a valid move." );
                     return true;
                 }
-
-
             }
         }
         return false;
     } //makeMove
 
 }
-
