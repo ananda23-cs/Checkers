@@ -473,6 +473,9 @@ public class CheckersGameState extends GameState {
         return pieceSelectedPiece;
     }
 
+    /**
+     * added the method to prevent crashing when the human player selects another piece.
+     */
     public void setPieceSelectedPieceAndPieceSelectedBoolean(){
         pieceSelectedPiece = null;
         pieceSelectedBoolean = false;

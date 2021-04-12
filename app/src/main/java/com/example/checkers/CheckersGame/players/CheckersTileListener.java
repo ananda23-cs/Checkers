@@ -43,7 +43,9 @@ public class CheckersTileListener implements View.OnClickListener {
         isClicked = false;
     }
 
-    //this programs what actually happens when a button is clicked
+    /**
+     * this programs what actually happens when a button is clicked
+     */
     @Override
     public void onClick(View v) {
         //this if statement is to choose a piece to move

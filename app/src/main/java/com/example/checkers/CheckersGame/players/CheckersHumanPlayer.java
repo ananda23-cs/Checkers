@@ -31,7 +31,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     private Button cancelButton;
     private TextView gameInfo;
     private int layoutID;
-    private int checkersGameState;
+    //private int checkersGameState;
 
     /**
      * constructor
@@ -62,7 +62,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             flash(Color.RED, 100);
         }
         else if(!(info instanceof CheckersGameState)) return;
-        else{;
+        else{
             ((CheckersGameState) info).setBoard(board);
             gameInfo.setText(((CheckersGameState) info).getMessage());
         }
@@ -219,6 +219,10 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         }
     }
 
+    /**
+     * sets up onClickListener for the cancel button
+     * @param button the button pressed
+     */
     @Override
     public void onClick(View button) {
         if(button instanceof Button){

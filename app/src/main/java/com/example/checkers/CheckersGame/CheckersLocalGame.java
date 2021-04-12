@@ -114,6 +114,7 @@ public class CheckersLocalGame extends LocalGame {
             CheckersGameState state = (CheckersGameState) super.state;
             int cancelRow = cancelMoveAction.getSelectedRow();
             int cancelCol = cancelMoveAction.getSelectedCol();
+            //deselects the piece to undo an action
             state.setPieceSelectedPieceAndPieceSelectedBoolean();
             state.setMessage("The piece at " + cancelRow + ", " + cancelCol +
                                 " has been unselected.\nPlease select another piece.");
@@ -123,13 +124,16 @@ public class CheckersLocalGame extends LocalGame {
             Log.e("Make Move", "this happened");
             CheckersMoveAction2 moveAction = (CheckersMoveAction2) action;
             CheckersGameState state = (CheckersGameState) super.state;
+            //get necessary parameters
             int playerId = state.getPlayerTurn();
             int xDir = moveAction.getXDire();
             int yDir = moveAction.getYDire();
             CheckersPiece piece = moveAction.getPiece();
+            //sees whether the player can move
             if(state.canMove(piece,xDir,yDir,state.getPlayerTurn())) {
                 state.movePiece(piece, xDir, yDir, playerId);
                 state.setPieceSelectedPieceAndPieceSelectedBoolean();
+                //lets the next player have his/her turn
                 if (state.getPlayerTurn() == 0) {
                     state.setMessage("Player 1's move was valid.\nPlayer 2's turn.");
                 } else {

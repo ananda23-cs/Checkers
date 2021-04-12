@@ -15,6 +15,13 @@ public class CheckersPiece {
     private boolean isAlive;
     private int owner; // player num or owner
 
+    /**
+     * creates a new instance of a checker piece
+     *
+     * @param xCord x-coordinate of a piece
+     * @param yCord y-coordinate of a piece
+     * @param owner the player that owns the piece
+     */
     public CheckersPiece(int xCord, int yCord, int owner) {
         this.xCord = xCord;
         this.yCord = yCord;
@@ -23,6 +30,10 @@ public class CheckersPiece {
         this.owner = owner;
     }
 
+    /**
+     * deep copy constructor of the piece class
+     * @param p the saved Checker piece
+     */
     public CheckersPiece(CheckersPiece p){
         this.xCord = p.xCord;
         this.yCord = p.yCord;
@@ -40,7 +51,9 @@ public class CheckersPiece {
         return returnValue;
     }
 
-    // getter methods for coordinates, king, and is alive
+    /**
+     * getter and setter methods for coordinates, king, and is alive
+     */
     public int getXcoordinate(){
         return this.xCord;
     }
@@ -67,9 +80,5 @@ public class CheckersPiece {
 
     public void setKing(boolean king) {
         this.isKing = king;
-    }
-
-    public int getOwner() {
-        return owner;
     }
 }
