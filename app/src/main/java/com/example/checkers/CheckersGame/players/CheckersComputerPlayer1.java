@@ -45,33 +45,35 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             current = new CheckersGameState((CheckersGameState) info);
             if(current.getPlayerTurn() == playerNum) {
                 //Random r = new Random();
+                boolean invalid = true;
+                while(invalid) {
+                    //chooses the index of a computer player's piece;
+                    int pieceIdx = (int) (Math.random() * 12);
+                    int[] directions = new int[2];
+                    directions[0] = -1;
+                    directions[1] = 1;
+                    int xdirection = directions[(int) (Math.random() * 2)];
+                    int ydirection = directions[(int) (Math.random() * 2)];
 
-                //chooses the index of a computer player's piece;
-                int pieceIdx = (int) (Math.random() * 12);
-                int[] directions = new int[2];
-                directions[0] = -1;
-                directions[1] = 1;
-                int xdirection = directions[(int) (Math.random() * 2)];
-                int ydirection = directions[(int) (Math.random() * 2)];
+                    //int action = 1 + r.nextInt(100);
+                    //CheckersPiece piece, int xDir,int yDir,int id
+                    if (playerNum == 0) {
+                        if (current.canMove(current.p1Pieces[pieceIdx], xdirection, ydirection, playerNum)) {
+                            //invalid = false;
+                            game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection, current.p1Pieces[pieceIdx]));
+                        } else {
+                            game.sendAction(new CheckersCaptureAction(CheckersComputerPlayer1.this, xdirection, ydirection, current.p1Pieces[pieceIdx]));
+                            //invalid = false;
+                        }
 
-                //int action = 1 + r.nextInt(100);
-                //CheckersPiece piece, int xDir,int yDir,int id
-                if (playerNum == 0) {
-                    if (current.canMove(current.p1Pieces[pieceIdx],xdirection,ydirection,playerNum)) {
-                        //invalid = false;
-                        game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection, current.p1Pieces[pieceIdx]));
-                    } else {
-                        game.sendAction(new CheckersCaptureAction(CheckersComputerPlayer1.this, xdirection, ydirection, current.p1Pieces[pieceIdx]));
-                        //invalid = false;
-                    }
-
-                } else if (playerNum == 1) {
-                    if (current.canMove(current.p2Pieces[pieceIdx],xdirection,ydirection,playerNum)) {
-                        //invalid = false;
-                        game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection, current.p2Pieces[pieceIdx]));
-                    } else {
-                        game.sendAction(new CheckersCaptureAction(CheckersComputerPlayer1.this, xdirection, ydirection, current.p2Pieces[pieceIdx]));
-                        //invalid = false;
+                    } else if (playerNum == 1) {
+                        if (current.canMove(current.p2Pieces[pieceIdx], xdirection, ydirection, playerNum)) {
+                            //invalid = false;
+                            game.sendAction(new CheckersMoveAction2(CheckersComputerPlayer1.this, xdirection, ydirection, current.p2Pieces[pieceIdx]));
+                        } else {
+                            game.sendAction(new CheckersCaptureAction(CheckersComputerPlayer1.this, xdirection, ydirection, current.p2Pieces[pieceIdx]));
+                            //invalid = false;
+                        }
                     }
                 }
             }
