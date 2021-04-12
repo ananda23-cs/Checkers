@@ -472,4 +472,9 @@ public class CheckersGameState extends GameState {
     public CheckersPiece getPieceSelectedPiece() {
         return pieceSelectedPiece;
     }
+
+    public void setPieceSelectedPieceAndPieceSelectedBoolean(){
+        pieceSelectedPiece = null;
+        pieceSelectedBoolean = false;
+    }
 }

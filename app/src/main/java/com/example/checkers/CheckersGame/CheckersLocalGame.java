@@ -114,7 +114,7 @@ public class CheckersLocalGame extends LocalGame {
             CheckersGameState state = (CheckersGameState) super.state;
             int cancelRow = cancelMoveAction.getSelectedRow();
             int cancelCol = cancelMoveAction.getSelectedCol();
-            state.setPieceSelectedPieceAndPieceSelectedBoolean(cancelRow,cancelCol);
+            state.setPieceSelectedPieceAndPieceSelectedBoolean();
             state.setMessage("The piece at " + cancelRow + ", " + cancelCol +
                                 " has been unselected.\nPlease select another piece.");
             return true;
@@ -129,8 +129,7 @@ public class CheckersLocalGame extends LocalGame {
             CheckersPiece piece = moveAction.getPiece();
             if(state.canMove(piece,xDir,yDir,state.getPlayerTurn())) {
                 state.movePiece(piece, xDir, yDir, playerId);
-                state.setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(),
-                        piece.getYcoordinate());
+                state.setPieceSelectedPieceAndPieceSelectedBoolean();
                 if (state.getPlayerTurn() == 0) {
                     state.setMessage("Player 1's move was valid.\nPlayer 2's turn.");
                 } else {
@@ -166,6 +165,6 @@ public class CheckersLocalGame extends LocalGame {
             }
             else{ return false; }
         }
-        return false;
+        else{return false;}
     }
 }
