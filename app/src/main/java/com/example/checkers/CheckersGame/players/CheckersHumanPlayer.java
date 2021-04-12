@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGame.Actions.ChooseAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
@@ -224,14 +225,14 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     public void onClick(View button) {
         if(button instanceof Button){
-            game.sendAction(new CheckersCancelMoveAction(this,4,4));
+            game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this));
         }
         if (button instanceof ImageButton) {
             for (int x = 0; x < 8; x++) {
                 for (int y = 0; y < 8; y++) {
                     if (board[x][y].equals(button)) {
                         Log.e("onClick: ", "x = " + x + "y = " + y);
-                        game.sendAction(new ChooseAction(this, x, y));
+                        game.sendAction(new ChooseAction(CheckersHumanPlayer.this, x, y));
                     }
                 }
             }

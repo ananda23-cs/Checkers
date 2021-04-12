@@ -7,10 +7,13 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGame;
 
 import android.util.Log;
 
+import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
+import com.example.checkers.CheckersGame.Actions.ChooseAction;
+import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
@@ -100,7 +103,7 @@ public class CheckersLocalGame extends LocalGame {
         if(action instanceof CheckersCancelMoveAction){
             CheckersGameState state = (CheckersGameState) super.state;
             state.setPieceSelectedPieceAndPieceSelectedBoolean();
-            state.setMessage("Choose another piece" );
+            state.setMessage("Choose another piece.");
             return true;
         }
         else if(action instanceof ChooseAction){
@@ -108,8 +111,8 @@ public class CheckersLocalGame extends LocalGame {
             ChooseAction ca = (ChooseAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
 
-            int x = ca.x;
-            int y = ca.y;
+            int x = ca.getXLoc();
+            int y = ca.getYLoc();
 
             // get player id
             //int playerId = state.getPlayerTurn();

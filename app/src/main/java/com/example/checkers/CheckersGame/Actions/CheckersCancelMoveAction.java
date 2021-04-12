@@ -13,8 +13,8 @@ import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersCancelMoveAction extends GameAction {
     // variables for row and column
-    private int selectedRow;
-    private int selectedCol;
+    //private int selectedRow;
+    //private int selectedCol;
 
     /**
      * constructor for CheckersCancelMoveAction
@@ -22,10 +22,10 @@ public class CheckersCancelMoveAction extends GameAction {
      * @param player
      *      the player who created the action
      */
-    public CheckersCancelMoveAction(GamePlayer player, int selectedRow, int selectedCol) {
+    public CheckersCancelMoveAction(GamePlayer player) {
         super(player);
-        this.selectedRow = selectedRow;
-        this.selectedCol = selectedCol;
+        //this.selectedRow = selectedRow;
+        //this.selectedCol = selectedCol;
     } //CheckersCancelMoveAction
 
     // getter method for variables

@@ -6,13 +6,13 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGame.Actions;
 
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class ChooseAction extends GameAction {
-    int x,y;
+    private int x,y;
 
     /**
      * constructor for ChooseAction
@@ -29,4 +29,12 @@ public class ChooseAction extends GameAction {
         this.x = x;
         this.y = y;
     } //ChooseAction
+
+    public int getXLoc() {
+        return x;
+    }
+
+    public int getYLoc() {
+        return y;
+    }
 }
