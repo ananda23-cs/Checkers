@@ -40,6 +40,9 @@ public class CheckersPiece {
      *      the saved Checker piece
      */
     public CheckersPiece(CheckersPiece p){
+        if(p == null){
+            return;
+        }
         this.xCord = p.xCord;
         this.yCord = p.yCord;
         this.isAlive = p.isAlive;

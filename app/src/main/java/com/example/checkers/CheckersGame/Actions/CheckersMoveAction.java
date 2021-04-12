@@ -6,14 +6,13 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers.CheckersGame.Actions;
+package com.example.checkers;
 
-import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersMoveAction extends GameAction {
-    // variables for row and columns and pieces
+    // variables for row and column and pieces
     private int toRow;
     private int toCol;
     private int selectedRow;

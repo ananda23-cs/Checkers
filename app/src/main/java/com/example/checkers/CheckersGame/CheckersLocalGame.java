@@ -7,19 +7,13 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers.CheckersGame;
+package com.example.checkers;
 
 import android.util.Log;
 
-import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
-import com.example.checkers.CheckersGame.Actions.CheckersCaptureAction;
-import com.example.checkers.CheckersGame.Actions.CheckersMoveAction;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
-import com.example.checkers.CheckersGame.Actions.CheckersMoveAction2;
-import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
-import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
 
 public class CheckersLocalGame extends LocalGame {
 
@@ -28,7 +22,7 @@ public class CheckersLocalGame extends LocalGame {
     /**
      * Constructor for the CheckersLocalGame.
      */
-    public CheckersLocalGame(){
+    public CheckersLocalGame() {
         super();
         super.state = new CheckersGameState();
         //checkersGameState = new CheckersGameState();
@@ -38,12 +32,12 @@ public class CheckersLocalGame extends LocalGame {
      * Constructor for the CheckersLocalGame with loaded checkersGameState.
      * @param checkersGameState
      */
-    public CheckersLocalGame(CheckersGameState checkersGameState){
+    public CheckersLocalGame(CheckersGameState checkersGameState) {
         super();
         super.state = new CheckersGameState(checkersGameState);
     } //CheckersLocalGame
 
-   /**
+    /**
      * method sendUpdatedStateTo
      * notifies the players that the state of the game has changed
      * should involve sending a GameInfo object to the player
@@ -54,7 +48,6 @@ public class CheckersLocalGame extends LocalGame {
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
-        //make a copy of the state and send it to the player
         p.sendInfo(new CheckersGameState((CheckersGameState) state));
     } //sendUpdatedStateTo
 
@@ -85,16 +78,11 @@ public class CheckersLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         CheckersGameState state = (CheckersGameState) super.state;
-        if(state.getP1NumPieces() == 0)
-        {
+        if (state.getP1NumPieces() == 0) {
             return "Player 2 won!";
-        }
-        else if(state.getP2NumPieces() == 0)
-        {
+        } else if (state.getP2NumPieces() == 0) {
             return "Player 1 won!";
-        }
-        else
-        {
+        } else {
             return null;
         }
     } //checkIfGameOver
@@ -109,7 +97,6 @@ public class CheckersLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
-        Log.e("Cancel Move", "this happened");
         if(action instanceof CheckersCancelMoveAction){
             CheckersCancelMoveAction cancelMoveAction = (CheckersCancelMoveAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
@@ -118,58 +105,57 @@ public class CheckersLocalGame extends LocalGame {
             //deselects the piece to undo an action
             state.setPieceSelectedPieceAndPieceSelectedBoolean();
             state.setMessage("The piece at " + cancelRow + ", " + cancelCol +
-                                " has been unselected.\nPlease select another piece.");
+                    " has been unselected.\nPlease select another piece.");
             return true;
         }
-        else if (action instanceof CheckersMoveAction2){
-            Log.e("Make Move", "this happened");
-            CheckersMoveAction2 moveAction = (CheckersMoveAction2) action;
+        else if(action instanceof ChooseAction){
+
+            ChooseAction ca = (ChooseAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
-            //get necessary parameters
+
+            int x = ca.x;
+            int y = ca.y;
+
+            // get player id
             int playerId = state.getPlayerTurn();
-            int xDir = moveAction.getXDire();
-            int yDir = moveAction.getYDire();
-            CheckersPiece piece = moveAction.getPiece();
-            //sees whether the player can move
-            if(state.canMove(piece,xDir,yDir,state.getPlayerTurn())) {
-                state.movePiece(piece, xDir, yDir, playerId);
-                state.setPieceSelectedPieceAndPieceSelectedBoolean();
-                //lets the next player have his/her turn
-                if (state.getPlayerTurn() == 0) {
-                    state.setMessage("Player 1's move was valid.\nPlayer 2's turn.");
-                } else {
-                    state.setMessage("Player 2's move was valid.\nPlayer 1's turn");
+
+            if(!state.isPieceSelectedBoolean()){
+                // checks if spot is empty
+                if(state.isEmpty(x,y)){
+                    state.setMessage("This tile is empty. Pick another square");
+                    return false;
                 }
-                state.setPlayerTurn(1 - playerId);
-                return true;
+                else {
+                    // checks if piece belongs to player
+                    if (state.hasEnemyPieces(x,y)) {
+                        state.setMessage("This piece is not yours. Please try again.");
+                    }
+                    // if conditions are true, piece is chosen
+                    else{
+                        state.setMessage("This piece can be moved. Click on the spot where you want to move it." );
+                        state.setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
+                        return true;
+                    }
+                }
             }
             else{
-                state.setMessage("Invalid Move. Try again.");
-                return false;
-            }
+                int xDire=x-state.getPieceSelectedPiece().getXcoordinate();
+                int yDire=y-state.getPieceSelectedPiece().getYcoordinate();
+                    if(state.hasEnemyPieces(x,y)){
+                        if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+                            return true;
+                        }
+                    }
+                if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
 
-        }
-        else if (action instanceof CheckersCaptureAction){
-            CheckersCaptureAction captureAction = (CheckersCaptureAction) action;
-            CheckersGameState state = (CheckersGameState) super.state;
-            int playerId = state.getPlayerTurn();
-            int xDir = captureAction.getXDire();
-            int yDir = captureAction.getYDire();
-            CheckersPiece piece = captureAction.getCheckersPiece();
-            if (canMove(playerId)){
-                if(playerId == 0){
-                    state.capturepiece(piece,playerId,state.p2Pieces,xDir,yDir);
-                    state.setP2NumPieces(state.getP2NumPieces()-1);
+                    state.move(xDire,yDire);
+                    state.setMessage("This is a valid move." );
+                    return true;
                 }
-                else{
-                    state.capturepiece(piece,playerId,state.p1Pieces,xDir,yDir);
-                    state.setP1NumPieces(state.getP1NumPieces()-1);
-                }
-                state.setPlayerTurn(1-playerId);
-                return true;
             }
-            else{ return false; }
         }
-        else{return false;}
+        return false;
     } //makeMove
+
 }
+

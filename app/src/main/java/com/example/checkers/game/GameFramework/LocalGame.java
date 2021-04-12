@@ -20,6 +20,7 @@ import com.example.checkers.game.GameFramework.utilities.Logger;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 /**
  * A class that knows how to play the game. The data in this class represent the
@@ -298,9 +299,12 @@ public abstract class LocalGame implements Game, Tickable {
         // attempt to make the move; if the move was not a legal one,
         // send the player a message to that effect
         if (!makeMove(action)) {
+
+            Log.e("checkandhandleaction","hello ");
             player.sendInfo(new IllegalMoveInfo());
             sendUpdatedStateTo(player);
             return;
+
         }
 
         //Logging the current game phase so we know what it is.
