@@ -44,7 +44,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             return;
 
         }
-
+        sleep(1);
         // loop until a valid move can be made
         for(CheckersPiece piece: ((CheckersGameState) info).p2Pieces) {
             Log.e("xlr15","hello"+((CheckersGameState) info).p1Pieces[10]);
