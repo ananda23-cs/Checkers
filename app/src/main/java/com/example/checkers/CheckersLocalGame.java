@@ -107,7 +107,16 @@ public class CheckersLocalGame extends LocalGame {
 //                }
 //                else {
 //                    return false;
-//                }
+//              }
+
+                if(state.getPlayerTurn() == 0){
+                    if(state.hasEnemyPieces(x,y)){
+                        if(state.capturepiece(state.getPieceSelectedPiece(),0,state.p2Pieces,xDire,yDire)){
+                            return true;
+                        }
+                    }
+                }
+
                 if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
 
                     state.move(xDire,yDire);
