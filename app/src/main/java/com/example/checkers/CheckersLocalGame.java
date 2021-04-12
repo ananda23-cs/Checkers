@@ -19,14 +19,14 @@ public class CheckersLocalGame extends LocalGame {
 
     //CheckersGameState checkersGameState;//I added this
 
-    public CheckersLocalGame(){
+    public CheckersLocalGame() {
         //I am commenting this out
         super();
         super.state = new CheckersGameState();
         //checkersGameState = new CheckersGameState();
     }
 
-    public CheckersLocalGame(CheckersGameState checkersGameState){
+    public CheckersLocalGame(CheckersGameState checkersGameState) {
         super();
         super.state = new CheckersGameState(checkersGameState);
     }
@@ -44,16 +44,11 @@ public class CheckersLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         CheckersGameState state = (CheckersGameState) super.state;
-        if(state.getP1NumPieces() == 0)
-        {
+        if (state.getP1NumPieces() == 0) {
             return "Player 2 wins.";
-        }
-        else if(state.getP2NumPieces() == 0)
-        {
+        } else if (state.getP2NumPieces() == 0) {
             return "Player 1 wins.";
-        }
-        else
-        {
+        } else {
             return null;
         }
 
@@ -61,23 +56,89 @@ public class CheckersLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
-          if(action instanceof CheckersMoveAction2){
-              Log.e("makeMove","before"+((CheckersMoveAction2)action).getPiece());
-              if(((CheckersGameState)super.state).movePiece(((CheckersMoveAction2) action).getPiece(),((CheckersMoveAction2) action).getXDire()
-              ,((CheckersMoveAction2) action).getYDire(),((CheckersGameState) super.state).getPlayerTurn())){
-                  ((CheckersGameState)super.state).setPieceSelectedPieceAndPieceSelectedBoolean();
-                  Log.e("makeMove","after"+((CheckersMoveAction2)action).getPiece());
-                  return true;
-              }
-              else {
-                  return false;
-              }
+        if(action instanceof ChooseAction){
+
+            ChooseAction ca = (ChooseAction) action;
+            CheckersGameState state = (CheckersGameState) super.state;
+
+            int x = ca.x;
+            int y = ca.y;
+
+            // get the 0/1 id of our player
+            int playerId = state.getPlayerTurn();
 
 
-          }
-          else{
-              return false;
-          }
+            if(!state.isPieceSelectedBoolean()){
+                //this checks if they chose an empty spot
+
+                if(state.isEmpty(x,y)){
+                    state.setMessage("This tile is empty. Pick another square");
+                    return false;
+                }
+                else {
+                    //this checks if the piece belongs to the player
+                    if (state.hasEnemyPieces(x,y)) {
+                        state.setMessage("This piece is not yours. Please try again.");
+                    }
+
+                    //if all the conditions are right the piece is chosen
+                    else{
+                        state.setMessage("This piece can be moved. Click on the spot where you want to move it." );
+                        state.setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
+                        return true;
+
+                    }
+
+                }
+
+            }
+            else{
+                int xDire=x-state.getPieceSelectedPiece().getXcoordinate();
+                int yDire=y-state.getPieceSelectedPiece().getYcoordinate();
+//                if(state.getPlayerTurn() == 0) {
+//                    Log.e("makeMoveXLR8 ","thisJusthappend" );
+//                    if (state.hasEnemyPieces(x, y)) {
+//
+//                        if (state.capturepiece(state.getPieceSelectedPiece(), state.getPlayerTurn(),state.p2Pieces , xDire, yDire)) {
+//                            state.setMessage("A piece was just captured!" );
+//                            return true;
+//                        }
+//                    }
+//                }
+//                else {
+//                    return false;
+//                }
+                if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
+
+                    state.move(xDire,yDire);
+                    state.setMessage("This is a valid move." );
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+}
+
+//          if(action instanceof CheckersMoveAction2){
+//              Log.e("makeMove","before"+((CheckersMoveAction2)action).getPiece());
+//              if(((CheckersGameState)super.state).movePiece(((CheckersMoveAction2) action).getPiece(),((CheckersMoveAction2) action).getXDire()
+//              ,((CheckersMoveAction2) action).getYDire(),((CheckersGameState) super.state).getPlayerTurn())){
+//                  ((CheckersGameState)super.state).setPieceSelectedPieceAndPieceSelectedBoolean();
+//                  Log.e("makeMove","after"+((CheckersMoveAction2)action).getPiece());
+//                  return true;
+//              }
+//              else {
+//                  return false;
+//              }
+//
+//
+//          }
+//          else{
+//              return false;
+//          }
 
 
 
@@ -151,5 +212,4 @@ public class CheckersLocalGame extends LocalGame {
 //            else{ return false; }
 //        }
 //        return false;
-    }
-}
+

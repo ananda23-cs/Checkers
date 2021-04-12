@@ -28,7 +28,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     private Button cancelButton;
     private TextView gameInfo;
     private int layoutID;
-    private CheckersGameState checkersGameState;
+    //private CheckersGameState checkersGameState;
 
 
     /**
@@ -43,7 +43,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         board = new ImageButton[8][8];
 
 
-    }
+     }
 
     @Override
     public View getTopView() {
@@ -54,13 +54,56 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     public void receiveInfo(GameInfo info) {
         if(info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo){
             flash(Color.RED, 100);
+            //gameInfo.setText(((CheckersGameState)info).getMessage());
         }
         else if(!(info instanceof CheckersGameState)) return;
         else{
+
             Log.e("human","p2piece"+((CheckersGameState) info).p2Pieces[1]);
-            checkersGameState = (CheckersGameState) info;
-            checkersGameState.setBoard(board);
-            gameInfo.setText((checkersGameState).getMessage());
+
+            //checkersGameState = (CheckersGameState) info;
+            //checkersGameState.setBoard(board);
+            gameInfo.setText(((CheckersGameState) info).getMessage());
+
+            for(int height=0;height<8;height++) {
+                for(int length=0; length<8;length++) {
+                    if((height + length) % 2 == 0){
+                        board[length][height].setImageResource(R.drawable.red_tile);
+                        board[length][height].setTag(R.drawable.red_tile);
+                    }
+                    else{
+                        board[length][height].setImageResource(R.drawable.white_tile);
+                        board[length][height].setTag(R.drawable.white_tile);
+                    }
+                }
+            }
+
+            for(CheckersPiece piece :  ((CheckersGameState) info).p1Pieces){
+                if(piece.getAlive()) {
+                    if(piece.getKing()){
+                        board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.black_king);
+                        board[piece.getXcoordinate()][piece.getYcoordinate()].setTag(R.drawable.black_king);
+                    }
+                    else {
+                        board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.black_piece);
+                        board[piece.getXcoordinate()][piece.getYcoordinate()].setTag(R.drawable.black_piece);
+                    }
+                }
+            }
+
+            for(CheckersPiece piece :  ((CheckersGameState) info).p2Pieces){
+                Log.e("setBoard: ",""+piece );
+                if(piece.getAlive()) {
+                    if(piece.getKing()){
+                        board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.red_king);
+                        board[piece.getXcoordinate()][piece.getYcoordinate()].setTag(R.drawable.red_king);
+                    }
+                    else {
+                        board[piece.getXcoordinate()][piece.getYcoordinate()].setImageResource(R.drawable.red_piece);
+                        board[piece.getXcoordinate()][piece.getYcoordinate()].setTag(R.drawable.red_piece);
+                    }
+                }
+            }
         }
     }
 
@@ -142,41 +185,44 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         board[6][7] = (ImageButton) activity.findViewById(R.id.tile78);
         board[7][7] = (ImageButton) activity.findViewById(R.id.tile88);
 
+        gameInfo = activity.findViewById(R.id.gameInfo);
 
+        cancelButton = activity.findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(this);
 
-        for(int height=0;height<8;height++) {
-            for(int length=0; length<8;length++) {
-                /*if(height%2 == 1) {
-                    if(length%2 == 1) {
-                        board[length][height].setImageResource(R.drawable.red_tile);
-                    }
-                    else{
-                        board[length][height].setImageResource(R.drawable.white_tile);
-                    }
-                }
-                else{
-                    if(height%2 == 1){
-                        board[length][height].setImageResource(R.drawable.white_tile);
-                    }
-                    else{
-                        board[length][height].setImageResource(R.drawable.red_tile);
-                    }
-                }*/
-                if((height + length) % 2 == 0){
-                    board[length][height].setImageResource(R.drawable.red_tile);
-                    board[length][height].setTag(R.drawable.red_tile);
-                }
-                else{
-                    board[length][height].setImageResource(R.drawable.white_tile);
-                    board[length][height].setTag(R.drawable.white_tile);
-                }
-            }
-        }
+//        for(int height=0;height<8;height++) {
+//            for(int length=0; length<8;length++) {
+//                /*if(height%2 == 1) {
+//                    if(length%2 == 1) {
+//                        board[length][height].setImageResource(R.drawable.red_tile);
+//                    }
+//                    else{
+//                        board[length][height].setImageResource(R.drawable.white_tile);
+//                    }
+//                }
+//                else{
+//                    if(height%2 == 1){
+//                        board[length][height].setImageResource(R.drawable.white_tile);
+//                    }
+//                    else{
+//                        board[length][height].setImageResource(R.drawable.red_tile);
+//                    }
+//                }*/
+//                if((height + length) % 2 == 0){
+//                    board[length][height].setImageResource(R.drawable.red_tile);
+//                    board[length][height].setTag(R.drawable.red_tile);
+//                }
+//                else{
+//                    board[length][height].setImageResource(R.drawable.white_tile);
+//                    board[length][height].setTag(R.drawable.white_tile);
+//                }
+//            }
+//        }
         //this is will be listening to the tiles.
         //CheckersTileListener[][] boardListener = new CheckersTileListener[8][8];
 
         //sets up the textview displaying information regarding the events of the game
-        gameInfo = activity.findViewById(R.id.gameInfo);
+
 
         /*for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
@@ -186,8 +232,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             }
         }*/
 
-        cancelButton = activity.findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(this);
+
     }
 
     /**
@@ -198,31 +243,27 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     protected void initAfterReady() {
         myActivity.setTitle("Checkers: " + allPlayerNames[0] + " vs. " + allPlayerNames[1]);
         //this is will be listening to the tiles.
-        boardListener = new CheckersTileListener[8][8];
+       // boardListener = new CheckersTileListener[8][8];
         for(int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(),
-                        gameInfo, board, CheckersHumanPlayer.this, game);
-                board[i][j].setOnClickListener(boardListener[i][j]);
+                //boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(),
+                //gameInfo, board, CheckersHumanPlayer.this, game);
+                board[i][j].setOnClickListener(this);
+
             }
         }
     }
 
     @Override
     public void onClick(View button) {
-        if(button instanceof Button){
-            for(int i = 0; i < 8; i++) {
-                for(int j = 0; j < 8; j++) {
-                    if(boardListener[i][j].isClicked()) {
-                        if ((board[i][j].getTag().equals(R.drawable.black_piece) ||
-                                board[i][j].getTag().equals(R.drawable.black_king) ||
-                                board[i][j].getTag().equals(R.drawable.red_piece) ||
-                                board[i][j].getTag().equals(R.drawable.red_king))) {
-                            game.sendAction(new CheckersCancelMoveAction(CheckersHumanPlayer.this,
-                                    boardListener[i][j].xCord, boardListener[i][j].yCord));
-                            boardListener[i][j].setClicked(false);
+        if(button instanceof ImageButton){
+            for(int x = 0; x < 8; x++) {
+                for(int y = 0; y < 8; y++) {
+                    {
+                        if(board[x][y].equals(button)) {
+                            Log.e("onClick: ", "x = " + x + "y = " + y);
+                            game.sendAction(new ChooseAction(this,x,y));
                         }
-                        return;
                     }
                 }
             }

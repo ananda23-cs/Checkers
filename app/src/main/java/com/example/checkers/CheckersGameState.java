@@ -350,7 +350,7 @@ public class CheckersGameState extends GameState {
 
     public boolean canMove(CheckersPiece piece, int xDir,int yDir,int id){
         if(inRange(xDir,yDir)) {
-            Log.e("canMove", "Xcord"+piece.getXcoordinate());
+
             //this checks that user is not trying to move off the checker board as well as if the space is held by another piece
             if (inBounds(piece.getXcoordinate() + xDir, piece.getYcoordinate() + yDir) &&
                     isEmpty(piece.getXcoordinate() + xDir, piece.getYcoordinate() + yDir)) {
@@ -405,6 +405,7 @@ public class CheckersGameState extends GameState {
 
 //                //if all the conditions are right the piece will move.
                 else {
+                    Log.e("tag","true");
                     piece.setCoordinates(piece.getXcoordinate()+xDir,piece.getYcoordinate()+yDir);
                     setPlayerTurn(5);
                     //will turn to player 1's pieces king if the piece reaches the other side of the board
@@ -473,7 +474,7 @@ public class CheckersGameState extends GameState {
             }
             this.pieceSelectedBoolean = true;
         }
-        else{
+        else if(xCord == -1 && yCord ==-1){
             this.pieceSelectedPiece = null;
             this.pieceSelectedBoolean = false;
         }
@@ -499,4 +500,28 @@ public class CheckersGameState extends GameState {
         pieceSelectedPiece = null;
         pieceSelectedBoolean = false;
     }
+
+    public void move(int xDire,int yDire){
+        this.pieceSelectedPiece.setCoordinates(pieceSelectedPiece.getXcoordinate()+xDire,pieceSelectedPiece.getYcoordinate()+yDire);
+
+        if(playerTurn == 0){
+            //playerTurn = 1;
+            if(pieceSelectedPiece.getYcoordinate() == 7){
+                pieceSelectedPiece.setKing(true);
+            }
+        }
+
+        //will turn to player 2's pieces king if the piece reaches the other side of the board
+        else{
+            if(pieceSelectedPiece.getYcoordinate() == 0){
+                pieceSelectedPiece.setKing(true);
+            }
+            //playerTurn = 0;
+        }
+
+        setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
+        setPlayerTurn(54);
+
+    }
+
 }
