@@ -28,13 +28,6 @@ public class CheckersGameState extends GameState {
     ImageButton[][] board; //displays the 8x8 checkerboard
     //TextView gameInfo;
 
-    //stop here top here sto here
-    // jno o42en oew
-    // hnfoew huowhnuo
-    // uihfiuhiufwh
-    // iojfoijfoi3j
-    // iojhoheohoifj
-
     public CheckersGameState(){
         playerTurn = 0;
 
@@ -109,6 +102,7 @@ public class CheckersGameState extends GameState {
         p1NumPieces = p1;
     }
     public void setP2NumPieces(int p2) { p2NumPieces = p2; }
+
     /*
     public CheckersPiece[] getP1Pieces()
     {
