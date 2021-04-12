@@ -68,4 +68,8 @@ public class CheckersPiece {
     public void setKing(boolean king) {
         this.isKing = king;
     }
+
+    public int getOwner() {
+        return owner;
+    }
 }

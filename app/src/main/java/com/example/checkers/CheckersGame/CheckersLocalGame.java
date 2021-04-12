@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersCaptureAction;
+import com.example.checkers.CheckersGame.Actions.CheckersMoveAction;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;

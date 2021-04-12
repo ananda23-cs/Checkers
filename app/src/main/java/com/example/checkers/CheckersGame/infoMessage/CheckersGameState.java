@@ -340,7 +340,7 @@ public class CheckersGameState extends GameState {
                 }
 
                 //this checks if player two is not trying to move a non king piece backwards
-                else if (id == 1 && yDir > 1 && !piece.getKing()) {
+                else if (id == 1 && yDir > 0 && !piece.getKing()) {
                     Log.e("movePiece: ", "Can't move backwards because not king");
                     return false;
                 }
