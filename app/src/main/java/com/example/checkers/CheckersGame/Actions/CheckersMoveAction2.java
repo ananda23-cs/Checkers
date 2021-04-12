@@ -5,7 +5,6 @@
  * CS301A
  * @version 04/11/2021
  */
-
 package com.example.checkers.CheckersGame.Actions;
 
 import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
@@ -36,7 +35,7 @@ public class CheckersMoveAction2 extends GameAction {
         this.piece = piece;
     } //CheckersMoveAction2
 
-    // getter methods for variables
+    /// getter methods for variables
     public int getXDire() {
         return XDire;
     }

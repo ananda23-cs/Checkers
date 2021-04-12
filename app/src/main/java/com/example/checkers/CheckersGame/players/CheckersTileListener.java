@@ -6,13 +6,16 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGame.players;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.checkers.CheckersGame.Actions.CheckersCaptureAction;
+import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
+import com.example.checkers.CheckersGame.Actions.CheckersMoveAction2;
 import com.example.checkers.game.GameFramework.Game;
 
 public class CheckersTileListener implements View.OnClickListener {
@@ -35,7 +38,7 @@ public class CheckersTileListener implements View.OnClickListener {
                                 ImageButton[][] board, CheckersHumanPlayer player, Game game){
         this.xCord = xCord;
         this.yCord = yCord;
-        this.gameState = gameState;
+        this.gameState = new CheckersGameState(gameState);
         this.gameInfo = gameInfo;
         this.board = board;
         this.player = player;
