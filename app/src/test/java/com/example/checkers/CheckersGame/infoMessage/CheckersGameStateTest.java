@@ -15,7 +15,7 @@ public class CheckersGameStateTest {
     @Test
     public void getP2NumPieces() {
         CheckersGameState state = new CheckersGameState();
-        assertEquals(12, state.getP1NumPieces());
+        assertEquals(12, state.getP2NumPieces());
     }
 
     @Test
@@ -40,6 +40,9 @@ public class CheckersGameStateTest {
 
     @Test
     public void setPlayerTurn() {
+        CheckersGameState gameState = new CheckersGameState();
+        gameState.setPlayerTurn(1);
+        assertEquals("Not the player's turn",1,gameState.getPlayerTurn());
     }
 
     @Test

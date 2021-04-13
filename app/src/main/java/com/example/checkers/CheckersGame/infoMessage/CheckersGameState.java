@@ -111,22 +111,25 @@ public class CheckersGameState extends GameState {
     }
     public int getP2NumPieces()
     {
-        return p1NumPieces;
+        return p2NumPieces;
     }
     public int getPlayerTurn() {
         return playerTurn;
     }
 
+
     /**
      * setter methods for players pieces
      *
      */
-    public void setP1NumPieces(int p1)
-    {
-        this.p1NumPieces = p1;
-    }
-    public void setP2NumPieces(int p2) { this.p2NumPieces = p2; }
 
+    public void setP1NumPieces(int p1NumPieces) {
+        this.p1NumPieces = p1NumPieces;
+    }
+
+    public void setP2NumPieces(int p2NumPieces) {
+        this.p2NumPieces = p2NumPieces;
+    }
     /*
     public CheckersPiece[] getP1Pieces()
     {
