@@ -632,7 +632,7 @@ public class CheckersGameState extends GameState {
 
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
-                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,yDist*2)){
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
                         if(isEmpty(xFinal,yFinal)){
