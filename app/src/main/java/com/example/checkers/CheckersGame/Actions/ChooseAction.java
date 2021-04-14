@@ -30,10 +30,10 @@ public class ChooseAction extends GameAction {
         this.y = y;
     } //ChooseAction
 
+    // getter methods for x and y location
     public int getXLoc() {
         return x;
     }
-
     public int getYLoc() {
         return y;
     }

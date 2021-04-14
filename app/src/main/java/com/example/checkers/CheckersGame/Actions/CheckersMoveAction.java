@@ -45,21 +45,4 @@ public class CheckersMoveAction extends GameAction {
         this.toCol = toCol;
         this.checkersPiece = piece;
     } //CheckersMoveAction
-
-    // getter methods for variables
-    /*public int getSelectedRow() {
-        return selectedRow;
-    }
-    public int getSelectedCol() {
-        return selectedCol;
-    }
-    public int getToRow() {
-        return toRow;
-    }
-    public int getToCol() {
-        return toCol;
-    }
-    public CheckersPiece getCheckersPiece() {
-        return checkersPiece;
-    } */
 }

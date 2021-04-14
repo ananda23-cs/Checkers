@@ -34,15 +34,4 @@ public class CheckersCaptureAction extends GameAction {
         this.YDire = YDir;
         this.checkersPiece = checkersPiece;
     } //CheckersCaptureAction
-
-    // getter methods for coordinates
-    /*public int getXDire() {
-        return XDire;
-    }
-    public int getYDire() {
-        return YDire;
-    }
-    public CheckersPiece getCheckersPiece() {
-        return checkersPiece;
-    } */
 }
