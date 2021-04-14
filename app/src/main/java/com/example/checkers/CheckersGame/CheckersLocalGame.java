@@ -82,9 +82,9 @@ public class CheckersLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         CheckersGameState state = (CheckersGameState) super.state;
         if (state.getP1NumPieces() == 0) {
-            return "Player 2 won!";
+            return "Player 2 won! ";
         } else if (state.getP2NumPieces() == 0) {
-            return "Player 1 won!";
+            return "Player 1 won! ";
         } else {
             return null;
         }

@@ -107,6 +107,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         }
     } //receiveInfo
 
+    // check the statements above
     public boolean checkIfStatement(GameInfo info){
         Log.e("checkIfStatement","this happened" + ((CheckersGameState) info).getPlayerTurn());
         return false;

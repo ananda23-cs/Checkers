@@ -36,7 +36,6 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     private int layoutID;
     //private CheckersGameState checkersGameState;
 
-
     /**
      * constructor CheckersHumanPlayer
      *
@@ -73,9 +72,6 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         else {
             ((CheckersGameState) info).setImageBoard(board);
             Log.e("human", "p2piece" + ((CheckersGameState) info).p2Pieces[1]);
-
-            //checkersGameState = (CheckersGameState) info;
-            //checkersGameState.setBoard(board);
             gameInfo.setText(((CheckersGameState) info).getMessage());
 
             // alternates between red and white tiles in a checkerboard pattern
