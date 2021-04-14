@@ -23,7 +23,7 @@ import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
-    ImageButton[][] board;
+    ImageButton[][] board;//the board
     private CheckersTileListener[][] boardListener;
     private Button cancelButton;
     private TextView gameInfo;
@@ -203,33 +203,34 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     protected void initAfterReady() {
         myActivity.setTitle("Checkers: " + allPlayerNames[0] + " vs. " + allPlayerNames[1]);
 
-        // sets board to listen to tiles
+        // sets onclicklisteners for the tiles
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                //boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(),
-                //gameInfo, board, CheckersHumanPlayer.this, game);
                 board[i][j].setOnClickListener(this);
             }
         }
     } //initAfterReady
 
+    //on click method
     @Override
     public void onClick(View button) {
+        //sends cancel action if the cancel button is pressed
         if(button instanceof Button){
             game.sendAction(new CheckersCancelMoveAction(this,4,4));
         }
+        //sends a Choose action if any other button is pressed. A choose action selects,captures or moves a piece
+        //this forloop is used to gain the access the location of the button which is needed chooseaction object
         if (button instanceof ImageButton) {
             for (int x = 0; x < 8; x++) {
                 for (int y = 0; y < 8; y++) {
                     if (board[x][y].equals(button)) {
                         Log.e("onClick: ", "x = " + x + "y = " + y);
-                        game.sendAction(new ChooseAction(this, x, y));
+                        //sends a
+                        game.sendAction(new CheckersMoveAction3(this, x, y));
                     }
                 }
             }
-        /*else if (button instanceof ImageButton){
-            game.sendAction(new CheckersMoveAction(CheckersHumanPlayer.this));
-        }*/
-        } //onClick
+
+        }
     }
 }

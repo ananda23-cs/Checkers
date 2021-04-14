@@ -12,15 +12,19 @@ import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersCancelMoveAction extends GameAction {
-    // variables for row and column
+    // variables for row and column. Not needed. I do not want to delete it though becuase I would have to make edits
+    // a lot things
     private int selectedRow;
     private int selectedCol;
+
 
     /**
      * constructor for CheckersCancelMoveAction
      *
      * @param player
      *      the player who created the action
+     * @param selectedRow y location
+     * @param selectedCol x location
      */
     public CheckersCancelMoveAction(GamePlayer player, int selectedRow, int selectedCol) {
         super(player);

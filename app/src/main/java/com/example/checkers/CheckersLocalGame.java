@@ -9,25 +9,22 @@
 
 package com.example.checkers;
 
-import android.util.Log;
-
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersLocalGame extends LocalGame {
 
-    //CheckersGameState checkersGameState;//I added this
+
 
     /**
      * Constructor for the CheckersLocalGame.
      */
     public CheckersLocalGame() {
-        //I am commenting this out
         super();
         super.state = new CheckersGameState();
-        //checkersGameState = new CheckersGameState();
-    } //CheckersLocalGame
+
+    }
 
     /**
      * Constructor for the CheckersLocalGame with loaded checkersGameState.
@@ -36,7 +33,7 @@ public class CheckersLocalGame extends LocalGame {
     public CheckersLocalGame(CheckersGameState checkersGameState) {
         super();
         super.state = new CheckersGameState(checkersGameState);
-    } //CheckersLocalGame
+    }
 
     /**
      * method sendUpdatedStateTo
@@ -98,23 +95,24 @@ public class CheckersLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
+        //this lets the user pick another piece.
         if(action instanceof CheckersCancelMoveAction){
             CheckersGameState state = (CheckersGameState) super.state;
             state.setPieceSelectedPieceAndPieceSelectedBoolean();
-            state.setMessage("Choose another piece" );
+            state.setMessage("Choose another piece " + " P2 Pieces = " +state.getP2NumPieces() + " P1 Pieces = " + state.getP1NumPieces());
             return true;
         }
-        else if(action instanceof ChooseAction){
 
-            ChooseAction ca = (ChooseAction) action;
+        //if they send a choose action
+        else if(action instanceof CheckersMoveAction3){
+
+            CheckersMoveAction3 ca = (CheckersMoveAction3) action;
             CheckersGameState state = (CheckersGameState) super.state;
 
             int x = ca.x;
             int y = ca.y;
 
-            // get player id
-            int playerId = state.getPlayerTurn();
-
+            //chooses a piece
             if(!state.isPieceSelectedBoolean()){
                 // checks if spot is empty
                 if(state.isEmpty(x,y)){
@@ -134,33 +132,21 @@ public class CheckersLocalGame extends LocalGame {
                     }
                 }
             }
+
+            //lets a player move a piece
             else{
+                //distance as well as direction of where the piece is going
                 int xDire=x-state.getPieceSelectedPiece().getXcoordinate();
                 int yDire=y-state.getPieceSelectedPiece().getYcoordinate();
-//                if(state.getPlayerTurn() == 0) {
-//                    Log.e("makeMoveXLR8 ","thisJusthappend" );
-//                    if (state.hasEnemyPieces(x, y)) {
-//
-//                        if (state.capturepiece(state.getPieceSelectedPiece(), state.getPlayerTurn(),state.p2Pieces , xDire, yDire)) {
-//                            state.setMessage("A piece was just captured!" );
-//                            return true;
-//                        }
-//                    }
-//                }
-//                else {
-//                    return false;
-//              }
-                //if(state.getPlayerTurn() == 0){
+
+                //captures a piece
                 if(state.hasEnemyPieces(x,y)){
                     if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
                         return true;
                     }
                 }
-                if(state.hasEnemyPieces(x,y)){
-                    if(state.CaptureEnemyPieceCP(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
-                        return true;
-                    }
-                }
+
+                //moves a piece
                 if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
                     state.move(xDire,yDire);
                     state.setMessage("This is a valid move." );
@@ -171,7 +157,7 @@ public class CheckersLocalGame extends LocalGame {
             }
         }
         return false;
-    } //makeMove
+    }
 
 }
 
@@ -265,4 +251,24 @@ public class CheckersLocalGame extends LocalGame {
 //            else{ return false; }
 //        }
 //        return false;
+
+//if(state.hasEnemyPieces(x,y)){
+//    if(state.CaptureEnemyPieceCP(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+//        return true;
+//   }
+//}
+//                if(state.getPlayerTurn() == 0) {
+//                    Log.e("makeMoveXLR8 ","thisJusthappend" );
+//                    if (state.hasEnemyPieces(x, y)) {
+//
+//                        if (state.capturepiece(state.getPieceSelectedPiece(), state.getPlayerTurn(),state.p2Pieces , xDire, yDire)) {
+//                            state.setMessage("A piece was just captured!" );
+//                            return true;
+//                        }
+//                    }
+//                }
+//                else {
+//                    return false;
+//              }
+//if(state.getPlayerTurn() == 0){
 

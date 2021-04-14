@@ -4,6 +4,7 @@
  *
  * CS301A
  * @version 04/11/2021
+ * This is not used in favor of CheckersMoveAction 3
  */
 
 package com.example.checkers;

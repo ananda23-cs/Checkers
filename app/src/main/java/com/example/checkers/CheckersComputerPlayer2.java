@@ -1,6 +1,6 @@
 /**
  * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
- * Computer Player 2 - Smart AI
+ * Computer Player 2 - Smart AI. Has not been implemented yet
  *
  * CS301A
  * @version 04/11/2021

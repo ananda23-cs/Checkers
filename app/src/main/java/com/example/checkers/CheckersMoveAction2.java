@@ -4,6 +4,7 @@
  *
  * CS301A
  * @version 04/11/2021
+ * THIS IS NOT USED IN FAVOR OF CHECKPOINT 3
  */
 package com.example.checkers;
 
