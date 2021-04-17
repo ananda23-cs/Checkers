@@ -154,6 +154,9 @@ public class CheckersLocalGame extends LocalGame {
                     state.setMessage("This is a valid move." );
                     return true;
                 }
+                else{
+                    state.setMessage("Invalid move.");
+                }
             }
         }
         return false;
