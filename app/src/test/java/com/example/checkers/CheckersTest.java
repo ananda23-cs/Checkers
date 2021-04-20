@@ -21,11 +21,13 @@ public class CheckersTest {
         if(checkersState.canMove(checkersState.getPieceSelectedPiece(),1,1,
                                 checkersState.getPlayerTurn())) {
             checkersState.move(1, 1);
+            checkersState.setPlayerTurn(1);
         }
         checkersState.setPieceSelectedPieceAndPieceSelectedBoolean(5,5);
         if(checkersState.canMove(checkersState.getPieceSelectedPiece(),1,-1,
                 checkersState.getPlayerTurn())) {
             checkersState.move(1, -1);
+            checkersState.setPlayerTurn(0);
         }
         CheckersGameState copyState = new CheckersGameState(checkersState);
         assertTrue("Copy Constructor did not produce equal states,",checkersState.equals(copyState));
@@ -45,22 +47,26 @@ public class CheckersTest {
         if(checkersState.canMove(checkersState.getPieceSelectedPiece(),1,1,
                 checkersState.getPlayerTurn())) {
             checkersState.move(1, 1);
+            checkersState.setPlayerTurn(1);
         }
         checkersState.setPieceSelectedPieceAndPieceSelectedBoolean(5,5);
         if(checkersState.canMove(checkersState.getPieceSelectedPiece(),1,-1,
                 checkersState.getPlayerTurn())) {
             checkersState.move(1, -1);
+            checkersState.setPlayerTurn(0);
         }
         CheckersGameState otherState = new CheckersGameState();
         otherState.setPieceSelectedPieceAndPieceSelectedBoolean(2,2);
         if(otherState.canMove(otherState.getPieceSelectedPiece(),1,1,
                 otherState.getPlayerTurn())) {
             otherState.move(1, 1);
+            otherState.setPlayerTurn(1);
         }
         otherState.setPieceSelectedPieceAndPieceSelectedBoolean(5,5);
         if(otherState.canMove(otherState.getPieceSelectedPiece(),1,-1,
                 otherState.getPlayerTurn())) {
             otherState.move(1, -1);
+            otherState.setPlayerTurn(0);
         }
         assertTrue("The game states are not equal.", checkersState.equals(otherState));
     }

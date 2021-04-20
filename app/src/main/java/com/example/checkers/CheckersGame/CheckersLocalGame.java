@@ -143,17 +143,20 @@ public class CheckersLocalGame extends LocalGame {
                 int yDire=y-state.getPieceSelectedPiece().getYcoordinate();
                 if(state.hasEnemyPieces(x,y) && (action.getPlayer() instanceof CheckersHumanPlayer)){
                     if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+                        state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                         return true;
                     }
                 }
                 else if(state.hasEnemyPieces(x,y) && (action.getPlayer() instanceof CheckersComputerPlayer1)){
                     if(state.CaptureEnemyPieceCP(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+                        state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                         return true;
                     }
                 }
                 else if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
                     state.move(xDire,yDire);
                     state.setMessage("This is a valid move." );
+                    state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                     return true;
                 }
                 else{

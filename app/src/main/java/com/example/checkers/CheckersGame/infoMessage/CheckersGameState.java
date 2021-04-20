@@ -599,7 +599,6 @@ public class CheckersGameState extends GameState {
         }
 
         setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
-        setPlayerTurn(1-playerTurn);
 
     } //move
 
@@ -646,7 +645,6 @@ public class CheckersGameState extends GameState {
                                 pieceSelectedPiece.setKing(true);
                             }
 
-                            setPlayerTurn(1);
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
                             return true;
@@ -677,7 +675,6 @@ public class CheckersGameState extends GameState {
                                 pieceSelectedPiece.setKing(true);
                             }
 
-                            setPlayerTurn(0);
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
                             return true;
@@ -730,7 +727,6 @@ public class CheckersGameState extends GameState {
                                 pieceSelectedPiece.setKing(true);
                             }
 
-                            setPlayerTurn(0);
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
                             return true;
@@ -764,7 +760,6 @@ public class CheckersGameState extends GameState {
                                 pieceSelectedPiece.setKing(true);
                             }
 
-                            setPlayerTurn(1);
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
                             return true;
