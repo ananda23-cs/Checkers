@@ -33,6 +33,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     private CheckersTileListener[][] boardListener;
     private Button cancelButton;
     private TextView gameInfo;
+    private TextView humanPlayerID, computerPlayerID;
     private int layoutID;
     //private CheckersGameState checkersGameState;
 
@@ -196,6 +197,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
         // get id's from GUI
         gameInfo = activity.findViewById(R.id.gameInfo);
+        humanPlayerID = activity.findViewById(R.id.humanPlayerId2);
+        computerPlayerID = activity.findViewById(R.id.computerPlayerId);
         cancelButton = activity.findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
     } //setAsGui
@@ -206,13 +209,13 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
      */
     @Override
     protected void initAfterReady() {
-        myActivity.setTitle("Checkers: " + allPlayerNames[0] + " vs. " + allPlayerNames[1]);
-
+        myActivity.setTitle("Checkers: " + allPlayerNames[playerNum] + " vs. " +
+                                            allPlayerNames[1-playerNum]);
+        humanPlayerID.setText(allPlayerNames[playerNum]);
+        computerPlayerID.setText(allPlayerNames[1-playerNum]);
         // sets board to listen to tiles
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                //boardListener[i][j] = new CheckersTileListener(i, j, (CheckersGameState) game.getGameState(),
-                //gameInfo, board, CheckersHumanPlayer.this, game);
                 board[i][j].setOnClickListener(this);
             }
         }
@@ -232,6 +235,6 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                     }
                 }
             }
-        } //onClick
-    }
-}
+        }
+    }//onClick
+}//CheckersHumanPlayer

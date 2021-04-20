@@ -95,7 +95,7 @@ public class CheckersGameState extends GameState {
         super.numSetupTurns = original.numSetupTurns;
         this.message = original.message;
         this.pieceSelectedBoolean = original.pieceSelectedBoolean;
-        this.pieceSelectedPiece = new CheckersPiece(original.pieceSelectedPiece);
+        this.pieceSelectedPiece = original.pieceSelectedPiece;
 
     } //CheckersGameState
 
@@ -525,7 +525,7 @@ public class CheckersGameState extends GameState {
      */
     public void setPieceSelectedPieceAndPieceSelectedBoolean(int xCord,int yCord){
         int i = 0;
-        if(this.pieceSelectedBoolean == false) {
+        if(!this.pieceSelectedBoolean) {
             for(CheckersPiece piece : p2Pieces){
                 if(p1Pieces[i].getAlive()){
                     if(p1Pieces[i].getYcoordinate() == yCord && p1Pieces[i].getXcoordinate() == xCord){
@@ -704,8 +704,6 @@ public class CheckersGameState extends GameState {
      *      not valid y location
      */
     public boolean CaptureEnemyPieceCP(int xLocation,int yLocation,int nVX,int nVY){
-        boolean returnValue = false;
-
         Log.e("cp","nVX = "+ nVX + "nYy = "+nVY );
         //Lo
         if(playerTurn == 1){
@@ -779,4 +777,24 @@ public class CheckersGameState extends GameState {
         return false;
     }//CheckersCapturePieceCP
 
+    public boolean equals(Object object){
+        if(!(object instanceof CheckersGameState)) return false;
+        CheckersGameState checkersGameState = (CheckersGameState) object;
+
+        for(int k = 0; k < 12; k++){
+            if(!(this.p1Pieces[k].equals(checkersGameState.p1Pieces[k])) ||
+                !(this.p2Pieces[k].equals(checkersGameState.p2Pieces[k]))){
+                return false;
+            }
+        }
+
+        return this.playerTurn == checkersGameState.playerTurn &&
+                this.numSetupTurns == checkersGameState.numSetupTurns &&
+                this.currentSetupTurn == checkersGameState.currentSetupTurn &&
+                this.p1NumPieces == checkersGameState.p1NumPieces &&
+                this.p2NumPieces == checkersGameState.p2NumPieces &&
+                this.pieceSelectedPiece == checkersGameState.pieceSelectedPiece &&
+                this.pieceSelectedBoolean == checkersGameState.pieceSelectedBoolean &&
+                this.message.equals(checkersGameState.message);
+    }
 }//CheckersGameState

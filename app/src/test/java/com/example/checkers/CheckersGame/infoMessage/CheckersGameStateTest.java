@@ -2,6 +2,8 @@ package com.example.checkers.CheckersGame.infoMessage;
 
 import org.junit.Test;
 
+import javax.annotation.RegEx;
+
 import static org.junit.Assert.*;
 
 public class CheckersGameStateTest {
@@ -42,27 +44,39 @@ public class CheckersGameStateTest {
     public void setPlayerTurn() {
         CheckersGameState gameState = new CheckersGameState();
         gameState.setPlayerTurn(1);
-        assertEquals("Not the player's turn",1,gameState.getPlayerTurn());
+        assertEquals("Not the player's turn",1, gameState.getPlayerTurn());
     }
 
     @Test
     public void isEmpty() {
+        CheckersGameState state = new CheckersGameState();
+        assertEquals("Tile not empty",true,
+                                state.isEmpty(4,4));
     }
 
     @Test
     public void inBounds() {
+        CheckersGameState state = new CheckersGameState();
+        assertEquals(true, state.inBounds(4,3));
     }
 
     @Test
     public void hasEnemyPieces() {
+        CheckersGameState state = new CheckersGameState();
+        assertEquals("either empty tile or friendly piece",
+                false, state.hasEnemyPieces(4,4));
     }
 
     @Test
     public void canMove() {
+        CheckersGameState state = new CheckersGameState();
+        assertEquals(true, state.canMove(state.p1Pieces[11],1,1,0));
     }
 
     @Test
     public void inRange() {
+        CheckersGameState state = new CheckersGameState();
+        assertEquals(true, state.inRange(1,1));
     }
 
     @Test
