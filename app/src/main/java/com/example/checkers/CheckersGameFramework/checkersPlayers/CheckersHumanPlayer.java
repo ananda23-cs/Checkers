@@ -6,7 +6,7 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGameFramework.checkersPlayers;
 
 import android.graphics.Color;
 import android.util.Log;
@@ -15,6 +15,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.checkers.CheckersGameFramework.CheckersInfoMessage.CheckersGameState;
+import com.example.checkers.CheckersGameFramework.checkersActionMessage.CheckersMoveAction;
+import com.example.checkers.CheckersGameFramework.CheckersPiece;
+import com.example.checkers.CheckersGameFramework.checkersActionMessage.CheckersCancelMoveAction;
+import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
 import com.example.checkers.game.GameFramework.infoMessage.IllegalMoveInfo;
@@ -24,7 +29,6 @@ import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     ImageButton[][] board;//the board
-    private CheckersTileListener[][] boardListener;
     private Button cancelButton;
     private TextView gameInfo;
     private int layoutID;
@@ -226,7 +230,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                     if (board[x][y].equals(button)) {
                         Log.e("onClick: ", "x = " + x + "y = " + y);
                         //sends a
-                        game.sendAction(new CheckersMoveAction3(this, x, y));
+                        game.sendAction(new CheckersMoveAction(this, x, y));
                     }
                 }
             }

@@ -7,8 +7,13 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGameFramework;
 
+import com.example.checkers.CheckersGameFramework.CheckersInfoMessage.CheckersGameState;
+import com.example.checkers.CheckersGameFramework.checkersPlayers.CheckersComputerPlayer1;
+import com.example.checkers.CheckersGameFramework.checkersPlayers.CheckersComputerPlayer2;
+import com.example.checkers.CheckersGameFramework.checkersPlayers.CheckersHumanPlayer;
+import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.gameConfiguration.GameConfig;

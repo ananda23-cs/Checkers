@@ -6,7 +6,7 @@
  * @version 04/11/2021
  */
 
-package com.example.checkers;
+package com.example.checkers.CheckersGameFramework;
 
 public class CheckersPiece {
     private int xCord;

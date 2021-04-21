@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6E5E5"
-    tools:context=".CheckersMainActivity">
+    tools:context=".CheckersGameFramework.CheckersMainActivity">
 
     <LinearLayout
         android:id="@+id/top_gui_layout"
