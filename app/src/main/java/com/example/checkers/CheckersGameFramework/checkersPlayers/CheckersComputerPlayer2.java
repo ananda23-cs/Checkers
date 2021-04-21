@@ -1,6 +1,8 @@
 /**
  * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
- * Computer Player 1 - Dumb AI. It makes smarter moves
+ * Computer Player 1 - Smart AI. If it can capture a piece it will always capture it.
+ * Other wise it will move a random piece to a location that is safe from enemy pieces.
+ * If it can't do that it will move a random piece.
  *
  * CS301A
  * @version 04/11/2021
@@ -65,13 +67,14 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
                 //if the piece is alive
                 if (piece.getAlive()) {
 
-                    //captures a piece to the left if it can
+                    //captures a piece to the left backwards if it can
                     if (copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate() - 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate())
                             && !(piece.getYcoordinate() - 2 == 0 && copy.getPlayerTurn() == 1)) {
+
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1));
                     }
-                    //captures a piece to the right if it can
+                    //captures a piece to the right backwards if it can
                     else if (copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate() + 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate())
                             && !(piece.getYcoordinate() - 2 == 0 && copy.getPlayerTurn() == 1)) {
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
