@@ -130,10 +130,11 @@ public class CheckersLocalGame extends LocalGame {
                     // checks if piece belongs to player
                     if (state.hasEnemyPieces(x,y)) {
                         state.setMessage("This piece is not yours. Please try again.");
+                        return false;
                     }
                     // if conditions are true, piece is chosen
                     else{
-                        state.setMessage("This piece can be moved. Click on the spot where you want to move it." );
+                        state.setMessage("This piece can be moved. Click on the spot where you want to move it.");
                         state.setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
                         return true;
                     }
@@ -142,19 +143,10 @@ public class CheckersLocalGame extends LocalGame {
             else{
                 int xDire=x-state.getPieceSelectedPiece().getXcoordinate();
                 int yDire=y-state.getPieceSelectedPiece().getYcoordinate();
-                if(state.hasEnemyPieces(x,y) &&
-                        (action.getPlayer() instanceof CheckersHumanPlayer)){
+                if(state.hasEnemyPieces(x,y)){
                     if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),
                             state.getPieceSelectedPiece().getYcoordinate())){
-                        state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
-                        return true;
-                    }
-                }
-                else if(state.hasEnemyPieces(x,y) &&
-                        (action.getPlayer() instanceof CheckersComputerPlayer1 ||
-                                action.getPlayer() instanceof CheckersComputerPlayer2)){
-                    if(state.CaptureEnemyPieceCP(x,y,state.getPieceSelectedPiece().getXcoordinate(),
-                            state.getPieceSelectedPiece().getYcoordinate())){
+                        state.setMessage("Valid capture.");
                         state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                         return true;
                     }
@@ -162,12 +154,12 @@ public class CheckersLocalGame extends LocalGame {
                 else if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,
                                                             state.getPlayerTurn())){
                     state.move(xDire,yDire);
-                    state.setMessage("This is a valid move." );
+                    state.setMessage("This is a valid move.");
                     state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                     return true;
                 }
                 else{
-                    state.setMessage("Invalid move.");
+                    state.setMessage("Invalid move. Try again.");
                 }
             }
         }

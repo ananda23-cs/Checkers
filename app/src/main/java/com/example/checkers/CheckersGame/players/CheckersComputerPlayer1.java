@@ -9,6 +9,7 @@
 package com.example.checkers.CheckersGame.players;
 import android.util.Log;
 
+import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGame.Actions.ChooseAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
@@ -36,9 +37,6 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
      */
     @Override
     protected void receiveInfo(GameInfo info) {
-        //int xDire = 0;
-        //int yDire = 0;
-        //int pieceIdx = 1;
         // return if not computer plays turn or not an instance of game state
         if (info instanceof NotYourTurnInfo) {
             return;
@@ -49,22 +47,33 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         }
         else {
             // loop until a valid move can be made
-            sleep(0.5);
+            sleep(1);
             if(((CheckersGameState) info).getPlayerTurn()==1) {
                 for (CheckersPiece piece : ((CheckersGameState) info).p2Pieces) {
-                    Log.e("xlr15", "hello" + ((CheckersGameState) info).p1Pieces[10]);
+                    //Log.e("xlr15", "hello" + ((CheckersGameState) info).p1Pieces[10]);
                     if (piece.getAlive()) {
                         // computer move method
+                        ((CheckersGameState) info).setPieceSelectedPieceAndPieceSelectedBoolean(
+                                                piece.getXcoordinate(),piece.getYcoordinate());
                         // move backwards diagonally left
-                        if (((CheckersGameState) info).canMove(piece, 1, -1, ((CheckersGameState) info).getPlayerTurn())) {
-                            game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
-                            game.sendAction(new ChooseAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() - 1));
+                        if (((CheckersGameState) info).canMove(piece, 1, -1,
+                                            ((CheckersGameState) info).getPlayerTurn())) {
+                            game.sendAction(new ChooseAction(this, piece.getXcoordinate(),
+                                                            piece.getYcoordinate()));
+                            game.sendAction(new ChooseAction(this,
+                                                                piece.getXcoordinate() + 1,
+                                                                piece.getYcoordinate() - 1));
 
                         }
                         // move move backwards diagonally right
-                        if (((CheckersGameState) info).canMove(piece, -1, -1, ((CheckersGameState) info).getPlayerTurn())) {
-                            game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
-                            game.sendAction(new ChooseAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1));
+                        if (((CheckersGameState) info).canMove(piece, -1, -1,
+                                ((CheckersGameState) info).getPlayerTurn())) {
+                            game.sendAction(new ChooseAction(this,
+                                                            piece.getXcoordinate(),
+                                                            piece.getYcoordinate()));
+                            game.sendAction(new ChooseAction(this,
+                                                    piece.getXcoordinate() - 1,
+                                                    piece.getYcoordinate() - 1));
                         }
                         // move forwards diagonally right
                         if (((CheckersGameState) info).canMove(piece, -1, +1, ((CheckersGameState) info).getPlayerTurn())) {
@@ -80,27 +89,31 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
                         // computer capture method
                         // capture forwards diagonally left
-                        if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() - 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
+                        if (((CheckersGameState) info).CaptureEnemyPiece(piece.getXcoordinate() - 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
                             game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                             game.sendAction(new ChooseAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1));
                         }
                         // capture forwards diagonally right
-                        if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() + 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
+                        if (((CheckersGameState) info).CaptureEnemyPiece(piece.getXcoordinate() + 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
                             game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                             game.sendAction(new ChooseAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() - 1));
                         }
 
                         if (piece.getKing()) {
                             // capture backwards diagonally left
-                            if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() - 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
+                            if (((CheckersGameState) info).CaptureEnemyPiece(piece.getXcoordinate() - 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
                                 game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                                 game.sendAction(new ChooseAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() + 1));
                             }
                             // capture backwards diagonally right
-                            if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() + 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
+                            if (((CheckersGameState) info).CaptureEnemyPiece(piece.getXcoordinate() + 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
                                 game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                                 game.sendAction(new ChooseAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() + 1));
                             }
+                        }
+
+                        else{
+                            game.sendAction(new CheckersCancelMoveAction(this));
                         }
                     }
 
@@ -108,9 +121,10 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             }
             else{
                 for (CheckersPiece piece : ((CheckersGameState) info).p1Pieces) {
-                    Log.e("xlr15", "hello" + ((CheckersGameState) info).p2Pieces[10]);
+                    //Log.e("xlr15", "hello" + ((CheckersGameState) info).p2Pieces[10]);
                     if (piece.getAlive()) {
                         // computer move method
+                        ((CheckersGameState) info).setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(),piece.getYcoordinate());
                         // move backwards diagonally left
                         if (((CheckersGameState) info).canMove(piece, 1, -1, ((CheckersGameState) info).getPlayerTurn())) {
                             game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
@@ -136,27 +150,31 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
                         // computer capture method
                         // capture forwards diagonally left
-                        if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() - 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
+                        if (((CheckersGameState) info).CaptureEnemyPiece(piece.getXcoordinate() - 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
                             game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                             game.sendAction(new ChooseAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() + 1));
                         }
                         // capture forwards diagonally right
-                        if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() + 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
+                        if (((CheckersGameState) info).CaptureEnemyPiece(piece.getXcoordinate() + 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
                             game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                             game.sendAction(new ChooseAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() + 1));
                         }
 
                         if (piece.getKing()) {
                             // capture backwards diagonally left
-                            if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() - 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
+                            if (((CheckersGameState) info).CaptureEnemyPiece(piece.getXcoordinate() - 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
                                 game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                                 game.sendAction(new ChooseAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1));
                             }
                             // capture backwards diagonally right
-                            if (((CheckersGameState) info).CaptureEnemyPieceCP(piece.getXcoordinate() + 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
+                            if (((CheckersGameState) info).CaptureEnemyPiece(piece.getXcoordinate() + 1, piece.getYcoordinate() - 1, piece.getXcoordinate(), piece.getYcoordinate()) || checkIfStatement(info)) {
                                 game.sendAction(new ChooseAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                                 game.sendAction(new ChooseAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() - 1));
                             }
+                        }
+
+                        else{
+                            game.sendAction(new CheckersCancelMoveAction(this));
                         }
                     }
 

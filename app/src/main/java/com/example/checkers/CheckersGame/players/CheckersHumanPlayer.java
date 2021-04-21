@@ -30,7 +30,6 @@ import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     ImageButton[][] board;
-    private CheckersTileListener[][] boardListener;
     private Button cancelButton;
     private TextView gameInfo;
     private TextView humanPlayerID, computerPlayerID;
