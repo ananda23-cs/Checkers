@@ -81,13 +81,36 @@ public class CheckersLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         CheckersGameState state = (CheckersGameState) super.state;
-        if (state.getP1NumPieces() == 0) {
-            return "Player 2 won!";
-        } else if (state.getP2NumPieces() == 0) {
+
+        boolean p1Alive = false;
+        boolean p2Alive = false;
+
+        for(CheckersPiece piece : state.p1Pieces){
+            if (piece.getAlive()){
+                p1Alive = true;
+            }
+        }
+
+        for(CheckersPiece piece : state.p2Pieces){
+            if (piece.getAlive()){
+                p2Alive = true;
+            }
+        }
+
+        if (!p2Alive) {
             return "Player 1 won!";
+        } else if (!p1Alive) {
+            return "Player 2 won!";
         } else {
             return null;
         }
+//        if (state.getP1NumPieces() == 0) {
+//            return "Player 2 won!";
+//        } else if (state.getP2NumPieces() == 0) {
+//            return "Player 1 won!";
+//        } else {
+//            return null;
+//        }
     } //checkIfGameOver
 
     /**
@@ -144,16 +167,6 @@ public class CheckersLocalGame extends LocalGame {
                 int xDire=x-state.getPieceSelectedPiece().getXcoordinate();
                 int yDire=y-state.getPieceSelectedPiece().getYcoordinate();
 
-
-//                if (((CheckersMoveAction) action).getX() == ((CheckersGameState) super.state).p2Pieces[1].getXcoordinate() && ((CheckersMoveAction) action).getY() == ((CheckersGameState) super.state).p2Pieces[1].getYcoordinate() ) {
-//                    Log.e("xcuiw", ""+((CheckersGameState) super.state).p2Pieces[1]);
-//                    Log.e("xcuiw", "xDire = " + xDire);
-//                    Log.e("xcuiw", "yDire = " + yDire);
-//                    if(((CheckersGameState) super.state).canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
-//                        Log.e("zenyatta", "moved succesfuly "+((CheckersGameState) super.state).p2Pieces[1]);
-//                    }
-//                }
-
                 //captures a piece
                 if(state.hasEnemyPieces(x,y)){
                     if(((CheckersGameState)super.state).CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
@@ -166,6 +179,7 @@ public class CheckersLocalGame extends LocalGame {
 
                     ((CheckersGameState)super.state).move(xDire,yDire);
                     state.setMessage("This is a valid move." );
+
                     return true;
                 }
 

@@ -69,12 +69,25 @@ public class CheckersGameState extends GameState {
         p2Pieces[10] = new CheckersPiece(5,7,2);
         p2Pieces[11] = new CheckersPiece(7,7,2);
 
+
+//        p1Pieces[9].setCoordinates(2,4);
+//        p1Pieces[11].setCoordinates(0,4);
+
+//        p1Pieces[10].setAlive(false);
+//        p2Pieces[2].setCoordinates(2,2);
+//        p2Pieces[7].setCoordinates(4,4);
+//        //p2Pieces[11].setCoordinates(6,6);
+//        p2Pieces[9].setAlive(false);
+
+
 //        p2Pieces[0].setKing(true);
 //        p2Pieces[0].setCoordinates(3,3);
 //        p1Pieces[9].setCoordinates(4,4);
 //        p2Pieces[1].setCoordinates(4,2);
 //        p1Pieces[5].setCoordinates(6,6);
 //        p2Pieces[2].setCoordinates(2,4);
+
+
 
         pieceSelectedBoolean = false;
         message = "";
@@ -282,6 +295,8 @@ public class CheckersGameState extends GameState {
                         if(piece.getYcoordinate() == 0 && playerTurn == 1){
                             piece.setKing(true);
                         }
+
+
 
                         //changes the turn number
                         piece.setCoordinates(piece1.getXcoordinate() + xDir+1,
@@ -520,10 +535,10 @@ public class CheckersGameState extends GameState {
             this.pieceSelectedBoolean = true;
         }
 
-        else if(xCord == -1 && yCord ==-1){
-            this.pieceSelectedPiece = null;
-            this.pieceSelectedBoolean = false;
-        }
+//        else if(xCord == -1 && yCord ==-1){
+//            this.pieceSelectedPiece = null;
+//            this.pieceSelectedBoolean = false;
+//        }
     }
 
 
@@ -559,7 +574,7 @@ public class CheckersGameState extends GameState {
             //playerTurn = 0;
         }
 
-        setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
+        setPieceSelectedPieceAndPieceSelectedBoolean();
         //it does not matter what parameter goes in setPlayerTurn. See the setPlayerTurn(1) for a description on why that is
         setPlayerTurn(1);
 
@@ -575,6 +590,9 @@ public class CheckersGameState extends GameState {
      * @return
      */
     public boolean CaptureEnemyPiece(int xLocation,int yLocation,int nVX,int nVY){
+        if(pieceSelectedBoolean == false){
+            return false;
+        }
         boolean returnValue = false;//gets returned if conditions are not valid
         int xDist = xLocation - nVX;
         int yDist = yLocation - nVY;
@@ -612,7 +630,9 @@ public class CheckersGameState extends GameState {
                         if(isEmpty(xFinal,yFinal)){
                             //if all conditions are met it captures the piece
                             piece.setAlive(false);
-                            pieceSelectedPiece.setCoordinates(xFinal,yFinal);
+                            if( pieceSelectedPiece != null) {
+                                pieceSelectedPiece.setCoordinates(xFinal, yFinal);
+                            }
                             p2NumPieces = p2NumPieces-1;
                             if(playerTurn == 0){
                                 //playerTurn = 1;
@@ -620,6 +640,25 @@ public class CheckersGameState extends GameState {
                                     pieceSelectedPiece.setKing(true);
                                 }
                             }
+
+//                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal)){
+//                                CaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal);
+//                            }
+//
+//                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal)){
+//                                CaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal);
+//                            }
+//
+//                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal)){
+//                                CaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal);
+//                            }
+//
+//                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal)){
+//                                CaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal);
+//                            }
+
+
+
                             setPlayerTurn(1);
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
@@ -657,6 +696,24 @@ public class CheckersGameState extends GameState {
                                     pieceSelectedPiece.setKing(true);
                                 }
                             }
+
+
+//                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal)){
+//                                CaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal);
+//                            }
+//
+//                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal)){
+//                                CaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal);
+//                            }
+//
+//                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal)){
+//                                CaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal);
+//                            }
+//
+//                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal)){
+//                                CaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal);
+//                            }
+
                             setPlayerTurn(0);
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
@@ -688,12 +745,14 @@ public class CheckersGameState extends GameState {
             //runs through all of player 2's pieces to see if they match the xLocation and yLocation
             for (CheckersPiece piece : p2Pieces) {
                 //checks if piece matches the xLocation and yLocation
+                Log.e("xuix2","" + pieceSelectedPiece);
                 if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
                         && piece.getAlive()) {
-
+                    Log.e("xuix2","" + pieceSelectedPiece);
                     //how far away the enemy piece is
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
+                    //Log.e("calculator","xLocation ");
 
                     //if distance is in range of the piece
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,yDist*2)){
@@ -721,6 +780,7 @@ public class CheckersGameState extends GameState {
                         && piece.getAlive()) {
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
+                    Log.e("xuix","" + pieceSelectedPiece);
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
