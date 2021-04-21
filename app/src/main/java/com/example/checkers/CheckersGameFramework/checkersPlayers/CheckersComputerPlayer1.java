@@ -16,6 +16,8 @@ import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
 
+import java.util.ArrayList;
+
 public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
     /**
@@ -47,6 +49,8 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         else if(((CheckersGameState) info).getPlayerTurn()==this.playerNum) {
 
             CheckersGameState copy = new CheckersGameState((CheckersGameState)info);
+            ArrayList<CheckersMoveAction[]> str = new ArrayList<CheckersMoveAction[]>();
+
 
             CheckersPiece[] checkersPieces = new CheckersPiece[12];
             if(((CheckersGameState) info).getPlayerTurn() == 1){
@@ -64,6 +68,10 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
                     //moves right backwards if it can
                     if (copy.canMove(piece, 1, -1, copy.getPlayerTurn()) && !(piece.getYcoordinate() - 1 == 0 && copy.getPlayerTurn() ==1) ) {
+
+//                        CheckersMoveAction[] moveRB = new CheckersMoveAction[2];
+//                        moveRB[0] = new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate());
+//                        moveRB[1] = new CheckersMoveAction( this, piece.getXcoordinate() + 1, piece.getYcoordinate() - 1);
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() - 1));
 

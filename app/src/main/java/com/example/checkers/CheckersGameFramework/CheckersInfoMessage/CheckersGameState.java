@@ -110,6 +110,14 @@ public class CheckersGameState extends GameState {
         this.pieceSelectedBoolean = original.pieceSelectedBoolean;
         this.pieceSelectedPiece = new CheckersPiece(original.pieceSelectedPiece);
 
+        if(original.pieceSelectedPiece == null) {
+            this.pieceSelectedPiece = null;
+
+        }
+        else{
+            this.pieceSelectedPiece = new CheckersPiece(original.pieceSelectedPiece);
+        }
+
     }
 
     //getter and setter methods. Nothing special or complicated about them

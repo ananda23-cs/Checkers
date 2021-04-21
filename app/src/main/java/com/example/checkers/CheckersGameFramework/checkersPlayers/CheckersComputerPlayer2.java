@@ -96,13 +96,13 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
                             copy.setPlayerTurn(1);
                             piece.setCoordinates(piece.getXcoordinate()+1,piece.getYcoordinate()-1);
 
-//                            if(enemyPiece.equals(copy.p1Pieces[9]) && pie) {
-//                                Log.e("pikachu", " Enemy " + enemyPiece);
-//                                Log.e("pikachu", " turn " + copy.getPlayerTurn());
-//                                Log.e("pikachu", "piece" + piece);
-//                            }
+                            if( piece.equals(copy.p2Pieces[0]) && enemyPiece.equals(copy.p1Pieces[9])) {
+                                Log.e("pikachu", " Enemy " + enemyPiece);
+                                Log.e("pikachu", " turn " + copy.getPlayerTurn());
+                                Log.e("pikachu", "piece" + piece);
+                            }
 
-                            if(copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate()+1, piece.getYcoordinate()-1,enemyPiece.getXcoordinate(), enemyPiece.getYcoordinate())){
+                            if(copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate(), piece.getYcoordinate(),enemyPiece.getXcoordinate(), enemyPiece.getYcoordinate())){
                                 safeSpot = false;
                             }
 
@@ -120,8 +120,105 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
                     //moves left backwards if it can
                     else if (copy.canMove(piece, -1, -1, copy.getPlayerTurn()) ) {
-                        if (copy.p2Pieces[1].equals(piece)){
-                            Log.e("thishappened", ""+copy.p2Pieces[1]);
+                        boolean safeSpot = true;
+
+                        for(CheckersPiece enemyPiece : enemyPieces){
+                            copy.setPieceSelectedPieceAndPieceSelectedBoolean(enemyPiece.getXcoordinate(), enemyPiece.getYcoordinate());
+                            copy.setPlayerTurn(1);
+                            piece.setCoordinates(piece.getXcoordinate()-1,piece.getYcoordinate()-1);
+
+
+                            if(copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate(), piece.getYcoordinate(),enemyPiece.getXcoordinate(), enemyPiece.getYcoordinate())){
+                                safeSpot = false;
+                            }
+
+                            piece.setCoordinates(piece.getXcoordinate()+1,piece.getYcoordinate()+1);
+                            copy.setPlayerTurn(0);
+                        }
+
+                        copy.setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(), piece.getYcoordinate());
+
+
+
+                        if(safeSpot) {
+                            game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
+                            game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1));
+                        }
+
+                    }
+
+                    //moves left forward if it can
+                    else if (copy.canMove(piece, -1, +1, copy.getPlayerTurn()) ) {
+                        boolean safeSpot = true;
+
+                        for(CheckersPiece enemyPiece : enemyPieces){
+                            copy.setPieceSelectedPieceAndPieceSelectedBoolean(enemyPiece.getXcoordinate(), enemyPiece.getYcoordinate());
+                            copy.setPlayerTurn(1);
+                            piece.setCoordinates(piece.getXcoordinate()-1,piece.getYcoordinate()+1);
+
+
+                            if(copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate(), piece.getYcoordinate(),enemyPiece.getXcoordinate(), enemyPiece.getYcoordinate())){
+                                safeSpot = false;
+                            }
+
+                            piece.setCoordinates(piece.getXcoordinate()+1,piece.getYcoordinate()-1);
+                            copy.setPlayerTurn(0);
+                        }
+
+                        copy.setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(), piece.getYcoordinate());
+
+                        if(safeSpot) {
+                            game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
+                            game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() + 1));
+                        }
+                    }
+
+                    //moves right forward if it can
+                    else if (copy.canMove(piece, 1, +1, copy.getPlayerTurn()) ) {
+                        boolean safeSpot = true;
+
+                        for(CheckersPiece enemyPiece : enemyPieces){
+                            copy.setPieceSelectedPieceAndPieceSelectedBoolean(enemyPiece.getXcoordinate(), enemyPiece.getYcoordinate());
+                            copy.setPlayerTurn(1);
+                            piece.setCoordinates(piece.getXcoordinate()+1,piece.getYcoordinate()+1);
+
+
+                            if(copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate(), piece.getYcoordinate(),enemyPiece.getXcoordinate(), enemyPiece.getYcoordinate())){
+                                safeSpot = false;
+                            }
+
+                            piece.setCoordinates(piece.getXcoordinate()-1,piece.getYcoordinate()-1);
+                            copy.setPlayerTurn(0);
+                        }
+
+                        copy.setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(), piece.getYcoordinate());
+
+
+                        if(true) {
+                            game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
+                            game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() + 1));
+                        }
+                    }
+
+                }
+            }
+
+            for (CheckersPiece piece : checkersPieces) {
+                copy.setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(), piece.getYcoordinate());
+                //if the piece is alive
+                if (piece.getAlive()) {
+
+                    //moves right backwards if it can
+                    if (copy.canMove(piece, 1, -1, copy.getPlayerTurn()) && !(piece.getYcoordinate() - 1 == 0 && copy.getPlayerTurn() == 1)) {
+                        game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
+                        game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() - 1));
+
+                    }
+
+                    //moves left backwards if it can
+                    else if (copy.canMove(piece, -1, -1, copy.getPlayerTurn()) && !(piece.getYcoordinate() - 1 == 0 && copy.getPlayerTurn() == 1)) {
+                        if (copy.p2Pieces[1].equals(piece)) {
+                            Log.e("thishappened", "" + copy.p2Pieces[1]);
                         }
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1));
@@ -130,14 +227,14 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
                     }
 
                     //moves left forward if it can
-                    else if (copy.canMove(piece, -1, +1, copy.getPlayerTurn()) ) {
+                    else if (copy.canMove(piece, -1, +1, copy.getPlayerTurn()) && !(piece.getYcoordinate() + 1 == 7 && copy.getPlayerTurn() == 0)) {
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() + 1));
 
                     }
 
                     //moves right forward if it can
-                    else if (copy.canMove(piece, 1, +1, copy.getPlayerTurn()) ) {
+                    else if (copy.canMove(piece, 1, +1, copy.getPlayerTurn()) && !(piece.getYcoordinate() + 1 == 7 && copy.getPlayerTurn() == 0)) {
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                         game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() + 1));
 
@@ -145,9 +242,6 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
                 }
             }
-
-
-
         }
     } //receiveInfo
 
