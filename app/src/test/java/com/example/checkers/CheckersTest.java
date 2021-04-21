@@ -1,12 +1,47 @@
 package com.example.checkers;
 
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
+import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class CheckersTest {
+
+    @Test
+    public void testMovePiece(){
+        CheckersGameState checkersState = new CheckersGameState();
+        checkersState.setPlayerTurn(0);
+        checkersState.setPieceSelectedPieceAndPieceSelectedBoolean(2,2);
+        CheckersPiece piece = checkersState.getPieceSelectedPiece();
+        assertTrue(checkersState.canMove(piece,1,1,0));
+        checkersState.move(1,1);
+    }
+
+    @Test
+    public void testUndoPieceSelection(){
+        CheckersGameState checkersGameState = new CheckersGameState();
+        checkersGameState.setPieceSelectedPieceAndPieceSelectedBoolean(0,0);
+        checkersGameState.setPieceSelectedPieceAndPieceSelectedBoolean();
+        assertFalse(checkersGameState.isPieceSelectedBoolean());
+        assertNull(checkersGameState.getPieceSelectedPiece());
+    }
+
+    @Test
+    public void testCaptureEnemyPiece(){
+        CheckersGameState state = new CheckersGameState();
+        CheckersPiece piece1 = state.p1Pieces[10];
+        CheckersPiece piece2 = state.p2Pieces[2];
+        piece1.setCoordinates(3,3);
+        piece2.setCoordinates(4,4);
+        state.setPlayerTurn(0);
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(3,3);
+        state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
+                                piece1.getXcoordinate(),piece1.getYcoordinate());
+        assertEquals(false, piece2.getAlive());
+    }
+
     @Test
     public void test_CopyConstructorState_Empty(){
         CheckersGameState checkersState = new CheckersGameState();
