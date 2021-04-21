@@ -2,6 +2,7 @@ package com.example.checkers;
 
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
+import com.example.checkers.CheckersGame.players.CheckersComputerPlayer1;
 
 import org.junit.Test;
 
@@ -17,6 +18,12 @@ public class CheckersTest {
         CheckersPiece piece = checkersState.getPieceSelectedPiece();
         assertTrue(checkersState.canMove(piece,1,1,0));
         checkersState.move(1,1);
+    }
+
+    @Test
+    public void testMoveKingPiece(){
+        CheckersGameState checkersGameState = new CheckersGameState();
+        checkersGameState.setPlayerTurn(0);
     }
 
     @Test

@@ -585,7 +585,8 @@ public class CheckersGameState extends GameState {
      *      y coordinate of piece
      */
     public void move(int xDire,int yDire){
-        this.pieceSelectedPiece.setCoordinates(pieceSelectedPiece.getXcoordinate()+xDire,pieceSelectedPiece.getYcoordinate()+yDire);
+        this.pieceSelectedPiece.setCoordinates(pieceSelectedPiece.getXcoordinate()+xDire,
+                                                pieceSelectedPiece.getYcoordinate()+yDire);
 
         if(playerTurn == 0){
             //playerTurn = 1;
@@ -636,7 +637,8 @@ public class CheckersGameState extends GameState {
 
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
-                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,
+                            nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
                         if(isEmpty(xFinal,yFinal)){

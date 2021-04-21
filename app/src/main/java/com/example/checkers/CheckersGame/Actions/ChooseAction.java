@@ -26,8 +26,8 @@ public class ChooseAction extends GameAction {
      */
     public ChooseAction(GamePlayer player,int x,int y){
         super(player);
-        this.x = x;
-        this.y = y;
+        this.x = Math.max(0,Math.min(7,x));
+        this.y = Math.max(0,Math.min(7,y));
     } //ChooseAction
 
     // getter methods for x and y location
