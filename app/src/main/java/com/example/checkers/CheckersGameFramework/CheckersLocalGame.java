@@ -9,6 +9,8 @@
 
 package com.example.checkers.CheckersGameFramework;
 
+import android.util.Log;
+
 import com.example.checkers.CheckersGameFramework.CheckersInfoMessage.CheckersGameState;
 import com.example.checkers.CheckersGameFramework.checkersActionMessage.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGameFramework.checkersActionMessage.CheckersMoveAction;
@@ -130,7 +132,7 @@ public class CheckersLocalGame extends LocalGame {
                     // if conditions are true, piece is chosen
                     else{
                         state.setMessage("This piece can be moved. Click on the spot where you want to move it." );
-                        state.setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
+                        ((CheckersGameState)super.state).setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
                         return true;
                     }
                 }
@@ -142,16 +144,27 @@ public class CheckersLocalGame extends LocalGame {
                 int xDire=x-state.getPieceSelectedPiece().getXcoordinate();
                 int yDire=y-state.getPieceSelectedPiece().getYcoordinate();
 
+
+                if (((CheckersMoveAction) action).getX() == ((CheckersGameState) super.state).p2Pieces[1].getXcoordinate() && ((CheckersMoveAction) action).getY() == ((CheckersGameState) super.state).p2Pieces[1].getYcoordinate() ) {
+                    Log.e("xcuiw", ""+((CheckersGameState) super.state).p2Pieces[1]);
+                    Log.e("xcuiw", "xDire = " + xDire);
+                    Log.e("xcuiw", "yDire = " + yDire);
+                    if(((CheckersGameState) super.state).canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
+                        Log.e("zenyatta", "moved succesfuly "+((CheckersGameState) super.state).p2Pieces[1]);
+                    }
+                }
+
                 //captures a piece
                 if(state.hasEnemyPieces(x,y)){
-                    if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+                    if(((CheckersGameState)super.state).CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
                         return true;
                     }
                 }
 
                 //moves a piece
-                if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
-                    state.move(xDire,yDire);
+                if(((CheckersGameState)super.state).canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
+
+                    ((CheckersGameState)super.state).move(xDire,yDire);
                     state.setMessage("This is a valid move." );
                     return true;
                 }

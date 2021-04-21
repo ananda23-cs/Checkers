@@ -69,10 +69,12 @@ public class CheckersGameState extends GameState {
         p2Pieces[10] = new CheckersPiece(5,7,2);
         p2Pieces[11] = new CheckersPiece(7,7,2);
 
-//        p1Pieces[11].setKing(true);
-//        p1Pieces[11].setCoordinates(1,5);
-//        p2Pieces[0].setCoordinates(2,4);
-
+//        p2Pieces[0].setKing(true);
+//        p2Pieces[0].setCoordinates(3,3);
+//        p1Pieces[9].setCoordinates(4,4);
+//        p2Pieces[1].setCoordinates(4,2);
+//        p1Pieces[5].setCoordinates(6,6);
+//        p2Pieces[2].setCoordinates(2,4);
 
         pieceSelectedBoolean = false;
         message = "";
@@ -350,24 +352,40 @@ public class CheckersGameState extends GameState {
      * @param id whoever's turn it is
      */
     public boolean canMove(CheckersPiece piece, int xDir,int yDir,int id){
+        if(piece.equals(p2Pieces[1])){
+            Log.e("Lego1","x = " + piece.getXcoordinate()+"y = " + piece.getYcoordinate());
+        }
         if(inRange(xDir,yDir)) {
+
 
             //this checks that user is not trying to move off the checker board as well as if the space is held by another piece
             if (inBounds(piece.getXcoordinate() + xDir, piece.getYcoordinate() + yDir) &&
                     isEmpty(piece.getXcoordinate() + xDir, piece.getYcoordinate() + yDir)) {
 
+                if(piece.equals(p2Pieces[1])){
+                    Log.e("Lego2" , ""+piece);
+                    Log.e("Lego2" , "xdire = "+xDir +"yDir = "+yDir);
+                }
+
                 //this checks if player one is not trying to move a non king piece backwards
                 if (id == 0 && yDir < 1 && !piece.getKing()) {
                     Log.e("movePiece: ", "Can't move backwards because not king");
+
                     return false;
                 }
 
                 //this checks if player two is not trying to move a non king piece backwards
                 else if (id == 1 && yDir == 1 && !piece.getKing()) {
+
                     Log.e("movePiece: ", "Can't move backwards because not king");
                     return false;
                 }
                 else{
+                    if(piece.equals(p2Pieces[1])) {
+                        Log.e("lego3", "True x = " + piece.getXcoordinate() + "y = " + piece.getYcoordinate());
+                        Log.e("lego3", "xDire = " + xDir + "yDire = " + yDir);
+
+                    }
                     return true;
                 }
             }
@@ -379,7 +397,10 @@ public class CheckersGameState extends GameState {
         }
         //will return false if the player tries to move
         else {
-            Log.e( "movePiece: ","not in range" );
+            if(piece.equals(p2Pieces[1])) {
+                Log.e("lego4", "True x = " + piece.getXcoordinate() + "y = " + piece.getYcoordinate());
+                Log.e("lego4", "xDire = " + xDir + "yDire = " + yDir);
+            }
             return false;
         }
     }
@@ -555,6 +576,112 @@ public class CheckersGameState extends GameState {
      */
     public boolean CaptureEnemyPiece(int xLocation,int yLocation,int nVX,int nVY){
         boolean returnValue = false;//gets returned if conditions are not valid
+        int xDist = xLocation - nVX;
+        int yDist = yLocation - nVY;
+
+        Log.e("Coordinates","nVY = " +nVY );
+        if(playerTurn == 0 && yDist < 0  && !pieceSelectedPiece.getKing()){
+            return false;
+        }
+
+        if(playerTurn == 1 && yDist >0 && !pieceSelectedPiece.getKing()){
+            return false;
+        }
+        Log.e("hello","hello");
+        //if player one's turn
+        if(playerTurn == 0) {
+            //runs through all of player 2's pieces to see if they match the xLocation and yLocation
+            for (CheckersPiece piece : p2Pieces) {
+                //checks if piece matches the xLocation and yLocation
+                if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
+                        && piece.getAlive()) {
+
+                    //how far away the enemy piece is
+                    //int xDist = xLocation - nVX;
+                    //int yDist = yLocation - nVY;
+
+
+
+                    //if distance is in range of the piece
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY+yDist*2)){
+                        //final location of the piece that does the capturing
+                        int xFinal = nVX + xDist*2;
+                        int yFinal = nVY + yDist*2;
+
+                        //checks if spot ahead of the victim is empty
+                        if(isEmpty(xFinal,yFinal)){
+                            //if all conditions are met it captures the piece
+                            piece.setAlive(false);
+                            pieceSelectedPiece.setCoordinates(xFinal,yFinal);
+                            p2NumPieces = p2NumPieces-1;
+                            if(playerTurn == 0){
+                                //playerTurn = 1;
+                                if(pieceSelectedPiece.getYcoordinate() == 7){
+                                    pieceSelectedPiece.setKing(true);
+                                }
+                            }
+                            setPlayerTurn(1);
+                            setPieceSelectedPieceAndPieceSelectedBoolean();
+
+                            return true;
+                        }
+                    }
+
+                }
+
+            }
+            return false;
+        }
+
+        //if player two's turn
+        //this code is the same as before except it runs though p1's pieces
+        else if(playerTurn == 1 ){
+            for (CheckersPiece piece : p1Pieces) {
+                if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
+                        && piece.getAlive()) {
+                    //int xDist = xLocation - nVX;
+                    //int yDist = yLocation - nVY;
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
+                        int xFinal = nVX + xDist*2;
+                        int yFinal = nVY + yDist*2;
+                        if(isEmpty(xFinal,yFinal)){
+
+                            piece.setAlive(false);
+                            pieceSelectedPiece.setCoordinates(xFinal,yFinal);
+
+
+                            p1NumPieces = p1NumPieces-1;
+                            if(playerTurn == 1){
+                                //playerTurn = 1;
+                                if(pieceSelectedPiece.getYcoordinate() == 0){
+                                    pieceSelectedPiece.setKing(true);
+                                }
+                            }
+                            setPlayerTurn(0);
+                            setPieceSelectedPieceAndPieceSelectedBoolean();
+
+
+                            return true;
+
+
+                        }
+                    }
+
+                }
+            }
+            return false;
+        }
+
+
+        else {
+            return false;
+        }
+
+
+    }
+
+    public boolean checkIfCanCaptureEnemyPiece(int xLocation,int yLocation,int nVX,int nVY){
+        boolean returnValue = false;//gets returned if conditions are not valid
 
         //if player one's turn
         if(playerTurn == 0) {
@@ -569,28 +696,13 @@ public class CheckersGameState extends GameState {
                     int yDist = yLocation - nVY;
 
                     //if distance is in range of the piece
-                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,yDist*2)){
                         //final location of the piece that does the capturing
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
 
                         //checks if spot ahead of the victim is empty
                         if(isEmpty(xFinal,yFinal)){
-                            //if all conditions are met it captures the piece
-                            piece.setAlive(false);
-                            pieceSelectedPiece.setCoordinates(xFinal,yFinal);
-
-                            Log.e( "xl2425","p2NumPieces before" + p2NumPieces);
-                            p2NumPieces = p2NumPieces-1;
-                            Log.e( "xl2425","p2NumPieces after" + p2NumPieces);
-                            if(playerTurn == 0){
-                                //playerTurn = 1;
-                                if(pieceSelectedPiece.getYcoordinate() == 7){
-                                    pieceSelectedPiece.setKing(true);
-                                }
-                            }
-                            setPlayerTurn(54);
-                            setPieceSelectedPieceAndPieceSelectedBoolean();
 
                             return true;
                         }
@@ -603,36 +715,19 @@ public class CheckersGameState extends GameState {
 
         //if player two's turn
         //this code is the same as before except it runs though p1's pieces
-        else if(playerTurn == 1){
+        if(playerTurn == 1 ){
             for (CheckersPiece piece : p1Pieces) {
-                if(piece.equals(p2Pieces[0])) {
-                    Log.e("cp34r33", "nVX = " + nVX + "nYy = " + nVY + "\n" + piece + "\n" + "xLoc = " + xLocation + "yLoc = " + yLocation);
-                }
                 if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
                         && piece.getAlive()) {
-                    Log.e("cp343","nVX = "+ nVX + "nYy = "+nVY );
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
                         if(isEmpty(xFinal,yFinal)){
-                            piece.setAlive(false);
-                            pieceSelectedPiece.setCoordinates(xFinal,yFinal);
-
-
-                            p1NumPieces = p1NumPieces-1;
-                            if(playerTurn == 1){
-                                //playerTurn = 1;
-                                if(pieceSelectedPiece.getYcoordinate() == 0){
-                                    pieceSelectedPiece.setKing(true);
-                                }
-                            }
-                            setPlayerTurn(54);
-                            setPieceSelectedPieceAndPieceSelectedBoolean();
-
 
                             return true;
+
                         }
                     }
 
