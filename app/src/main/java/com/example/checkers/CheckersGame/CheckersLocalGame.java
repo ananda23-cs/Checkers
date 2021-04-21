@@ -15,6 +15,7 @@ import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGame.Actions.ChooseAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.CheckersGame.players.CheckersComputerPlayer1;
+import com.example.checkers.CheckersGame.players.CheckersComputerPlayer2;
 import com.example.checkers.CheckersGame.players.CheckersHumanPlayer;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
@@ -141,19 +142,25 @@ public class CheckersLocalGame extends LocalGame {
             else{
                 int xDire=x-state.getPieceSelectedPiece().getXcoordinate();
                 int yDire=y-state.getPieceSelectedPiece().getYcoordinate();
-                if(state.hasEnemyPieces(x,y) && (action.getPlayer() instanceof CheckersHumanPlayer)){
-                    if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+                if(state.hasEnemyPieces(x,y) &&
+                        (action.getPlayer() instanceof CheckersHumanPlayer)){
+                    if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),
+                            state.getPieceSelectedPiece().getYcoordinate())){
                         state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                         return true;
                     }
                 }
-                else if(state.hasEnemyPieces(x,y) && (action.getPlayer() instanceof CheckersComputerPlayer1)){
-                    if(state.CaptureEnemyPieceCP(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
+                else if(state.hasEnemyPieces(x,y) &&
+                        (action.getPlayer() instanceof CheckersComputerPlayer1 ||
+                                action.getPlayer() instanceof CheckersComputerPlayer2)){
+                    if(state.CaptureEnemyPieceCP(x,y,state.getPieceSelectedPiece().getXcoordinate(),
+                            state.getPieceSelectedPiece().getYcoordinate())){
                         state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                         return true;
                     }
                 }
-                else if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
+                else if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,
+                                                            state.getPlayerTurn())){
                     state.move(xDire,yDire);
                     state.setMessage("This is a valid move." );
                     state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
