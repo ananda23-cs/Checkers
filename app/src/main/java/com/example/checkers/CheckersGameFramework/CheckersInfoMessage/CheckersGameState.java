@@ -569,7 +569,7 @@ public class CheckersGameState extends GameState {
                     int yDist = yLocation - nVY;
 
                     //if distance is in range of the piece
-                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,yDist*2)){
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
                         //final location of the piece that does the capturing
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
@@ -603,7 +603,7 @@ public class CheckersGameState extends GameState {
 
         //if player two's turn
         //this code is the same as before except it runs though p1's pieces
-        if(playerTurn == 1 ){
+        else if(playerTurn == 1){
             for (CheckersPiece piece : p1Pieces) {
                 if(piece.equals(p2Pieces[0])) {
                     Log.e("cp34r33", "nVX = " + nVX + "nYy = " + nVY + "\n" + piece + "\n" + "xLoc = " + xLocation + "yLoc = " + yLocation);

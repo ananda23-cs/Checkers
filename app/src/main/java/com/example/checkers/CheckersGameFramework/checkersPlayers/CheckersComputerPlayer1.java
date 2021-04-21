@@ -46,11 +46,12 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         else if(((CheckersGameState) info).getPlayerTurn()==this.playerNum) {
             sleep(1);
             //runs though all the players pieces
-            if(((CheckersGameState) info).getPlayerTurn() == 1) {
+            if(this.playerNum == 1) {
                 for (CheckersPiece piece : ((CheckersGameState) info).p2Pieces) {
-                    Log.e("xlr15", "hello" + ((CheckersGameState) info).p1Pieces[10]);
+                    //Log.e("xlr15", "hello" + ((CheckersGameState) info).p1Pieces[10]);
                     //if the piece is alive
                     if (piece.getAlive()) {
+                        ((CheckersGameState) info).setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(),piece.getYcoordinate());
                         //moves right forward if it can
                         if (((CheckersGameState) info).canMove(piece, 1, -1, ((CheckersGameState) info).getPlayerTurn())) {
                             game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
