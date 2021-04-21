@@ -95,8 +95,12 @@ public class CheckersGameState extends GameState {
         super.numSetupTurns = original.numSetupTurns;
         this.message = original.message;
         this.pieceSelectedBoolean = original.pieceSelectedBoolean;
-        this.pieceSelectedPiece = original.pieceSelectedPiece;
-
+        if(original.pieceSelectedPiece != null) {
+            this.pieceSelectedPiece = new CheckersPiece(original.pieceSelectedPiece);
+        }
+        else{
+            this.pieceSelectedPiece = null;
+        }
     } //CheckersGameState
 
     /**
