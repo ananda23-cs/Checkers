@@ -8,12 +8,9 @@
 
 package com.example.checkers.CheckersGame.players;
 
-import android.util.Log;
-
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
-import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
@@ -44,10 +41,6 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
             return;
         }
         else if(((CheckersGameState) info).getPlayerTurn() == playerNum){
-
-
-            sleep(1);
-
             //list of possible moves
             ArrayList<CheckersChoosePieceAction[]> possibleMoves = new ArrayList<CheckersChoosePieceAction[]>();
             ArrayList<CheckersChoosePieceAction[]> possibleCaptures = new ArrayList<CheckersChoosePieceAction[]>();
@@ -92,15 +85,15 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
             int possibleMovesIndex = (int)(Math.random()*(possibleMoves.size()));
 
             if(possibleCaptures.size()>0){
+                sleep(1);
                 for(CheckersChoosePieceAction action : possibleCaptures.get(possibleCapturesIndex)){
-                    game.sendAction(action);
                     game.sendAction(action);
                 }
             }
 
             else if(possibleMoves.size() >0) {
+                sleep(1);
                 for (CheckersChoosePieceAction action : possibleMoves.get(possibleMovesIndex)) {
-                    game.sendAction(action);
                     game.sendAction(action);
                 }
             }

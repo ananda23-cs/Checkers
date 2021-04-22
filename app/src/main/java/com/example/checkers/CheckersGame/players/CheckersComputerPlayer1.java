@@ -45,9 +45,6 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             return;
         }
         else if(((CheckersGameState) info).getPlayerTurn() == playerNum){
-
-
-            sleep(1);
             //list of possible moves
             ArrayList<CheckersChoosePieceAction[]> possibleMoves = new ArrayList<CheckersChoosePieceAction[]>();
             CheckersPiece [] Pieces;
@@ -81,16 +78,12 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                 checkValidCapture(((CheckersGameState)info),piece,possibleMoves,+1,+1);
                 //if capturing left forwards is a valid move it gets added to the list of possible moves
                 checkValidCapture(((CheckersGameState)info),piece,possibleMoves,-1,+1);
-
-
-
-
             }
 
             int possibleMovesIndex = (int)(Math.random()*(possibleMoves.size()));
-            if(possibleMoves.size() >0) {
+            if(possibleMoves.size() > 0) {
+                sleep(1);
                 for (CheckersChoosePieceAction action : possibleMoves.get(possibleMovesIndex)) {
-                    game.sendAction(action);
                     game.sendAction(action);
                 }
             }
