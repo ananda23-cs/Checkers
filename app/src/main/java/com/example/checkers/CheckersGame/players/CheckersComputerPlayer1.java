@@ -8,9 +8,6 @@
 
 package com.example.checkers.CheckersGame.players;
 
-import android.util.Log;
-
-import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
@@ -50,14 +47,12 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         else if(((CheckersGameState) info).getPlayerTurn() == playerNum){
 
 
-            //sleep(1);
-
-
+            sleep(1);
             //list of possible moves
             ArrayList<CheckersChoosePieceAction[]> possibleMoves = new ArrayList<CheckersChoosePieceAction[]>();
             CheckersPiece [] Pieces;
 
-            if(playerNum == 1){
+            if(((CheckersGameState) info).getPlayerTurn() == 1){
                 Pieces = ((CheckersGameState) info).p2Pieces;
             }
             else{
@@ -90,7 +85,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
 
 
 
-                }
+            }
 
             int possibleMovesIndex = (int)(Math.random()*(possibleMoves.size()));
             if(possibleMoves.size() >0) {
@@ -99,9 +94,6 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                     game.sendAction(action);
                 }
             }
-
-
-
         }
     } //receiveInfo
 
