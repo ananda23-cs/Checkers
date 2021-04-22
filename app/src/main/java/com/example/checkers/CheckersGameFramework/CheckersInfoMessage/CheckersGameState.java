@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.ImageButton;
 
 import com.example.checkers.CheckersGameFramework.CheckersPiece;
+import com.example.checkers.CheckersGameFramework.checkersPlayers.CheckersComputerPlayer2;
 import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 
@@ -30,7 +31,7 @@ public class CheckersGameState extends GameState {
     private String message;// this is what will be displayed for
     //add grid here
     ImageButton[][] board; //displays the 8x8 checkerboard
-
+    //Thread timer = new Thread();
 
     //initial constructor for the beginning of the game
     public CheckersGameState(){
@@ -76,7 +77,7 @@ public class CheckersGameState extends GameState {
 //        p1Pieces[10].setAlive(false);
 //        p2Pieces[2].setCoordinates(2,2);
 //        p2Pieces[7].setCoordinates(4,4);
-//        //p2Pieces[11].setCoordinates(6,6);
+//        p2Pieces[11].setCoordinates(6,6);
 //        p2Pieces[9].setAlive(false);
 
 
@@ -86,8 +87,6 @@ public class CheckersGameState extends GameState {
 //        p2Pieces[1].setCoordinates(4,2);
 //        p1Pieces[5].setCoordinates(6,6);
 //        p2Pieces[2].setCoordinates(2,4);
-
-
 
         pieceSelectedBoolean = false;
         message = "";
@@ -649,25 +648,29 @@ public class CheckersGameState extends GameState {
                                 }
                             }
 
-//                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal)){
-//                                CaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal);
-//                            }
-//
-//                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal)){
-//                                CaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal);
-//                            }
-//
-//                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal)){
-//                                CaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal);
-//                            }
-//
-//                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal)){
-//                                CaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal);
-//                            }
+                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal);
+
+                            }
+
+                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal);
+
+                            }
+
+                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal);
+
+                            }
+
+                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal);
+
+                            }
 
 
 
-                            setPlayerTurn(1);
+                            //setPlayerTurn(1);
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
                             return true;
@@ -706,23 +709,27 @@ public class CheckersGameState extends GameState {
                             }
 
 
-//                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal)){
-//                                CaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal);
-//                            }
-//
-//                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal)){
-//                                CaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal);
-//                            }
-//
-//                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal)){
-//                                CaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal);
-//                            }
-//
-//                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal)){
-//                                CaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal);
-//                            }
+                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal);
 
-                            setPlayerTurn(0);
+                            }
+
+                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal);
+
+                            }
+
+                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal);
+
+                            }
+
+                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal);
+
+                            }
+
+                            //setPlayerTurn(0);
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
 
