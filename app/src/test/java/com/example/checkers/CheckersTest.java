@@ -9,7 +9,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CheckersTest {
-
     @Test
     public void testMovePiece(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -22,8 +21,13 @@ public class CheckersTest {
 
     @Test
     public void testMoveKingPiece(){
-        CheckersGameState checkersGameState = new CheckersGameState();
-        checkersGameState.setPlayerTurn(0);
+        CheckersGameState checkersState = new CheckersGameState();
+        checkersState.setPlayerTurn(0);
+        checkersState.setPieceSelectedPieceAndPieceSelectedBoolean(2,2);
+        CheckersPiece kingPiece = checkersState.getPieceSelectedPiece();
+        kingPiece.setCoordinates(3,3);
+        kingPiece.setKing(true);
+        assertEquals(true,checkersState.canMove(kingPiece,-1,-1,0));
     }
 
     @Test
@@ -44,6 +48,21 @@ public class CheckersTest {
         piece2.setCoordinates(4,4);
         state.setPlayerTurn(0);
         state.setPieceSelectedPieceAndPieceSelectedBoolean(3,3);
+        state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
+                                piece1.getXcoordinate(),piece1.getYcoordinate());
+        assertEquals(false, piece2.getAlive());
+    }
+
+    @Test
+    public void testCaptureEnemyPieceAsKing(){
+        CheckersGameState state = new CheckersGameState();
+        CheckersPiece piece1 = state.p1Pieces[10];
+        CheckersPiece piece2 = state.p2Pieces[2];
+        piece1.setCoordinates(4,4);
+        piece2.setCoordinates(3,3);
+        piece1.setKing(true);
+        state.setPlayerTurn(0);
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(4,4);
         state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
                                 piece1.getXcoordinate(),piece1.getYcoordinate());
         assertEquals(false, piece2.getAlive());

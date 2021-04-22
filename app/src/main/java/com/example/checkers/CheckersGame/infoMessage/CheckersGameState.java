@@ -407,6 +407,9 @@ public class CheckersGameState extends GameState {
 
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
+                    if(yDist < 1 && !pieceSelectedPiece.getKing()){
+                        return false;
+                    }
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,
                             nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
@@ -425,6 +428,9 @@ public class CheckersGameState extends GameState {
 
                             return true;
                         }
+                        else{
+                            return false;
+                        }
                     }
 
                 }
@@ -438,6 +444,9 @@ public class CheckersGameState extends GameState {
 
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
+                    if(yDist == 1 && !pieceSelectedPiece.getKing()){
+                        return false;
+                    }
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
@@ -454,6 +463,9 @@ public class CheckersGameState extends GameState {
                             setPieceSelectedPieceAndPieceSelectedBoolean();
 
                             return true;
+                        }
+                        else{
+                            return false;
                         }
                     }
 

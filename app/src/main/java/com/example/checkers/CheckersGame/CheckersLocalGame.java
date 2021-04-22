@@ -142,6 +142,10 @@ public class CheckersLocalGame extends LocalGame {
                         state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                         return true;
                     }
+                    else{
+                        state.setMessage("Invalid capture. Try again.");
+                        return false;
+                    }
                 }
                 else if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,
                                                             state.getPlayerTurn())){
@@ -152,6 +156,7 @@ public class CheckersLocalGame extends LocalGame {
                 }
                 else{
                     state.setMessage("Invalid move. Try again.");
+                    return false;
                 }
             }
         }
