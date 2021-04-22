@@ -139,6 +139,12 @@ public class CheckersLocalGame extends LocalGame {
                     if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),
                             state.getPieceSelectedPiece().getYcoordinate())){
                         state.setMessage("Valid capture.");
+                        if(state.getPlayerTurn() == 0){
+                            state.setP2NumPieces(state.getP2NumPieces()-1);
+                        }
+                        else{
+                            state.setP1NumPieces(state.getP1NumPieces()-1);
+                        }
                         state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                         return true;
                     }

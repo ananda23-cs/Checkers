@@ -8,9 +8,7 @@
 
 package com.example.checkers.CheckersGame.infoMessage;
 
-import android.util.Log;
 import android.widget.ImageButton;
-
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 
 public class CheckersGameState extends GameState {
@@ -216,6 +214,23 @@ public class CheckersGameState extends GameState {
 
     } //hasEnemyPieces
 
+    /**finds piece at xCord and yCord
+     * @param xCord
+     * @param yCord
+     * @return piece at xCord and yCord
+     */
+    public CheckersPiece findPiece(int xCord,int yCord){
+        for(int i = 0;i<12;i++){
+            if(p1Pieces[i].getYcoordinate() == yCord && p1Pieces[i].getXcoordinate() == xCord){
+                return p1Pieces[i];
+            }
+            else if (p2Pieces[i].getYcoordinate() == yCord && p2Pieces[i].getXcoordinate() == xCord){
+                return p2Pieces[i];
+            }
+        }
+        return null;
+    }
+
     /**
      * method canMove
      * checks if player can move
@@ -240,13 +255,11 @@ public class CheckersGameState extends GameState {
 
                 //this checks if player one is not trying to move a non king piece backwards
                 if (id == 0 && yDir < 1 && !piece.getKing()) {
-                    Log.e("movePiece: ", "Can't move backwards because not king");
                     return false;
                 }
 
                 //this checks if player two is not trying to move a non king piece backwards
                 else if (id == 1 && yDir == 1 && !piece.getKing()) {
-                    Log.e("movePiece: ", "Can't move backwards because not king");
                     return false;
                 }
                 else{
@@ -255,13 +268,11 @@ public class CheckersGameState extends GameState {
             }
             //returns false if the move is out of bounds or tries to move into a spot with another piece
             else {
-                Log.e("movePiece: ", "not in bounds");
                 return false;
             }
         }
         //will return false if the player tries to move
         else {
-            Log.e( "movePiece: ","not in range" );
             return false;
         }
     } //canMove
@@ -359,7 +370,6 @@ public class CheckersGameState extends GameState {
                                                 pieceSelectedPiece.getYcoordinate()+yDire);
 
         if(playerTurn == 0){
-            //playerTurn = 1;
             if(pieceSelectedPiece.getYcoordinate() == 7){
                 pieceSelectedPiece.setKing(true);
             }
@@ -370,7 +380,6 @@ public class CheckersGameState extends GameState {
             if(pieceSelectedPiece.getYcoordinate() == 0){
                 pieceSelectedPiece.setKing(true);
             }
-            //playerTurn = 0;
         }
 
         setPieceSelectedPieceAndPieceSelectedBoolean(-1,-1);
@@ -390,14 +399,10 @@ public class CheckersGameState extends GameState {
     /**
      * method CaptureEnemyPiece
      * checks if player can capture the enemies piece
-     * @param xLocation
-     *      x location of piece
-     * @param yLocation
-     *      y location of piece
-     * @param nVX
-     *      not valid x location
-     * @param nVY
-     *      not valid y location
+     * @param xLocation x location of piece being
+     * @param yLocation y location of piece
+     * @param nVX not valid x location
+     * @param nVY not valid y location
      */
     public boolean CaptureEnemyPiece(int xLocation,int yLocation,int nVX,int nVY){
         if(playerTurn == 0) {
@@ -418,8 +423,6 @@ public class CheckersGameState extends GameState {
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
 
-                            setP2NumPieces(p2NumPieces-1);
-
                             if(pieceSelectedPiece.getYcoordinate() == 7){
                                 pieceSelectedPiece.setKing(true);
                             }
@@ -434,7 +437,6 @@ public class CheckersGameState extends GameState {
                     }
 
                 }
-
             }
         }
         else if(playerTurn == 1){
@@ -453,8 +455,6 @@ public class CheckersGameState extends GameState {
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
-
-                            setP1NumPieces(p1NumPieces-1);
 
                             if(pieceSelectedPiece.getYcoordinate() == 7){
                                 pieceSelectedPiece.setKing(true);
