@@ -31,10 +31,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     ImageButton[][] board;//the board
     private Button cancelButton;
-    private TextView gameInfo;
+    private TextView gameInfo, humanPlayerId, computerPlayerId;
     private int layoutID;
-    //private CheckersGameState checkersGameState;
-
 
     /**
      * constructor CheckersHumanPlayer
@@ -68,12 +66,13 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         } else if (!(info instanceof CheckersGameState)) return;
         else {
             ((CheckersGameState) info).setImageBoard(board);
-            Log.e("human", "p2piece" + ((CheckersGameState) info).p2Pieces[1]);
-
-            //checkersGameState = (CheckersGameState) info;
-            //checkersGameState.setBoard(board);
             gameInfo.setText(((CheckersGameState) info).getMessage());
-
+            if(((CheckersGameState) info).getPlayerTurn() == 0){
+                getTopView().setBackgroundColor(0xFFE6E5E5);
+            }
+            else{
+                getTopView().setBackgroundColor(0xFFFFADEC);
+            }
             // alternates between red and white tiles in a checkerboard pattern
             for (int height = 0; height < 8; height++) {
                 for (int length = 0; length < 8; length++) {
@@ -196,6 +195,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
         // get id's from GUI
         gameInfo = activity.findViewById(R.id.gameInfo);
+        humanPlayerId = activity.findViewById(R.id.humanPlayerId2);
+        computerPlayerId = activity.findViewById(R.id.computerPlayerId);
         cancelButton = activity.findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
     } //setAsGui
@@ -207,7 +208,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     protected void initAfterReady() {
         myActivity.setTitle("Checkers: " + allPlayerNames[0] + " vs. " + allPlayerNames[1]);
-
+        humanPlayerId.setText(allPlayerNames[playerNum]);
+        computerPlayerId.setText(allPlayerNames[1-playerNum]);
         // sets onclicklisteners for the tiles
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -223,14 +225,16 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         if(button instanceof Button){
             game.sendAction(new CheckersCancelMoveAction(this,4,4));
         }
-        //sends a Choose action if any other button is pressed. A choose action selects,captures or moves a piece
-        //this forloop is used to gain the access the location of the button which is needed chooseaction object
+        /*sends a Choose action if any other button is pressed.
+          A choose action selects,captures or moves a piece*/
+        /*this for loop is used to gain the access the location of the button which is needed
+        choose action object*/
         if (button instanceof ImageButton) {
             for (int x = 0; x < 8; x++) {
                 for (int y = 0; y < 8; y++) {
                     if (board[x][y].equals(button)) {
                         Log.e("onClick: ", "x = " + x + "y = " + y);
-                        //sends a
+                        //sends a move action whenever a piece is selected
                         game.sendAction(new CheckersMoveAction(this, x, y));
                     }
                 }

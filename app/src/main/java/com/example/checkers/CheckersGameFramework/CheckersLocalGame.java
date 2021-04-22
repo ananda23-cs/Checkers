@@ -9,8 +9,6 @@
 
 package com.example.checkers.CheckersGameFramework;
 
-import android.util.Log;
-
 import com.example.checkers.CheckersGameFramework.CheckersInfoMessage.CheckersGameState;
 import com.example.checkers.CheckersGameFramework.checkersActionMessage.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGameFramework.checkersActionMessage.CheckersMoveAction;
@@ -19,9 +17,6 @@ import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersLocalGame extends LocalGame {
-
-
-
     /**
      * Constructor for the CheckersLocalGame.
      */
@@ -74,43 +69,19 @@ public class CheckersLocalGame extends LocalGame {
      * checks if the game is over. If it's over, return a message
      * showing who won the game. If not, return null
      *
-     * @return
-     *          a String message showing the winner of the game
+     * @return  a String message showing the winner of the game
      *          or null
      */
     @Override
     protected String checkIfGameOver() {
         CheckersGameState state = (CheckersGameState) super.state;
-
-        boolean p1Alive = false;
-        boolean p2Alive = false;
-
-        for(CheckersPiece piece : state.p1Pieces){
-            if (piece.getAlive()){
-                p1Alive = true;
-            }
-        }
-
-        for(CheckersPiece piece : state.p2Pieces){
-            if (piece.getAlive()){
-                p2Alive = true;
-            }
-        }
-
-        if (!p2Alive) {
-            return "Player 1 won!";
-        } else if (!p1Alive) {
-            return "Player 2 won!";
+        if (state.getP1NumPieces() == 0) {
+          return playerNames[1] + " won! ";
+        } else if (state.getP2NumPieces() == 0) {
+            return playerNames[0] + " won! ";
         } else {
             return null;
         }
-//        if (state.getP1NumPieces() == 0) {
-//            return "Player 2 won!";
-//        } else if (state.getP2NumPieces() == 0) {
-//            return "Player 1 won!";
-//        } else {
-//            return null;
-//        }
     } //checkIfGameOver
 
     /**
@@ -174,7 +145,7 @@ public class CheckersLocalGame extends LocalGame {
                             state.getPieceSelectedPiece().getXcoordinate(),
                             state.getPieceSelectedPiece().getYcoordinate())){
                         state.setMessage("Valid capture");
-                        state.setPlayerTurn(1-state.getPlayerTurn());
+                        state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                         return true;
                     }
                     else{
@@ -187,6 +158,7 @@ public class CheckersLocalGame extends LocalGame {
                 if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
                     state.setMessage("This is a valid move.");
                     state.move(xDire,yDire);
+                    state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                     return true;
                 }
                 else{

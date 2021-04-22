@@ -47,7 +47,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         }
 
         else if(((CheckersGameState) info).getPlayerTurn()==this.playerNum) {
-            sleep(0.5);
+            sleep(1);
             CheckersGameState copy = new CheckersGameState((CheckersGameState)info);
             ArrayList<CheckersMoveAction[]> possibleMoves = new ArrayList<CheckersMoveAction[]>();
 

@@ -71,4 +71,13 @@ public class CheckersPiece {
     public void setKing(boolean king) {
         this.isKing = king;
     }
+
+    public boolean equals(Object object){
+        if(!(object instanceof CheckersPiece)) return false;
+        return this.xCord == ((CheckersPiece) object).xCord &&
+                this.yCord == ((CheckersPiece) object).yCord &&
+                this.isKing == ((CheckersPiece) object).isKing &&
+                this.isAlive == ((CheckersPiece) object).isAlive &&
+                this.owner == ((CheckersPiece) object).owner;
+    }
 }
