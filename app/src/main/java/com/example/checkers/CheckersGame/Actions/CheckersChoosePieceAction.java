@@ -11,7 +11,7 @@ package com.example.checkers.CheckersGame.Actions;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
-public class ChooseAction extends GameAction {
+public class CheckersChoosePieceAction extends GameAction {
     private int x,y;
 
     /**
@@ -24,7 +24,7 @@ public class ChooseAction extends GameAction {
      * @param y
      *      y coordinate of piece
      */
-    public ChooseAction(GamePlayer player,int x,int y){
+    public CheckersChoosePieceAction(GamePlayer player, int x, int y){
         super(player);
         this.x = Math.max(0,Math.min(7,x));
         this.y = Math.max(0,Math.min(7,y));

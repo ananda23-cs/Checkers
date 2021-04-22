@@ -9,14 +9,9 @@
 
 package com.example.checkers.CheckersGame;
 
-import android.util.Log;
-
 import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
-import com.example.checkers.CheckersGame.Actions.ChooseAction;
+import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
-import com.example.checkers.CheckersGame.players.CheckersComputerPlayer1;
-import com.example.checkers.CheckersGame.players.CheckersComputerPlayer2;
-import com.example.checkers.CheckersGame.players.CheckersHumanPlayer;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
@@ -109,16 +104,13 @@ public class CheckersLocalGame extends LocalGame {
             state.setMessage("Choose another piece.");
             return true;
         }
-        else if(action instanceof ChooseAction){
+        else if(action instanceof CheckersChoosePieceAction){
 
-            ChooseAction ca = (ChooseAction) action;
+            CheckersChoosePieceAction ca = (CheckersChoosePieceAction) action;
             CheckersGameState state = (CheckersGameState) super.state;
 
             int x = ca.getXLoc();
             int y = ca.getYLoc();
-
-            // get player id
-            //int playerId = state.getPlayerTurn();
 
             if(!state.isPieceSelectedBoolean()){
                 // checks if spot is empty
