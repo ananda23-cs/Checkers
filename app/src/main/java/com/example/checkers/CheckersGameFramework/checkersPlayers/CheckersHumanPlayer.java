@@ -8,6 +8,7 @@
 
 package com.example.checkers.CheckersGameFramework.checkersPlayers;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
@@ -118,7 +119,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     public void setAsGui(GameMainActivity activity) {
         activity.setContentView(layoutID);
-
+        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // set tiles to the correct coordinates on the board
         // row 1
         board[0][0] = (ImageButton) activity.findViewById(R.id.tile11);

@@ -151,11 +151,12 @@ public class CheckersLocalGame extends LocalGame {
                     // checks if piece belongs to player
                     if (state.hasEnemyPieces(x,y)) {
                         state.setMessage("This piece is not yours. Please try again.");
+                        return false;
                     }
                     // if conditions are true, piece is chosen
                     else{
                         state.setMessage("This piece can be moved. Click on the spot where you want to move it." );
-                        ((CheckersGameState)super.state).setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
+                        state.setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
                         return true;
                     }
                 }
@@ -169,19 +170,28 @@ public class CheckersLocalGame extends LocalGame {
 
                 //captures a piece
                 if(state.hasEnemyPieces(x,y)){
-                    if(((CheckersGameState)super.state).CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),state.getPieceSelectedPiece().getYcoordinate())){
-                        ((CheckersGameState) super.state).setPlayerTurn(1);
+                    if(state.CaptureEnemyPiece(x,y,
+                            state.getPieceSelectedPiece().getXcoordinate(),
+                            state.getPieceSelectedPiece().getYcoordinate())){
+                        state.setMessage("Valid capture");
+                        state.setPlayerTurn(1-state.getPlayerTurn());
                         return true;
+                    }
+                    else{
+                        state.setMessage("Invalid capture.");
+                        return false;
                     }
                 }
 
                 //moves a piece
-                if(((CheckersGameState)super.state).canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
-
-                    ((CheckersGameState)super.state).move(xDire,yDire);
-                    state.setMessage("This is a valid move." );
-
+                if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,state.getPlayerTurn())){
+                    state.setMessage("This is a valid move.");
+                    state.move(xDire,yDire);
                     return true;
+                }
+                else{
+                    state.setMessage("Invalid move. Try again.");
+                    return false;
                 }
 
 

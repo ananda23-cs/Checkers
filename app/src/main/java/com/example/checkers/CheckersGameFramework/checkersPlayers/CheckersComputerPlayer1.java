@@ -52,7 +52,7 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             ArrayList<CheckersMoveAction[]> possibleMoves = new ArrayList<CheckersMoveAction[]>();
 
 
-            CheckersPiece[] checkersPieces = new CheckersPiece[12];
+            CheckersPiece[] checkersPieces;
             if(((CheckersGameState) info).getPlayerTurn() == 1){
                 checkersPieces = copy.p2Pieces;
             }
@@ -84,8 +84,6 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                         moveLB[0] = new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate());
                         moveLB[1] = new CheckersMoveAction( this, piece.getXcoordinate() - 1, piece.getYcoordinate() - 1);
                         possibleMoves.add(moveLB);
-
-
 
                     }
 
@@ -129,26 +127,19 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                     }
 
                     //captures a piece to the right forward if it can
-//                    else if(copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate() + 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate())){
-//                        CheckersMoveAction[] moveRCF = new CheckersMoveAction[2];
-//                        moveRCF[0] = new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate());
-//                        moveRCF[1] = new CheckersMoveAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() + 1);
-//                        possibleMoves.add(moveRCF);
-////                        game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
-////                        game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() + 1));
-//                    }
-//
-//                    else if(copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate() - 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate())){
-//                        CheckersMoveAction[] moveLCF = new CheckersMoveAction[2];
-//                        moveLCF[0] = new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate());
-//                        moveLCF[1] = new CheckersMoveAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() + 1);
-//                        possibleMoves.add(moveLCF);
-////                        game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
-////                        game.sendAction(new CheckersMoveAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() + 1));
-//                    }
+                    if(copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate() + 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate())){
+                        CheckersMoveAction[] moveRCF = new CheckersMoveAction[2];
+                        moveRCF[0] = new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate());
+                        moveRCF[1] = new CheckersMoveAction(this, piece.getXcoordinate() + 1, piece.getYcoordinate() + 1);
+                        possibleMoves.add(moveRCF);
+                    }
 
-
-
+                    if(copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate() - 1, piece.getYcoordinate() + 1, piece.getXcoordinate(), piece.getYcoordinate())){
+                        CheckersMoveAction[] moveLCF = new CheckersMoveAction[2];
+                        moveLCF[0] = new CheckersMoveAction(this, piece.getXcoordinate(), piece.getYcoordinate());
+                        moveLCF[1] = new CheckersMoveAction(this, piece.getXcoordinate() - 1, piece.getYcoordinate() + 1);
+                        possibleMoves.add(moveLCF);
+                    }
 
                 }
 
@@ -160,12 +151,6 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                     game.sendAction(move);
                 }
             }
-
-
-
-
-
-
 
 
         }
