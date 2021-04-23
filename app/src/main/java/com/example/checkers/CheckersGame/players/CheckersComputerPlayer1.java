@@ -39,14 +39,17 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
      */
     @Override
     protected void receiveInfo(GameInfo info) {
+
+        if(!(info instanceof CheckersGameState)) {
+            return;
+        }
+
         // return if not computer player's turn or not an instance of game state
-        if (info instanceof NotYourTurnInfo) {
+        else if (info instanceof NotYourTurnInfo || ((CheckersGameState) info).getPlayerTurn() != playerNum) {
             return;
         }
-        else if(!(info instanceof CheckersGameState)) {
-            return;
-        }
-        else if(((CheckersGameState) info).getPlayerTurn() == playerNum){
+
+        //else if(((CheckersGameState) info).getPlayerTurn() == playerNum){
 
 
 
@@ -66,6 +69,11 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             //arraylist above
             for(CheckersPiece piece: Pieces){
                 if(piece.getAlive()) {
+
+                    if(((CheckersGameState) info).getPieceSelectedPiece() != null) {
+                        return;
+                    }
+
                     //if moving left backwards is a possible move for this piece it gets added to the list of moves
                     checkValidMove(((CheckersGameState) info), piece, -1, -1, possibleMoves);
                     //if moving right backwards is a possible move for this piece it gets added to the list of moves
@@ -84,18 +92,28 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                     //if capturing left forwards is a valid move it gets added to the list of possible moves
                     checkValidCapture(((CheckersGameState) info), piece, possibleMoves, -1, +1);
 
+
+
+
+
                 }
 
 
             }
 
             int possibleMovesIndex = (int)(Math.random()*(possibleMoves.size()));
+
             if(possibleMoves.size() >0) {
+                Log.e("Sleeping", "x = " +  possibleMoves.get(possibleMovesIndex)[0].getXLoc());
+                Log.e("Sleeping", "y = " +  possibleMoves.get(possibleMovesIndex)[0].getYLoc());
+                sleep(0.5);
+
                 for (CheckersChoosePieceAction action : possibleMoves.get(possibleMovesIndex)) {
                     game.sendAction(action);
+
                 }
             }
-        }
+        //}
     } //receiveInfo
 
     public void checkValidMove(CheckersGameState info,CheckersPiece piece,int xDire,

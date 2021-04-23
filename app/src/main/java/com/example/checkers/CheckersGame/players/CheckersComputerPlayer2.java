@@ -45,6 +45,9 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
         }
         else if(((CheckersGameState) info).getPlayerTurn() == playerNum){
 
+            if(((CheckersGameState) info).getPieceSelectedPiece() != null) {
+                return;
+            }
 
             //sleep(1);
 
@@ -70,6 +73,7 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
             //arraylist above
             for(CheckersPiece piece: Pieces){
                 if(piece.getAlive()) {
+
                     //if moving left backwards is a possible move for this piece it gets added to the list of moves
                     checkValidMove(((CheckersGameState) info), piece, -1, -1, possibleMoves);
                     //if moving right backwards is a possible move for this piece it gets added to the list of moves
@@ -103,9 +107,11 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
             int possibleMovesIndex = (int)(Math.random()*(possibleMoves.size()));
             int possibleSaveMovesIndex = (int) (Math.random()*possibleSafeMoves.size());
 
+            sleep(0.5);
+            Log.e("Sleeping", "x = " );
+
             if(possibleCaptures.size()>0){
                 for(CheckersChoosePieceAction action : possibleCaptures.get(possibleCapturesIndex)){
-
                     game.sendAction(action);
                 }
             }
