@@ -135,6 +135,41 @@ public class CheckersTest {
     }
 
     @Test
+    public void testCaptureMultipleEnemyPiece(){
+        CheckersGameState state = new CheckersGameState();
+        CheckersPiece piece1 = state.p1Pieces[10];
+        CheckersPiece piece2 = state.p2Pieces[1];
+        CheckersPiece piece3 = state.p2Pieces[2];
+        CheckersPiece piece4 = state.p2Pieces[7];
+        piece2.setCoordinates(3,3);
+        piece4.setCoordinates(7,3);
+        state.setPlayerTurn(0);
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(2,2);
+        state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
+                                piece1.getXcoordinate(),piece1.getYcoordinate());
+        assertFalse(piece2.getAlive());
+        assertFalse(piece3.getAlive());
+        assertNotNull(state.findPiece(6,6));
+    }
+
+    @Test
+    public void testCaptureMultipleEnemyPieceAsKing(){
+        CheckersGameState state = new CheckersGameState();
+        CheckersPiece piece1 = state.findPiece(5,5);
+        CheckersPiece piece2 = state.findPiece(1,1);
+        CheckersPiece piece3 = state.findPiece(2,2);
+        piece2.setCoordinates(4,4);
+        piece1.setKing(true);
+        state.setPlayerTurn(1);
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(5,5);
+        state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
+                                piece1.getXcoordinate(),piece1.getYcoordinate());
+        assertFalse(piece2.getAlive());
+        assertFalse(piece3.getAlive());
+        assertNotNull(state.findPiece(1,1));
+    }
+
+    @Test
     public void testCaptureEnemyPieceAsKing(){
         CheckersGameState state = new CheckersGameState();
         CheckersPiece piece1 = state.p1Pieces[10];
