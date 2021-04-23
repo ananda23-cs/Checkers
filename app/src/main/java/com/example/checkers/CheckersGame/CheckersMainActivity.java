@@ -26,8 +26,8 @@ import com.example.checkers.CheckersGame.players.CheckersHumanPlayer;
 import java.util.ArrayList;
 
 public class CheckersMainActivity extends GameMainActivity {
+    public static final int PORT_NUMBER = 5213;
     private static final String CHECKERS = "CheckersMainActivity";
-    private static final int PORT_NUMBER = 5213;
 
     /**
      * sets up a default of one human and one computer player
@@ -70,7 +70,7 @@ public class CheckersMainActivity extends GameMainActivity {
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
 
         // Set the initial information for the remote players
-        //defaultConfig.setRemoteData("Remote Human Player", "", 0);
+        defaultConfig.setRemoteData("Remote Human Player", "", 0);
 
         return defaultConfig;
 
