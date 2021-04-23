@@ -189,7 +189,7 @@ public class CheckersLocalGame extends LocalGame {
                 }
             }
         }
-        return false;
+        else {return false;}
     } //makeMove
 
 }
