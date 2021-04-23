@@ -18,8 +18,60 @@ import static org.junit.Assert.*;
 public class CheckersTest {
 
     /**
-     * Tests if a list of coordinates are on the board or not
+     * Tests if a piece can capture multiple pieces under the right conditions
+     * Anand Gogoi made this
      */
+    @Test
+    public void testCaptureMultiplePieces(){
+        CheckersGameState checkersState = new CheckersGameState();
+
+        //this method is to clear the board so it is easier to test out methods becuase pieces have more space to move
+        for(int i =0; i<12;i++){
+            checkersState.p1Pieces[i].setAlive(false);
+            checkersState.p1Pieces[i].setAlive(false);
+        }
+
+        checkersState.p1Pieces[0].setAlive(true);
+
+        checkersState.p2Pieces[0].setAlive(true);
+        checkersState.p2Pieces[1].setAlive(true);
+
+
+        checkersState.p1Pieces[0].setCoordinates(0,0);
+        checkersState.p2Pieces[0].setCoordinates(1,1);
+        checkersState.p2Pieces[1].setCoordinates(3,3);
+
+        checkersState.setPieceSelectedPieceAndPieceSelectedBoolean(0,0);
+        checkersState.CaptureEnemyPiece(1,1,0,0);
+
+
+        assertFalse("This piece is dead", checkersState.p2Pieces[0].getAlive());
+        assertFalse("This piece is dead", checkersState.p2Pieces[1].getAlive());
+
+        for(int i =0; i<12;i++){
+            checkersState.p1Pieces[i].setAlive(false);
+            checkersState.p1Pieces[i].setAlive(false);
+        }
+
+        checkersState.p1Pieces[0].setAlive(true);
+
+        checkersState.p2Pieces[0].setAlive(true);
+        checkersState.p2Pieces[1].setAlive(true);
+
+
+        checkersState.p1Pieces[0].setCoordinates(0,0);
+        checkersState.p2Pieces[0].setCoordinates(1,1);
+        checkersState.p2Pieces[1].setCoordinates(1,3);
+
+        checkersState.setPieceSelectedPieceAndPieceSelectedBoolean(0,0);
+        checkersState.CaptureEnemyPiece(1,1,0,0);
+
+        assertFalse("This piece is dead", checkersState.p2Pieces[0].getAlive());
+        assertFalse("This piece is dead", checkersState.p2Pieces[1].getAlive());
+
+
+    }
+
     /**
      * tests the movement of a regular piece
      */
@@ -200,6 +252,8 @@ public class CheckersTest {
         assertTrue("Copy Constructor did not produce equal states,",
                 checkersState.equals(copyState));
     }
+
+
 
     @Test
     public void test_EqualsState_Empty(){

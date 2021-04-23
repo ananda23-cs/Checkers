@@ -88,6 +88,7 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
                     //if capturing left forwards is a valid move it gets added to the list of possible moves
                     checkValidCapture(((CheckersGameState) info), piece, possibleCaptures, -1, +1);
 
+                    //adds all possible safe moves
                     safeMove(((CheckersGameState) info), EnemyPieces,piece,-1,-1,possibleSafeMoves);
                     safeMove(((CheckersGameState) info), EnemyPieces,piece,+1,-1,possibleSafeMoves);
                     safeMove(((CheckersGameState) info), EnemyPieces,piece,-1,+1,possibleSafeMoves);
