@@ -195,6 +195,17 @@ public class CheckersTest {
         state.setPieceSelectedPieceAndPieceSelectedBoolean(4,4);
         assertFalse(state.CaptureEnemyPiece(newPiece.getXcoordinate(), newPiece.getYcoordinate(),
                                         kingPiece.getXcoordinate(), kingPiece.getYcoordinate()));
+        state.setPieceSelectedPieceAndPieceSelectedBoolean();
+
+        //valid move from player 2
+        state.setPlayerTurn(1);
+        newPiece.setKing(true);
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(5,3);
+        state.CaptureEnemyPiece(kingPiece.getXcoordinate(), kingPiece.getYcoordinate(),
+                newPiece.getXcoordinate(), newPiece.getYcoordinate());
+        assertFalse(kingPiece.getAlive());
+        assertEquals(3, newPiece.getXcoordinate());
+        assertEquals(5, newPiece.getYcoordinate());
     }
 
     @Test
