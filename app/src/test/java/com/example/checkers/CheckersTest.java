@@ -30,7 +30,7 @@ public class CheckersTest {
         CheckersPiece piece = checkersState.getPieceSelectedPiece();
         assertTrue("Invalid move.", checkersState.canMove(piece,1,1,0));
         checkersState.move(1,1);
-        assertNotNull("No piece there.", checkersState.findPiece(3,3));
+        assertEquals("Failed move.", piece, checkersState.findPiece(3,3));
 
         //valid move from player 2
         checkersState.setPlayerTurn(1);
@@ -38,7 +38,7 @@ public class CheckersTest {
         CheckersPiece piece2 = checkersState.getPieceSelectedPiece();
         assertTrue(checkersState.canMove(piece2,1,-1, 1));
         checkersState.move(1,-1);
-        assertNotNull(checkersState.findPiece(4,4));
+        assertEquals(piece2, checkersState.findPiece(4,4));
 
         //illegal move made
         checkersState.setPlayerTurn(0);
@@ -62,7 +62,7 @@ public class CheckersTest {
         kingPiece.setKing(true);
         assertTrue(checkersState.canMove(kingPiece, -1, -1, 0));
         checkersState.move(-1,-1);
-        assertNotNull(checkersState.findPiece(2,2));
+        assertEquals(kingPiece, checkersState.findPiece(2,2));
 
         //valid move from player 2
         checkersState.setPlayerTurn(1);
@@ -72,7 +72,7 @@ public class CheckersTest {
         kingPiece2.setKing(true);
         assertTrue(checkersState.canMove(kingPiece2,1,1,1));
         checkersState.move(1,1);
-        assertNotNull(checkersState.findPiece(5,5));
+        assertEquals(kingPiece2, checkersState.findPiece(5,5));
 
         //illegal move
         checkersState.setPlayerTurn(0);
@@ -112,18 +112,18 @@ public class CheckersTest {
                                 piece1.getXcoordinate(),piece1.getYcoordinate());
         state.setP2NumPieces(state.getP2NumPieces()-1);
         assertFalse(piece2.getAlive());
-        assertNotNull(state.findPiece(5,5));
+        assertEquals(piece1, state.findPiece(5, 5));
 
         //valid move from player 2
         state.setPlayerTurn(1);
-        CheckersPiece piece3 = state.findPiece(5,5);
         state.setPieceSelectedPieceAndPieceSelectedBoolean(6,6);
         CheckersPiece piece4 = state.findPiece(6,6);
-        state.CaptureEnemyPiece(piece3.getXcoordinate(), piece3.getYcoordinate(),
+        state.CaptureEnemyPiece(piece1.getXcoordinate(), piece1.getYcoordinate(),
                                 piece4.getXcoordinate(), piece4.getYcoordinate());
         state.setP1NumPieces(state.getP1NumPieces()-1);
-        assertFalse(piece3.getAlive());
-        assertNotNull(state.findPiece(4,4));
+        assertFalse(piece1.getAlive());
+        assertEquals(4, piece4.getXcoordinate());
+        assertEquals(4, piece4.getYcoordinate());
 
         //illegal capture
         state.setPieceSelectedPieceAndPieceSelectedBoolean(4,4);
@@ -149,13 +149,13 @@ public class CheckersTest {
                                 piece1.getXcoordinate(),piece1.getYcoordinate());
         state.setP2NumPieces(state.getP2NumPieces()-1);
         assertFalse(piece2.getAlive());
-        assertNotNull(state.findPiece(2,2));
+        assertEquals(piece1, state.findPiece(2,2));
 
         //illegal move
-        CheckersPiece kingPiece = state.findPiece(2,2);
+        CheckersPiece kingPiece = piece1;
         kingPiece.setCoordinates(4,4);
         state.p2Pieces[1].setCoordinates(5,3);
-        CheckersPiece newPiece = state.findPiece(5,3);
+        CheckersPiece newPiece = state.p2Pieces[1];
         state.setPieceSelectedPieceAndPieceSelectedBoolean(4,4);
         assertFalse(state.CaptureEnemyPiece(newPiece.getXcoordinate(), newPiece.getYcoordinate(),
                                         kingPiece.getXcoordinate(), kingPiece.getYcoordinate()));
@@ -167,7 +167,8 @@ public class CheckersTest {
         state.CaptureEnemyPiece(kingPiece.getXcoordinate(), kingPiece.getYcoordinate(),
                                 newPiece.getXcoordinate(), newPiece.getYcoordinate());
         assertFalse(kingPiece.getAlive());
-        assertNotNull(state.findPiece(3,5));
+        assertEquals(3, newPiece.getXcoordinate());
+        assertEquals(5, newPiece.getYcoordinate());
     }
 
     @Test

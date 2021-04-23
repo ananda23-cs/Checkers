@@ -92,7 +92,12 @@ public class CheckersGameState extends GameState {
         super.numSetupTurns = original.numSetupTurns;
         this.message = original.message;
         this.pieceSelectedBoolean = original.pieceSelectedBoolean;
-        this.pieceSelectedPiece = new CheckersPiece(original.pieceSelectedPiece);
+        if(original.pieceSelectedPiece == null){
+            this.pieceSelectedPiece = null;
+        }
+        else {
+            this.pieceSelectedPiece = new CheckersPiece(original.pieceSelectedPiece);
+        }
 
     } //CheckersGameState
 
@@ -442,7 +447,7 @@ public class CheckersGameState extends GameState {
 
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
-                    if(yDist == 1 && !pieceSelectedPiece.getKing()){
+                    if(yDist > 0 && !pieceSelectedPiece.getKing()){
                         return false;
                     }
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
@@ -452,7 +457,7 @@ public class CheckersGameState extends GameState {
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
 
-                            if(pieceSelectedPiece.getYcoordinate() == 7){
+                            if(pieceSelectedPiece.getYcoordinate() == 0){
                                 pieceSelectedPiece.setKing(true);
                             }
 
