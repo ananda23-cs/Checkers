@@ -16,6 +16,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CheckersTest {
+
     /**
      * tests the movement of a regular piece
      */

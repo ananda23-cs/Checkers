@@ -8,10 +8,11 @@
 
 package com.example.checkers.CheckersGame.players;
 
-import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
+
+import java.util.ArrayList;
 
 public class CheckersComputerPlayer2 extends GameComputerPlayer {
 

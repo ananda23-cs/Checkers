@@ -18,13 +18,13 @@ public class CheckersGameState extends GameState {
     public CheckersPiece[] p2Pieces; // holds player 2's pieces
     private int p1NumPieces;
     private int p2NumPieces;
-    private boolean pieceSelectedBoolean; // determines if piece has been selected
-    private CheckersPiece pieceSelectedPiece; // piece that will move
+    private boolean pieceSelectedBoolean; // determines if pieces has been selected
+    private CheckersPiece pieceSelectedPiece; // pieces that will move
     private int playerTurn;
     private String message;
-
     //add grid here
     ImageButton[][] board; //displays the 8x8 checkerboard
+    //TextView gameInfo;
 
     /**
      * constructor CheckersGameState
@@ -92,12 +92,8 @@ public class CheckersGameState extends GameState {
         super.numSetupTurns = original.numSetupTurns;
         this.message = original.message;
         this.pieceSelectedBoolean = original.pieceSelectedBoolean;
-        if(original.pieceSelectedPiece != null) {
-            this.pieceSelectedPiece = new CheckersPiece(original.pieceSelectedPiece);
-        }
-        else{
-            this.pieceSelectedPiece = null;
-        }
+        this.pieceSelectedPiece = new CheckersPiece(original.pieceSelectedPiece);
+
     } //CheckersGameState
 
     /**
