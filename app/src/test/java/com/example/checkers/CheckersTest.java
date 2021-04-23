@@ -16,6 +16,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CheckersTest {
+
+    /**
+     * Tests if a list of coordinates are on the board or not
+     */
     /**
      * tests the movement of a regular piece
      */
@@ -234,4 +238,6 @@ public class CheckersTest {
         }
         assertTrue("The game states are not equal.", checkersState.equals(otherState));
     }
+
+
 }

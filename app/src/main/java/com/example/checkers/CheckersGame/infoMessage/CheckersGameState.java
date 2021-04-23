@@ -445,10 +445,13 @@ public class CheckersGameState extends GameState {
                     if(yDist < 1 && !pieceSelectedPiece.getKing()){
                         return false;
                     }
+
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,
                             nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
+
+
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
@@ -502,6 +505,8 @@ public class CheckersGameState extends GameState {
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
+
+
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
@@ -570,6 +575,10 @@ public class CheckersGameState extends GameState {
     public boolean checkIfCanCaptureEnemyPiece(int xLocation,int yLocation,int nVX,int nVY) {
         boolean returnValue = false;//gets returned if conditions are not valid
 
+        if(pieceSelectedBoolean == false || pieceSelectedPiece == null){
+            return false;
+        }
+
         //if player one's turn
         if(playerTurn == 0) {
             //runs through all of player 2's pieces to see if they match the xLocation and yLocation
@@ -581,6 +590,11 @@ public class CheckersGameState extends GameState {
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
                     //Log.e("calculator","xLocation ");
+
+                    if(yDist < 1 && !pieceSelectedPiece.getKing()){
+                        return false;
+                    }
+
 
                     //if distance is in range of the piece
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,yDist*2)){
@@ -608,6 +622,10 @@ public class CheckersGameState extends GameState {
                         && piece.getAlive()) {
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
+
+                    if(yDist == 1 && !pieceSelectedPiece.getKing()){
+                        return false;
+                    }
 
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
