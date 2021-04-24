@@ -48,6 +48,19 @@ public class CheckersGameStateTest {
     }
 
     @Test
+    public void getMessage(){
+        CheckersGameState gameState = new CheckersGameState();
+        assertEquals("", gameState.getMessage());
+    }
+
+    @Test
+    public void setMessage(){
+        CheckersGameState gameState = new CheckersGameState();
+        gameState.setMessage("Test successful.");
+        assertEquals("Test successful.", gameState.getMessage());
+    }
+
+    @Test
     public void isEmpty() {
         CheckersGameState state = new CheckersGameState();
         assertEquals("Tile not empty",true,
@@ -63,8 +76,7 @@ public class CheckersGameStateTest {
     @Test
     public void hasEnemyPieces() {
         CheckersGameState state = new CheckersGameState();
-        assertEquals("either empty tile or friendly piece",
-                false, state.hasEnemyPieces(4,4));
+        assertEquals(false, state.hasEnemyPieces(4,4));
     }
 
     @Test
@@ -89,5 +101,17 @@ public class CheckersGameStateTest {
     public void getPieceSelectedPiece() {
         CheckersGameState state = new CheckersGameState();
         assertEquals(null,state.getPieceSelectedPiece());
+    }
+
+    @Test
+    public void checkIfCanCaptureEnemyPiece(){
+        CheckersGameState state = new CheckersGameState();
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(2,2);
+        state.move(1,1);
+        state.setPlayerTurn(1);
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(5,5);
+        state.move(-1,-1);
+        state.setPlayerTurn(0);
+        assertTrue(state.checkIfCanCaptureEnemyPiece(4,4,3,3));
     }
 }

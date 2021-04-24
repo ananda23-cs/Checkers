@@ -18,6 +18,38 @@ import static org.junit.Assert.*;
 public class CheckersTest {
 
     /**
+     * Tests if a piece can capture multiple pieces under the right conditions
+     * Anand Gogoi made this
+     */
+    @Test
+    public void testCaptureMultiplePieces(){
+        CheckersGameState checkersState = new CheckersGameState();
+
+        //this method is to clear the board so it is easier to test out methods because pieces have more space to move
+        for(int i =0; i<12;i++){
+            checkersState.p1Pieces[i].setAlive(false);
+            checkersState.p2Pieces[i].setAlive(false);
+        }
+
+        checkersState.p1Pieces[0].setAlive(true);
+
+        checkersState.p2Pieces[0].setAlive(true);
+        checkersState.p2Pieces[1].setAlive(true);
+
+
+        checkersState.p1Pieces[0].setCoordinates(0,0);
+        checkersState.p2Pieces[0].setCoordinates(1,1);
+        checkersState.p2Pieces[1].setCoordinates(3,3);
+
+        checkersState.setPieceSelectedPieceAndPieceSelectedBoolean(0,0);
+        checkersState.CaptureEnemyPiece(1,1,0,0);
+
+
+        assertFalse("This piece is not dead", checkersState.p2Pieces[0].getAlive());
+        assertFalse("This piece is not dead", checkersState.p2Pieces[1].getAlive());
+    }
+
+    /**
      * tests the movement of a regular piece
      */
     @Test
@@ -38,7 +70,7 @@ public class CheckersTest {
         CheckersPiece piece2 = checkersState.getPieceSelectedPiece();
         assertTrue(checkersState.canMove(piece2,1,-1, 1));
         checkersState.move(1,-1);
-        assertEquals(piece2, checkersState.findPiece(4,4));
+        assertEquals("Failed move.", piece2, checkersState.findPiece(4,4));
 
         //illegal move made
         checkersState.setPlayerTurn(0);
@@ -136,6 +168,41 @@ public class CheckersTest {
     }
 
     @Test
+    public void testCaptureMultipleEnemyPiece(){
+        CheckersGameState state = new CheckersGameState();
+        CheckersPiece piece1 = state.p1Pieces[10];
+        CheckersPiece piece2 = state.p2Pieces[1];
+        CheckersPiece piece3 = state.p2Pieces[2];
+        CheckersPiece piece4 = state.p2Pieces[7];
+        piece2.setCoordinates(3,3);
+        piece4.setCoordinates(7,3);
+        state.setPlayerTurn(0);
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(2,2);
+        state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
+                                piece1.getXcoordinate(),piece1.getYcoordinate());
+        assertFalse(piece2.getAlive());
+        assertFalse(piece3.getAlive());
+        assertEquals(piece1, state.findPiece(6,6));
+    }
+
+    @Test
+    public void testCaptureMultipleEnemyPieceAsKing(){
+        CheckersGameState state = new CheckersGameState();
+        CheckersPiece piece1 = state.findPiece(5,5);
+        CheckersPiece piece2 = state.findPiece(1,1);
+        CheckersPiece piece3 = state.findPiece(2,2);
+        piece2.setCoordinates(4,4);
+        piece1.setKing(true);
+        state.setPlayerTurn(1);
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(5,5);
+        state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
+                                piece1.getXcoordinate(),piece1.getYcoordinate());
+        assertFalse(piece2.getAlive());
+        assertFalse(piece3.getAlive());
+        assertEquals(piece1,state.findPiece(1,1));
+    }
+
+    @Test
     public void testCaptureEnemyPieceAsKing(){
         CheckersGameState state = new CheckersGameState();
         CheckersPiece piece1 = state.p1Pieces[10];
@@ -143,6 +210,7 @@ public class CheckersTest {
         piece1.setCoordinates(4,4);
         piece2.setCoordinates(3,3);
         piece1.setKing(true);
+        //tests a valid move
         state.setPlayerTurn(0);
         state.setPieceSelectedPieceAndPieceSelectedBoolean(4,4);
         state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
@@ -152,10 +220,10 @@ public class CheckersTest {
         assertEquals(piece1, state.findPiece(2,2));
 
         //illegal move
-        CheckersPiece kingPiece = piece1;
+        CheckersPiece kingPiece = state.findPiece(2,2);
         kingPiece.setCoordinates(4,4);
         state.p2Pieces[1].setCoordinates(5,3);
-        CheckersPiece newPiece = state.p2Pieces[1];
+        CheckersPiece newPiece = state.findPiece(5,3);
         state.setPieceSelectedPieceAndPieceSelectedBoolean(4,4);
         assertFalse(state.CaptureEnemyPiece(newPiece.getXcoordinate(), newPiece.getYcoordinate(),
                                         kingPiece.getXcoordinate(), kingPiece.getYcoordinate()));

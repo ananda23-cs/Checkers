@@ -12,6 +12,9 @@ package com.example.checkers.CheckersGame;
 import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
+import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
+import com.example.checkers.CheckersGame.players.CheckersComputerPlayer1;
+import com.example.checkers.CheckersGame.players.CheckersComputerPlayer2;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
@@ -79,9 +82,24 @@ public class CheckersLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         CheckersGameState state = (CheckersGameState) super.state;
-        if (state.getP1NumPieces() == 0) {
+        boolean p1Alive = false;
+        boolean p2Alive = false;
+
+        for(CheckersPiece piece : state.p1Pieces){
+            if (piece.getAlive()){
+                p1Alive = true;
+            }
+        }
+
+        for(CheckersPiece piece : state.p2Pieces){
+            if (piece.getAlive()){
+                p2Alive = true;
+            }
+        }
+
+        if (!p1Alive) {
             return "Player 2 won! ";
-        } else if (state.getP2NumPieces() == 0) {
+        } else if (!p2Alive) {
             return "Player 1 won! ";
         } else {
             return null;
@@ -138,7 +156,10 @@ public class CheckersLocalGame extends LocalGame {
                 if(state.hasEnemyPieces(x,y)){
                     if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),
                             state.getPieceSelectedPiece().getYcoordinate())){
+
+
                         state.setMessage("Valid capture.");
+
                         if(state.getPlayerTurn() == 0){
                             state.setP2NumPieces(state.getP2NumPieces()-1);
                         }
@@ -157,7 +178,9 @@ public class CheckersLocalGame extends LocalGame {
                                                             state.getPlayerTurn())){
                     state.move(xDire,yDire);
                     state.setMessage("This is a valid move.");
+
                     state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
+
                     return true;
                 }
                 else{
@@ -166,7 +189,7 @@ public class CheckersLocalGame extends LocalGame {
                 }
             }
         }
-        return false;
+        else {return false;}
     } //makeMove
 
 }
