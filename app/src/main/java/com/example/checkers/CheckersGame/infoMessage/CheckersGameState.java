@@ -455,6 +455,8 @@ public class CheckersGameState extends GameState {
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
 
+                            setP2NumPieces(getP2NumPieces()-1);
+
                             if(pieceSelectedPiece.getYcoordinate() == 7){
                                 pieceSelectedPiece.setKing(true);
                             }
@@ -502,7 +504,8 @@ public class CheckersGameState extends GameState {
                     if(yDist > 0 && !pieceSelectedPiece.getKing()){
                         return false;
                     }
-                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,
+                                                        nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
 
@@ -510,6 +513,8 @@ public class CheckersGameState extends GameState {
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
+
+                            setP1NumPieces(getP1NumPieces()-1);
 
                             if(pieceSelectedPiece.getYcoordinate() == 0){
                                 pieceSelectedPiece.setKing(true);
@@ -627,7 +632,6 @@ public class CheckersGameState extends GameState {
         }
 
         //if player two's turn
-        //this code is the same as before except it runs though p1's pieces
         else if(playerTurn == 1 ){
             for (CheckersPiece piece : p1Pieces) {
                 if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
@@ -639,7 +643,8 @@ public class CheckersGameState extends GameState {
                         return false;
                     }
 
-                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,
+                                                        nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
                         if(isEmpty(xFinal,yFinal)){

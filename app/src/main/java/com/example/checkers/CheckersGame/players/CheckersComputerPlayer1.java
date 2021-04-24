@@ -92,7 +92,6 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             sleep(0.5);
             for (CheckersChoosePieceAction action : possibleMoves.get(possibleMovesIndex)) {
                 game.sendAction(action);
-
             }
         }
     } //receiveInfo
