@@ -8,6 +8,7 @@
 
 package com.example.checkers.CheckersGame.infoMessage;
 
+import android.util.Log;
 import android.widget.ImageButton;
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 
@@ -78,10 +79,12 @@ public class CheckersGameState extends GameState {
 //        p1Pieces[9].setCoordinates(2,4);
 //        p1Pieces[11].setCoordinates(0,4);
 
+        //p1Pieces[4].setKing(true);
 //        p1Pieces[10].setAlive(false);
 //        p2Pieces[2].setCoordinates(2,2);
 //        p2Pieces[7].setCoordinates(4,4);
-////        p2Pieces[11].setCoordinates(6,6);
+//        p2Pieces[11].setCoordinates(6,6);
+//        p2Pieces[0].setAlive(false);
 //        p2Pieces[9].setAlive(false);
 
 
@@ -460,6 +463,7 @@ public class CheckersGameState extends GameState {
                                 pieceSelectedPiece.setKing(true);
                             }
 
+                            Log.e("Camera",""+pieceSelectedPiece);
                             if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal)){
                                 CaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal);
 
@@ -582,14 +586,22 @@ public class CheckersGameState extends GameState {
         //if player one's turn
         if(playerTurn == 0) {
             //runs through all of player 2's pieces to see if they match the xLocation and yLocation
+            if(xLocation - nVX<1 && yLocation - nVY<1) {
+                Log.e("Cameracheck", "" + pieceSelectedPiece);
+                Log.e("Cameracheck", "nVX = " + nVX + "nVY = " + nVY);
+                Log.e("Cameracheck", "Xlocation = " + xLocation + "Ylocation = " + yLocation);
+            }
             for (CheckersPiece piece : p2Pieces) {
                 //checks if piece matches the xLocation and yLocation
                 if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
                         && piece.getAlive()) {
+
                     //how far away the enemy piece is
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
+
                     //Log.e("calculator","xLocation ");
+
 
                     if(yDist < 1 && !pieceSelectedPiece.getKing()){
                         return false;
@@ -597,7 +609,10 @@ public class CheckersGameState extends GameState {
 
 
                     //if distance is in range of the piece
-                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,yDist*2)){
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY+yDist*2)){
+
+
+
                         //final location of the piece that does the capturing
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;

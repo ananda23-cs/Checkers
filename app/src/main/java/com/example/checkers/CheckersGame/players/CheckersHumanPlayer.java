@@ -28,6 +28,8 @@ import com.example.checkers.game.GameFramework.infoMessage.IllegalMoveInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 
+import java.util.Timer;
+
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     ImageButton[][] board;
@@ -112,6 +114,18 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                                                                             R.drawable.red_piece);
                     }
                 }
+            }
+
+            if(((CheckersGameState) info).isPieceSelectedBoolean()){
+                CheckersGameState copy =  ((CheckersGameState) info);
+
+                showMoves(copy,1,1);
+                showMoves(copy,-1,1);
+                showMoves(copy,-1,-1);
+                showMoves(copy,+1,-1);
+
+
+
             }
         }
     } //receiveInfo
@@ -218,6 +232,15 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                 board[i][j].setOnClickListener(this);
             }
         }
+
+
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                if(board[x][y].getTag() == R.id.tan)
+            }
+        }
+
+
     } //initAfterReady
 
     @Override
@@ -236,4 +259,17 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             }
         }
     }//onClick
+
+    public void showMoves(CheckersGameState copy,int xdir,int ydir){
+        if(copy.canMove(copy.getPieceSelectedPiece(),xdir,ydir,copy.getPlayerTurn())){
+            board[copy.getPieceSelectedPiece().getXcoordinate()+xdir][copy.getPieceSelectedPiece().getYcoordinate()+ydir]
+                    .setImageResource(R.drawable.tan_square);
+        }
+    }
+    public void hideMoves(CheckersGameState copy,int xdir,int ydir){
+        if(copy.canMove(copy.getPieceSelectedPiece(),xdir,ydir,copy.getPlayerTurn())){
+            board[copy.getPieceSelectedPiece().getXcoordinate()+xdir][copy.getPieceSelectedPiece().getYcoordinate()+ydir]
+                    .setImageResource(R.drawable.red_tile);
+        }
+    }
 }//CheckersHumanPlayer
