@@ -25,7 +25,8 @@ public class CheckersTest {
     public void testCaptureMultiplePieces(){
         CheckersGameState checkersState = new CheckersGameState();
 
-        //this method is to clear the board so it is easier to test out methods because pieces have more space to move
+        /*this method is to clear the board so it is easier to test out methods
+          because pieces have more space to move*/
         for(int i =0; i<12;i++){
             checkersState.p1Pieces[i].setAlive(false);
             checkersState.p2Pieces[i].setAlive(false);

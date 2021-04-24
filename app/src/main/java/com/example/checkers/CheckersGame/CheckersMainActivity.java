@@ -4,7 +4,7 @@
  * the user to pick their opponent
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/23/2021
  */
 
 package com.example.checkers.CheckersGame;

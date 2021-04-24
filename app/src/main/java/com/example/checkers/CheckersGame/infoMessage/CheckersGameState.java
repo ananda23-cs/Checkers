@@ -3,7 +3,7 @@
  * Game State class - defines different states of the game
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/23/2021
  */
 
 package com.example.checkers.CheckersGame.infoMessage;

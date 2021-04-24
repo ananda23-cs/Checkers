@@ -3,12 +3,10 @@
  * Computer Player 1 - Dumb AI. Makes random moves
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/23/2021
  */
 
 package com.example.checkers.CheckersGame.players;
-
-import android.util.Log;
 
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;

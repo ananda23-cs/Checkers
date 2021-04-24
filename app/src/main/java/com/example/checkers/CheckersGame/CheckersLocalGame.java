@@ -4,7 +4,7 @@
  * capture, and turn to king actions, and update it to the new game state
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/23/2021
  */
 
 package com.example.checkers.CheckersGame;
