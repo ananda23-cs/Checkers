@@ -466,7 +466,7 @@ public class CheckersGameState extends GameState {
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
-
+                            setP2NumPieces(getP2NumPieces()-1);
                             if(pieceSelectedPiece.getYcoordinate() == 7){
                                 pieceSelectedPiece.setKing(true);
                             }
@@ -521,7 +521,7 @@ public class CheckersGameState extends GameState {
 
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
-
+                            setP1NumPieces(getP1NumPieces()-1);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
 
                             if(pieceSelectedPiece.getYcoordinate() == 0){

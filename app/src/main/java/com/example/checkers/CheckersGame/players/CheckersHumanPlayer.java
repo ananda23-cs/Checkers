@@ -122,14 +122,10 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
             if(((CheckersGameState) info).isPieceSelectedBoolean()){
                 CheckersGameState copy =  ((CheckersGameState) info);
-
                 showMoves(copy,1,1);
                 showMoves(copy,-1,1);
                 showMoves(copy,-1,-1);
                 showMoves(copy,+1,-1);
-
-
-
             }
         }
     } //receiveInfo
@@ -256,18 +252,17 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         }
     }//onClick
 
+    /**
+     * highlights the possible valid moves that the human player can make
+     * @param copy the current game state
+     * @param xdir the x direction of movement
+     * @param ydir the y-direction of movement
+     */
     public void showMoves(CheckersGameState copy,int xdir,int ydir){
         if(copy.canMove(copy.getPieceSelectedPiece(),xdir,ydir,copy.getPlayerTurn())){
-            board[copy.getPieceSelectedPiece().getXcoordinate()+xdir][copy.getPieceSelectedPiece().getYcoordinate()+ydir].setImageResource(R.drawable.tan_square);
-            int [] move = new int[2];
+            board[copy.getPieceSelectedPiece().getXcoordinate()+xdir]
+                    [copy.getPieceSelectedPiece().getYcoordinate()+ydir]
+                    .setImageResource(R.drawable.tan_square);
         }
-    }
-    public void hideMoves(CheckersGameState copy,int xdir,int ydir){
-        if(copy.canMove(copy.getPieceSelectedPiece(),xdir,ydir,copy.getPlayerTurn())){
-            board[copy.getPieceSelectedPiece().getXcoordinate()+xdir][copy.getPieceSelectedPiece().getYcoordinate()+ydir]
-                    .setImageResource(R.drawable.red_tile);
-        }
-    }
-
-
+    }//showMoves
 }//CheckersHumanPlayer
