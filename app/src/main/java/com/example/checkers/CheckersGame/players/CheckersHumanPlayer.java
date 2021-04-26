@@ -28,6 +28,7 @@ import com.example.checkers.game.GameFramework.infoMessage.IllegalMoveInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 
+import java.util.ArrayList;
 import java.util.Timer;
 
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
@@ -37,6 +38,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     private TextView gameInfo;
     private TextView humanPlayerID, computerPlayerID;
     private int layoutID;
+
+
 
     /**
      * constructor CheckersHumanPlayer
@@ -50,6 +53,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         super(name);
         this.layoutID = activity_main;
         board = new ImageButton[8][8];
+
     } //CheckersHumanPlayer
 
     @Override
@@ -233,14 +237,6 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             }
         }
 
-
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
-                if(board[x][y].getTag() == R.id.tan)
-            }
-        }
-
-
     } //initAfterReady
 
     @Override
@@ -262,8 +258,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     public void showMoves(CheckersGameState copy,int xdir,int ydir){
         if(copy.canMove(copy.getPieceSelectedPiece(),xdir,ydir,copy.getPlayerTurn())){
-            board[copy.getPieceSelectedPiece().getXcoordinate()+xdir][copy.getPieceSelectedPiece().getYcoordinate()+ydir]
-                    .setImageResource(R.drawable.tan_square);
+            board[copy.getPieceSelectedPiece().getXcoordinate()+xdir][copy.getPieceSelectedPiece().getYcoordinate()+ydir].setImageResource(R.drawable.tan_square);
+            int [] move = new int[2];
         }
     }
     public void hideMoves(CheckersGameState copy,int xdir,int ydir){
@@ -272,4 +268,6 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                     .setImageResource(R.drawable.red_tile);
         }
     }
+
+
 }//CheckersHumanPlayer

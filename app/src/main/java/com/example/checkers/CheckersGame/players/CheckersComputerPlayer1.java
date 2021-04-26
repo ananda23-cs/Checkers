@@ -10,6 +10,7 @@ package com.example.checkers.CheckersGame.players;
 
 import android.util.Log;
 
+import com.example.checkers.CheckersGame.Actions.CheckersCanNotMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
@@ -104,14 +105,14 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
             int possibleMovesIndex = (int)(Math.random()*(possibleMoves.size()));
 
             if(possibleMoves.size() >0) {
-                Log.e("Sleeping", "x = " +  possibleMoves.get(possibleMovesIndex)[0].getXLoc());
-                Log.e("Sleeping", "y = " +  possibleMoves.get(possibleMovesIndex)[0].getYLoc());
                 sleep(0.5);
-
                 for (CheckersChoosePieceAction action : possibleMoves.get(possibleMovesIndex)) {
                     game.sendAction(action);
 
                 }
+            }
+            else{
+                game.sendAction(new CheckersCanNotMoveAction(this));
             }
         //}
     } //receiveInfo

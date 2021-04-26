@@ -23,7 +23,8 @@ public class CheckersGameState extends GameState {
     private CheckersPiece pieceSelectedPiece; // piece that will move
     private int playerTurn;
     private String message;
-    private Boolean sleptCP1;
+    private boolean p1CanNotMove;
+    private boolean p2CanNotMove;
 
     //add grid here
     ImageButton[][] board; //displays the 8x8 checkerboard
@@ -71,8 +72,10 @@ public class CheckersGameState extends GameState {
 
         this.pieceSelectedBoolean = false;
         this.pieceSelectedPiece = null;
-        this.message = "";
-        this.sleptCP1 = false;
+        this.message = "Welcome to checkers. Player one please click on the piece you would like to move.";
+        this.p2CanNotMove = false;
+        this.p1CanNotMove = false;
+
 
 //        p1Pieces[11].setCoordinates(1,3);
 
@@ -123,7 +126,9 @@ public class CheckersGameState extends GameState {
         else{
             this.pieceSelectedPiece = null;
         }
-        this.sleptCP1 = original.sleptCP1;
+        this.p1CanNotMove = original.p1CanNotMove;
+        this.p2CanNotMove = original.p2CanNotMove;
+
     } //CheckersGameState
 
     /**
@@ -141,7 +146,9 @@ public class CheckersGameState extends GameState {
     public int getPlayerTurn() {
         return playerTurn;
     }
-    public boolean getSleptP1(){ return this.sleptCP1; }
+    public boolean getP1CanNotMove(){ return this.p1CanNotMove; }
+    public boolean getP2CanNotMove(){ return this.p2CanNotMove; }
+
 
 
 
@@ -159,7 +166,8 @@ public class CheckersGameState extends GameState {
     public void setPlayerTurn(int playerTurn) {
         this.playerTurn = playerTurn;
     } //setPlayerTurn
-    public void setSleptCP1(boolean sleptCP1){ this.sleptCP1 = sleptCP1; }
+    public void setP1CanNotMove(boolean p1CanNotMove){ this.p1CanNotMove = p1CanNotMove; }
+    public void setP2CanNotMove(boolean p2CanNotMove){ this.p2CanNotMove = p2CanNotMove; }
 
 
     /**
@@ -513,6 +521,7 @@ public class CheckersGameState extends GameState {
 
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
+
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
 
                             if(pieceSelectedPiece.getYcoordinate() == 0){
@@ -662,5 +671,7 @@ public class CheckersGameState extends GameState {
 
 
     }
+
+
 
 }//CheckersGameState

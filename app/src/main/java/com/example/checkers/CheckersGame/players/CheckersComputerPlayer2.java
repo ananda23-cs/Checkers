@@ -8,12 +8,10 @@
 
 package com.example.checkers.CheckersGame.players;
 
-import android.util.Log;
-
+import com.example.checkers.CheckersGame.Actions.CheckersCanNotMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
-import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameComputerPlayer;
@@ -55,6 +53,7 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
             ArrayList<CheckersChoosePieceAction[]> possibleSafeMoves = new ArrayList<CheckersChoosePieceAction[]>();
             ArrayList<CheckersChoosePieceAction[]> possibleMoves = new ArrayList<CheckersChoosePieceAction[]>();
             ArrayList<CheckersChoosePieceAction[]> possibleCaptures = new ArrayList<CheckersChoosePieceAction[]>();
+            ArrayList<CheckersChoosePieceAction[]> possibleSaviorMoves = new ArrayList<CheckersChoosePieceAction[]>();
 
             CheckersPiece[] Pieces;
             CheckersPiece[] EnemyPieces;
@@ -75,31 +74,31 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
                 if(piece.getAlive()) {
 
                     //if moving left backwards is a possible move for this piece it gets added to the list of moves
-                    checkValidMove(((CheckersGameState) info), piece, -1, -1, possibleMoves);
+                    addValidMove(((CheckersGameState) info), piece, -1, -1, possibleMoves);
                     //if moving right backwards is a possible move for this piece it gets added to the list of moves
-                    checkValidMove(((CheckersGameState) info), piece, +1, -1, possibleMoves);
+                    addValidMove(((CheckersGameState) info), piece, +1, -1, possibleMoves);
                     //if moving right Forward is a possible move for this piece it gets added to the list of moves
-                    checkValidMove(((CheckersGameState) info), piece, +1, +1, possibleMoves);
+                    addValidMove(((CheckersGameState) info), piece, +1, +1, possibleMoves);
                     //if moving left Forward is a possible move for this piece it gets added to the list of moves
-                    checkValidMove(((CheckersGameState) info), piece, -1, +1, possibleMoves);
+                    addValidMove(((CheckersGameState) info), piece, -1, +1, possibleMoves);
 
                     //if capturing right backwards is a valid move it gets added to the list of possible moves
-                    checkValidCapture(((CheckersGameState) info), piece, possibleCaptures, +1, -1);
+                    addValidCapture(((CheckersGameState) info), piece, possibleCaptures, +1, -1);
                     //if capturing left backwards is a valid move it gets added to the list of possible moves
-                    checkValidCapture(((CheckersGameState) info), piece, possibleCaptures, -1, -1);
+                    addValidCapture(((CheckersGameState) info), piece, possibleCaptures, -1, -1);
                     //if capturing right forwards is a valid move it gets added to the list of possible moves
-                    checkValidCapture(((CheckersGameState) info), piece, possibleCaptures, +1, +1);
+                    addValidCapture(((CheckersGameState) info), piece, possibleCaptures, +1, +1);
                     //if capturing left forwards is a valid move it gets added to the list of possible moves
-                    checkValidCapture(((CheckersGameState) info), piece, possibleCaptures, -1, +1);
+                    addValidCapture(((CheckersGameState) info), piece, possibleCaptures, -1, +1);
 
                     //adds all possible safe moves
-                    safeMove(((CheckersGameState) info), EnemyPieces,piece,-1,-1,possibleSafeMoves);
-                    safeMove(((CheckersGameState) info), EnemyPieces,piece,+1,-1,possibleSafeMoves);
-                    safeMove(((CheckersGameState) info), EnemyPieces,piece,-1,+1,possibleSafeMoves);
-                    safeMove(((CheckersGameState) info), EnemyPieces,piece,+1,+1,possibleSafeMoves);
+                    addSafeMove(((CheckersGameState) info), EnemyPieces,piece,-1,-1,possibleSafeMoves);
+                    addSafeMove(((CheckersGameState) info), EnemyPieces,piece,+1,-1,possibleSafeMoves);
+                    addSafeMove(((CheckersGameState) info), EnemyPieces,piece,-1,+1,possibleSafeMoves);
+                    addSafeMove(((CheckersGameState) info), EnemyPieces,piece,+1,+1,possibleSafeMoves);
 
-
-
+                    //adds any moves that save a piece
+                    //addSaviorMove(((CheckersGameState) info),EnemyPieces,piece,possibleSaviorMoves);
 
                 }
 
@@ -111,10 +110,13 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
             if(possibleCaptures.size()>0){
                 makeAction(possibleCaptures);
-
             }
 
-            if(possibleSafeMoves.size()>0){
+//            else if(possibleSaviorMoves.size()>0){
+//                makeAction(possibleSaviorMoves);
+//            }
+
+            else if(possibleSafeMoves.size()>0){
                 makeAction(possibleSafeMoves);
 
             }
@@ -123,13 +125,17 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
                 makeAction(possibleMoves);
             }
+            else{
+                game.sendAction(new CheckersCanNotMoveAction(this));
+
+            }
 
 
         }
     } //receiveInfo
 
-    public void checkValidMove(CheckersGameState info,CheckersPiece piece,int xDire,
-                               int yDire,ArrayList<CheckersChoosePieceAction[]> possibleMoves ){
+    public void addValidMove(CheckersGameState info, CheckersPiece piece, int xDire,
+                             int yDire, ArrayList<CheckersChoosePieceAction[]> possibleMoves ){
 
         if(info.canMove(piece,xDire,yDire,info.getPlayerTurn())){
             CheckersChoosePieceAction[] mL = new CheckersChoosePieceAction[2];
@@ -141,8 +147,8 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
     }
 
-    public void checkValidCapture(CheckersGameState info,CheckersPiece piece,ArrayList<CheckersChoosePieceAction[]> possibleMoves
-            ,int xDire, int yDire){
+    public void addValidCapture(CheckersGameState info, CheckersPiece piece, ArrayList<CheckersChoosePieceAction[]> possibleMoves
+            , int xDire, int yDire){
 
         ((CheckersGameState) info).setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(),piece.getYcoordinate());
 
@@ -158,18 +164,26 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
     }
 
-    public void safeMove(CheckersGameState copy,CheckersPiece[] enemyPieces, CheckersPiece piece,int xdire,int ydire,ArrayList<CheckersChoosePieceAction[]> possibleSafeMoves){
+    public void addSafeMove(CheckersGameState copy, CheckersPiece[] enemyPieces, CheckersPiece piece, int xdire, int ydire, ArrayList<CheckersChoosePieceAction[]> possibleSafeMoves){
         if (copy.canMove(piece, xdire, ydire, copy.getPlayerTurn()) ) {
-            if(safeSpotTobe(copy,enemyPieces,xdire,ydire,piece)) {
+            piece.setCoordinates(piece.getXcoordinate()+xdire,piece.getYcoordinate()+ydire);
+
+            if(safeSpotTobe(copy,enemyPieces,piece)) {
                 CheckersChoosePieceAction[] sM = new CheckersChoosePieceAction[2];
+                piece.setCoordinates(piece.getXcoordinate()-xdire,piece.getYcoordinate()-ydire);
                 sM[0] = (new CheckersChoosePieceAction(this, piece.getXcoordinate(), piece.getYcoordinate()));
                 sM[1] = (new CheckersChoosePieceAction(this, piece.getXcoordinate() + xdire, piece.getYcoordinate() + ydire));
                 possibleSafeMoves.add(sM);
             }
+
+            else{
+                piece.setCoordinates(piece.getXcoordinate()-xdire,piece.getYcoordinate()-ydire);
+            }
+
         }
     }
 
-    public boolean safeSpotTobe(CheckersGameState copy,CheckersPiece[] enemyPieces,int xdire,int ydire,CheckersPiece piece){
+    public boolean safeSpotTobe(CheckersGameState copy,CheckersPiece[] enemyPieces,CheckersPiece piece){
         boolean safeSpot = true;
 
 
@@ -183,13 +197,12 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
                 copy.setPlayerTurn(0);
             }
 
-            piece.setCoordinates(piece.getXcoordinate()+xdire,piece.getYcoordinate()+ydire);
+
 
             if(copy.checkIfCanCaptureEnemyPiece(piece.getXcoordinate(), piece.getYcoordinate(),enemyPiece.getXcoordinate(), enemyPiece.getYcoordinate())){
                 safeSpot = false;
             }
 
-            piece.setCoordinates(piece.getXcoordinate()-xdire,piece.getYcoordinate()-ydire);
 
 
             if(copy.getPlayerTurn() == 1 ) {
@@ -212,20 +225,12 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
             }
         }
     }
+
+//    public void addSaviorMove(CheckersGameState info, CheckersPiece[] EnemyPieces,CheckersPiece piece,ArrayList<CheckersChoosePieceAction[]> possibleSaviorMoves){
+//        if(!safeSpotTobe(info,EnemyPieces,piece)){
+//            addSafeMove( info, EnemyPieces,piece,+1,-1,possibleSaviorMoves);
+//            addSafeMove(info, EnemyPieces,piece,-1,+1,possibleSaviorMoves);
+//            addSafeMove( info, EnemyPieces,piece,+1,+1,possibleSaviorMoves);
+//        }
+//    }
 }
-
-//            int possibleCapturesIndex = (int)(Math.random()*(possibleCaptures.size()));
-//            int possibleMovesIndex = (int)(Math.random()*(possibleMoves.size()));
-//            int possibleSaveMovesIndex = (int) (Math.random()*possibleSafeMoves.size());
-
-///for (CheckersChoosePieceAction action : possibleMoves.get(possibleMovesIndex)) {
-//    game.sendAction(action);
-//}
-
-///for (CheckersChoosePieceAction action : possibleMoves.get(possibleMovesIndex)) {
-//    game.sendAction(action);
-//}
-
-//                for(CheckersChoosePieceAction action : possibleCaptures.get(possibleCapturesIndex)){
-//                    game.sendAction(action);
-//                }
