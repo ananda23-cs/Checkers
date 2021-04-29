@@ -76,7 +76,6 @@ public class CheckersGameState extends GameState {
         this.p2CanNotMove = false;
         this.p1CanNotMove = false;
 
-
 //        p1Pieces[11].setCoordinates(1,3);
 
 //        p1Pieces[9].setCoordinates(2,4);
@@ -128,7 +127,6 @@ public class CheckersGameState extends GameState {
         }
         this.p1CanNotMove = original.p1CanNotMove;
         this.p2CanNotMove = original.p2CanNotMove;
-
     } //CheckersGameState
 
     /**
@@ -254,8 +252,10 @@ public class CheckersGameState extends GameState {
 
     /**finds piece at xCord and yCord
      * @param xCord
+     *        the given x-coordinate
      * @param yCord
-     * @return piece at xCord and yCord
+     *        the given y-coordinate
+     * @return piece at xCord and yCord or null if not found
      */
     public CheckersPiece findPiece(int xCord,int yCord){
         for(int i = 0;i<12;i++){
@@ -327,12 +327,7 @@ public class CheckersGameState extends GameState {
      *      return if piece is in range
      */
     public boolean inRange(int xDir,int yDir){
-        if((xDir == 1 || xDir == -1) && (yDir == 1 || yDir == -1)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return (xDir == 1 || xDir == -1) && (yDir == 1 || yDir == -1);
 
     } //inRange
 
@@ -443,7 +438,7 @@ public class CheckersGameState extends GameState {
      * @param nVY not valid y location
      */
     public boolean CaptureEnemyPiece(int xLocation,int yLocation,int nVX,int nVY){
-        if(pieceSelectedBoolean == false){
+        if(!pieceSelectedBoolean){
             return false;
         }
         if(playerTurn == 0) {
@@ -586,9 +581,7 @@ public class CheckersGameState extends GameState {
     }
 
     public boolean checkIfCanCaptureEnemyPiece(int xLocation,int yLocation,int nVX,int nVY) {
-        boolean returnValue = false;//gets returned if conditions are not valid
-
-        if(pieceSelectedBoolean == false || pieceSelectedPiece == null){
+        if(!pieceSelectedBoolean || pieceSelectedPiece == null){
             return false;
         }
 
