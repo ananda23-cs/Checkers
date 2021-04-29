@@ -4,7 +4,7 @@
  * the user to pick their opponent
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers.CheckersGame;
@@ -63,14 +63,15 @@ public class CheckersMainActivity extends GameMainActivity {
         });
 
         // Create a game configuration class for Checkers
-        GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "Checkers", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 2,
+                2, "Checkers", PORT_NUMBER);
 
         // Add the default players
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
 
         // Set the initial information for the remote players
-        //defaultConfig.setRemoteData("Remote Human Player", "", 0);
+        defaultConfig.setRemoteData("Remote Human Player", "", 0);
 
         return defaultConfig;
 
@@ -100,7 +101,8 @@ public class CheckersMainActivity extends GameMainActivity {
     } //saveGame
 
     /**
-     * loadGame, adds this games prepend to the desire file to open and creates the game specific state
+     * loadGame, adds this games prepend to the desire file to open and creates the
+     * game specific state
      * @param CheckersGame
      * 				The file to open
      * @return The loaded GameState

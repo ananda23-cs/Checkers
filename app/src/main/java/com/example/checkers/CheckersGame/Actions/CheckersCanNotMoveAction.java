@@ -1,3 +1,10 @@
+/**
+ * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
+ * Can not move action - check if the user can not make any more valid moves
+ *
+ * CS301A
+ * @version 04/30/2021
+ */
 package com.example.checkers.CheckersGame.Actions;
 
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;

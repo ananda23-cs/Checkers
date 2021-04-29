@@ -3,7 +3,7 @@
  * Game State class - defines different states of the game
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers.CheckersGame.infoMessage;
@@ -441,6 +441,7 @@ public class CheckersGameState extends GameState {
         if(!pieceSelectedBoolean){
             return false;
         }
+        // if user is player 0
         if(playerTurn == 0) {
             for (CheckersPiece piece : p2Pieces) {
                 if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
@@ -452,12 +453,13 @@ public class CheckersGameState extends GameState {
                         return false;
                     }
 
+                    // checks if enemy piece is in range
                     if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,
                             nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
 
-
+                        // checks if spot behind enemy piece is empty
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
                             pieceSelectedPiece.setCoordinates(xFinal,yFinal);
@@ -466,24 +468,34 @@ public class CheckersGameState extends GameState {
                                 pieceSelectedPiece.setKing(true);
                             }
 
+                            // check if can capture the enemies piece
+                            // forwards right/left and backwards right/left
                             Log.e("Camera",""+pieceSelectedPiece);
-                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal)){
-                                CaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal);
+                            if(checkIfCanCaptureEnemyPiece(xFinal-1,
+                                    yFinal-1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal-1,
+                                        yFinal-1,xFinal,yFinal);
 
                             }
 
-                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal)){
-                                CaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal);
+                            if(checkIfCanCaptureEnemyPiece(xFinal+1,
+                                    yFinal-1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal+1,
+                                        yFinal-1,xFinal,yFinal);
 
                             }
 
-                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal)){
-                                CaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal);
+                            if(checkIfCanCaptureEnemyPiece(xFinal+1,
+                                    yFinal+1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal+1,
+                                        yFinal+1,xFinal,yFinal);
 
                             }
 
-                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal)){
-                                CaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal);
+                            if(checkIfCanCaptureEnemyPiece(xFinal-1,
+                                    yFinal+1,xFinal,yFinal)){
+                                CaptureEnemyPiece(xFinal-1,
+                                        yFinal+1,xFinal,yFinal);
 
                             }
 
@@ -499,6 +511,7 @@ public class CheckersGameState extends GameState {
                 }
             }
         }
+        // if user is player 1
         else if(playerTurn == 1){
             for (CheckersPiece piece : p1Pieces) {
                 if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation
@@ -509,11 +522,13 @@ public class CheckersGameState extends GameState {
                     if(yDist > 0 && !pieceSelectedPiece.getKing()){
                         return false;
                     }
-                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
+                    // checks if enemy piece is in range
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,
+                            nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
 
-
+                        // checks if spot behind enemy piece is empty
                         if(isEmpty(xFinal,yFinal)){
                             piece.setAlive(false);
                             setP1NumPieces(getP1NumPieces()-1);
@@ -523,22 +538,28 @@ public class CheckersGameState extends GameState {
                                 pieceSelectedPiece.setKing(true);
                             }
 
-                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal)){
+                            // check if can capture the enemies piece
+                            // forwards right/left and backwards right/left
+                            if(checkIfCanCaptureEnemyPiece(xFinal+1,
+                                    yFinal+1,xFinal,yFinal)){
                                 CaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal);
 
                             }
 
-                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal)){
+                            if(checkIfCanCaptureEnemyPiece(xFinal-1,
+                                    yFinal+1,xFinal,yFinal)){
                                 CaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal);
 
                             }
 
-                            if(checkIfCanCaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal)){
+                            if(checkIfCanCaptureEnemyPiece(xFinal-1,
+                                    yFinal-1,xFinal,yFinal)){
                                 CaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal);
 
                             }
 
-                            if(checkIfCanCaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal)){
+                            if(checkIfCanCaptureEnemyPiece(xFinal+1,
+                                    yFinal-1,xFinal,yFinal)){
                                 CaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal);
 
                             }
@@ -578,7 +599,7 @@ public class CheckersGameState extends GameState {
                 this.pieceSelectedPiece == checkersGameState.pieceSelectedPiece &&
                 this.pieceSelectedBoolean == checkersGameState.pieceSelectedBoolean &&
                 this.message.equals(checkersGameState.message);
-    }
+    } //equals
 
     public boolean checkIfCanCaptureEnemyPiece(int xLocation,int yLocation,int nVX,int nVY) {
         if(!pieceSelectedBoolean || pieceSelectedPiece == null){
@@ -658,12 +679,8 @@ public class CheckersGameState extends GameState {
             }
         }
 
-
-
         return false;
-
-
-    }
+    } //checkIfCanCaptureEnemyPiece
 
 
 

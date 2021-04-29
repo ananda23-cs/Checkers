@@ -4,7 +4,7 @@
  * capture, and turn to king actions, and update it to the new game state
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers.CheckersGame;
@@ -99,11 +99,13 @@ public class CheckersLocalGame extends LocalGame {
             }
         }
 
+        // end game is none of the opponents or users pieces are alive
         if (!p1Alive) {
             return "Player 2 won! ";
         } else if (!p2Alive) {
             return "Player 1 won! ";
         }
+        // end game if user or opponent cannot make any more valid moves
         else if(state.getP2CanNotMove() == true){
             return "Player 2 can not move any more. Player one wins! ";
         }
@@ -125,13 +127,16 @@ public class CheckersLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
+        // print message if cancel button is clicked
         if(action instanceof CheckersCancelMoveAction){
             CheckersGameState state = (CheckersGameState) super.state;
             state.setPieceSelectedPieceAndPieceSelectedBoolean();
-            state.setMessage("You have unselected the piece that you were initially going to move. Please click on the piece that you would like to move.");
+            state.setMessage("You have unselected the piece that you were initially going " +
+                    "to move.\nPlease click on the piece that you would like to move.");
             return true;
         }
 
+        // checks if user can not make any more valid moves
         else if(action instanceof CheckersCanNotMoveAction){
             CheckersGameState state = (CheckersGameState) super.state;
             if(state.getPlayerTurn() == 1) {
@@ -166,9 +171,9 @@ public class CheckersLocalGame extends LocalGame {
                     }
                     // if conditions are true, piece is chosen
                     else{
-                        state.setMessage("This piece can be moved. Click on the spot where you want to move it."+
-                                " If you would like to move a different piece, click the \ncancel button in the top " +
-                                "right corner. ");
+                        state.setMessage("This piece can be moved. Click on the spot where you want " +
+                                "to move it.\n If you would like to move a different piece, click the " +
+                                "\ncancel button in the top right corner. ");
                         state.setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
                         return true;
                     }
@@ -178,12 +183,14 @@ public class CheckersLocalGame extends LocalGame {
                 int xDire=x-state.getPieceSelectedPiece().getXcoordinate();
                 int yDire=y-state.getPieceSelectedPiece().getYcoordinate();
                 if(state.hasEnemyPieces(x,y)){
+                    // check if piece can be captured
                     if(state.CaptureEnemyPiece(x,y,state.getPieceSelectedPiece().getXcoordinate(),
                             state.getPieceSelectedPiece().getYcoordinate())){
                         state.setMessage("Valid capture.");
                         state.setPlayerTurn(1-getPlayerIdx(ca.getPlayer()));
                         return true;
                     }
+                    // error message if piece cannot be captured
                     else{
                         state.setMessage("This piece can not be captured.");
                         return false;
@@ -191,7 +198,7 @@ public class CheckersLocalGame extends LocalGame {
                 }
                 else if(state.canMove(state.getPieceSelectedPiece(),xDire,yDire,
                                                             state.getPlayerTurn())){
-
+                    // states if it was a valid move and whose turn it is
                     if(ca.getPlayer() instanceof CheckersHumanPlayer) {
                         if (state.getPlayerTurn() == 0) {
                             state.setMessage("That was a valid move. It is now player two's turn.");
@@ -216,6 +223,7 @@ public class CheckersLocalGame extends LocalGame {
                     return true;
                 }
                 else{
+                    // error messages for users move
                     if(!state.isEmpty(x,y)){
                         state.setMessage("You can not capture your own piece");
                     }

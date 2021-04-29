@@ -3,7 +3,7 @@
  * Computer Player 1 - Dumb AI. Makes random moves
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers.CheckersGame.players;
@@ -27,10 +27,8 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
      */
 
     public CheckersComputerPlayer1(String name){
-
         super(name);
-
-    }
+    } //CheckersComputerPlayer1
 
     /**
      * Called when the player receives a game-state (or other info) from the

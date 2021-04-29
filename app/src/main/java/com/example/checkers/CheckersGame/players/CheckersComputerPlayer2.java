@@ -1,9 +1,10 @@
 /**
  * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
  * Computer Player 2 - Smart AI
- *This captures a piece when ever it can
+ * This captures a piece when ever it can
+ *
  * CS301A
- * @version 04/11/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers.CheckersGame.players;
@@ -130,10 +131,8 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
             mL[1] = new CheckersChoosePieceAction(this, piece.getXcoordinate()+ xDire,
                                                                 piece.getYcoordinate() + yDire);
             possibleMoves.add(mL);
-
         }
-
-    }
+    } //addValidMove
 
     public void addValidCapture(CheckersGameState info, CheckersPiece piece,
                                 ArrayList<CheckersChoosePieceAction[]> possibleMoves,
@@ -155,8 +154,7 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
         }
         ((CheckersGameState) info).setPieceSelectedPieceAndPieceSelectedBoolean();
-
-    }
+    } //addValidCapture
 
     public void addSafeMove(CheckersGameState copy, CheckersPiece[] enemyPieces,
                             CheckersPiece piece, int xdire, int ydire,
@@ -177,16 +175,15 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
             else{
                 piece.setCoordinates(piece.getXcoordinate()-xdire,piece.getYcoordinate()-ydire);
             }
-
         }
-    }
+    } //addSafeMove
 
     public boolean safeSpotTobe(CheckersGameState copy,CheckersPiece[] enemyPieces,CheckersPiece piece){
         boolean safeSpot = true;
 
-
         for(CheckersPiece enemyPiece : enemyPieces){
-            copy.setPieceSelectedPieceAndPieceSelectedBoolean(enemyPiece.getXcoordinate(), enemyPiece.getYcoordinate());
+            copy.setPieceSelectedPieceAndPieceSelectedBoolean(enemyPiece.getXcoordinate(),
+                    enemyPiece.getYcoordinate());
 
             if(copy.getPlayerTurn() == 0 ) {
                 copy.setPlayerTurn(1);
@@ -201,8 +198,6 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
                 safeSpot = false;
             }
 
-
-
             if(copy.getPlayerTurn() == 1) {
                 copy.setPlayerTurn(0);
             }
@@ -213,7 +208,7 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
         }
         copy.setPieceSelectedPieceAndPieceSelectedBoolean(piece.getXcoordinate(), piece.getYcoordinate());
         return safeSpot;
-    }
+    } //safeSpotTobe
 
     /**
      * send the appropriate computer player actions to the local game, if possible
@@ -227,5 +222,5 @@ public class CheckersComputerPlayer2 extends GameComputerPlayer {
                 game.sendAction(action);
             }
         }
-    }
+    } //makeAction
 }

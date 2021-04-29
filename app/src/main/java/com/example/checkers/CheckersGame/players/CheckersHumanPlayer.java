@@ -3,7 +3,7 @@
  * Human Player class - User player that decides where to move using onclick and displays board
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers.CheckersGame.players;
@@ -210,12 +210,16 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     } //initAfterReady
 
+    /**
+     * if clicked, game turns into night mode/light mode
+     */
     @Override
     public void onClick(View button) {
         if(button instanceof Button){
             if(button.getId() == R.id.cancelButton) {
                 game.sendAction(new CheckersCancelMoveAction(this));
             }
+            // if clicked, turn game into night mode
             else {
                 nightButtonClicks += 1;
                 nightModeBoard();
@@ -242,6 +246,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                                 ((CheckersGameState) game.getGameState()), 1, -1);
                     }
                 }
+                // if clicked turn game into light mode
                 else{
                     ((Button)button).setText("Night Mode");
                     gameTitle.setTextColor(0xFFF13A01);
@@ -287,44 +292,65 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         }
     }//showMoves
 
+    /**
+     * highlights the possible valid captures that the human player can make
+     * @param copy the current game state
+     * @param xdir the x direction of movement
+     * @param ydir the y-direction of movement
+     */
     public void showCaptures(CheckersGameState copy, int xdir, int ydir){
+        // check if the user can capture a piece
         if(copy.checkIfCanCaptureEnemyPiece(
                 copy.getPieceSelectedPiece().getXcoordinate()+xdir,
                 copy.getPieceSelectedPiece().getYcoordinate()+ydir,
                           copy.getPieceSelectedPiece().getXcoordinate(),
                           copy.getPieceSelectedPiece().getYcoordinate())){
+            // if user is using black pieces, show red pieces that can be captured
             if(playerNum == 0 && playerNum == copy.getPlayerTurn()){
                 board[copy.getPieceSelectedPiece().getXcoordinate()+xdir]
                         [copy.getPieceSelectedPiece().getYcoordinate()+ydir]
                         .setImageResource(R.drawable.tan_valid_redcapture);
             }
+            // if user is using red pieces, show black pieces that can be captured
             else if(playerNum == 1 && playerNum == copy.getPlayerTurn()){
                 board[copy.getPieceSelectedPiece().getXcoordinate()+xdir]
                         [copy.getPieceSelectedPiece().getYcoordinate()+ydir]
                         .setImageResource(R.drawable.tan_valid_blackcapture);
             }
         }
-    }
+    } //showCaptures
 
+    /**
+     * highlights the possible valid captures that the human player can make in night mode
+     * @param copy the current game state
+     * @param xdir the x direction of movement
+     * @param ydir the y-direction of movement
+     */
     public void showNightModeCaptures(CheckersGameState copy, int xdir, int ydir){
+        // check if the user can capture a piece
         if(copy.checkIfCanCaptureEnemyPiece(
                 copy.getPieceSelectedPiece().getXcoordinate()+xdir,
                 copy.getPieceSelectedPiece().getYcoordinate()+ydir,
                 copy.getPieceSelectedPiece().getXcoordinate(),
                 copy.getPieceSelectedPiece().getYcoordinate())){
+            // if user is using black pieces, show grey pieces that can be captured
             if(playerNum == 0 && playerNum == copy.getPlayerTurn()){
                 board[copy.getPieceSelectedPiece().getXcoordinate()+xdir]
                         [copy.getPieceSelectedPiece().getYcoordinate()+ydir]
                         .setImageResource(R.drawable.tan_night_validcapture);
             }
+            // if user is using grey pieces, show black pieces that can be captured
             else if(playerNum == 1 && playerNum == copy.getPlayerTurn()){
                 board[copy.getPieceSelectedPiece().getXcoordinate()+xdir]
                         [copy.getPieceSelectedPiece().getYcoordinate()+ydir]
                         .setImageResource(R.drawable.tan_valid_blackcapture);
             }
         }
-    }
+    } //showNightModeCaptures
 
+     /**
+     * turns the board into a night mode (grey and white)
+     */
     public void nightModeBoard(){
         // alternates between red and white tiles in a checkerboard pattern (or all grey tiles)
         for (int height = 0; height < 8; height++) {
@@ -346,8 +372,11 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                 }
             }
         }
-    }
+    } //nightModeBoard
 
+    /**
+     * turns the background into a grey background for night mode
+     */
     public void nightModeBackground(CheckersGameState state){
         if(nightButtonClicks % 2 == 1){
             if (state.getPlayerTurn() == 1) {
@@ -363,8 +392,11 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                 getTopView().setBackgroundColor(0xFFFFDAB1);
             }
         }
-    }
+    } //nightModeBackground
 
+    /**
+     * turns the pieces into grey pieces for night mode
+     */
     public void nightModePieces(CheckersGameState state){
         // sets player 1's pieces on the board to black
         for (CheckersPiece piece : state.p1Pieces) {
@@ -415,5 +447,5 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                 }
             }
         }
-    }
+    } //nightModePieces
 }//CheckersHumanPlayer

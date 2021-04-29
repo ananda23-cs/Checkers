@@ -3,7 +3,7 @@
  * CheckersTest -- Unit tests for the Checkers game
  *
  * CS 301
- * @version 4/23/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers;
@@ -19,8 +19,8 @@ public class CheckersTest {
 
     /**
      * Tests if a piece can capture multiple pieces under the right conditions
-     * Anand Gogoi made this
      */
+    // Anand
     @Test
     public void testCaptureMultiplePieces(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -75,6 +75,7 @@ public class CheckersTest {
     /**
      * tests the movement of a regular piece
      */
+    // Anand
     @Test
     public void testMovePiece(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -105,6 +106,7 @@ public class CheckersTest {
     /**
      * tests the backward movement of a king piece
      */
+    // Aashish
     @Test
     public void testMoveKingPiece(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -140,6 +142,7 @@ public class CheckersTest {
     /**
      * should de-select a piece from the board
      */
+    // Cian
     @Test
     public void testUndoPieceSelection(){
         CheckersGameState checkersGameState = new CheckersGameState();
@@ -152,6 +155,7 @@ public class CheckersTest {
     /**
      * should capture an enemy piece, if legal
      */
+    // Aashish
     @Test
     public void testCaptureEnemyPiece(){
         CheckersGameState state = new CheckersGameState();
@@ -191,6 +195,7 @@ public class CheckersTest {
                                             piece6.getXcoordinate(), piece6.getYcoordinate()));
     }
 
+    // Aashish
     @Test
     public void testCaptureMultipleEnemyPiece(){
         CheckersGameState state = new CheckersGameState();
@@ -209,6 +214,7 @@ public class CheckersTest {
         assertEquals(piece1, state.findPiece(6,6));
     }
 
+    // Aashish
     @Test
     public void testCaptureMultipleEnemyPieceAsKing(){
         CheckersGameState state = new CheckersGameState();
@@ -226,6 +232,7 @@ public class CheckersTest {
         assertEquals(piece1,state.findPiece(1,1));
     }
 
+    // Aashish
     @Test
     public void testCaptureEnemyPieceAsKing(){
         CheckersGameState state = new CheckersGameState();
@@ -264,6 +271,7 @@ public class CheckersTest {
         assertEquals(5, newPiece.getYcoordinate());
     }
 
+    // Caitlin
     @Test
     public void test_CopyConstructorState_Empty(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -272,6 +280,7 @@ public class CheckersTest {
                 checkersState.equals(copyState));
     }
 
+    // Cian
     @Test
     public void test_CopyConstructorState_InProgress(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -292,8 +301,7 @@ public class CheckersTest {
                 checkersState.equals(copyState));
     }
 
-
-
+    // Caitlin
     @Test
     public void test_EqualsState_Empty(){
         CheckersGameState checkersGameState = new CheckersGameState();
@@ -301,6 +309,7 @@ public class CheckersTest {
         assertTrue("The game states are not equal.", checkersGameState.equals(otherState));
     }
 
+    // Aashish
     @Test
     public void test_EqualsState_InProgress(){
         CheckersGameState checkersState = new CheckersGameState();
