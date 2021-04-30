@@ -212,6 +212,13 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     /**
      * if clicked, game turns into night mode/light mode
+
+     External Citation
+     Date:     28 April 2021
+     Problem:  Did not know how to change board into dark mode
+     Resource:
+     https://developer.android.com/guide/topics/ui/look-and-feel/darktheme
+     Solution: I used the example code from this post.
      */
     @Override
     public void onClick(View button) {

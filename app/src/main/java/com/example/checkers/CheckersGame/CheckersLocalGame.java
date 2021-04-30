@@ -131,8 +131,8 @@ public class CheckersLocalGame extends LocalGame {
         if(action instanceof CheckersCancelMoveAction){
             CheckersGameState state = (CheckersGameState) super.state;
             state.setPieceSelectedPieceAndPieceSelectedBoolean();
-            state.setMessage("You have unselected the piece that you were initially going " +
-                    "to move.\nPlease click on the piece that you would like to move.");
+            state.setMessage("You have unselected the piece." +
+                    "\nPlease click a new piece you would like to move.");
             return true;
         }
 
@@ -171,9 +171,11 @@ public class CheckersLocalGame extends LocalGame {
                     }
                     // if conditions are true, piece is chosen
                     else{
-                        state.setMessage("This piece can be moved. Click on the spot where you want " +
-                                "to move it.\n If you would like to move a different piece, click the " +
-                                "\ncancel button in the top right corner. ");
+                        state.setMessage("This piece can be moved." +
+                                "\nClick a tile to move the piece or click the opponent's piece " +
+                                "to capture." +
+                                "\nIf you would like to select a different piece, " +
+                                "click the cancel button.");
                         state.setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
                         return true;
                     }
@@ -229,13 +231,18 @@ public class CheckersLocalGame extends LocalGame {
                     }
 
                     else if(!state.inRange(xDire,yDire) ){
-                        state.setMessage("Invalid move. You can only move a piece by one \nspace diagonally.");
+                        state.setMessage("Invalid move. You can only move a piece by one" +
+                                "\nspace diagonally.");
                     }
-                    else if(state.getPlayerTurn() == 0 && yDire<1 && !state.getPieceSelectedPiece().getKing()){
-                        state.setMessage("You can not move this piece backwards because it is not a king.");
+                    else if(state.getPlayerTurn() == 0 && yDire<1 &&
+                            !state.getPieceSelectedPiece().getKing()){
+                        state.setMessage("You can not move this piece backwards because " +
+                                "it is not a king.");
                     }
-                    else if(state.getPlayerTurn() == 1 && yDire==1 && !state.getPieceSelectedPiece().getKing()){
-                        state.setMessage("You can not move this piece backwards because it is not a king.");
+                    else if(state.getPlayerTurn() == 1 && yDire==1 &&
+                            !state.getPieceSelectedPiece().getKing()){
+                        state.setMessage("You can not move this piece backwards because " +
+                                "it is not a king.");
                     }
                     else {
                         state.setMessage("Invalid move. Try again.");

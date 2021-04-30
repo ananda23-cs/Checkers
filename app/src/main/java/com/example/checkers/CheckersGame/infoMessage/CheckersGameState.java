@@ -72,30 +72,10 @@ public class CheckersGameState extends GameState {
 
         this.pieceSelectedBoolean = false;
         this.pieceSelectedPiece = null;
-        this.message = "Welcome to checkers. Player one please click on the piece you would like to move.";
+        this.message = "Welcome to checkers. Player one please click on the piece " +
+                "you would like to move.";
         this.p2CanNotMove = false;
         this.p1CanNotMove = false;
-
-//        p1Pieces[11].setCoordinates(1,3);
-
-//        p1Pieces[9].setCoordinates(2,4);
-//        p1Pieces[11].setCoordinates(0,4);
-
-        //p1Pieces[4].setKing(true);
-//        p1Pieces[10].setAlive(false);
-//        p2Pieces[2].setCoordinates(2,2);
-//        p2Pieces[7].setCoordinates(4,4);
-//        p2Pieces[11].setCoordinates(6,6);
-//        p2Pieces[0].setAlive(false);
-//        p2Pieces[9].setAlive(false);
-
-
-//        p2Pieces[0].setKing(true);
-//        p2Pieces[0].setCoordinates(3,3);
-//        p1Pieces[9].setCoordinates(4,4);
-//        p2Pieces[1].setCoordinates(4,2);
-//        p1Pieces[5].setCoordinates(6,6);
-//        p2Pieces[2].setCoordinates(2,4);
 
     } //CheckersGameState
 
@@ -181,6 +161,7 @@ public class CheckersGameState extends GameState {
      */
     public boolean isEmpty(int newXCord,int newYCord){
         for(CheckersPiece piece : p1Pieces ){
+            // run through pieces coordinates and return false if spot is not empty
             if(piece.getXcoordinate() == newXCord && piece.getYcoordinate() == newYCord
                     && piece.getAlive()){
                 return false;
@@ -209,6 +190,7 @@ public class CheckersGameState extends GameState {
     public boolean inBounds(int newXCord,int newYCord){
         boolean valid = true;
 
+        // if coordinates exceed 7 or below 0, return false (out of bounds)
         if(newXCord>7 || newYCord>7 || newXCord<0 || newYCord<0){
             valid = false;
         }
@@ -258,6 +240,7 @@ public class CheckersGameState extends GameState {
      * @return piece at xCord and yCord or null if not found
      */
     public CheckersPiece findPiece(int xCord,int yCord){
+        // run through all of the coordinates and return the pieces coordinate
         for(int i = 0;i<12;i++){
             if(p1Pieces[i].getYcoordinate() == yCord && p1Pieces[i].getXcoordinate() == xCord){
                 return p1Pieces[i];
@@ -287,9 +270,12 @@ public class CheckersGameState extends GameState {
     public boolean canMove(CheckersPiece piece, int xDir,int yDir,int id){
         if(inRange(xDir,yDir)) {
 
-            //this checks that user is not trying to move off the checker board as well as if the space is held by another piece
-            if (inBounds(piece.getXcoordinate() + xDir, piece.getYcoordinate() + yDir) &&
-                    isEmpty(piece.getXcoordinate() + xDir, piece.getYcoordinate() + yDir)) {
+            //this checks that user is not trying to move off the checker board
+            // as well as if the space is held by another piece
+            if (inBounds(piece.getXcoordinate() + xDir,
+                    piece.getYcoordinate() + yDir) && isEmpty(
+                            piece.getXcoordinate() + xDir,
+                    piece.getYcoordinate() + yDir)) {
 
                 //this checks if player one is not trying to move a non king piece backwards
                 if (id == 0 && yDir < 1 && !piece.getKing()) {
@@ -304,7 +290,8 @@ public class CheckersGameState extends GameState {
                     return true;
                 }
             }
-            //returns false if the move is out of bounds or tries to move into a spot with another piece
+            //returns false if the move is out of bounds or tries to move into a spot
+            //with another piece
             else {
                 return false;
             }
@@ -345,6 +332,7 @@ public class CheckersGameState extends GameState {
         int i = 0;
         if(!this.pieceSelectedBoolean) {
             for(CheckersPiece piece : p2Pieces){
+                // if piece is alive, set the piece to the selected position
                 if(p1Pieces[i].getAlive()){
                     if(p1Pieces[i].getYcoordinate() == yCord && p1Pieces[i].getXcoordinate() == xCord){
                         this.pieceSelectedPiece = p1Pieces[i];
@@ -359,7 +347,6 @@ public class CheckersGameState extends GameState {
                     }
                 }
                 i++;
-
             }
             this.pieceSelectedBoolean = true;
         }
@@ -402,13 +389,15 @@ public class CheckersGameState extends GameState {
         this.pieceSelectedPiece.setCoordinates(pieceSelectedPiece.getXcoordinate()+xDire,
                                                 pieceSelectedPiece.getYcoordinate()+yDire);
 
+        // turn player's pieces to a king if it reaches the opposing side
+        // turn player 1's pieces to a king
         if(playerTurn == 0){
             if(pieceSelectedPiece.getYcoordinate() == 7){
                 pieceSelectedPiece.setKing(true);
             }
         }
 
-        //will turn to player 2's pieces king if the piece reaches the other side of the board
+        // turn player 2's pieces to a king
         else{
             if(pieceSelectedPiece.getYcoordinate() == 0){
                 pieceSelectedPiece.setKing(true);
@@ -475,28 +464,24 @@ public class CheckersGameState extends GameState {
                                     yFinal-1,xFinal,yFinal)){
                                 CaptureEnemyPiece(xFinal-1,
                                         yFinal-1,xFinal,yFinal);
-
                             }
 
                             if(checkIfCanCaptureEnemyPiece(xFinal+1,
                                     yFinal-1,xFinal,yFinal)){
                                 CaptureEnemyPiece(xFinal+1,
                                         yFinal-1,xFinal,yFinal);
-
                             }
 
                             if(checkIfCanCaptureEnemyPiece(xFinal+1,
                                     yFinal+1,xFinal,yFinal)){
                                 CaptureEnemyPiece(xFinal+1,
                                         yFinal+1,xFinal,yFinal);
-
                             }
 
                             if(checkIfCanCaptureEnemyPiece(xFinal-1,
                                     yFinal+1,xFinal,yFinal)){
                                 CaptureEnemyPiece(xFinal-1,
                                         yFinal+1,xFinal,yFinal);
-
                             }
 
                             setPieceSelectedPieceAndPieceSelectedBoolean();
@@ -507,7 +492,6 @@ public class CheckersGameState extends GameState {
                             return false;
                         }
                     }
-
                 }
             }
         }
@@ -542,26 +526,26 @@ public class CheckersGameState extends GameState {
                             // forwards right/left and backwards right/left
                             if(checkIfCanCaptureEnemyPiece(xFinal+1,
                                     yFinal+1,xFinal,yFinal)){
-                                CaptureEnemyPiece(xFinal+1,yFinal+1,xFinal,yFinal);
-
+                                CaptureEnemyPiece(xFinal+1,yFinal+1,
+                                        xFinal,yFinal);
                             }
 
                             if(checkIfCanCaptureEnemyPiece(xFinal-1,
                                     yFinal+1,xFinal,yFinal)){
-                                CaptureEnemyPiece(xFinal-1,yFinal+1,xFinal,yFinal);
-
+                                CaptureEnemyPiece(xFinal-1,yFinal+1,
+                                        xFinal,yFinal);
                             }
 
                             if(checkIfCanCaptureEnemyPiece(xFinal-1,
                                     yFinal-1,xFinal,yFinal)){
-                                CaptureEnemyPiece(xFinal-1,yFinal-1,xFinal,yFinal);
-
+                                CaptureEnemyPiece(xFinal-1,yFinal-1,
+                                        xFinal,yFinal);
                             }
 
                             if(checkIfCanCaptureEnemyPiece(xFinal+1,
                                     yFinal-1,xFinal,yFinal)){
-                                CaptureEnemyPiece(xFinal+1,yFinal-1,xFinal,yFinal);
-
+                                CaptureEnemyPiece(xFinal+1,yFinal-1,
+                                        xFinal,yFinal);
                             }
 
                             setPieceSelectedPieceAndPieceSelectedBoolean();
@@ -572,9 +556,7 @@ public class CheckersGameState extends GameState {
                             return false;
                         }
                     }
-
                 }
-
             }
         }
         return false;
@@ -623,18 +605,13 @@ public class CheckersGameState extends GameState {
                     int xDist = xLocation - nVX;
                     int yDist = yLocation - nVY;
 
-                    //Log.e("calculator","xLocation ");
-
-
                     if(yDist < 1 && !pieceSelectedPiece.getKing()){
                         return false;
                     }
 
-
                     //if distance is in range of the piece
-                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY+yDist*2)){
-
-
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,
+                            nVY+yDist*2)){
 
                         //final location of the piece that does the capturing
                         int xFinal = nVX + xDist*2;
@@ -642,13 +619,10 @@ public class CheckersGameState extends GameState {
 
                         //checks if spot ahead of the victim is empty
                         if(isEmpty(xFinal,yFinal)){
-
                             return true;
                         }
                     }
-
                 }
-
             }
         }
 
@@ -665,16 +639,14 @@ public class CheckersGameState extends GameState {
                         return false;
                     }
 
-                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,nVY + yDist*2)){
+                    if(inRange(xDist,yDist) && inBounds(nVX + xDist*2,
+                            nVY + yDist*2)){
                         int xFinal = nVX + xDist*2;
                         int yFinal = nVY + yDist*2;
                         if(isEmpty(xFinal,yFinal)){
-
                             return true;
-
                         }
                     }
-
                 }
             }
         }
