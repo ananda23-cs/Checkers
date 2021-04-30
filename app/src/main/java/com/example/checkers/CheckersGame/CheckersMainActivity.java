@@ -4,7 +4,7 @@
  * the user to pick their opponent
  *
  * CS301A
- * @version 04/23/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers.CheckersGame;
@@ -26,8 +26,8 @@ import com.example.checkers.CheckersGame.players.CheckersHumanPlayer;
 import java.util.ArrayList;
 
 public class CheckersMainActivity extends GameMainActivity {
-    public static final int PORT_NUMBER = 5213;
     private static final String CHECKERS = "CheckersMainActivity";
+    private static final int PORT_NUMBER = 5213;
 
     /**
      * sets up a default of one human and one computer player
@@ -63,7 +63,8 @@ public class CheckersMainActivity extends GameMainActivity {
         });
 
         // Create a game configuration class for Checkers
-        GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "Checkers", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 2,
+                2, "Checkers", PORT_NUMBER);
 
         // Add the default players
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
@@ -100,7 +101,8 @@ public class CheckersMainActivity extends GameMainActivity {
     } //saveGame
 
     /**
-     * loadGame, adds this games prepend to the desire file to open and creates the game specific state
+     * loadGame, adds this games prepend to the desire file to open and creates the
+     * game specific state
      * @param CheckersGame
      * 				The file to open
      * @return The loaded GameState

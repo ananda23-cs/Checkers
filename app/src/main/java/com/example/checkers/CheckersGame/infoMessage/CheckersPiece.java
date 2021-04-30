@@ -3,7 +3,7 @@
  * Piece class - initializes checker pieces coordinates, if its alive, and if its a king
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers.CheckersGame.infoMessage;

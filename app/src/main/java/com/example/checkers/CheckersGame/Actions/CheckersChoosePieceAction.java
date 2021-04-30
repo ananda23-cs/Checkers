@@ -3,7 +3,7 @@
  * Choose action class - choose the action between move and capture
  *
  * CS301A
- * @version 04/11/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers.CheckersGame.Actions;
