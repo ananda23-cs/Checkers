@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
-import com.example.checkers.CheckersGame.CheckersMainActivity;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
 import com.example.checkers.R;
@@ -210,19 +209,10 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     } //initAfterReady
 
-    /**
-     * if clicked, game turns into night mode/light mode
-
-     External Citation
-     Date:     28 April 2021
-     Problem:  Did not know how to change board into dark mode
-     Resource:
-     https://developer.android.com/guide/topics/ui/look-and-feel/darktheme
-     Solution: I used the example code from this post.
-     */
     @Override
     public void onClick(View button) {
         if(button instanceof Button){
+            //if clicked, a piece gets unselected
             if(button.getId() == R.id.cancelButton) {
                 game.sendAction(new CheckersCancelMoveAction(this));
             }
@@ -356,7 +346,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     } //showNightModeCaptures
 
      /**
-     * turns the board into a night mode (grey and white)
+     * turns the board into a grey and white checkerboard
      */
     public void nightModeBoard(){
         // alternates between red and white tiles in a checkerboard pattern (or all grey tiles)
