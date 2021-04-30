@@ -721,10 +721,10 @@
                     android:text="Night Mode" />
 
                 <Button
-                    android:id="@+id/forfit"
+                    android:id="@+id/forfeit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Forfit" />
+                    android:text="Forfeit" />
 
             </LinearLayout>
 
