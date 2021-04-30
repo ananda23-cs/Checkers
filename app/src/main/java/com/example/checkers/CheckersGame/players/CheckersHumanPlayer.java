@@ -232,10 +232,17 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                 nightModeBackground((CheckersGameState) game.getGameState());
                 if(nightButtonClicks % 2 == 1){
                     ((Button)button).setText("Light Mode");
-                    gameTitle.setTextColor(Color.WHITE);
-                    gameInfo.setTextColor(Color.WHITE);
-                    humanPlayerID.setTextColor(Color.WHITE);
-                    computerPlayerID.setTextColor(Color.WHITE);
+
+//                    gameTitle.setTextColor(Color.WHITE);
+//                    gameInfo.setTextColor(Color.WHITE);
+//                    humanPlayerID.setTextColor(Color.WHITE);
+//                    computerPlayerID.setTextColor(Color.WHITE);
+
+                    gameTitle.setTextColor(Color.BLACK);
+                    gameInfo.setTextColor(Color.BLACK);
+                    humanPlayerID.setTextColor(Color.BLACK);
+                    computerPlayerID.setTextColor(Color.BLACK);
+
                     if(((CheckersGameState) game.getGameState()).isPieceSelectedBoolean()){
                         showMoves(((CheckersGameState) game.getGameState()), 1,1);
                         showMoves(((CheckersGameState) game.getGameState()), -1,1);
