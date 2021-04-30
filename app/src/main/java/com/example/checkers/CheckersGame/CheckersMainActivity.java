@@ -9,6 +9,9 @@
 
 package com.example.checkers.CheckersGame;
 
+import android.view.View;
+import android.widget.Button;
+
 import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.LocalGame;
@@ -115,4 +118,7 @@ public class CheckersMainActivity extends GameMainActivity {
         return (GameState) new CheckersGameState((CheckersGameState) Saving.readFromFile(appName,
                 this.getApplicationContext()));
     } //loadGame
+
+
+
 }

@@ -720,6 +720,12 @@
                     android:layout_height="wrap_content"
                     android:text="Night Mode" />
 
+                <Button
+                    android:id="@+id/forfeit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Forfeit" />
+
             </LinearLayout>
 
         </LinearLayout>
