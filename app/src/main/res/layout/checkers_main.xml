@@ -720,6 +720,11 @@
                     android:layout_height="wrap_content"
                     android:text="Night Mode" />
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6" />
+
                 <Button
                     android:id="@+id/forfeit"
                     android:layout_width="wrap_content"

@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.checkers.CheckersGame.Actions.CheckersCanNotMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
@@ -221,10 +222,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             if(button.getId() == R.id.cancelButton) {
                 game.sendAction(new CheckersCancelMoveAction(this));
             }
-            else if(button.getId() == R.id.forfeit)
-            {
-
-                System.exit(0);
+            else if(button.getId() == R.id.forfeit){
+                game.sendAction(new CheckersCanNotMoveAction(this));
             }
             // if clicked, turn game into night mode
             else {
