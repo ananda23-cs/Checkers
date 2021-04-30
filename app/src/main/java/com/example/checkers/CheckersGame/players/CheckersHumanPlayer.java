@@ -23,6 +23,7 @@ import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
 import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
+import com.example.checkers.game.GameFramework.infoMessage.GameOverInfo;
 import com.example.checkers.game.GameFramework.infoMessage.IllegalMoveInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
@@ -221,8 +222,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             }
             else if(button.getId() == R.id.forfeit)
             {
-
-                System.exit(0);
+                sendInfo(new GameOverInfo("Player has forfeited. "));
             }
             // if clicked, turn game into night mode
             else {
