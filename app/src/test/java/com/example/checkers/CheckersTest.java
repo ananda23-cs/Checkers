@@ -3,7 +3,7 @@
  * CheckersTest -- Unit tests for the Checkers game
  *
  * CS 301
- * @version 4/23/2021
+ * @version 04/30/2021
  */
 
 package com.example.checkers;
@@ -18,8 +18,64 @@ import static org.junit.Assert.*;
 public class CheckersTest {
 
     /**
+     * Tests if a piece can capture multiple pieces under the right conditions
+     */
+    // Anand
+    @Test
+    public void testCaptureMultiplePieces(){
+        CheckersGameState checkersState = new CheckersGameState();
+
+        //this method is to clear the board so it is easier to test out methods becuase pieces have more space to move
+        for(int i =0; i<12;i++){
+            checkersState.p1Pieces[i].setAlive(false);
+            checkersState.p1Pieces[i].setAlive(false);
+        }
+
+        checkersState.p1Pieces[0].setAlive(true);
+
+        checkersState.p2Pieces[0].setAlive(true);
+        checkersState.p2Pieces[1].setAlive(true);
+
+
+        checkersState.p1Pieces[0].setCoordinates(0,0);
+        checkersState.p2Pieces[0].setCoordinates(1,1);
+        checkersState.p2Pieces[1].setCoordinates(3,3);
+
+        checkersState.setPieceSelectedPieceAndPieceSelectedBoolean(0,0);
+        checkersState.CaptureEnemyPiece(1,1,0,0);
+
+
+        assertFalse("This piece is dead", checkersState.p2Pieces[0].getAlive());
+        assertFalse("This piece is dead", checkersState.p2Pieces[1].getAlive());
+
+        for(int i =0; i<12;i++){
+            checkersState.p1Pieces[i].setAlive(false);
+            checkersState.p1Pieces[i].setAlive(false);
+        }
+
+        checkersState.p1Pieces[0].setAlive(true);
+
+        checkersState.p2Pieces[0].setAlive(true);
+        checkersState.p2Pieces[1].setAlive(true);
+
+
+        checkersState.p1Pieces[0].setCoordinates(0,0);
+        checkersState.p2Pieces[0].setCoordinates(1,1);
+        checkersState.p2Pieces[1].setCoordinates(1,3);
+
+        checkersState.setPieceSelectedPieceAndPieceSelectedBoolean(0,0);
+        checkersState.CaptureEnemyPiece(1,1,0,0);
+
+        assertFalse("This piece is dead", checkersState.p2Pieces[0].getAlive());
+        assertFalse("This piece is dead", checkersState.p2Pieces[1].getAlive());
+
+
+    }
+
+    /**
      * tests the movement of a regular piece
      */
+    // Anand
     @Test
     public void testMovePiece(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -30,7 +86,7 @@ public class CheckersTest {
         CheckersPiece piece = checkersState.getPieceSelectedPiece();
         assertTrue("Invalid move.", checkersState.canMove(piece,1,1,0));
         checkersState.move(1,1);
-        assertNotNull("No piece there.", checkersState.findPiece(3,3));
+        assertEquals("Failed move.", piece, checkersState.findPiece(3,3));
 
         //valid move from player 2
         checkersState.setPlayerTurn(1);
@@ -38,7 +94,7 @@ public class CheckersTest {
         CheckersPiece piece2 = checkersState.getPieceSelectedPiece();
         assertTrue(checkersState.canMove(piece2,1,-1, 1));
         checkersState.move(1,-1);
-        assertNotNull(checkersState.findPiece(4,4));
+        assertEquals(piece2, checkersState.findPiece(4,4));
 
         //illegal move made
         checkersState.setPlayerTurn(0);
@@ -50,6 +106,7 @@ public class CheckersTest {
     /**
      * tests the backward movement of a king piece
      */
+    // Aashish
     @Test
     public void testMoveKingPiece(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -62,7 +119,7 @@ public class CheckersTest {
         kingPiece.setKing(true);
         assertTrue(checkersState.canMove(kingPiece, -1, -1, 0));
         checkersState.move(-1,-1);
-        assertNotNull(checkersState.findPiece(2,2));
+        assertEquals(kingPiece, checkersState.findPiece(2,2));
 
         //valid move from player 2
         checkersState.setPlayerTurn(1);
@@ -72,7 +129,7 @@ public class CheckersTest {
         kingPiece2.setKing(true);
         assertTrue(checkersState.canMove(kingPiece2,1,1,1));
         checkersState.move(1,1);
-        assertNotNull(checkersState.findPiece(5,5));
+        assertEquals(kingPiece2, checkersState.findPiece(5,5));
 
         //illegal move
         checkersState.setPlayerTurn(0);
@@ -85,6 +142,7 @@ public class CheckersTest {
     /**
      * should de-select a piece from the board
      */
+    // Cian
     @Test
     public void testUndoPieceSelection(){
         CheckersGameState checkersGameState = new CheckersGameState();
@@ -97,6 +155,7 @@ public class CheckersTest {
     /**
      * should capture an enemy piece, if legal
      */
+    // Aashish
     @Test
     public void testCaptureEnemyPiece(){
         CheckersGameState state = new CheckersGameState();
@@ -112,7 +171,7 @@ public class CheckersTest {
                                 piece1.getXcoordinate(),piece1.getYcoordinate());
         state.setP2NumPieces(state.getP2NumPieces()-1);
         assertFalse(piece2.getAlive());
-        assertNotNull(state.findPiece(5,5));
+        assertEquals(piece1, state.findPiece(5, 5));
 
         //valid move from player 2
         state.setPlayerTurn(1);
@@ -123,7 +182,8 @@ public class CheckersTest {
                                 piece4.getXcoordinate(), piece4.getYcoordinate());
         state.setP1NumPieces(state.getP1NumPieces()-1);
         assertFalse(piece3.getAlive());
-        assertNotNull(state.findPiece(4,4));
+        assertEquals(4, piece4.getXcoordinate());
+        assertEquals(4, piece4.getYcoordinate());
 
         //illegal capture
         state.setPieceSelectedPieceAndPieceSelectedBoolean(4,4);
@@ -135,6 +195,44 @@ public class CheckersTest {
                                             piece6.getXcoordinate(), piece6.getYcoordinate()));
     }
 
+    // Aashish
+    @Test
+    public void testCaptureMultipleEnemyPiece(){
+        CheckersGameState state = new CheckersGameState();
+        CheckersPiece piece1 = state.p1Pieces[10];
+        CheckersPiece piece2 = state.p2Pieces[1];
+        CheckersPiece piece3 = state.p2Pieces[2];
+        CheckersPiece piece4 = state.p2Pieces[7];
+        piece2.setCoordinates(3,3);
+        piece4.setCoordinates(7,3);
+        state.setPlayerTurn(0);
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(2,2);
+        state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
+                                piece1.getXcoordinate(),piece1.getYcoordinate());
+        assertFalse(piece2.getAlive());
+        assertFalse(piece3.getAlive());
+        assertEquals(piece1, state.findPiece(6,6));
+    }
+
+    // Aashish
+    @Test
+    public void testCaptureMultipleEnemyPieceAsKing(){
+        CheckersGameState state = new CheckersGameState();
+        CheckersPiece piece1 = state.findPiece(5,5);
+        CheckersPiece piece2 = state.findPiece(1,1);
+        CheckersPiece piece3 = state.findPiece(2,2);
+        piece2.setCoordinates(4,4);
+        piece1.setKing(true);
+        state.setPlayerTurn(1);
+        state.setPieceSelectedPieceAndPieceSelectedBoolean(5,5);
+        state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
+                                piece1.getXcoordinate(),piece1.getYcoordinate());
+        assertFalse(piece2.getAlive());
+        assertFalse(piece3.getAlive());
+        assertEquals(piece1,state.findPiece(1,1));
+    }
+
+    // Aashish
     @Test
     public void testCaptureEnemyPieceAsKing(){
         CheckersGameState state = new CheckersGameState();
@@ -143,13 +241,14 @@ public class CheckersTest {
         piece1.setCoordinates(4,4);
         piece2.setCoordinates(3,3);
         piece1.setKing(true);
+        //tests a valid move
         state.setPlayerTurn(0);
         state.setPieceSelectedPieceAndPieceSelectedBoolean(4,4);
         state.CaptureEnemyPiece(piece2.getXcoordinate(),piece2.getYcoordinate(),
                                 piece1.getXcoordinate(),piece1.getYcoordinate());
         state.setP2NumPieces(state.getP2NumPieces()-1);
         assertFalse(piece2.getAlive());
-        assertNotNull(state.findPiece(2,2));
+        assertEquals(piece1, state.findPiece(2,2));
 
         //illegal move
         CheckersPiece kingPiece = state.findPiece(2,2);
@@ -159,17 +258,20 @@ public class CheckersTest {
         state.setPieceSelectedPieceAndPieceSelectedBoolean(4,4);
         assertFalse(state.CaptureEnemyPiece(newPiece.getXcoordinate(), newPiece.getYcoordinate(),
                                         kingPiece.getXcoordinate(), kingPiece.getYcoordinate()));
+        state.setPieceSelectedPieceAndPieceSelectedBoolean();
 
         //valid move from player 2
         state.setPlayerTurn(1);
         newPiece.setKing(true);
         state.setPieceSelectedPieceAndPieceSelectedBoolean(5,3);
         state.CaptureEnemyPiece(kingPiece.getXcoordinate(), kingPiece.getYcoordinate(),
-                                newPiece.getXcoordinate(), newPiece.getYcoordinate());
+                newPiece.getXcoordinate(), newPiece.getYcoordinate());
         assertFalse(kingPiece.getAlive());
-        assertNotNull(state.findPiece(3,5));
+        assertEquals(3, newPiece.getXcoordinate());
+        assertEquals(5, newPiece.getYcoordinate());
     }
 
+    // Caitlin
     @Test
     public void test_CopyConstructorState_Empty(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -178,6 +280,7 @@ public class CheckersTest {
                 checkersState.equals(copyState));
     }
 
+    // Cian
     @Test
     public void test_CopyConstructorState_InProgress(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -198,6 +301,7 @@ public class CheckersTest {
                 checkersState.equals(copyState));
     }
 
+    // Caitlin
     @Test
     public void test_EqualsState_Empty(){
         CheckersGameState checkersGameState = new CheckersGameState();
@@ -205,6 +309,7 @@ public class CheckersTest {
         assertTrue("The game states are not equal.", checkersGameState.equals(otherState));
     }
 
+    // Aashish
     @Test
     public void test_EqualsState_InProgress(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -235,4 +340,6 @@ public class CheckersTest {
         }
         assertTrue("The game states are not equal.", checkersState.equals(otherState));
     }
+
+
 }
