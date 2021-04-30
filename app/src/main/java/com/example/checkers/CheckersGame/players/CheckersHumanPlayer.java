@@ -8,6 +8,7 @@
 
 package com.example.checkers.CheckersGame.players;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     ImageButton[][] board;
     private Button cancelButton, nightMode;
+    private Button forfit;
     private TextView gameInfo, gameTitle;
     private TextView humanPlayerID, computerPlayerID;
     private int layoutID;
@@ -188,6 +190,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         cancelButton.setOnClickListener(this);
         nightMode = activity.findViewById(R.id.nightButton);
         nightMode.setOnClickListener(this);
+        forfit = activity.findViewById(R.id.forfit);
+        forfit.setOnClickListener(this);
     } //setAsGui
 
     /**
@@ -215,6 +219,11 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             //if clicked, a piece gets unselected
             if(button.getId() == R.id.cancelButton) {
                 game.sendAction(new CheckersCancelMoveAction(this));
+            }
+            else if(button.getId() == R.id.forfit)
+            {
+
+                System.exit(0);
             }
             // if clicked, turn game into night mode
             else {
