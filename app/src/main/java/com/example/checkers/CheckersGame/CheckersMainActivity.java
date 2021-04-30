@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class CheckersMainActivity extends GameMainActivity {
     private static final String CHECKERS = "CheckersMainActivity";
-    private static final int PORT_NUMBER = 5213;
+    public static final int PORT_NUMBER = 5213;
 
     /**
      * sets up a default of one human and one computer player

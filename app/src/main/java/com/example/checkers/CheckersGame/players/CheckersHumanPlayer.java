@@ -4,6 +4,8 @@
  *
  * CS301A
  * @version 04/30/2021
+ *
+ * No outside sources necessary
  */
 
 package com.example.checkers.CheckersGame.players;
@@ -346,8 +348,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     } //showNightModeCaptures
 
      /**
-     * turns the board into a grey and white checkerboard
-     */
+      * turns the board into a grey and white checkerboard
+      */
     public void nightModeBoard(){
         // alternates between red and white tiles in a checkerboard pattern (or all grey tiles)
         for (int height = 0; height < 8; height++) {

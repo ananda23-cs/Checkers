@@ -5,6 +5,8 @@
  *
  * CS301A
  * @version 04/30/2021
+ *
+ * No outside sources necessary
  */
 
 package com.example.checkers.CheckersGame;
@@ -14,16 +16,12 @@ import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
 import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
-import com.example.checkers.CheckersGame.players.CheckersComputerPlayer1;
-import com.example.checkers.CheckersGame.players.CheckersComputerPlayer2;
 import com.example.checkers.CheckersGame.players.CheckersHumanPlayer;
 import com.example.checkers.game.GameFramework.LocalGame;
 import com.example.checkers.game.GameFramework.actionMessage.GameAction;
 import com.example.checkers.game.GameFramework.players.GamePlayer;
 
 public class CheckersLocalGame extends LocalGame {
-
-    //CheckersGameState checkersGameState;//I added this
 
     /**
      * Constructor for the CheckersLocalGame.
@@ -36,7 +34,7 @@ public class CheckersLocalGame extends LocalGame {
 
     /**
      * Constructor for the CheckersLocalGame with loaded checkersGameState.
-     * @param checkersGameState
+     * @param checkersGameState the loaded game state
      */
     public CheckersLocalGame(CheckersGameState checkersGameState) {
         super();
@@ -88,14 +86,16 @@ public class CheckersLocalGame extends LocalGame {
         boolean p2Alive = false;
 
         for(CheckersPiece piece : state.p1Pieces){
-            if (piece.getAlive()){
+            if (piece.getAlive()) {
                 p1Alive = true;
+                break;
             }
         }
 
         for(CheckersPiece piece : state.p2Pieces){
-            if (piece.getAlive()){
+            if (piece.getAlive()) {
                 p2Alive = true;
+                break;
             }
         }
 
@@ -106,11 +106,11 @@ public class CheckersLocalGame extends LocalGame {
             return "Player 1 won! ";
         }
         // end game if user or opponent cannot make any more valid moves
-        else if(state.getP2CanNotMove() == true){
+        else if(state.getP2CanNotMove()){
             return "Player 2 can not move any more. Player one wins! ";
         }
-        else if(state.getP1CanNotMove() == true){
-            return "Player 2 can not move any more. Player two wins! ";
+        else if(state.getP1CanNotMove()){
+            return "Player 1 can not move any more. Player two wins! ";
         }
         else {
             return null;
@@ -141,12 +141,11 @@ public class CheckersLocalGame extends LocalGame {
             CheckersGameState state = (CheckersGameState) super.state;
             if(state.getPlayerTurn() == 1) {
                 state.setP2CanNotMove(true);
-                return true;
             }
             else{
                 state.setP1CanNotMove(true);
-                return true;
             }
+            return true;
         }
 
         else if(action instanceof CheckersChoosePieceAction){

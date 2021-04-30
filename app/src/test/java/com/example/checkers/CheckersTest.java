@@ -4,6 +4,8 @@
  *
  * CS 301
  * @version 04/30/2021
+ *
+ * No outside sources necessary
  */
 
 package com.example.checkers;
@@ -19,8 +21,8 @@ public class CheckersTest {
 
     /**
      * Tests if a piece can capture multiple pieces under the right conditions
+     * By: Anand
      */
-    // Anand
     @Test
     public void testCaptureMultiplePieces(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -74,8 +76,8 @@ public class CheckersTest {
 
     /**
      * tests the movement of a regular piece
+     * By: Anand
      */
-    // Anand
     @Test
     public void testMovePiece(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -105,8 +107,8 @@ public class CheckersTest {
 
     /**
      * tests the backward movement of a king piece
+     * By: Aashish
      */
-    // Aashish
     @Test
     public void testMoveKingPiece(){
         CheckersGameState checkersState = new CheckersGameState();
