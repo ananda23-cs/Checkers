@@ -31,8 +31,7 @@ import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     ImageButton[][] board;
-    private Button cancelButton;
-    private Button nightMode;
+    private Button cancelButton, nightMode;
     private Button forfeit;
     private TextView gameInfo, gameTitle;
     private TextView humanPlayerID, computerPlayerID;
@@ -402,7 +401,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             if (state.getPlayerTurn() == 1) {
                 getTopView().setBackgroundColor(0xffffaec2);
             } else {
-                getTopView().setBackgroundColor(0xFFFFDAB1);
+                getTopView().setBackgroundColor(Color.WHITE);
             }
         }
     } //nightModeBackground
