@@ -31,7 +31,8 @@ import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     ImageButton[][] board;
-    private Button cancelButton, nightMode;
+    private Button cancelButton;
+    private Button nightMode;
     private Button forfeit;
     private TextView gameInfo, gameTitle;
     private TextView humanPlayerID, computerPlayerID;
