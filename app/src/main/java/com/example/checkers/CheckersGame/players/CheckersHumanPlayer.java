@@ -236,11 +236,6 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                 if(nightButtonClicks % 2 == 1){
                     ((Button)button).setText("Light Mode");
 
-//                    gameTitle.setTextColor(Color.WHITE);
-//                    gameInfo.setTextColor(Color.WHITE);
-//                    humanPlayerID.setTextColor(Color.WHITE);
-//                    computerPlayerID.setTextColor(Color.WHITE);
-
                     gameTitle.setTextColor(Color.BLACK);
                     gameInfo.setTextColor(Color.BLACK);
                     humanPlayerID.setTextColor(Color.BLACK);
