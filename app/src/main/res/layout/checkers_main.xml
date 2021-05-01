@@ -42,7 +42,7 @@
             android:fontFamily="@font/allan"
             android:text="@string/Computer_Dumb_Name"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:translationX="110sp" />
 
         <LinearLayout
@@ -746,7 +746,7 @@
             android:fontFamily="@font/allan"
             android:text="@string/Human_Player_Name"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:translationX="110sp" />
 
         <TextView
@@ -755,8 +755,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/allan"
             android:textAlignment="center"
-            android:textSize="25sp"
-            android:translationX="50sp" />
+            android:textSize="30sp"
+            android:translationX="50sp"
+            android:translationY="20sp" />
 
 
     </LinearLayout>
