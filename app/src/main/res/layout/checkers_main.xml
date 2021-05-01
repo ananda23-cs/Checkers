@@ -756,7 +756,7 @@
             android:fontFamily="@font/allan"
             android:textAlignment="center"
             android:textSize="30sp"
-            android:translationX="50sp"
+            android:translationX="25sp"
             android:translationY="20sp" />
 
 

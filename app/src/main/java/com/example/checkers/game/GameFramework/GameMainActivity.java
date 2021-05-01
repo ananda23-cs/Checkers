@@ -524,6 +524,11 @@ public abstract class GameMainActivity extends Activity implements
         switch (item.getItemId()) {
             case R.id.menu_help:
                 Logger.log(CHECKERS, "This is the help button!");
+                MessageBox.popUpMessage("In this Checkers game, you click on a piece to select it and click on an empty tile on the board to make a move (highlighted when piece is selected)." +
+                                                " If you want to capture an enemy piece (or 2), click on the enemy piece (shown by a skull on it). In case you end up selecting the wrong piece or " +
+                                                "you selected one by accident, click on the cancel button to deselect it. During the game, if you realize that you can't make any more moves, click " +
+                                                "the forfeit button and the game will end with other player's victory. The game ends when there's no more pieces " +
+                                                "left for one of the players or there are no more valid moves left.", this);
                 return true;
             case R.id.save_game:
                 Logger.log(CHECKERS, "This is the save button!");
