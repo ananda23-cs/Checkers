@@ -2,7 +2,8 @@
  * @author Aashish Anand, Anand Gogoi, Caitlin Ching, Cian Murray
  * Computer Player 2 - Smart AI
  * This captures a piece when ever it can
- *
+ * If it can not capture a piece it will move a piece to a place where it can not be captured
+ * If none of these are options than it will move a random piece.
  * CS301A
  * @version 04/30/2021
  *
