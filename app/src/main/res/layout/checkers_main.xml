@@ -759,6 +759,15 @@
             android:translationX="25sp"
             android:translationY="20sp" />
 
+        <ImageView
+            android:id="@+id/key"
+            android:layout_width="562dp"
+            android:layout_height="202dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/newkey"
+            android:translationX="120sp"
+            android:translationY="50sp" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

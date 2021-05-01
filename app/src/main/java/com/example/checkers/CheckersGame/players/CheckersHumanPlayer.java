@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.checkers.CheckersGame.Actions.CheckersCanNotMoveAction;
@@ -38,6 +39,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     private TextView humanPlayerID, computerPlayerID;
     private int layoutID;
     private int nightButtonClicks = 0;
+    private ImageView key;
 
     /**
      * constructor CheckersHumanPlayer
@@ -93,13 +95,19 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                     showCaptures(copy, -1, 1);
                     showCaptures(copy, -1, -1);
                     showCaptures(copy, 1, -1);
+                    key.setImageResource(R.drawable.newkey);
                 }
                 else{
                     showNightModeCaptures(copy, 1, 1);
                     showNightModeCaptures(copy, -1, 1);
                     showNightModeCaptures(copy, -1, -1);
                     showNightModeCaptures(copy, 1, -1);
+                    key.setImageResource(R.drawable.grey_key);
                 }
+                key.setVisibility(View.VISIBLE);
+            }
+            else{
+                key.setVisibility(View.INVISIBLE);
             }
         }
     } //receiveInfo
@@ -193,6 +201,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         nightMode.setOnClickListener(this);
         forfeit = (Button) activity.findViewById(R.id.forfeit);
         forfeit.setOnClickListener(this);
+        key = activity.findViewById(R.id.key);
+        key.setImageResource(R.drawable.newkey);
     } //setAsGui
 
     /**
@@ -245,7 +255,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                     gameInfo.setTextColor(Color.BLACK);
                     humanPlayerID.setTextColor(Color.BLACK);
                     computerPlayerID.setTextColor(Color.BLACK);
-
+                    key.setImageResource(R.drawable.grey_key);
                     if(((CheckersGameState) game.getGameState()).isPieceSelectedBoolean()){
                         showMoves(((CheckersGameState) game.getGameState()), 1,1);
                         showMoves(((CheckersGameState) game.getGameState()), -1,1);
@@ -259,6 +269,10 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                                 ((CheckersGameState) game.getGameState()), -1, -1);
                         showNightModeCaptures(
                                 ((CheckersGameState) game.getGameState()), 1, -1);
+                        key.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        key.setVisibility(View.INVISIBLE);
                     }
                 }
                 // if clicked turn game into light mode
@@ -268,6 +282,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                     gameInfo.setTextColor(Color.BLACK);
                     humanPlayerID.setTextColor(Color.BLACK);
                     computerPlayerID.setTextColor(Color.BLACK);
+                    key.setImageResource(R.drawable.newkey);
                     if(((CheckersGameState) game.getGameState()).isPieceSelectedBoolean()){
                         showMoves(((CheckersGameState) game.getGameState()), 1,1);
                         showMoves(((CheckersGameState) game.getGameState()), -1,1);
@@ -277,6 +292,10 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                         showCaptures(((CheckersGameState) game.getGameState()), -1, 1);
                         showCaptures(((CheckersGameState) game.getGameState()), -1, -1);
                         showCaptures(((CheckersGameState) game.getGameState()), 1, -1);
+                        key.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        key.setVisibility(View.INVISIBLE);
                     }
                 }
             }
