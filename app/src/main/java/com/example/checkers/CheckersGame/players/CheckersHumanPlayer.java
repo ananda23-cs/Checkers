@@ -4,8 +4,6 @@
  *
  * CS301A
  * @version 04/30/2021
- *
- * No outside sources necessary
  */
 
 package com.example.checkers.CheckersGame.players;
@@ -197,6 +195,12 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     } //setAsGui
 
     /**
+     * External Citation:
+     * Date: April 10, 2021
+     * Problem: Couldn't click on the tiles when the game runs
+     * Resource: Professor Tribelhorn
+     * Solution: moved the onClickListener for the tiles into initAfterReady()
+     *
      * perform any initialization that needs to be done after player
      * knows what the game-position and opponents' names are
      */

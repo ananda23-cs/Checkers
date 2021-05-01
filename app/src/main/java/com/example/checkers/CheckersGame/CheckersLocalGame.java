@@ -5,8 +5,6 @@
  *
  * CS301A
  * @version 04/30/2021
- *
- * No outside sources necessary
  */
 
 package com.example.checkers.CheckersGame;
@@ -71,6 +69,12 @@ public class CheckersLocalGame extends LocalGame {
     } //canMove
 
     /**
+     * External Citation:
+     * Date: April 16, 2021
+     * Problem: when one of the player's pieces got stuck in the game, it didn't do anything.
+     * Resource: Professor Tribelhorn
+     * Solution: added a condition to recognize a forfeit in the gameOver method
+     *
      * method checkIfGameOver
      * checks if the game is over. If it's over, return a message
      * showing who won the game. If not, return null

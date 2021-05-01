@@ -6,7 +6,7 @@
  * CS301A
  * @version 04/30/2021
  *
- * No outside sources necessary
+ * No outside sources necessary for this class
  */
 
 package com.example.checkers.CheckersGame.players;

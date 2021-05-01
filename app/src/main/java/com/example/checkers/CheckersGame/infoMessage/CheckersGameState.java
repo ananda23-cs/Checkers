@@ -5,12 +5,11 @@
  * CS301A
  * @version 04/30/2021
  *
- * No outside sources necessary
+ * No outside sources for this class
  */
 
 package com.example.checkers.CheckersGame.infoMessage;
 
-import android.util.Log;
 import android.widget.ImageButton;
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 

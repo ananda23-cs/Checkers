@@ -5,12 +5,11 @@
  *
  * CS301A
  * @version 04/30/2021
+ *
+ * No external sources needed for this class.
  */
 
 package com.example.checkers.CheckersGame;
-
-import android.view.View;
-import android.widget.Button;
 
 import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.GameMainActivity;
