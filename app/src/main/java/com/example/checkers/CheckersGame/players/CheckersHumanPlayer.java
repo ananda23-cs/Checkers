@@ -31,7 +31,8 @@ import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     ImageButton[][] board;
-    private Button cancelButton, nightMode;
+    private Button nightMode;
+    private ImageButton cancelButton;
     private Button forfeit;
     private TextView gameInfo, gameTitle;
     private TextView humanPlayerID, computerPlayerID;
@@ -182,15 +183,15 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         board[7][7] = (ImageButton) activity.findViewById(R.id.tile88);
 
         //get id's of texts, buttons, and widgets from GUI
-        gameTitle = activity.findViewById(R.id.gameTitle);
-        gameInfo = activity.findViewById(R.id.gameInfo);
-        humanPlayerID = activity.findViewById(R.id.humanPlayerId2);
-        computerPlayerID = activity.findViewById(R.id.computerPlayerId);
-        cancelButton = activity.findViewById(R.id.cancelButton);
+        gameTitle = (TextView) activity.findViewById(R.id.gameTitle);
+        gameInfo = (TextView) activity.findViewById(R.id.gameInfo);
+        humanPlayerID = (TextView) activity.findViewById(R.id.humanPlayerId2);
+        computerPlayerID = (TextView) activity.findViewById(R.id.computerPlayerId);
+        cancelButton = (ImageButton) activity.findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
-        nightMode = activity.findViewById(R.id.nightButton);
+        nightMode = (Button) activity.findViewById(R.id.nightButton);
         nightMode.setOnClickListener(this);
-        forfeit = activity.findViewById(R.id.forfeit);
+        forfeit = (Button) activity.findViewById(R.id.forfeit);
         forfeit.setOnClickListener(this);
     } //setAsGui
 
@@ -222,11 +223,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     public void onClick(View button) {
         if(button instanceof Button){
-            //if clicked, a piece gets unselected
-            if(button.getId() == R.id.cancelButton) {
-                game.sendAction(new CheckersCancelMoveAction(this));
-            }
-            else if(button.getId() == R.id.forfeit){
+            //if clicked, the player forfeits the game and the other player wins
+            if(button.getId() == R.id.forfeit){
                 game.sendAction(new CheckersCanNotMoveAction(this));
             }
             // if clicked, turn game into night mode
@@ -284,11 +282,17 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             }
         }
         else if (button instanceof ImageButton) {
-            for (int x = 0; x < 8; x++) {
-                for (int y = 0; y < 8; y++) {
-                    if (board[x][y].equals(button)) {
-                        Log.e("onClick: ", "x = " + x + "y = " + y);
-                        game.sendAction(new CheckersChoosePieceAction(this, x, y));
+            //if clicked, a piece gets unselected
+            if(button.getId() == R.id.cancelButton) {
+                game.sendAction(new CheckersCancelMoveAction(this));
+            }
+            else {
+                for (int x = 0; x < 8; x++) {
+                    for (int y = 0; y < 8; y++) {
+                        if (board[x][y].equals(button)) {
+                            Log.e("onClick: ", "x = " + x + "y = " + y);
+                            game.sendAction(new CheckersChoosePieceAction(this, x, y));
+                        }
                     }
                 }
             }

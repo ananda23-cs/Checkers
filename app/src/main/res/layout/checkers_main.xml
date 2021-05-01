@@ -696,10 +696,16 @@
 
             </LinearLayout>
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.9" />
+            <ImageButton
+                android:id="@+id/cancelButton"
+                android:layout_width="52dp"
+                android:layout_height="79dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/cancel_button"
+                android:scaleType="fitXY"
+                android:src="@drawable/cancel_button"
+                android:translationX="-5sp" />
 
         </LinearLayout>
 
@@ -734,19 +740,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/cancelButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center|center_horizontal|center_vertical"
-                android:text="cancel" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.6" />
 
             <Button
                 android:id="@+id/nightButton"
