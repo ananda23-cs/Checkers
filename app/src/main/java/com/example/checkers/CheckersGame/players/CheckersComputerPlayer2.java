@@ -5,6 +5,8 @@
  *
  * CS301A
  * @version 04/30/2021
+ *
+ * No outside sources necessary for this class
  */
 
 package com.example.checkers.CheckersGame.players;
@@ -21,10 +23,8 @@ import java.util.ArrayList;
 
 public class CheckersComputerPlayer2 extends GameComputerPlayer {
 
-    //int id;
     public CheckersComputerPlayer2(String name){
         super(name);
-        //int id;
     } //CheckersComputerPlayer2
 
     /**

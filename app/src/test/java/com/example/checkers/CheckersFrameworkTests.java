@@ -3,7 +3,9 @@
  * CheckersFrameworkTests -- Tests for main activity in checkers game
  *
  * CS 301
- * @version 4/23/2021
+ * @version 4/30/2021
+ *
+ * No outside sources needed for this class
  */
 package com.example.checkers;
 

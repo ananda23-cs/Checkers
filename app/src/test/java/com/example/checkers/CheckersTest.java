@@ -19,13 +19,14 @@ public class CheckersTest {
 
     /**
      * Tests if a piece can capture multiple pieces under the right conditions
+     * @author Anand
      */
-    // Anand
     @Test
     public void testCaptureMultiplePieces(){
         CheckersGameState checkersState = new CheckersGameState();
 
-        //this method is to clear the board so it is easier to test out methods becuase pieces have more space to move
+        /*this method is to clear the board so it is easier to test out methods
+          because pieces have more space to move*/
         for(int i =0; i<12;i++){
             checkersState.p1Pieces[i].setAlive(false);
             checkersState.p1Pieces[i].setAlive(false);
@@ -74,8 +75,8 @@ public class CheckersTest {
 
     /**
      * tests the movement of a regular piece
+     * @author Anand
      */
-    // Anand
     @Test
     public void testMovePiece(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -105,8 +106,8 @@ public class CheckersTest {
 
     /**
      * tests the backward movement of a king piece
+     * @author Aashish
      */
-    // Aashish
     @Test
     public void testMoveKingPiece(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -141,6 +142,7 @@ public class CheckersTest {
 
     /**
      * should de-select a piece from the board
+     * @author Cian
      */
     // Cian
     @Test
@@ -154,8 +156,8 @@ public class CheckersTest {
 
     /**
      * should capture an enemy piece, if legal
+     * @author Aashish
      */
-    // Aashish
     @Test
     public void testCaptureEnemyPiece(){
         CheckersGameState state = new CheckersGameState();

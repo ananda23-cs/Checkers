@@ -4,11 +4,12 @@
  *
  * CS301A
  * @version 04/30/2021
+ *
+ * No outside sources for this class
  */
 
 package com.example.checkers.CheckersGame.infoMessage;
 
-import android.util.Log;
 import android.widget.ImageButton;
 import com.example.checkers.game.GameFramework.infoMessage.GameState;
 
@@ -459,7 +460,6 @@ public class CheckersGameState extends GameState {
 
                             // check if can capture the enemies piece
                             // forwards right/left and backwards right/left
-                            Log.e("Camera",""+pieceSelectedPiece);
                             if(checkIfCanCaptureEnemyPiece(xFinal-1,
                                     yFinal-1,xFinal,yFinal)){
                                 CaptureEnemyPiece(xFinal-1,
@@ -591,11 +591,6 @@ public class CheckersGameState extends GameState {
         //if player one's turn
         if(playerTurn == 0) {
             //runs through all of player 2's pieces to see if they match the xLocation and yLocation
-            if(xLocation - nVX<1 && yLocation - nVY<1) {
-                Log.e("Cameracheck", "" + pieceSelectedPiece);
-                Log.e("Cameracheck", "nVX = " + nVX + "nVY = " + nVY);
-                Log.e("Cameracheck", "Xlocation = " + xLocation + "Ylocation = " + yLocation);
-            }
             for (CheckersPiece piece : p2Pieces) {
                 //checks if piece matches the xLocation and yLocation
                 if (piece.getXcoordinate() == xLocation && piece.getYcoordinate() == yLocation

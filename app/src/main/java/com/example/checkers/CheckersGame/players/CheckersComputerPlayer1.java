@@ -4,11 +4,11 @@
  *
  * CS301A
  * @version 04/30/2021
+ *
+ * No outside sources necessary for this class
  */
 
 package com.example.checkers.CheckersGame.players;
-
-import android.util.Log;
 
 import com.example.checkers.CheckersGame.Actions.CheckersCanNotMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
@@ -60,9 +60,8 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
         }
 
 
-        //runs through all the computer players pieces checks all the moves. It adds all possible
-        // moves to the
-        //array list above
+        /*runs through all the computer players pieces checks all the moves. It adds all possible
+          moves to the array list above*/
         for(CheckersPiece piece: Pieces){
             if(piece.getAlive()) {
 
@@ -70,20 +69,20 @@ public class CheckersComputerPlayer1 extends GameComputerPlayer {
                     return;
                 }
 
-                //if moving left backwards is a possible move for this piece it gets added to the
-                //list of moves
+                /*if moving left backwards is a possible move for this piece it gets added to the
+                  list of moves*/
                 checkValidMove(((CheckersGameState) info), piece, -1, -1,
                         possibleMoves);
-                //if moving right backwards is a possible move for this piece it gets added to the
-                //list of moves
+                /*if moving right backwards is a possible move for this piece it gets added to the
+                  list of moves*/
                 checkValidMove(((CheckersGameState) info), piece, +1, -1,
                         possibleMoves);
-                //if moving right Forward is a possible move for this piece it gets added to the
-                //list of moves
+                /*if moving right forwards is a possible move for this piece it gets added to the
+                  list of moves*/
                 checkValidMove(((CheckersGameState) info), piece, +1, +1,
                         possibleMoves);
-                //if moving left Forward is a possible move for this piece it gets added to the
-                //list of moves
+                /*if moving left forwards is a possible move for this piece it gets added to the
+                  list of moves*/
                 checkValidMove(((CheckersGameState) info), piece, -1, +1,
                         possibleMoves);
 

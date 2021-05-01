@@ -4,6 +4,8 @@
  *
  * CS301A
  * @version 04/30/2021
+ *
+ * No outside sources needed for this class.
  */
 package com.example.checkers.CheckersGame.Actions;
 

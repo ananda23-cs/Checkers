@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.checkers.CheckersGame.Actions.CheckersCanNotMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersCancelMoveAction;
 import com.example.checkers.CheckersGame.Actions.CheckersChoosePieceAction;
 import com.example.checkers.CheckersGame.infoMessage.CheckersGameState;
@@ -23,7 +24,6 @@ import com.example.checkers.CheckersGame.infoMessage.CheckersPiece;
 import com.example.checkers.R;
 import com.example.checkers.game.GameFramework.GameMainActivity;
 import com.example.checkers.game.GameFramework.infoMessage.GameInfo;
-import com.example.checkers.game.GameFramework.infoMessage.GameOverInfo;
 import com.example.checkers.game.GameFramework.infoMessage.IllegalMoveInfo;
 import com.example.checkers.game.GameFramework.infoMessage.NotYourTurnInfo;
 import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
@@ -31,7 +31,8 @@ import com.example.checkers.game.GameFramework.players.GameHumanPlayer;
 public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     ImageButton[][] board;
-    private Button cancelButton, nightMode;
+    private Button nightMode;
+    private ImageButton cancelButton;
     private Button forfeit;
     private TextView gameInfo, gameTitle;
     private TextView humanPlayerID, computerPlayerID;
@@ -182,19 +183,25 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         board[7][7] = (ImageButton) activity.findViewById(R.id.tile88);
 
         //get id's of texts, buttons, and widgets from GUI
-        gameTitle = activity.findViewById(R.id.gameTitle);
-        gameInfo = activity.findViewById(R.id.gameInfo);
-        humanPlayerID = activity.findViewById(R.id.humanPlayerId2);
-        computerPlayerID = activity.findViewById(R.id.computerPlayerId);
-        cancelButton = activity.findViewById(R.id.cancelButton);
+        gameTitle = (TextView) activity.findViewById(R.id.gameTitle);
+        gameInfo = (TextView) activity.findViewById(R.id.gameInfo);
+        humanPlayerID = (TextView) activity.findViewById(R.id.humanPlayerId2);
+        computerPlayerID = (TextView) activity.findViewById(R.id.computerPlayerId);
+        cancelButton = (ImageButton) activity.findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
-        nightMode = activity.findViewById(R.id.nightButton);
+        nightMode = (Button) activity.findViewById(R.id.nightButton);
         nightMode.setOnClickListener(this);
-        forfeit = activity.findViewById(R.id.forfeit);
+        forfeit = (Button) activity.findViewById(R.id.forfeit);
         forfeit.setOnClickListener(this);
     } //setAsGui
 
     /**
+     * External Citation:
+     * Date: April 10, 2021
+     * Problem: Couldn't click on the tiles when the game runs
+     * Resource: Professor Tribelhorn
+     * Solution: moved the onClickListener for the tiles into initAfterReady()
+     *
      * perform any initialization that needs to be done after player
      * knows what the game-position and opponents' names are
      */
@@ -216,13 +223,9 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     public void onClick(View button) {
         if(button instanceof Button){
-            //if clicked, a piece gets unselected
-            if(button.getId() == R.id.cancelButton) {
-                game.sendAction(new CheckersCancelMoveAction(this));
-            }
-            else if(button.getId() == R.id.forfeit)
-            {
-                sendInfo(new GameOverInfo("Player has forfeited. "));
+            //if clicked, the player forfeits the game and the other player wins
+            if(button.getId() == R.id.forfeit){
+                game.sendAction(new CheckersCanNotMoveAction(this));
             }
             // if clicked, turn game into night mode
             else {
@@ -232,11 +235,6 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
                 nightModeBackground((CheckersGameState) game.getGameState());
                 if(nightButtonClicks % 2 == 1){
                     ((Button)button).setText("Light Mode");
-
-//                    gameTitle.setTextColor(Color.WHITE);
-//                    gameInfo.setTextColor(Color.WHITE);
-//                    humanPlayerID.setTextColor(Color.WHITE);
-//                    computerPlayerID.setTextColor(Color.WHITE);
 
                     gameTitle.setTextColor(Color.BLACK);
                     gameInfo.setTextColor(Color.BLACK);
@@ -279,11 +277,17 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             }
         }
         else if (button instanceof ImageButton) {
-            for (int x = 0; x < 8; x++) {
-                for (int y = 0; y < 8; y++) {
-                    if (board[x][y].equals(button)) {
-                        Log.e("onClick: ", "x = " + x + "y = " + y);
-                        game.sendAction(new CheckersChoosePieceAction(this, x, y));
+            //if clicked, a piece gets unselected
+            if(button.getId() == R.id.cancelButton) {
+                game.sendAction(new CheckersCancelMoveAction(this));
+            }
+            else {
+                for (int x = 0; x < 8; x++) {
+                    for (int y = 0; y < 8; y++) {
+                        if (board[x][y].equals(button)) {
+                            Log.e("onClick: ", "x = " + x + "y = " + y);
+                            game.sendAction(new CheckersChoosePieceAction(this, x, y));
+                        }
                     }
                 }
             }
@@ -361,8 +365,8 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
     } //showNightModeCaptures
 
      /**
-     * turns the board into a grey and white checkerboard
-     */
+      * turns the board into a grey and white checkerboard
+      */
     public void nightModeBoard(){
         // alternates between red and white tiles in a checkerboard pattern (or all grey tiles)
         for (int height = 0; height < 8; height++) {
