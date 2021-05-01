@@ -711,6 +711,10 @@
                     android:layout_height="wrap_content"
                     android:text="Night Mode" />
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
                 <Button
                     android:id="@+id/cancelButton"
                     android:layout_width="wrap_content"
@@ -718,19 +722,16 @@
                     android:gravity="center|center_horizontal|center_vertical"
                     android:text="cancel" />
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
                 <Button
                     android:id="@+id/forfeit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fadeScrollbars="false"
                     android:text="Forfeit" />
-
-                <ImageButton
-                    android:id="@+id/cancelButtonImage"
-                    android:layout_width="90dp"
-                    android:layout_height="45dp"
-                    android:background="#8c4646"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/cancelbutton" />
 
             </LinearLayout>
 
