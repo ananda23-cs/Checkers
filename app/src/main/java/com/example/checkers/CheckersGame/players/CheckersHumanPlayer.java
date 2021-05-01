@@ -405,7 +405,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             if (state.getPlayerTurn() == 1) {
                 getTopView().setBackgroundColor(0xffffaec2);
             } else {
-                getTopView().setBackgroundColor(Color.WHITE);
+                getTopView().setBackgroundColor(0xf5e5be);
             }
         }
     } //nightModeBackground

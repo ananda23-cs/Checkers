@@ -37,6 +37,7 @@ public class CheckersFrameworkTests {
 
     /**
      * Verifies a local Game can be created
+     * @author Caitlin
      */
     @Test
     public void test_createLocalGame(){
@@ -48,6 +49,7 @@ public class CheckersFrameworkTests {
 
     /**
      * Verifies setGameOver still sets the Game as over
+     * @author Caitlin
      */
     @Test
     public void test_setGameOver(){

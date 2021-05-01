@@ -33,10 +33,8 @@ public class CheckersTest {
         }
 
         checkersState.p1Pieces[0].setAlive(true);
-
         checkersState.p2Pieces[0].setAlive(true);
         checkersState.p2Pieces[1].setAlive(true);
-
 
         checkersState.p1Pieces[0].setCoordinates(0,0);
         checkersState.p2Pieces[0].setCoordinates(1,1);
@@ -44,7 +42,6 @@ public class CheckersTest {
 
         checkersState.setPieceSelectedPieceAndPieceSelectedBoolean(0,0);
         checkersState.CaptureEnemyPiece(1,1,0,0);
-
 
         assertFalse("This piece is dead", checkersState.p2Pieces[0].getAlive());
         assertFalse("This piece is dead", checkersState.p2Pieces[1].getAlive());
@@ -55,10 +52,8 @@ public class CheckersTest {
         }
 
         checkersState.p1Pieces[0].setAlive(true);
-
         checkersState.p2Pieces[0].setAlive(true);
         checkersState.p2Pieces[1].setAlive(true);
-
 
         checkersState.p1Pieces[0].setCoordinates(0,0);
         checkersState.p2Pieces[0].setCoordinates(1,1);
@@ -69,10 +64,7 @@ public class CheckersTest {
 
         assertFalse("This piece is dead", checkersState.p2Pieces[0].getAlive());
         assertFalse("This piece is dead", checkersState.p2Pieces[1].getAlive());
-
-
     }
-
 
     /**
      * tests the movement of a regular piece
@@ -104,7 +96,6 @@ public class CheckersTest {
         CheckersPiece piece3 = checkersState.getPieceSelectedPiece();
         assertFalse(checkersState.canMove(piece3,1,1,0));
     }
-
 
     /**
      * tests the backward movement of a king piece
@@ -142,13 +133,10 @@ public class CheckersTest {
         assertFalse(checkersState.canMove(kingPiece3,-1,-1,0));
     }
 
-
-
     /**
      * should de-select a piece from the board
      * @author Cian
      */
-    // Cian
     @Test
     public void testUndoPieceSelection(){
         CheckersGameState checkersGameState = new CheckersGameState();
@@ -201,7 +189,10 @@ public class CheckersTest {
                                             piece6.getXcoordinate(), piece6.getYcoordinate()));
     }
 
-    // Aashish
+    /**
+     * Tests if user can capture multiple enemy pieces
+     * @author Aashish
+     */
     @Test
     public void testCaptureMultipleEnemyPiece(){
         CheckersGameState state = new CheckersGameState();
@@ -220,7 +211,10 @@ public class CheckersTest {
         assertEquals(piece1, state.findPiece(6,6));
     }
 
-    // Aashish
+    /**
+     * Tests if user can capture multiple enemy pieces as a king
+     * @author Aashish
+     */
     @Test
     public void testCaptureMultipleEnemyPieceAsKing(){
         CheckersGameState state = new CheckersGameState();
@@ -238,7 +232,10 @@ public class CheckersTest {
         assertEquals(piece1,state.findPiece(1,1));
     }
 
-    // Aashish
+    /**
+     * Tests capturing an enemies piece as a king
+     * @author Aashish
+     */
     @Test
     public void testCaptureEnemyPieceAsKing(){
         CheckersGameState state = new CheckersGameState();
@@ -277,7 +274,10 @@ public class CheckersTest {
         assertEquals(5, newPiece.getYcoordinate());
     }
 
-    // Caitlin
+    /**
+     * Tests the copy constructor of the game state and if its empty
+     * @author Caitlin
+     */
     @Test
     public void test_CopyConstructorState_Empty(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -286,7 +286,10 @@ public class CheckersTest {
                 checkersState.equals(copyState));
     }
 
-    // Cian
+    /**
+     * Tests the copy constructor of the game state and if game is in progress
+     * @author Cian
+     */
     @Test
     public void test_CopyConstructorState_InProgress(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -307,15 +310,24 @@ public class CheckersTest {
                 checkersState.equals(copyState));
     }
 
-    // Caitlin
+    /**
+     * Tests if the game state constructor is equivalent to its copy constructor
+     * when game is empty
+     * @author Caitlin
+     */
     @Test
     public void test_EqualsState_Empty(){
         CheckersGameState checkersGameState = new CheckersGameState();
         CheckersGameState otherState = new CheckersGameState();
-        assertTrue("The game states are not equal.", checkersGameState.equals(otherState));
+        assertTrue("The game states are not equal.",
+                checkersGameState.equals(otherState));
     }
 
-    // Aashish
+    /**
+     * Tests if the game state constructor is equivalent to its copy constructor
+     * when game is in progress
+     * @author Aashish
+     */
     @Test
     public void test_EqualsState_InProgress(){
         CheckersGameState checkersState = new CheckersGameState();
@@ -346,6 +358,5 @@ public class CheckersTest {
         }
         assertTrue("The game states are not equal.", checkersState.equals(otherState));
     }
-
 
 }

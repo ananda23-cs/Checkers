@@ -177,9 +177,9 @@ public class CheckersLocalGame extends LocalGame {
                         state.setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
 
                         state.setMessage("This piece is yours." +
-                                "Click a tile to move the piece or click the opponent's piece " +
+                                " Click a tile to move the piece or click the opponent's piece " +
                                 "to capture." +
-                                "If you would like to select a different piece, " +
+                                "\nIf you would like to select a different piece, " +
                                 "click the cancel button.");
                         state.setPieceSelectedPieceAndPieceSelectedBoolean(x,y);
                         return true;
