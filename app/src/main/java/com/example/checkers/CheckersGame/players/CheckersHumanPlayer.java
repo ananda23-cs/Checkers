@@ -32,7 +32,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     ImageButton[][] board;
     private Button nightMode;
-    private ImageButton cancelButton;
+    private Button cancelButton;
     private Button forfeit;
     private TextView gameInfo, gameTitle;
     private TextView humanPlayerID, computerPlayerID;
@@ -187,7 +187,7 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
         gameInfo = (TextView) activity.findViewById(R.id.gameInfo);
         humanPlayerID = (TextView) activity.findViewById(R.id.humanPlayerId2);
         computerPlayerID = (TextView) activity.findViewById(R.id.computerPlayerId);
-        cancelButton = (ImageButton) activity.findViewById(R.id.cancelButton);
+        cancelButton = (Button) activity.findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(this);
         nightMode = (Button) activity.findViewById(R.id.nightButton);
         nightMode.setOnClickListener(this);
@@ -227,6 +227,11 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             if(button.getId() == R.id.forfeit){
                 game.sendAction(new CheckersCanNotMoveAction(this));
             }
+
+            else if(button.getId() == R.id.cancelButton) {
+                game.sendAction(new CheckersCancelMoveAction(this));
+            }
+
             // if clicked, turn game into night mode
             else {
                 nightButtonClicks += 1;
@@ -277,20 +282,15 @@ public class CheckersHumanPlayer extends GameHumanPlayer implements View.OnClick
             }
         }
         else if (button instanceof ImageButton) {
-            //if clicked, a piece gets unselected
-            if(button.getId() == R.id.cancelButton) {
-                game.sendAction(new CheckersCancelMoveAction(this));
-            }
-            else {
-                for (int x = 0; x < 8; x++) {
-                    for (int y = 0; y < 8; y++) {
-                        if (board[x][y].equals(button)) {
-                            Log.e("onClick: ", "x = " + x + "y = " + y);
-                            game.sendAction(new CheckersChoosePieceAction(this, x, y));
-                        }
+
+            for (int x = 0; x < 8; x++) {
+                for (int y = 0; y < 8; y++) {
+                    if (board[x][y].equals(button)) {
+                        game.sendAction(new CheckersChoosePieceAction(this, x, y));
                     }
                 }
             }
+
         }
     }//onClick
 
